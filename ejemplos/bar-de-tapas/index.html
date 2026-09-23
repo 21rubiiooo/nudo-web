@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Local ficticio: no debe aparecer en buscadores -->
+<meta name="robots" content="noindex, nofollow">
+<title>La Taberna del Nudo · Ejemplo de web para bar de tapas</title>
+<meta name="description" content="Maqueta de concepto de Nudo: así podría ser la web de tu bar de tapas. Local ficticio.">
+<meta name="theme-color" content="#3b2518">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ============ VARIABLES: estilo propio del local (cálido, tabernero) ============ */
+  :root {
+    color-scheme: light;
+    --crema: #f7efe0;
+    --crema-2: #efe2c9;
+    --papel: #fffaf1;
+    --madera: #3b2518;
+    --madera-2: #5a3a26;
+    --terracota: #b04a26;
+    --terracota-osc: #8f3a1b;
+    --mostaza: #e0a93b;
+    --oliva: #56632f;
+    --texto: #2a1a10;
+    --texto-suave: #5c4636;
+    --borde: #dcc7a4;
+    --radio: 14px;
+    --sombra: 0 6px 20px rgba(59, 37, 24, .12);
+    --banda-alto: 0px; /* se ajusta con JS en escritorio */
+  }
+
+  /* ============ BASE ============ */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--crema);
+    color: var(--texto);
+    font-family: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+    overflow-x: hidden;
+    /* hueco para la banda fija inferior en móvil */
+    padding-bottom: 84px;
+  }
+  img { max-width: 100%; display: block; }
+  h1, h2, h3, h4 { font-family: "Bitter", Georgia, serif; line-height: 1.2; margin: 0; color: var(--madera); }
+  p { margin: 0 0 1em; }
+  a { color: var(--terracota-osc); }
+  :focus-visible { outline: 3px solid var(--mostaza); outline-offset: 3px; }
+  .contenedor { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+  section[id] { scroll-margin-top: calc(var(--banda-alto) + 12px); }
+  .solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ============ BANDA DE NUDO (abajo en móvil, arriba en escritorio) ============ */
+  .banda-nudo {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    background: #151515; color: #fff;
+    border-top: 3px solid #25d366;
+    box-shadow: 0 -4px 18px rgba(0,0,0,.25);
+  }
+  .banda-nudo .contenedor {
+    display: flex; align-items: center; gap: 12px;
+    padding-top: 10px; padding-bottom: 10px;
+  }
+  .banda-nudo p { margin: 0; flex: 1; font-size: 16px; line-height: 1.3; font-weight: 700; min-width: 0; }
+  .banda-nudo p span { display: none; font-weight: 400; color: #cfcfcf; }
+  .btn-nudo {
+    flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 52px; padding: 10px 16px; border-radius: 999px;
+    background: #25d366; color: #0b2b16; font-weight: 800; font-size: 16px;
+    text-decoration: none; text-align: center; line-height: 1.15;
+  }
+  .btn-nudo:hover { background: #3ee07a; }
+  .btn-nudo svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+  /* ============ CABECERA ============ */
+  .cabecera { background: var(--madera); color: var(--crema); }
+  .cabecera .contenedor { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding-top: 14px; padding-bottom: 14px; }
+  .logo { display: flex; align-items: center; gap: 10px; color: var(--crema); text-decoration: none; font-family: "Bitter", serif; font-weight: 800; font-size: 21px; line-height: 1.1; }
+  .logo-marca { width: 42px; height: 42px; border-radius: 50%; background: var(--terracota); display: grid; place-items: center; border: 2px solid var(--mostaza); flex-shrink: 0; }
+  .logo-marca svg { width: 24px; height: 24px; }
+  .cabecera nav { width: 100%; }
+  .menu { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 100%; margin: 0; padding: 0; list-style: none; }
+  .menu a {
+    display: flex; align-items: center; justify-content: center; min-height: 48px;
+    color: var(--crema); text-decoration: none; font-weight: 700; font-size: 17px;
+    border: 1px solid rgba(247,239,224,.25); border-radius: 10px;
+  }
+  .menu a:hover { background: rgba(247,239,224,.1); }
+
+  /* ============ BOTONES ============ */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 58px; padding: 14px 26px; border-radius: 12px; border: 2px solid transparent;
+    font-family: inherit; font-size: 19px; font-weight: 800; text-decoration: none; cursor: pointer;
+    line-height: 1.2; text-align: center; transition: transform .15s, background .15s;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn svg { width: 24px; height: 24px; flex-shrink: 0; }
+  .btn-principal { background: var(--terracota); color: #fff; }
+  .btn-principal:hover { background: var(--terracota-osc); }
+  .btn-claro { background: var(--crema); color: var(--madera); border-color: var(--crema); }
+  .btn-claro:hover { background: #fff; }
+  .btn-borde { background: transparent; color: var(--madera); border-color: var(--madera); }
+  .btn-borde:hover { background: var(--crema-2); }
+  .btn-verde { background: var(--oliva); color: #fff; }
+  .btn-verde:hover { background: #45501f; }
+
+  /* ============ PORTADA ============ */
+  .portada { position: relative; color: #fff; overflow: hidden; background: var(--madera); }
+  .portada-foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .portada::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30,16,8,.55) 0%, rgba(30,16,8,.72) 55%, rgba(30,16,8,.9) 100%); }
+  .portada .contenedor { position: relative; z-index: 1; padding-top: 56px; padding-bottom: 48px; }
+  .portada .etiqueta { display: inline-block; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: 15px; color: var(--mostaza); margin-bottom: 10px; }
+  .portada h1 { color: #fff; font-size: clamp(40px, 11vw, 76px); font-weight: 800; letter-spacing: -.01em; }
+  .portada .frase { font-size: 21px; margin: 14px 0 22px; max-width: 34ch; color: #f5ead8; }
+  .hoy {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px;
+    background: rgba(255,250,241,.12); border: 1px solid rgba(255,250,241,.3);
+    border-radius: 12px; padding: 12px 16px; margin-bottom: 26px; max-width: 520px; font-size: 18px;
+  }
+  .hoy strong { color: #fff; }
+  .estado { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; font-size: 16px; padding: 4px 10px; border-radius: 999px; }
+  .estado::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+  .estado.abierto { background: #e3f3d6; color: #2f5a12; }
+  .estado.cerrado { background: #f7dcd2; color: #8f2a0d; }
+  .portada-botones { display: grid; gap: 12px; }
+
+  /* ============ INTRO / GALERÍA ============ */
+  .intro { padding: 48px 0 8px; }
+  .intro-texto { font-size: 19px; max-width: 60ch; }
+  .galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+  .galeria img { width: 100%; height: 150px; object-fit: cover; border-radius: var(--radio); background: var(--crema-2); }
+  .galeria img:first-child { grid-column: 1 / -1; height: 210px; }
+
+  /* ============ TÍTULOS DE SECCIÓN ============ */
+  .seccion { padding: 56px 0; }
+  .titulo-seccion { font-size: clamp(32px, 8vw, 46px); font-weight: 800; }
+  .titulo-seccion::after { content: ""; display: block; width: 64px; height: 5px; border-radius: 3px; background: var(--terracota); margin-top: 12px; }
+  .subtitulo { font-size: 19px; color: var(--texto-suave); margin: 14px 0 26px; max-width: 60ch; }
+
+  /* ============ CARTA ============ */
+  .carta { background: var(--papel); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); }
+  .ventaja { display: flex; gap: 12px; align-items: flex-start; background: #fdf1d8; border: 1px solid #ecd29a; border-radius: var(--radio); padding: 14px 16px; margin-bottom: 26px; font-size: 17px; }
+  .ventaja b { color: var(--madera); }
+
+  /* Accesos rápidos a categorías (desplazamiento horizontal interno, no de la página) */
+  .categorias-nav { display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 12px; margin: 0 0 18px; list-style: none; scrollbar-width: thin; }
+  .categorias-nav a { display: inline-flex; align-items: center; min-height: 46px; white-space: nowrap; padding: 8px 16px; border-radius: 999px; background: var(--crema-2); color: var(--madera); font-weight: 700; text-decoration: none; font-size: 17px; }
+  .categorias-nav a:hover { background: var(--borde); }
+
+  /* Filtro de alérgenos */
+  .filtro { background: #fff; border: 2px solid var(--borde); border-radius: var(--radio); padding: 18px 16px; margin-bottom: 30px; box-shadow: var(--sombra); }
+  .filtro h3 { font-size: 23px; }
+  .filtro > p { margin: 6px 0 14px; color: var(--texto-suave); font-size: 17px; }
+  .filtro-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .btn-filtro {
+    display: flex; align-items: center; gap: 8px; min-height: 52px; padding: 8px 12px;
+    background: var(--crema); border: 2px solid var(--borde); border-radius: 10px;
+    font-family: inherit; font-size: 16px; font-weight: 700; color: var(--texto); cursor: pointer; text-align: left; line-height: 1.2;
+  }
+  .btn-filtro .ico { font-size: 20px; flex-shrink: 0; }
+  .btn-filtro[aria-pressed="true"] { background: var(--oliva); border-color: var(--oliva); color: #fff; }
+  .btn-filtro[aria-pressed="true"]::after { content: "✓"; margin-left: auto; font-weight: 800; }
+  .filtro-pie { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
+  .contador { font-weight: 700; font-size: 17px; margin: 0; }
+  .btn-quitar { min-height: 48px; padding: 8px 16px; background: transparent; border: 2px solid var(--terracota); color: var(--terracota-osc); border-radius: 10px; font: inherit; font-weight: 800; font-size: 16px; cursor: pointer; }
+  .btn-quitar[hidden] { display: none; }
+
+  /* Categorías y platos */
+  .categoria { margin-bottom: 40px; scroll-margin-top: calc(var(--banda-alto) + 12px); }
+  .categoria-cab { position: relative; border-radius: var(--radio); overflow: hidden; margin-bottom: 8px; min-height: 130px; display: flex; align-items: flex-end; background: var(--madera-2); }
+  .categoria-cab img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .categoria-cab::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(30,16,8,.85) 0%, rgba(30,16,8,.35) 100%); }
+  .categoria-cab h3 { position: relative; z-index: 1; color: #fff; font-size: 30px; padding: 18px 18px; }
+  .categoria-cab h3 small { display: block; font-family: "Nunito Sans", sans-serif; font-size: 16px; font-weight: 600; color: #f1e2c8; margin-top: 4px; }
+  .platos { list-style: none; margin: 0; padding: 0; }
+  .plato { padding: 18px 2px; border-bottom: 1px dashed var(--borde); }
+  .plato[hidden] { display: none; }
+  .plato-cab { display: flex; align-items: baseline; gap: 12px; }
+  .plato h4 { font-size: 21px; font-weight: 700; flex: 1; min-width: 0; }
+  .precio { font-family: "Bitter", serif; font-weight: 800; font-size: 21px; color: var(--terracota-osc); white-space: nowrap; }
+  .plato p { margin: 4px 0 10px; color: var(--texto-suave); font-size: 17px; }
+  .etiquetas { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+  .etiqueta-al { display: inline-flex; align-items: center; gap: 5px; font-size: 15px; font-weight: 700; padding: 3px 10px 3px 7px; border-radius: 999px; background: var(--crema-2); color: var(--madera); border: 1px solid var(--borde); }
+  .etiqueta-al.ninguno { background: #e7efd9; border-color: #c4d3a5; color: #3c4a17; }
+  .vacio { padding: 16px; background: var(--crema); border-radius: 10px; color: var(--texto-suave); font-size: 17px; margin-top: 10px; }
+  .vacio[hidden] { display: none; }
+
+  /* Leyenda de alérgenos */
+  .leyenda { border: 2px solid var(--borde); border-radius: var(--radio); padding: 18px 16px; background: #fff; }
+  .leyenda h3 { font-size: 23px; margin-bottom: 6px; }
+  .leyenda > p { font-size: 16px; color: var(--texto-suave); }
+  .leyenda ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; }
+  .leyenda li { display: flex; align-items: center; gap: 8px; font-size: 17px; }
+  .leyenda .ico { font-size: 22px; width: 28px; text-align: center; }
+
+  /* ============ HORARIO Y DIRECCIÓN ============ */
+  .horario-grid { display: grid; gap: 28px; }
+  .tabla-horario { width: 100%; border-collapse: collapse; background: var(--papel); border-radius: var(--radio); overflow: hidden; box-shadow: var(--sombra); font-size: 18px; }
+  .tabla-horario caption { text-align: left; font-family: "Bitter", serif; font-weight: 700; font-size: 23px; color: var(--madera); padding-bottom: 10px; }
+  .tabla-horario th, .tabla-horario td { padding: 14px 14px; text-align: left; border-bottom: 1px solid var(--borde); vertical-align: top; }
+  .tabla-horario th { font-weight: 800; width: 38%; }
+  .tabla-horario tr:last-child th, .tabla-horario tr:last-child td { border-bottom: 0; }
+  .tabla-horario tr.es-hoy { background: #fdecc8; }
+  .tabla-horario tr.es-hoy th::after { content: " · hoy"; color: var(--terracota-osc); font-weight: 800; }
+  .tabla-horario .cerrado-dia { color: var(--terracota-osc); font-weight: 700; }
+
+  .direccion h3 { font-size: 23px; margin-bottom: 10px; }
+  .direccion address { font-style: normal; font-size: 19px; margin-bottom: 14px; }
+  /* Mapa estilizado (sin iframe) */
+  .mapa {
+    position: relative; height: 240px; border-radius: var(--radio); overflow: hidden; margin-bottom: 14px;
+    border: 2px solid var(--borde);
+    background-color: #eadfc6;
+    background-image:
+      linear-gradient(90deg, transparent 46%, #fffaf1 46%, #fffaf1 54%, transparent 54%),
+      linear-gradient(0deg, transparent 40%, #fffaf1 40%, #fffaf1 47%, transparent 47%),
+      linear-gradient(28deg, transparent 70%, #f6ecd8 70%, #f6ecd8 74%, transparent 74%),
+      repeating-linear-gradient(90deg, rgba(90,58,38,.07) 0 1px, transparent 1px 38px),
+      repeating-linear-gradient(0deg, rgba(90,58,38,.07) 0 1px, transparent 1px 38px);
+  }
+  .mapa .parque { position: absolute; left: 8%; top: 8%; width: 28%; height: 26%; background: #c9d6a6; border-radius: 12px; }
+  .mapa .calle { position: absolute; left: 56%; top: 62%; font-size: 14px; font-weight: 800; color: var(--madera-2); letter-spacing: .04em; text-transform: uppercase; }
+  .mapa .pin { position: absolute; left: 50%; top: 43%; transform: translate(-50%, -100%); display: flex; flex-direction: column; align-items: center; }
+  .mapa .pin span { background: var(--terracota); color: #fff; font-weight: 800; font-size: 15px; padding: 6px 12px; border-radius: 8px; white-space: nowrap; box-shadow: var(--sombra); }
+  .mapa .pin i { width: 0; height: 0; border: 10px solid transparent; border-top-color: var(--terracota); }
+  .mapa .aviso-mapa { position: absolute; right: 8px; bottom: 8px; background: rgba(255,250,241,.92); font-size: 13px; padding: 3px 8px; border-radius: 6px; color: var(--texto-suave); }
+
+  /* ============ RESERVAS ============ */
+  .reservas { background: var(--madera); color: var(--crema); }
+  .reservas .titulo-seccion { color: #fff; }
+  .reservas .subtitulo { color: #e8d9bf; }
+  .reservas-grid { display: grid; gap: 28px; }
+  .reservas-botones { display: grid; gap: 12px; align-content: start; }
+  .reservas-botones .btn { width: 100%; min-height: 64px; font-size: 20px; }
+  .nota { font-size: 16px; color: #d8c6a6; margin-top: 4px; }
+  .formulario { background: var(--papel); color: var(--texto); border-radius: var(--radio); padding: 20px 16px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  .formulario h3 { font-size: 23px; margin-bottom: 14px; }
+  .campo { margin-bottom: 14px; }
+  .campo label { display: block; font-weight: 800; margin-bottom: 6px; font-size: 17px; }
+  .campo input, .campo select, .campo textarea {
+    width: 100%; min-height: 54px; padding: 12px 14px; font: inherit; font-size: 18px; color: var(--texto);
+    background: #fff; border: 2px solid var(--borde); border-radius: 10px;
+  }
+  .campo input:focus, .campo select:focus, .campo textarea:focus { border-color: var(--terracota); outline: none; box-shadow: 0 0 0 3px rgba(176,74,38,.2); }
+  .campos-fila { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .formulario .btn { width: 100%; }
+
+  /* ============ PIE ============ */
+  .pie { background: #22150d; color: #e8d9bf; padding: 40px 0 32px; font-size: 17px; }
+  .pie .contenedor { display: grid; gap: 22px; }
+  .pie .logo { font-size: 22px; }
+  .redes { display: flex; gap: 12px; list-style: none; margin: 0; padding: 0; }
+  .redes a { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: rgba(247,239,224,.1); color: var(--crema); }
+  .redes a:hover { background: var(--terracota); }
+  .redes svg { width: 24px; height: 24px; }
+  .firma { border-top: 1px solid rgba(247,239,224,.15); padding-top: 18px; font-size: 16px; color: #bfae92; }
+  .firma a { color: #fff; font-weight: 800; }
+
+  /* ============ AVISO (TOAST) ============ */
+  .toast {
+    position: fixed; left: 16px; right: 16px; bottom: 108px; z-index: 60;
+    max-width: 460px; margin: 0 auto;
+    background: var(--texto); color: #fff; border-left: 6px solid var(--mostaza);
+    padding: 14px 16px; border-radius: 12px; font-size: 17px; font-weight: 600; line-height: 1.4;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity .25s, transform .25s;
+  }
+  .toast.visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .toast, .btn { transition: none; }
+  }
+
+  /* ============ TABLET ============ */
+  @media (min-width: 640px) {
+    .portada-botones { grid-template-columns: auto auto; justify-content: start; }
+    .filtro-botones { grid-template-columns: repeat(3, 1fr); }
+    .leyenda ul { grid-template-columns: repeat(3, 1fr); }
+    .galeria { grid-template-columns: 2fr 1fr 1fr; }
+    .galeria img, .galeria img:first-child { grid-column: auto; height: 240px; }
+  }
+
+  /* ============ ESCRITORIO ============ */
+  @media (min-width: 960px) {
+    body { font-size: 19px; padding-bottom: 0; }
+    /* La banda de Nudo pasa arriba y se queda fija */
+    .banda-nudo { position: sticky; top: 0; bottom: auto; border-top: 0; border-bottom: 3px solid #25d366; box-shadow: 0 4px 18px rgba(0,0,0,.2); }
+    .banda-nudo .contenedor { padding-top: 8px; padding-bottom: 8px; }
+    .banda-nudo p { font-size: 17px; }
+    .banda-nudo p span { display: inline; margin-left: 8px; font-size: 16px; }
+    .cabecera .contenedor { flex-wrap: nowrap; }
+    .cabecera nav { width: auto; }
+    .menu { display: flex; width: auto; gap: 4px; }
+    .menu a { border: 0; padding: 0 16px; }
+    .portada .contenedor { padding-top: 110px; padding-bottom: 100px; }
+    .portada .frase { font-size: 24px; }
+    .toast { bottom: 28px; }
+    .filtro { padding: 24px; }
+    .filtro-botones { grid-template-columns: repeat(5, 1fr); }
+    .leyenda ul { grid-template-columns: repeat(5, 1fr); }
+    .carta-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; align-items: start; }
+    .categoria-cab { min-height: 150px; }
+    .horario-grid { grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: start; }
+    .reservas-grid { grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: start; }
+    .formulario { padding: 28px; }
+    .pie .contenedor { grid-template-columns: 1fr auto; align-items: center; }
+    .firma { grid-column: 1 / -1; }
+    .mapa { height: 280px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== BANDA DE NUDO ===================== -->
+<aside class="banda-nudo" id="banda-nudo" aria-label="Aviso: esto es un ejemplo">
+  <div class="contenedor">
+    <p>Ejemplo de concepto hecho por Nudo · Local ficticio <span>Tu bar, con una web así, en 7 días.</span></p>
+    <a class="btn-nudo" href="https://wa.me/34722740211?text=Hola%2C%20he%20visto%20el%20ejemplo%20del%20bar%20de%20tapas%20y%20quiero%20una%20web%20as%C3%AD" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg>
+      Quiero una web así
+    </a>
+  </div>
+</aside>
+
+<!-- ===================== CABECERA ===================== -->
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="logo" href="#inicio">
+      <span class="logo-marca" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f7efe0" stroke-width="2" stroke-linecap="round"><path d="M7 3v6a3 3 0 0 0 6 0V3M10 12v9M17 3c-1.7 1.3-2.5 3.3-2.5 6s1 3 2.5 3v9"/></svg>
+      </span>
+      La Taberna del Nudo
+    </a>
+    <nav aria-label="Menú principal">
+      <ul class="menu">
+        <li><a href="#carta">Carta</a></li>
+        <li><a href="#horario">Horario</a></li>
+        <li><a href="#reservas">Reservas</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <!-- ===================== 1. PORTADA ===================== -->
+  <section class="portada" aria-labelledby="titulo-portada">
+    <img class="portada-foto" src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=70" alt="Barra de madera de una taberna con luz cálida" fetchpriority="high">
+    <div class="contenedor">
+      <span class="etiqueta">Bar de tapas · Desde 1987</span>
+      <h1 id="titulo-portada">La Taberna del Nudo</h1>
+      <p class="frase">Tapas de siempre, hechas cada mañana. Caña fría, croqueta casera y buena compañía.</p>
+      <div class="hoy" id="hoy" aria-live="polite">
+        <strong id="hoy-dia">Hoy</strong>
+        <span id="hoy-horas">Consulta nuestro horario</span>
+        <span class="estado" id="hoy-estado" hidden></span>
+      </div>
+      <div class="portada-botones">
+        <a class="btn btn-principal" href="#reservas">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+          Reservar mesa
+        </a>
+        <a class="btn btn-claro" href="#carta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4Z"/><path d="M8 9h8M8 13h6"/></svg>
+          Ver la carta
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INTRO CON FOTOS ===================== -->
+  <section class="intro" aria-label="Sobre la taberna">
+    <div class="contenedor">
+      <p class="intro-texto">Una barra de toda la vida en pleno barrio. Cocina casera, producto de mercado y el vermut de grifo de los domingos. Ven a picar algo o a comer con calma: aquí siempre hay sitio para uno más.</p>
+      <div class="galeria">
+        <img src="https://images.unsplash.com/photo-1515669097368-22e68427d265?auto=format&fit=crop&w=1200&q=70" alt="Mesa con varias tapas y croquetas para compartir" loading="lazy" width="1200" height="800">
+        <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=1200&q=70" alt="Quesos curados sobre una mesa de piedra" loading="lazy" width="1200" height="800">
+        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=70" alt="Amigos brindando con copas de vino tinto" loading="lazy" width="1200" height="800">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2. LA CARTA ===================== -->
+  <section class="seccion carta" id="carta" aria-labelledby="titulo-carta">
+    <div class="contenedor">
+      <h2 class="titulo-seccion" id="titulo-carta">Nuestra carta</h2>
+      <p class="subtitulo">Precios con IVA incluido. Si tienes alguna alergia, usa el filtro y te enseñamos solo lo que puedes tomar.</p>
+
+      <div class="ventaja">
+        <span aria-hidden="true" style="font-size:26px">📱</span>
+        <p style="margin:0"><b>Carta siempre al día, sin PDF ni zoom.</b> Se lee bien en cualquier móvil y el dueño cambia un precio en un minuto.</p>
+      </div>
+
+      <!-- Accesos rápidos a cada categoría -->
+      <nav aria-label="Categorías de la carta">
+        <ul class="categorias-nav">
+          <li><a href="#tapas-frias">Tapas frías</a></li>
+          <li><a href="#tapas-calientes">Tapas calientes</a></li>
+          <li><a href="#raciones">Raciones</a></li>
+          <li><a href="#postres">Postres</a></li>
+          <li><a href="#bebidas">Bebidas</a></li>
+        </ul>
+      </nav>
+
+      <!-- Filtro de alérgenos: los botones se generan con JS a partir de la lista de alérgenos -->
+      <div class="filtro" role="region" aria-labelledby="titulo-filtro">
+        <h3 id="titulo-filtro">¿Tienes alguna alergia o intolerancia?</h3>
+        <p>Toca lo que <strong>no</strong> puedes tomar y ocultamos los platos que lo llevan.</p>
+        <div class="filtro-botones" id="filtro-botones"></div>
+        <div class="filtro-pie">
+          <p class="contador" id="contador" aria-live="polite"></p>
+          <button type="button" class="btn-quitar" id="quitar-filtros" hidden>Quitar filtros</button>
+        </div>
+      </div>
+
+      <!--
+        Cada plato lleva en data-al sus alérgenos (claves separadas por espacios).
+        Claves: gluten crustaceos huevo pescado cacahuetes soja lacteos frutos apio mostaza sesamo sulfitos altramuces moluscos
+      -->
+      <div class="carta-columnas">
+
+        <!-- Tapas frías -->
+        <div class="categoria" id="tapas-frias">
+          <div class="categoria-cab">
+            <img src="https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=1200&q=70" alt="" loading="lazy">
+            <h3>Tapas frías <small>Para abrir boca</small></h3>
+          </div>
+          <ul class="platos">
+            <li class="plato" data-al="huevo pescado">
+              <div class="plato-cab"><h4>Ensaladilla rusa</h4><span class="precio">4,50 €</span></div>
+              <p>Patata, atún, huevo cocido y mayonesa hecha en casa. Con picos.</p>
+            </li>
+            <li class="plato" data-al="pescado sulfitos">
+              <div class="plato-cab"><h4>Boquerones en vinagre</h4><span class="precio">5,00 €</span></div>
+              <p>Marinados en casa con ajo, perejil y aceite de oliva virgen extra.</p>
+            </li>
+            <li class="plato" data-al="gluten">
+              <div class="plato-cab"><h4>Jamón ibérico de cebo</h4><span class="precio">12,00 €</span></div>
+              <p>Media ración cortada a cuchillo, con pan con tomate.</p>
+            </li>
+            <li class="plato" data-al="lacteos">
+              <div class="plato-cab"><h4>Queso manchego curado</h4><span class="precio">7,50 €</span></div>
+              <p>De oveja, con membrillo casero y aceite de oliva.</p>
+            </li>
+            <li class="plato" data-al="gluten huevo">
+              <div class="plato-cab"><h4>Salmorejo cordobés</h4><span class="precio">5,00 €</span></div>
+              <p>Bien fresquito, con huevo duro picado y taquitos de jamón.</p>
+            </li>
+            <li class="plato" data-al="altramuces cacahuetes">
+              <div class="plato-cab"><h4>Chochos y cacahuetes</h4><span class="precio">2,00 €</span></div>
+              <p>Altramuces aliñados y cacahuetes tostados. El picoteo de la caña.</p>
+            </li>
+          </ul>
+          <p class="vacio" hidden>Con los filtros elegidos no queda ningún plato en esta sección.</p>
+        </div>
+
+        <!-- Tapas calientes -->
+        <div class="categoria" id="tapas-calientes">
+          <div class="categoria-cab">
+            <img src="https://images.unsplash.com/photo-1515443961218-a51367888e4b?auto=format&fit=crop&w=1200&q=70" alt="" loading="lazy">
+            <h3>Tapas calientes <small>Recién salidas de la cocina</small></h3>
+          </div>
+          <ul class="platos">
+            <li class="plato" data-al="gluten huevo lacteos">
+              <div class="plato-cab"><h4>Croquetas caseras de jamón</h4><span class="precio">7,00 €</span></div>
+              <p>Seis unidades, cremosas por dentro y crujientes por fuera.</p>
+            </li>
+            <li class="plato" data-al="huevo">
+              <div class="plato-cab"><h4>Patatas bravas</h4><span class="precio">5,50 €</span></div>
+              <p>Con nuestra salsa brava picantita y alioli suave.</p>
+            </li>
+            <li class="plato" data-al="huevo">
+              <div class="plato-cab"><h4>Pincho de tortilla</h4><span class="precio">3,50 €</span></div>
+              <p>Jugosa, con cebolla. Se hace varias veces al día.</p>
+            </li>
+            <li class="plato" data-al="crustaceos">
+              <div class="plato-cab"><h4>Gambas al ajillo</h4><span class="precio">11,50 €</span></div>
+              <p>En cazuela de barro, con ajo laminado y guindilla.</p>
+            </li>
+            <li class="plato" data-al="">
+              <div class="plato-cab"><h4>Pimientos de Padrón</h4><span class="precio">5,50 €</span></div>
+              <p>Fritos al momento con sal gorda. Unos pican y otros no.</p>
+            </li>
+            <li class="plato" data-al="soja sesamo gluten">
+              <div class="plato-cab"><h4>Pincho moruno de pollo</h4><span class="precio">4,50 €</span></div>
+              <p>Marinado con especias y soja, con sésamo tostado por encima.</p>
+            </li>
+          </ul>
+          <p class="vacio" hidden>Con los filtros elegidos no queda ningún plato en esta sección.</p>
+        </div>
+
+        <!-- Raciones -->
+        <div class="categoria" id="raciones">
+          <div class="categoria-cab">
+            <img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=1200&q=70" alt="" loading="lazy">
+            <h3>Raciones <small>Para compartir en la mesa</small></h3>
+          </div>
+          <ul class="platos">
+            <li class="plato" data-al="moluscos">
+              <div class="plato-cab"><h4>Pulpo a la gallega</h4><span class="precio">18,00 €</span></div>
+              <p>Sobre cachelos, con pimentón de la Vera y aceite de oliva.</p>
+            </li>
+            <li class="plato" data-al="moluscos gluten huevo">
+              <div class="plato-cab"><h4>Calamares a la romana</h4><span class="precio">12,50 €</span></div>
+              <p>Anillas de calamar rebozadas, con limón.</p>
+            </li>
+            <li class="plato" data-al="mostaza">
+              <div class="plato-cab"><h4>Secreto ibérico a la brasa</h4><span class="precio">16,00 €</span></div>
+              <p>Con patatas panadera y salsa suave de mostaza antigua.</p>
+            </li>
+            <li class="plato" data-al="gluten huevo apio sulfitos">
+              <div class="plato-cab"><h4>Albóndigas de la abuela</h4><span class="precio">9,50 €</span></div>
+              <p>En salsa de verduras (con apio y zanahoria) y un toque de vino blanco.</p>
+            </li>
+            <li class="plato" data-al="huevo">
+              <div class="plato-cab"><h4>Huevos rotos con jamón</h4><span class="precio">11,00 €</span></div>
+              <p>Patatas fritas caseras, huevos de corral y jamón serrano.</p>
+            </li>
+            <li class="plato" data-al="gluten sesamo">
+              <div class="plato-cab"><h4>Berenjenas con miel de caña</h4><span class="precio">8,50 €</span></div>
+              <p>Fritas y crujientes, con miel de caña y semillas de sésamo.</p>
+            </li>
+          </ul>
+          <p class="vacio" hidden>Con los filtros elegidos no queda ningún plato en esta sección.</p>
+        </div>
+
+        <!-- Postres -->
+        <div class="categoria" id="postres">
+          <div class="categoria-cab">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1200&q=70" alt="" loading="lazy">
+            <h3>Postres <small>Todos caseros</small></h3>
+          </div>
+          <ul class="platos">
+            <li class="plato" data-al="lacteos huevo gluten">
+              <div class="plato-cab"><h4>Tarta de queso al horno</h4><span class="precio">5,50 €</span></div>
+              <p>Cremosa por dentro, tostada por fuera. La receta de la casa.</p>
+            </li>
+            <li class="plato" data-al="huevo lacteos">
+              <div class="plato-cab"><h4>Flan de huevo con nata</h4><span class="precio">4,00 €</span></div>
+              <p>Con caramelo hecho aquí y nata montada.</p>
+            </li>
+            <li class="plato" data-al="gluten huevo lacteos">
+              <div class="plato-cab"><h4>Torrija</h4><span class="precio">5,00 €</span></div>
+              <p>Empapada en leche con canela y limón, y caramelizada.</p>
+            </li>
+            <li class="plato" data-al="lacteos">
+              <div class="plato-cab"><h4>Arroz con leche</h4><span class="precio">4,00 €</span></div>
+              <p>Con canela y el azúcar quemado por encima.</p>
+            </li>
+            <li class="plato" data-al="frutos huevo">
+              <div class="plato-cab"><h4>Tarta de almendra</h4><span class="precio">5,00 €</span></div>
+              <p>Al estilo de Santiago. Sin harina de trigo.</p>
+            </li>
+          </ul>
+          <p class="vacio" hidden>Con los filtros elegidos no queda ningún plato en esta sección.</p>
+        </div>
+
+        <!-- Bebidas -->
+        <div class="categoria" id="bebidas">
+          <div class="categoria-cab">
+            <img src="https://images.unsplash.com/photo-1608039829572-78524f79c4c7?auto=format&fit=crop&w=1200&q=70" alt="" loading="lazy">
+            <h3>Bebidas <small>Bien fresquitas</small></h3>
+          </div>
+          <ul class="platos">
+            <li class="plato" data-al="gluten">
+              <div class="plato-cab"><h4>Caña de cerveza</h4><span class="precio">1,80 €</span></div>
+              <p>De grifo, tirada como Dios manda. Doble: 2,80 €.</p>
+            </li>
+            <li class="plato" data-al="sulfitos">
+              <div class="plato-cab"><h4>Vermut de grifo</h4><span class="precio">3,00 €</span></div>
+              <p>Rojo, con hielo, rodaja de naranja y aceituna.</p>
+            </li>
+            <li class="plato" data-al="sulfitos">
+              <div class="plato-cab"><h4>Copa de vino tinto crianza</h4><span class="precio">3,20 €</span></div>
+              <p>Pregunta por el vino de la semana.</p>
+            </li>
+            <li class="plato" data-al="sulfitos">
+              <div class="plato-cab"><h4>Tinto de verano</h4><span class="precio">2,50 €</span></div>
+              <p>Con limón o con gaseosa.</p>
+            </li>
+            <li class="plato" data-al="">
+              <div class="plato-cab"><h4>Refrescos</h4><span class="precio">2,30 €</span></div>
+              <p>Cola, naranja, limón y tónica.</p>
+            </li>
+            <li class="plato" data-al="">
+              <div class="plato-cab"><h4>Agua mineral</h4><span class="precio">1,50 €</span></div>
+              <p>Botella de 50 cl, natural o con gas.</p>
+            </li>
+          </ul>
+          <p class="vacio" hidden>Con los filtros elegidos no queda ningún plato en esta sección.</p>
+        </div>
+
+      </div>
+
+      <!-- Leyenda de los 14 alérgenos (se rellena con JS) -->
+      <div class="leyenda" aria-labelledby="titulo-leyenda">
+        <h3 id="titulo-leyenda">Leyenda de alérgenos</h3>
+        <p>Los 14 alérgenos de declaración obligatoria según el Reglamento (UE) 1169/2011. Si tienes dudas, pregunta a nuestro personal antes de pedir.</p>
+        <ul id="leyenda-lista"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 3. HORARIO Y DIRECCIÓN ===================== -->
+  <section class="seccion" id="horario" aria-labelledby="titulo-horario">
+    <div class="contenedor">
+      <h2 class="titulo-seccion" id="titulo-horario">Horario y dónde estamos</h2>
+      <p class="subtitulo">Cocina abierta todo el horario. Los lunes descansamos.</p>
+      <div class="horario-grid">
+        <table class="tabla-horario" id="tabla-horario">
+          <caption>Horario de la semana</caption>
+          <tbody>
+            <tr data-dia="1"><th scope="row">Lunes</th><td class="cerrado-dia">Cerrado por descanso</td></tr>
+            <tr data-dia="2"><th scope="row">Martes</th><td>12:00 – 16:00<br>19:30 – 23:30</td></tr>
+            <tr data-dia="3"><th scope="row">Miércoles</th><td>12:00 – 16:00<br>19:30 – 23:30</td></tr>
+            <tr data-dia="4"><th scope="row">Jueves</th><td>12:00 – 16:00<br>19:30 – 23:30</td></tr>
+            <tr data-dia="5"><th scope="row">Viernes</th><td>12:00 – 16:30<br>19:30 – 00:30</td></tr>
+            <tr data-dia="6"><th scope="row">Sábado</th><td>12:00 – 16:30<br>19:30 – 00:30</td></tr>
+            <tr data-dia="0"><th scope="row">Domingo</th><td>12:00 – 17:00</td></tr>
+          </tbody>
+        </table>
+
+        <div class="direccion">
+          <h3>Dirección</h3>
+          <address>Calle Ejemplo, 1<br>00000 Ciudad Ejemplo</address>
+          <div class="mapa" role="img" aria-label="Mapa ilustrativo con la ubicación de la taberna">
+            <span class="parque"></span>
+            <span class="calle">Calle Ejemplo</span>
+            <span class="pin"><span>La Taberna del Nudo</span><i></i></span>
+            <span class="aviso-mapa">Mapa ilustrativo</span>
+          </div>
+          <button type="button" class="btn btn-borde" data-aviso="Esto es un ejemplo. En tu web, este botón abrirá la ruta hasta tu local en Google Maps.">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            Cómo llegar
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 4. RESERVAS ===================== -->
+  <section class="seccion reservas" id="reservas" aria-labelledby="titulo-reservas">
+    <div class="contenedor">
+      <h2 class="titulo-seccion" id="titulo-reservas">Reserva tu mesa</h2>
+      <p class="subtitulo">Llámanos, escríbenos por WhatsApp o déjanos tus datos y te confirmamos.</p>
+      <div class="reservas-grid">
+        <div class="reservas-botones">
+          <button type="button" class="btn btn-principal" data-aviso>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>
+            Llamar al local
+          </button>
+          <button type="button" class="btn btn-verde" data-aviso="Esto es un ejemplo. En tu web, este botón abrirá un WhatsApp con tu local.">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg>
+            Reservar por WhatsApp
+          </button>
+          <p class="nota">Para grupos de más de 10 personas, mejor llámanos.</p>
+        </div>
+
+        <form class="formulario" id="form-reserva" novalidate>
+          <h3>O déjanos tus datos</h3>
+          <div class="campo">
+            <label for="f-nombre">Nombre</label>
+            <input id="f-nombre" name="nombre" type="text" autocomplete="name" placeholder="Tu nombre">
+          </div>
+          <div class="campo">
+            <label for="f-telefono">Teléfono</label>
+            <input id="f-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="Para confirmarte la reserva">
+          </div>
+          <div class="campos-fila">
+            <div class="campo">
+              <label for="f-fecha">Día</label>
+              <input id="f-fecha" name="fecha" type="date">
+            </div>
+            <div class="campo">
+              <label for="f-personas">Personas</label>
+              <select id="f-personas" name="personas">
+                <option>1</option><option selected>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option><option>Más de 8</option>
+              </select>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="f-hora">Hora</label>
+            <select id="f-hora" name="hora">
+              <option>13:00</option><option>13:30</option><option selected>14:00</option><option>14:30</option><option>15:00</option>
+              <option>20:00</option><option>20:30</option><option>21:00</option><option>21:30</option><option>22:00</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-principal">Pedir reserva</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== 5. PIE ===================== -->
+<footer class="pie">
+  <div class="contenedor">
+    <div>
+      <a class="logo" href="#inicio">
+        <span class="logo-marca" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f7efe0" stroke-width="2" stroke-linecap="round"><path d="M7 3v6a3 3 0 0 0 6 0V3M10 12v9M17 3c-1.7 1.3-2.5 3.3-2.5 6s1 3 2.5 3v9"/></svg>
+        </span>
+        La Taberna del Nudo
+      </a>
+      <p style="margin:10px 0 0">Calle Ejemplo, 1 · 00000 Ciudad Ejemplo</p>
+    </div>
+    <ul class="redes" aria-label="Redes sociales">
+      <li><a href="#" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a></li>
+      <li><a href="#" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5Z"/></svg>
+      </a></li>
+      <li><a href="#" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.4 2.3 1.9 3.8 4.2 4v3.2a7.6 7.6 0 0 1-4.1-1.3v6.4A5.7 5.7 0 1 1 11 9.6v3.3a2.5 2.5 0 1 0 2.3 2.5V3h3.2Z"/></svg>
+      </a></li>
+    </ul>
+    <p class="firma">Local ficticio creado como ejemplo. Fotos: Unsplash. · <a href="https://nudodesign.es" target="_blank" rel="noopener">Web hecha por Nudo</a></p>
+  </div>
+</footer>
+
+<!-- Aviso emergente (toast) -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  /* =========================================================
+     DATOS: los 14 alérgenos del Reglamento (UE) 1169/2011
+     ========================================================= */
+  var ALERGENOS = [
+    { clave: "gluten",     nombre: "Gluten",            icono: "🌾" },
+    { clave: "crustaceos", nombre: "Crustáceos",        icono: "🦐" },
+    { clave: "huevo",      nombre: "Huevo",             icono: "🥚" },
+    { clave: "pescado",    nombre: "Pescado",           icono: "🐟" },
+    { clave: "cacahuetes", nombre: "Cacahuetes",        icono: "🥜" },
+    { clave: "soja",       nombre: "Soja",              icono: "🫘" },
+    { clave: "lacteos",    nombre: "Lácteos",           icono: "🥛" },
+    { clave: "frutos",     nombre: "Frutos de cáscara", icono: "🌰" },
+    { clave: "apio",       nombre: "Apio",              icono: "🥬" },
+    { clave: "mostaza",    nombre: "Mostaza",           icono: "🟡" },
+    { clave: "sesamo",     nombre: "Sésamo",            icono: "⚪" },
+    { clave: "sulfitos",   nombre: "Sulfitos",          icono: "🍷" },
+    { clave: "altramuces", nombre: "Altramuces",        icono: "🌼" },
+    { clave: "moluscos",   nombre: "Moluscos",          icono: "🦑" }
+  ];
+  var MAPA_ALERGENOS = {};
+  ALERGENOS.forEach(function (a) { MAPA_ALERGENOS[a.clave] = a; });
+
+  /* Horario: índice = día de la semana de JS (0 = domingo). Tramos en "HH:MM". */
+  var HORARIO = [
+    [["12:00", "17:00"]],                    // domingo
+    [],                                      // lunes (cerrado)
+    [["12:00", "16:00"], ["19:30", "23:30"]],// martes
+    [["12:00", "16:00"], ["19:30", "23:30"]],// miércoles
+    [["12:00", "16:00"], ["19:30", "23:30"]],// jueves
+    [["12:00", "16:30"], ["19:30", "00:30"]],// viernes
+    [["12:00", "16:30"], ["19:30", "00:30"]] // sábado
+  ];
+  var NOMBRES_DIAS = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+
+  /* Utilidad: crea un elemento con clase y texto */
+  function crear(etiqueta, clase, texto) {
+    var el = document.createElement(etiqueta);
+    if (clase) el.className = clase;
+    if (texto) el.textContent = texto;
+    return el;
+  }
+
+  /* =========================================================
+     AVISO (TOAST): los botones del local no llaman a nadie
+     ========================================================= */
+  var AVISO_POR_DEFECTO = "Esto es un ejemplo. En tu web, este botón llamará a tu local.";
+  var toast = document.getElementById("toast");
+  var temporizadorToast = null;
+
+  function mostrarAviso(mensaje) {
+    toast.textContent = mensaje || AVISO_POR_DEFECTO;
+    toast.classList.add("visible");
+    clearTimeout(temporizadorToast);
+    temporizadorToast = setTimeout(function () { toast.classList.remove("visible"); }, 4000);
+  }
+
+  document.querySelectorAll("[data-aviso]").forEach(function (boton) {
+    boton.addEventListener("click", function (e) {
+      e.preventDefault();
+      mostrarAviso(boton.getAttribute("data-aviso"));
+    });
+  });
+
+  /* Formulario de reserva: no envía nada, solo muestra el aviso */
+  document.getElementById("form-reserva").addEventListener("submit", function (e) {
+    e.preventDefault();
+    mostrarAviso("Esto es un ejemplo. En tu web, esta reserva le llegará a tu local al momento.");
+  });
+
+  /* Fecha mínima del formulario = hoy */
+  (function () {
+    var hoy = new Date();
+    var iso = hoy.getFullYear() + "-" + String(hoy.getMonth() + 1).padStart(2, "0") + "-" + String(hoy.getDate()).padStart(2, "0");
+    var campoFecha = document.getElementById("f-fecha");
+    campoFecha.min = iso;
+    campoFecha.value = iso;
+  })();
+
+  /* =========================================================
+     CARTA: etiquetas de alérgenos en cada plato
+     ========================================================= */
+  var platos = Array.prototype.slice.call(document.querySelectorAll(".plato"));
+
+  platos.forEach(function (plato) {
+    var claves = (plato.getAttribute("data-al") || "").split(/\s+/).filter(Boolean);
+    plato._alergenos = claves;
+    var lista = crear("ul", "etiquetas");
+    lista.setAttribute("aria-label", "Alérgenos");
+    if (claves.length === 0) {
+      lista.appendChild(crear("li", "etiqueta-al ninguno", "✓ Sin alérgenos declarados"));
+    } else {
+      claves.forEach(function (clave) {
+        var a = MAPA_ALERGENOS[clave];
+        if (!a) return;
+        var li = crear("li", "etiqueta-al");
+        var ico = crear("span", "", a.icono);
+        ico.setAttribute("aria-hidden", "true");
+        li.appendChild(ico);
+        li.appendChild(document.createTextNode(a.nombre));
+        lista.appendChild(li);
+      });
+    }
+    plato.appendChild(lista);
+  });
+
+  /* Leyenda */
+  var leyenda = document.getElementById("leyenda-lista");
+  ALERGENOS.forEach(function (a) {
+    var li = crear("li");
+    var ico = crear("span", "ico", a.icono);
+    ico.setAttribute("aria-hidden", "true");
+    li.appendChild(ico);
+    li.appendChild(document.createTextNode(a.nombre));
+    leyenda.appendChild(li);
+  });
+
+  /* =========================================================
+     FILTRO: oculta los platos que contienen los alérgenos elegidos
+     ========================================================= */
+  var excluidos = {}; // clave -> true
+  var contenedorFiltro = document.getElementById("filtro-botones");
+  var contador = document.getElementById("contador");
+  var botonQuitar = document.getElementById("quitar-filtros");
+
+  ALERGENOS.forEach(function (a) {
+    var b = crear("button", "btn-filtro");
+    b.type = "button";
+    b.setAttribute("aria-pressed", "false");
+    b.setAttribute("data-clave", a.clave);
+    var ico = crear("span", "ico", a.icono);
+    ico.setAttribute("aria-hidden", "true");
+    b.appendChild(ico);
+    b.appendChild(document.createTextNode("Sin " + a.nombre.toLowerCase()));
+    b.addEventListener("click", function () {
+      if (excluidos[a.clave]) delete excluidos[a.clave]; else excluidos[a.clave] = true;
+      b.setAttribute("aria-pressed", excluidos[a.clave] ? "true" : "false");
+      aplicarFiltro();
+    });
+    contenedorFiltro.appendChild(b);
+  });
+
+  botonQuitar.addEventListener("click", function () {
+    excluidos = {};
+    contenedorFiltro.querySelectorAll(".btn-filtro").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+    aplicarFiltro();
+  });
+
+  function aplicarFiltro() {
+    var visibles = 0;
+    platos.forEach(function (plato) {
+      var oculto = plato._alergenos.some(function (c) { return excluidos[c]; });
+      plato.hidden = oculto;
+      if (!oculto) visibles++;
+    });
+    // Mensaje de sección vacía
+    document.querySelectorAll(".categoria").forEach(function (cat) {
+      var quedan = cat.querySelectorAll(".plato:not([hidden])").length;
+      cat.querySelector(".vacio").hidden = quedan > 0;
+    });
+    var hayFiltros = Object.keys(excluidos).length > 0;
+    contador.textContent = hayFiltros
+      ? "Mostrando " + visibles + " de " + platos.length + " platos"
+      : "Mostrando los " + platos.length + " platos";
+    botonQuitar.hidden = !hayFiltros;
+  }
+  aplicarFiltro();
+
+  /* =========================================================
+     HORARIO DE HOY Y "ABIERTO AHORA"
+     ========================================================= */
+  function aMinutos(hhmm) {
+    var p = hhmm.split(":");
+    return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
+  }
+
+  // ¿Está abierto en este momento? Tiene en cuenta tramos que pasan de medianoche.
+  function estaAbierto(fecha) {
+    var dia = fecha.getDay();
+    var ahora = fecha.getHours() * 60 + fecha.getMinutes();
+    var abierto = HORARIO[dia].some(function (t) {
+      var ini = aMinutos(t[0]), fin = aMinutos(t[1]);
+      if (fin <= ini) fin += 24 * 60; // cierra pasada la medianoche
+      return ahora >= ini && ahora < fin;
+    });
+    if (abierto) return true;
+    // Tramo del día anterior que termina de madrugada
+    var anterior = HORARIO[(dia + 6) % 7];
+    return anterior.some(function (t) {
+      var ini = aMinutos(t[0]), fin = aMinutos(t[1]);
+      return fin <= ini && ahora < fin;
+    });
+  }
+
+  (function pintarHoy() {
+    var ahora = new Date();
+    var dia = ahora.getDay();
+    var tramos = HORARIO[dia];
+    document.getElementById("hoy-dia").textContent = "Hoy, " + NOMBRES_DIAS[dia] + ":";
+    document.getElementById("hoy-horas").textContent = tramos.length
+      ? tramos.map(function (t) { return t[0] + " – " + t[1]; }).join(" y ")
+      : "cerrado por descanso";
+    var estado = document.getElementById("hoy-estado");
+    var abierto = estaAbierto(ahora);
+    estado.textContent = abierto ? "Abierto ahora" : "Cerrado ahora";
+    estado.className = "estado " + (abierto ? "abierto" : "cerrado");
+    estado.hidden = false;
+    // Resaltar el día de hoy en la tabla
+    var fila = document.querySelector('#tabla-horario tr[data-dia="' + dia + '"]');
+    if (fila) fila.classList.add("es-hoy");
+  })();
+
+  /* =========================================================
+     ESCRITORIO: la banda de Nudo va arriba; ajustamos el margen
+     de los anclajes para que los títulos no queden tapados
+     ========================================================= */
+  function ajustarBanda() {
+    var banda = document.getElementById("banda-nudo");
+    var arriba = window.matchMedia("(min-width: 960px)").matches;
+    document.documentElement.style.setProperty("--banda-alto", arriba ? banda.offsetHeight + "px" : "0px");
+  }
+  window.addEventListener("resize", ajustarBanda);
+  ajustarBanda();
+</script>
+</body>
+</html>
