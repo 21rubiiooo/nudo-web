@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Webs para bares y restaurantes | Nudo</title>
-<meta name="description" content="Webs para bares, restaurantes y hoteles por 249 € + IVA, un solo pago. Carta con alérgenos, reservas y móvil. Lista en 7 días y te la enseñamos antes de pagar.">
+<meta name="description" content="Webs para bares, restaurantes y hoteles desde 249 € + IVA, un solo pago. Carta con alérgenos, reservas y móvil. Lista en 7 días y te la enseñamos antes de pagar.">
 <meta name="theme-color" content="#0B0C10">
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwQjBDMTAiLz48cGF0aCBkPSJNMTYgNDIgQzE2IDI0IDMyIDI0IDMyIDM0IEMzMiA0NCA0OCA0NCA0OCAyNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMUY0RkUwIiBzdHJva2Utd2lkdGg9IjkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg==">
@@ -1176,6 +1176,27 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   .tarj__cond,.tarj__mas{ font-size:.84rem; }
 }
 .bola svg{ width:30px; height:30px; }
+
+/* Los precios son de partida: el «Desde» va encima y pequeño, para no restar protagonismo a la cifra */
+.tarj__precio small,.srv__precio small{ display:block; margin-bottom:3px; font-size:.34em; font-weight:600; letter-spacing:.01em; line-height:1.2; }
+.tarj__precio small{ color:var(--tinta-2); }
+.srv__precio small{ color:rgba(255,255,255,.8); }
+
+/* Servicios en pantallas bajas (portátiles): con la letra grande el título,
+   la frase y las dos tarjetas no cabían y quedaban cortados por arriba y por
+   abajo. Primero se encogen las fotos; si aún no cabe, fuera fotos y frase. */
+@media (min-width:761px) and (max-height:900px){
+  .srv{ gap:clamp(14px,2.6svh,26px); padding-top:calc(var(--barra) + 2svh); padding-bottom:3svh; }
+  .srv__foto{ height:clamp(56px,8svh,84px); }
+  .srv__cab p{ margin-top:8px; }
+  .srv__t ul{ gap:7px; margin-top:12px; }
+  .srv__pie{ margin-top:14px; padding-top:14px; }
+}
+@media (min-width:761px) and (max-height:780px){
+  .srv__foto{ display:none; }
+  .srv__cuerpo{ padding-top:22px; }
+  .srv__cab p{ display:none; }
+}
 </style>
 
 
@@ -1233,13 +1254,13 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <div class="hero__txt hero__3d" id="heroTxt">
       <button class="tarj" type="button" data-abre="web">
         <span class="tarj__et">Tu web</span>
-        <span class="tarj__precio">249 €<i> + IVA</i></span>
+        <span class="tarj__precio"><small>Desde</small>249 €<i> + IVA</i></span>
         <span class="tarj__cond">Un solo pago · 7 días</span>
         <span class="tarj__mas">Qué incluye →</span>
       </button>
       <button class="tarj" type="button" data-abre="mant">
         <span class="tarj__et">Mantenimiento</span>
-        <span class="tarj__precio">39 €<i> /mes</i></span>
+        <span class="tarj__precio"><small>Desde</small>39 €<i> /mes</i></span>
         <span class="tarj__cond">Opcional · sin permanencia</span>
         <span class="tarj__mas">Qué incluye →</span>
       </button>
@@ -1292,7 +1313,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
               <li>Dominio y alojamiento del primer año incluidos</li>
             </ul>
             <div class="srv__pie">
-              <p class="srv__precio">249 €<span>+ IVA · lista en 7 días</span></p>
+              <p class="srv__precio"><small>Desde</small>249 €<span>+ IVA · lista en 7 días</span></p>
               <button class="srv__btn" type="button" data-abre="web">Qué incluye</button>
             </div>
           </div>
@@ -1310,7 +1331,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
               <li>Si algo falla, lo arreglamos nosotros</li>
             </ul>
             <div class="srv__pie">
-              <p class="srv__precio">39 €<span>+ IVA · al mes</span></p>
+              <p class="srv__precio"><small>Desde</small>39 €<span>+ IVA · al mes</span></p>
               <button class="srv__btn" type="button" data-abre="mant">Qué incluye</button>
             </div>
           </div>
@@ -1498,7 +1519,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <p>Si algún día añadimos analítica, lo haremos con una herramienta sin cookies o te pediremos permiso antes de activarla, y rechazar será tan fácil como aceptar.</p>
 
     <h4>Servicios y precios</h4>
-    <p>Tu web desde 249 €, un solo pago, que se abona íntegro al aceptar la maqueta. Mantenimiento 39 €/mes, opcional y sin permanencia. El precio de la web incluye dominio y alojamiento durante el primer año. Precios sin IVA: al importe hay que sumarle el 21 %. Pueden cambiar para nuevas contrataciones; a quien ya es cliente se le respeta el precio mientras siga dado de alta.</p>
+    <p>Tu web desde 249 €, un solo pago, que se abona íntegro al aceptar la maqueta. Mantenimiento desde 39 €/mes, opcional y sin permanencia. El precio de la web incluye dominio y alojamiento durante el primer año. Precios sin IVA: al importe hay que sumarle el 21 %. Pueden cambiar para nuevas contrataciones; a quien ya es cliente se le respeta el precio mientras siga dado de alta.</p>
 
     <h4>La garantía</h4>
     <p>Antes de cobrarte nada te enseñamos una maqueta de tu local: una web de verdad, que puedes abrir en el móvil y tocar. Si no te convence, ahí se queda y no nos debes nada. El pago se hace cuando aceptas esa maqueta y nos encargas la web definitiva; desde ese momento el importe no se devuelve.</p>
@@ -1547,7 +1568,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
         <h4>Qué hacemos</h4>
         <ul>
           <li><button class="pie__enlace" type="button" data-abre="web">Tu web · desde 249 € + IVA</button></li>
-          <li><button class="pie__enlace" type="button" data-abre="mant">Mantenimiento · 39 €/mes + IVA</button></li>
+          <li><button class="pie__enlace" type="button" data-abre="mant">Mantenimiento · desde 39 €/mes + IVA</button></li>
         </ul>
       </div>
       <div>
@@ -1993,7 +2014,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
         nota: 'Un solo pago, al aceptar la maqueta de tu local. Antes de eso no pagas nada: si la maqueta no te convence, ah\u00ed se queda. Las fotos las haces t\u00fa con nuestra gu\u00eda; si no puedes, la montamos con las que tengas.'
       },
       mant: {
-        precio: '39 \u20ac + IVA / mes',
+        precio: 'desde 39 \u20ac + IVA / mes',
         tit: 'Mantenimiento',
         puntos: [
           'Cambios de carta, precios y horarios en 24 h, los que hagan falta',
@@ -2151,7 +2172,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
     var PREGUNTAS = [
       { q: '¿Cuánto cuesta?',
-        r: 'Tu web desde 249 € más IVA, un solo pago. Y 39 €/mes si quieres que te la mantengamos al día: cambios de carta y horarios en 24 h, dominio y alojamiento. Sin permanencia y es opcional.' },
+        r: 'Tu web desde 249 € más IVA, un solo pago. Y desde 39 €/mes si quieres que te la mantengamos al día: cambios de carta y horarios en 24 h, dominio y alojamiento. Sin permanencia y es opcional.' },
       { q: '¿Cuánto tarda?',
         r: 'En la llamada solo pedimos permiso para mandártela. Te llega la maqueta por WhatsApp y la miras cuando puedas. Desde que la aceptas y nos mandas tu carta y tus fotos, siete días hasta tenerla online.' },
       { q: '¿Y si no me gusta?',
