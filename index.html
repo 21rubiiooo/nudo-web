@@ -449,7 +449,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 /* ==========================================================================
    SERVICIOS — dos tarjetas claras que suben con calma
    ========================================================================== */
-#servicios{ height:250svh; }
+#servicios{ height:170svh; }
 #servicios .acto__pega{ background:#050506; color:#fff; }
 
 .escenario{ position:absolute; inset:0; z-index:1; overflow:hidden; }
@@ -706,7 +706,6 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 /* ==========================================================================
    ACTO 5 — el proceso, paso a paso
    ========================================================================== */
-#acto5{ height:230svh; }
 #acto5 .acto__pega{ background:radial-gradient(ellipse 70% 60% at 50% 46%, #FFFFFF, var(--papel) 60%, #E4E8F0 100%); }
 
 .cifras4{ position:absolute; inset:0; z-index:0; display:grid; place-items:center; pointer-events:none; }
@@ -1068,7 +1067,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 @media (max-width:620px){
   body{ font-size:16px; }
   #acto1{ height:210svh; } #servicios{ height:330svh; }
-  #trabajos{ height:380svh; } #acto5{ height:215svh; } #nosotros{ height:210svh; }
+  #trabajos{ height:380svh; } #nosotros{ height:210svh; }
   .p-aviso{ right:-14%; }
   .parrilla__filas{ grid-template-columns:1fr; }
   .sitio__hero{ flex-basis:46%; }
@@ -1126,6 +1125,57 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   .srv__t{ position:relative !important; opacity:1 !important; transform:none !important; }
   .base__foto{ opacity:.8 !important; }
 }
+
+/* =====================================================================
+   LECTURA CÓMODA
+   Quien nos lee lleva un bar, no tiene veinte años: letra más grande,
+   menos gris y botones fáciles de pulsar. Va al final para ganar a lo de arriba.
+   ===================================================================== */
+.btn{ font-size:1.05rem; padding:15px 30px; }
+.btn--grande{ font-size:1.15rem; padding:18px 38px; }
+.barra .marca__logo{ height:26px; }
+.rotulo{ font-size:.86rem; }
+.hero__sub{ font-size:clamp(1.1rem,1.8vw,1.35rem); }
+.tarj__et{ font-size:.76rem; }
+.tarj__cond,.tarj__mas{ font-size:.95rem; }
+.remate__sub{ color:rgba(255,255,255,.92); font-size:clamp(1.1rem,2vw,1.3rem); }
+.srv__cab p{ color:rgba(255,255,255,.9); font-size:clamp(1.08rem,1.7vw,1.25rem); }
+.srv__eti{ font-size:1rem; }
+.srv__t li{ font-size:clamp(1.05rem,1.4vw,1.12rem); color:rgba(255,255,255,.94); }
+.srv__precio span{ font-size:.98rem; color:rgba(255,255,255,.82); }
+.srv__btn{ font-size:1.02rem; padding:14px 22px; }
+.socio__rol{ font-size:.8rem; }
+.socio p.socio__txt{ font-size:clamp(1.05rem,1.6vw,1.18rem); color:rgba(255,255,255,.9); }
+.oficio__lead{ font-size:clamp(1.1rem,1.8vw,1.28rem); color:rgba(255,255,255,.9); }
+.pilar__num{ font-size:.86rem; }
+.pilar p{ font-size:1.08rem; color:rgba(255,255,255,.86); }
+.oficio__cta span{ font-size:1.08rem; color:rgba(255,255,255,.88); }
+.oficio__cta .tel{ color:#fff; font-weight:700; white-space:nowrap; border-bottom:1px solid rgba(255,255,255,.5); }
+.pie{ color:rgba(255,255,255,.78); }
+.pie h4{ font-size:.8rem; color:rgba(255,255,255,.62); }
+.pie ul{ font-size:1.05rem; gap:12px; }
+.cita__pie{ font-size:1rem; }
+
+/* Cómo funciona: los seis pasos a la vista */
+#acto5.pasos{ height:auto; background:radial-gradient(ellipse 70% 60% at 50% 46%, #FFFFFF, var(--papel) 60%, #E4E8F0 100%); color:var(--tinta); padding:clamp(90px,14svh,150px) clamp(18px,5vw,48px); }
+.pasos__int{ max-width:1080px; margin:0 auto; }
+.pasos .rotulo{ color:var(--brasa); animation:none; }
+.pasos__tit{ margin-top:14px; font-size:clamp(2rem,4.6vw,3.4rem); font-weight:700; letter-spacing:-.045em; line-height:1.05; max-width:18ch; }
+.pasos__lista{ list-style:none; margin:clamp(34px,5vw,54px) 0 0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.pasos__lista li{ background:#fff; border:1px solid rgba(11,11,12,.08); border-radius:20px; padding:24px 24px 26px; box-shadow:0 10px 30px -18px rgba(16,30,60,.25); }
+.pasos__lista span{ display:block; font-size:.9rem; font-weight:700; letter-spacing:.14em; color:var(--brasa); }
+.pasos__lista b{ display:block; margin-top:8px; font-size:1.5rem; letter-spacing:-.03em; }
+.pasos__lista p{ margin-top:8px; font-size:1.1rem; line-height:1.5; color:#34373E; }
+@media (max-width:900px){ .pasos__lista{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:560px){
+  .pasos__lista{ grid-template-columns:1fr; gap:12px; }
+  .pasos__lista li{ padding:20px 20px 22px; }
+  .barra__int .btn{ font-size:.95rem; padding:11px 18px; }
+  .barra .marca__logo{ height:22px; }
+  .tarj__et{ font-size:.66rem; }
+  .tarj__cond,.tarj__mas{ font-size:.84rem; }
+}
+.bola svg{ width:30px; height:30px; }
 </style>
 
 
@@ -1274,44 +1324,22 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
 
 
-<!-- ===================== ACTO 5 · EL PROCESO ===================== -->
-<section class="acto" id="acto5">
-  <div class="acto__pega">
-    <div class="cifras4" aria-hidden="true">
-      <span class="cifra4" data-cifra="0">01</span>
-      <span class="cifra4" data-cifra="1">02</span>
-      <span class="cifra4" data-cifra="2">03</span>
-      <span class="cifra4" data-cifra="3">04</span>
-      <span class="cifra4" data-cifra="4">05</span>
-      <span class="cifra4" data-cifra="5">06</span>
-    </div>
-
-    <div class="centro">
-      <div class="palabras" id="palabras">
-        <div class="palabra" data-paso="0">Llamada</div>
-        <div class="palabra" data-paso="1">WhatsApp</div>
-        <div class="palabra" data-paso="2">Demo</div>
-        <div class="palabra" data-paso="3">Enlace</div>
-        <div class="palabra" data-paso="4">Pago</div>
-        <div class="palabra" data-paso="5">Online</div>
-      </div>
-
-      <div class="reloj">
-        <span class="reloj__via" aria-hidden="true"></span>
-        <span class="reloj__llena" id="relojLlena" aria-hidden="true"></span>
-        <span class="reloj__brillo" id="relojBrillo" aria-hidden="true"></span>
-        <div class="reloj__marcas">
-          <span class="marca-dia" data-dia="0"></span>
-          <span class="marca-dia" data-dia="1"></span>
-          <span class="marca-dia" data-dia="2"></span>
-          <span class="marca-dia" data-dia="3"></span>
-          <span class="marca-dia" data-dia="4"></span>
-          <span class="marca-dia" data-dia="5"></span>
-        </div>
-      </div>
-
-      <p class="dia-txt" id="diaTxt">Cinco minutos, te preguntamos cuatro cosas.</p>
-    </div>
+<!-- ===================== ACTO 5 · CÓMO FUNCIONA =====================
+     Antes eran seis pantallas que salían de una en una al hacer scroll.
+     Quien no se maneja bien con el móvil se perdía: ahora se ven los seis
+     pasos de golpe. Sigue siendo un .acto para que la barra se ponga oscura. -->
+<section class="acto pasos" id="acto5" aria-labelledby="pasosTit">
+  <div class="pasos__int">
+    <p class="rotulo">Cómo funciona</p>
+    <h2 class="pasos__tit" id="pasosTit">De la llamada a tu web, en seis pasos.</h2>
+    <ol class="pasos__lista">
+      <li><span>01</span><b>Llamada</b><p>Cinco minutos. Solo te pedimos permiso para mandarte algo.</p></li>
+      <li><span>02</span><b>WhatsApp</b><p>Seguimos por WhatsApp. Sin correos ni reuniones.</p></li>
+      <li><span>03</span><b>Maqueta</b><p>Te mandamos tu web hecha, no un presupuesto.</p></li>
+      <li><span>04</span><b>La pruebas</b><p>La abres en tu móvil y la tocas.</p></li>
+      <li><span>05</span><b>Pago</b><p>Si te gusta, la pagas y la hacemos tuya.</p></li>
+      <li><span>06</span><b>Online</b><p>Publicada con tu dominio, en siete días.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -1377,25 +1405,10 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       </div>
     </div>
 
-    <div class="compro">
-      <div class="compro__cab aparece">
-        <h3>Lo que te garantizamos</h3>
-        <p>Lo mismo para un bar de barrio que para un restaurante con dos locales.</p>
-      </div>
-      <ul class="compro__rej">
-          <li class="aparece"><span class="compro__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h4>Online en siete días</h4><p>Desde que aceptas la maqueta y nos mandas tu carta y tus fotos.</p></li>
-          <li class="aparece"><span class="compro__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span><h4>Pensada para el móvil</h4><p>Es donde te buscan: rápida, clara y cómoda de usar con una mano.</p></li>
-          <li class="aparece"><span class="compro__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h14v18H5z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span><h4>Carta y alérgenos</h4><p>Los catorce alérgenos, como manda la ley, y una carta fácil de mantener al día.</p></li>
-          <li class="aparece"><span class="compro__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18v16H3z"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><h4>Reservas sin fricción</h4><p>Teléfono, WhatsApp o formulario: como ya trabajes tú, sin cambiarte el sistema.</p></li>
-          <li class="aparece"><span class="compro__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span><h4>El dominio es tuyo</h4><p>Se registra a tu nombre. La web es tuya y el dominio también.</p></li>
-          <li class="aparece"><span class="compro__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span><h4>Precio cerrado</h4><p>249 € + IVA la web. 39 €/mes + IVA si quieres que la llevemos nosotros. Sin sorpresas.</p></li>
-      </ul>
-    </div>
-
     <div class="oficio__cta aparece">
       <div>
         <strong>¿Vemos cómo quedaría la tuya?</strong>
-        <span>Cinco minutos por teléfono y te preparamos la maqueta.</span>
+        <span>Cinco minutos por teléfono y te preparamos la maqueta. O llámanos: <a class="tel" href="tel:+34722740211">722 74 02 11</a></span>
       </div>
       <a class="btn btn--grande btn--blanco" href="https://calendly.com/eric-nudodesign/llamada" target="_blank" rel="noopener" data-cita>
         Reservar llamada
@@ -1416,7 +1429,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       <button class="cita__x" type="button" data-cierra-cita aria-label="Cerrar">×</button>
     </div>
     <div class="cita__marco" id="citaMarco"><p class="cita__carga">Cargando el calendario…</p></div>
-    <p class="cita__pie">¿Prefieres escribirnos? <a href="https://wa.me/34722740211" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a></p>
+    <p class="cita__pie">¿Prefieres llamar? <a href="tel:+34722740211">722 74 02 11</a> · ¿O escribirnos? <a href="https://wa.me/34722740211" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a></p>
   </div>
 </div>
 
@@ -1441,37 +1454,13 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 </div>
 
 
-<button class="bola" id="bola" type="button" aria-label="Abrir la ayuda">
+<a class="bola" id="bola" href="https://wa.me/34722740211" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp">
   <span class="bola__aro" aria-hidden="true"></span>
   <span class="bola__punto" aria-hidden="true"></span>
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.9-.9L3 20.5l1.6-4.5A8.4 8.4 0 0 1 3.6 11.5a8.4 8.4 0 0 1 9-8.4 8.4 8.4 0 0 1 8.4 8.4z"/>
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.5c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.5.9.9-3.4-.2-.4A9.5 9.5 0 1 1 12 21.5zm0-20.9A11.4 11.4 0 0 0 2.2 17.8L.6 23.4l5.8-1.5A11.4 11.4 0 1 0 12 .6z"/>
   </svg>
-</button>
-
-<div class="ayuda" id="ayuda" role="dialog" aria-label="Ayuda de Nudo" hidden>
-  <div class="ayuda__cab">
-    <div class="ayuda__ini" aria-hidden="true">
-      <svg width="17" height="17" viewBox="0 0 64 64"><path d="M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/></svg>
-    </div>
-    <div>
-      <b>Nudo</b>
-      <span>Contestamos en unos minutos</span>
-    </div>
-    <button class="ayuda__x" id="ayudaX" type="button" aria-label="Cerrar">&times;</button>
-  </div>
-
-  <div class="ayuda__hilo" id="hilo"></div>
-
-  <div class="ayuda__pie">
-    <div class="fichas" id="fichas"></div>
-    <a class="ayuda__wa" href="https://wa.me/34722740211" target="_blank" rel="noopener">
-      Seguir por WhatsApp
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-    </a>
-    <p class="ayuda__nota">Respuestas automáticas. Para hablar con nosotros, WhatsApp.</p>
-  </div>
-</div>
+</a>
 
 <div class="legalov" id="legalov" hidden>
   <div class="legalov__fondo" data-cierra-legal></div>
@@ -1564,6 +1553,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       <div>
         <h4>Contacto</h4>
         <ul>
+          <li><a href="tel:+34722740211">722 74 02 11</a></li>
           <li><a href="https://wa.me/34722740211" target="_blank" rel="noopener">WhatsApp</a></li>
           <li><a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a></li>
         </ul>
@@ -1825,7 +1815,8 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       /* ===== SERVICIOS · dos tarjetas que suben con calma ===== */
       else if (a.id === 'servicios'){
         if (barra){ barra.style.setProperty('--sobre','1'); }
-        var entra = suave(p,.02,.14), fuera = 1 - suave(p,.90,.99), vis = entra*fuera;
+        /* Ya no se funde a negro al final: la sección se va con las tarjetas a la vista */
+        var entra = suave(p,.02,.14), fuera = 1, vis = entra;
         if (baseFoto){
           baseFoto.style.opacity = (vis*.8).toFixed(3);
           baseFoto.style.transform = 'scale(' + (1.04 + p*.05).toFixed(4) + ')';
@@ -1837,20 +1828,20 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
         }
         var movil = anchoVista <= 760;
         for (var st = 0; st < tarjServ.length; st++){
-          var t = tarjServ[st], e, y;
+          var t = tarjServ[st], e, ty;   /* ty, no y: y es el scroll de todo el bucle */
           if (movil){
             /* la primera entra; la segunda sube por encima de ella */
             e = st === 0 ? suave(p,.08,.24) : suave(p,.42,.62);
-            y = (1-e) * (st === 0 ? 40 : alto*.7);
+            ty = (1-e) * (st === 0 ? 40 : alto*.7);
             var tapa = st === 0 ? suave(p,.50,.62) : 0;
             var op = st === 0 ? e * (1 - tapa) : Math.min(1, e*3);
             t.style.opacity = (op * fuera).toFixed(3);
-            t.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0) scale(' + (1 - tapa*.06).toFixed(3) + ')';
+            t.style.transform = 'translate3d(0,' + ty.toFixed(1) + 'px,0) scale(' + (1 - tapa*.06).toFixed(3) + ')';
           } else {
             e = suave(p, .12 + st*.12, .32 + st*.12);
-            y = (1-e) * 60;
+            ty = (1-e) * 60;
             t.style.opacity = (e * fuera).toFixed(3);
-            t.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
+            t.style.transform = 'translate3d(0,' + ty.toFixed(1) + 'px,0)';
           }
           t.style.pointerEvents = (e*fuera) > .6 ? 'auto' : 'none';
           var ft = fotosServ[st];
@@ -1910,7 +1901,9 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
       /* ===== ACTO 5 · el proceso ===== */
       else if (a.id === 'acto5'){
-        if (barra){ barra.style.setProperty('--sobre','0'); }
+        /* Ahora es corta: solo oscurece la barra mientras la tiene debajo,
+           o la siguiente sección se la pisa y el logo queda blanco sobre blanco */
+        if (barra && window.scrollY >= a.top - 60 && window.scrollY < a.top + a.h - 60){ barra.style.setProperty('--sobre','0'); }
         var av = suave(p,.08,.92);
         if (relojLlena){ relojLlena.style.transform = 'scaleX(' + av.toFixed(3) + ')'; }
         if (relojBrillo){ relojBrillo.style.transform = 'translate3d(' + (av*anchoReloj).toFixed(1) + 'px,0,0)'; }
@@ -1935,7 +1928,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
       /* ===== NOSOTROS ===== */
       else if (a.id === 'nosotros'){
-        if (barra){ barra.style.setProperty('--sobre','1'); }
+        if (barra && window.scrollY >= a.top - 60){ barra.style.setProperty('--sobre','1'); }
         if (nosFoto){ nosFoto.style.transform = 'scale(' + (1.04 + p*.09).toFixed(3) + ') translate3d(0,' + (-p*2.5).toFixed(2) + '%,0)'; }
         var eT = suave(p,.04,.18);
         if (nosTag){ nosTag.style.opacity = eT.toFixed(3); }
@@ -1957,6 +1950,12 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
         }
       }
     }
+
+    /* De "Cómo trabajamos" hacia abajo todo es oscuro. Si se llega de un salto
+       (un enlace, un deslizamiento rápido) ningún acto pinta la barra y se
+       quedaría clara sobre negro, con el logo invisible. */
+    var oficioSec = Q('oficio');
+    if (barra && oficioSec && y >= oficioSec.offsetTop - 60){ barra.style.setProperty('--sobre','1'); }
 
     /* Nubes: deriva continua, barata (sólo transform) */
     var deriva = y * 0.06;
