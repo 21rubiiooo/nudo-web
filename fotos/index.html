@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Las fotos de tu web · Nudo</title>
+<meta name="description" content="Ocho fotos con tu móvil en quince minutos. Todo lo que necesitamos para montar tu web.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FBFBFD">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --papel:#FBFBFD; --tinta:#16181C; --tinta-2:#6B6E76;
+  --brasa:#1F4FE0; --oro:#6E93F5; --linea:rgba(22,24,28,.10);
+  --sf:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter","Segoe UI",Roboto,Arial,sans-serif;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--papel); color:var(--tinta); font-family:var(--sf);
+      font-size:17px; line-height:1.6; letter-spacing:-.01em; -webkit-font-smoothing:antialiased; }
+a{ color:var(--brasa); text-decoration:none; } a:hover{ text-decoration:underline; }
+h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.035em; line-height:1.1; }
+p{ margin:14px 0; }
+.env{ max-width:720px; margin-inline:auto; padding-inline:24px; }
+
+.cab{ background:linear-gradient(to bottom,#EDF3FA,var(--papel)); border-bottom:1px solid var(--linea); }
+.cab .env{ padding-block:26px 52px; }
+.marca{ display:inline-flex; align-items:center; gap:8px; color:var(--tinta); font-weight:700;
+        font-size:.9rem; letter-spacing:.14em; text-transform:uppercase; }
+.marca svg{ color:var(--brasa); }
+.cab h1{ margin-top:44px; font-size:clamp(2.1rem,6vw,3.2rem); }
+.cab .entrada{ margin-top:14px; font-size:clamp(1.04rem,2.2vw,1.18rem); color:var(--tinta-2); max-width:42ch; }
+.tiempo{ display:inline-flex; align-items:center; gap:9px; margin-top:26px; padding:10px 18px;
+         border-radius:100px; background:#14171D; color:#fff; font-size:.92rem; font-weight:500; }
+.tiempo b{ color:var(--oro); }
+
+section{ padding-top:56px; }
+section > .env > h2{ font-size:clamp(1.4rem,3.2vw,1.9rem); padding-bottom:14px; border-bottom:1px solid var(--linea); }
+.epi{ font-size:.72rem; font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:var(--oro); margin-bottom:10px; }
+
+/* Las reglas */
+.regla{ display:flex; gap:16px; padding:20px 0; border-bottom:1px solid var(--linea); break-inside:avoid; }
+.regla:last-child{ border-bottom:0; }
+.regla__n{ flex:none; width:34px; height:34px; border-radius:50%; display:grid; place-items:center;
+           background:linear-gradient(150deg,var(--oro),var(--brasa)); color:#fff; font-weight:700; font-size:.9rem; }
+.regla b{ display:block; font-size:1.08rem; }
+.regla p{ margin:6px 0 0; font-size:.98rem; color:#3A3F47; }
+.regla .mal{ display:inline-block; margin-top:8px; font-size:.86rem; color:#9A3412;
+             background:rgba(154,52,18,.08); border-radius:8px; padding:5px 11px; }
+
+/* La lista de fotos */
+.foto{ display:flex; gap:16px; padding:18px 0; border-bottom:1px solid var(--linea); break-inside:avoid; }
+.foto:last-child{ border-bottom:0; }
+.foto__n{ flex:none; width:30px; font-size:.78rem; font-weight:700; letter-spacing:.1em; color:var(--oro); padding-top:4px; }
+.foto b{ display:block; font-size:1.05rem; }
+.foto span{ display:block; font-size:.96rem; color:var(--tinta-2); margin-top:3px; }
+.foto em{ display:inline-block; font-style:normal; margin-top:8px; font-size:.78rem; font-weight:600;
+          color:var(--brasa); background:rgba(31,79,224,.09); border-radius:100px; padding:3px 11px; }
+.opcional{ opacity:.72; }
+
+.caja{ margin:24px 0; padding:22px 24px; border-radius:20px; background:#fff; border:1px solid var(--linea); break-inside:avoid; }
+.caja b{ display:block; margin-bottom:10px; font-size:1.06rem; }
+.caja ul{ margin:0; padding-left:20px; } .caja li{ margin:8px 0; color:#3A3F47; }
+
+.destaca{ margin:24px 0; padding:22px 24px; border-radius:20px;
+          background:rgba(31,79,224,.06); border:1px solid rgba(31,79,224,.2); break-inside:avoid; }
+.destaca b{ display:block; margin-bottom:8px; font-size:1.06rem; }
+.destaca p{ margin:0; color:#3A3F47; font-size:.98rem; }
+
+.boton{ display:inline-flex; align-items:center; gap:9px; margin-top:18px; background:var(--tinta);
+        color:#fff; font-weight:500; padding:14px 26px; border-radius:100px; }
+.boton:hover{ text-decoration:none; opacity:.9; }
+
+.pie{ margin-top:60px; border-top:1px solid var(--linea); background:#fff; }
+.pie .env{ padding-block:28px 44px; font-size:.88rem; color:var(--tinta-2);
+           display:flex; flex-wrap:wrap; gap:10px 26px; justify-content:space-between; }
+
+@media print{
+  body{ font-size:11pt; } .cab{ background:#fff; } section{ padding-top:24px; }
+  .tiempo,.boton{ background:#fff; color:#000; border:1px solid #666; }
+  .tiempo b{ color:#000; }
+  .regla,.foto,.caja,.destaca{ break-inside:avoid; }
+}
+@media (max-width:520px){
+  .foto{ gap:12px; }
+}
+</style>
+</head>
+<body>
+
+<header class="cab">
+  <div class="env">
+    <span class="marca">
+      <svg width="20" height="20" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      Nudo
+    </span>
+
+    <h1>Las fotos<br>de tu web</h1>
+    <p class="entrada">Ocho fotos con tu móvil. No hace falta ni cámara ni saber de fotografía: solo hacerlas a la hora buena y sin flash.</p>
+
+    <span class="tiempo">Se tarda <b>quince minutos</b></span>
+  </div>
+</header>
+
+<main>
+
+<section>
+  <div class="env">
+    <p class="epi">Antes de empezar</p>
+    <h2>Seis reglas y no hay más</h2>
+
+    <div class="regla">
+      <span class="regla__n">1</span>
+      <div>
+        <b>Limpia la cámara del móvil</b>
+        <p>Con la camiseta, dos segundos. Lo llevas en el bolsillo todo el día y el cristal está grasiento: por eso te salen las fotos con niebla. Esto solo ya cambia la mitad del resultado.</p>
+      </div>
+    </div>
+
+    <div class="regla">
+      <span class="regla__n">2</span>
+      <div>
+        <b>La hora manda más que el móvil</b>
+        <p>La última hora de la tarde, con la luz baja, o de noche con todas las luces del local encendidas. Un local se ve bonito cuando está cálido, no cuando está iluminado.</p>
+        <span class="mal">Nunca a las tres de la tarde con el sol de plano</span>
+      </div>
+    </div>
+
+    <div class="regla">
+      <span class="regla__n">3</span>
+      <div>
+        <b>Flash nunca</b>
+        <p>Ni una sola. El flash aplasta la comida, pone las paredes amarillas y te delata en un segundo. Si está oscuro, enciende las luces del local y punto.</p>
+      </div>
+    </div>
+
+    <div class="regla">
+      <span class="regla__n">4</span>
+      <div>
+        <b>Limpia el encuadre antes de disparar</b>
+        <p>Mira la pantalla y quita lo que sobre: la servilleta arrugada, el bolso en la silla, la caja de cervezas del fondo, el cartel de la marca de refrescos. Treinta segundos de recoger valen más que cualquier filtro.</p>
+      </div>
+    </div>
+
+    <div class="regla">
+      <span class="regla__n">5</span>
+      <div>
+        <b>Agáchate</b>
+        <p>Las fotos del local, desde la altura de alguien sentado a la mesa, no desde tu cara. Los platos, desde justo encima. Es el cambio que más se nota y no cuesta nada.</p>
+      </div>
+    </div>
+
+    <div class="regla">
+      <span class="regla__n">6</span>
+      <div>
+        <b>Sin zoom y sin filtros</b>
+        <p>Acércate tú andando en vez de hacer zoom: el zoom del móvil destroza la calidad. Y no le pongas filtros ni retoques nada: ya lo hacemos nosotros, y del original sacamos mucho más.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="env">
+    <p class="epi">La lista</p>
+    <h2>Ocho fotos, en este orden</h2>
+
+    <div class="foto">
+      <span class="foto__n">01</span>
+      <div>
+        <b>La fachada</b>
+        <span>Desde la acera de enfrente, que se vea el local entero con su cartel.</span>
+        <em>Horizontal</em>
+      </div>
+    </div>
+
+    <div class="foto">
+      <span class="foto__n">02</span>
+      <div>
+        <b>La entrada, de cerca</b>
+        <span>El cartel, la puerta, la pizarra del día si tienes.</span>
+        <em>Vertical</em>
+      </div>
+    </div>
+
+    <div class="foto">
+      <span class="foto__n">03</span>
+      <div>
+        <b>La sala entera</b>
+        <span>Desde la puerta, con las mesas puestas y las luces encendidas. Esta es la más importante de todas: probablemente acabe en la portada.</span>
+        <em>Horizontal</em>
+      </div>
+    </div>
+
+    <div class="foto">
+      <span class="foto__n">04</span>
+      <div>
+        <b>La barra</b>
+        <span>Con las botellas detrás y las luces dadas. Si hay cafetera o jamón, que se vean.</span>
+        <em>Horizontal</em>
+      </div>
+    </div>
+
+    <div class="foto">
+      <span class="foto__n">05</span>
+      <div>
+        <b>Una mesa puesta</b>
+        <span>Desde la silla, como la ve quien se sienta. Mantel, cubiertos, copas, una vela o una planta si tienes.</span>
+        <em>Horizontal</em>
+      </div>
+    </div>
+
+    <div class="foto">
+      <span class="foto__n">06</span>
+      <div>
+        <b>Tu plato estrella, desde arriba</b>
+        <span>El que más pide la gente. Ponlo en una mesa con luz natural y dispara justo encima.</span>
+        <em>Vertical</em>
+      </div>
+    </div>
+
+    <div class="foto">
+      <span class="foto__n">07</span>
+      <div>
+        <b>El mismo plato, de lado</b>
+        <span>A la altura del plato, acercándote hasta que llene la pantalla. Es la que da hambre.</span>
+        <em>Vertical</em>
+      </div>
+    </div>
+
+    <div class="foto">
+      <span class="foto__n">08</span>
+      <div>
+        <b>La terraza</b>
+        <span>Si tienes. Con las mesas montadas y a la última hora de sol.</span>
+        <em>Horizontal</em>
+      </div>
+    </div>
+
+    <div class="foto opcional">
+      <span class="foto__n">+</span>
+      <div>
+        <b>Si te apetece, dos más</b>
+        <span>Un segundo plato distinto del primero, y tú o tu equipo detrás de la barra. Las fotos con gente del local funcionan muy bien, pero solo si estáis cómodos.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="env">
+    <p class="epi">Un truco</p>
+    <h2>Haz tres de cada</h2>
+
+    <div class="destaca">
+      <b>De cada foto de la lista, dispara tres o cuatro veces moviéndote un poco.</b>
+      <p>No cuesta nada y cambia mucho: entre cuatro intentos siempre hay uno bueno. Mándanoslas todas, que ya elegimos nosotros. No hace falta que selecciones nada.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="env">
+    <p class="epi">Cuando las tengas</p>
+    <h2>Cómo nos las mandas</h2>
+
+    <div class="caja">
+      <b>Por WhatsApp, al número de siempre</b>
+      <ul>
+        <li>Mándalas <strong>como documento</strong>, no como foto normal. En WhatsApp: el clip → Documento → Explorar → eliges las fotos. Así llegan sin comprimir y se ven mucho mejor en la web.</li>
+        <li>Si son muchas y va lento, mándalas en dos o tres tandas. Sin prisa.</li>
+        <li>No hace falta que las ordenes ni que las renombres.</li>
+      </ul>
+      <a class="boton" href="https://wa.me/34722740211" target="_blank" rel="noopener">Mandarlas por WhatsApp</a>
+    </div>
+
+    <div class="caja">
+      <b>Lo que hacemos nosotros con ellas</b>
+      <ul>
+        <li>Ajustamos luz, color y contraste.</li>
+        <li>Las recortamos para que encajen en la web.</li>
+        <li>Quitamos lo que moleste al fondo si se puede.</li>
+        <li>Si alguna no da para más, te decimos cuál repetir y cómo. Sin dramas.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="env">
+    <p class="epi">Tranquilo</p>
+    <h2>Si no te ves</h2>
+    <p>Si no te apetece, no tienes tiempo o las que salgan no te convencen, dínoslo y lo resolvemos: montamos la web con las fotos que tengas y con las de tu ficha de Google, y te decimos cuáles conviene repetir más adelante. Nadie se ha quedado sin web por las fotos.</p>
+    <a class="boton" href="https://wa.me/34722740211" target="_blank" rel="noopener">Escribirnos</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="pie">
+  <div class="env">
+    <p>Nudo · Webs para bares y restaurantes</p>
+    <p><a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

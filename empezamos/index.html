@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Empezamos · Nudo</title>
+<meta name="description" content="Tres cosas y tu web está lista en siete días.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FBFBFD">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --papel:#FBFBFD; --tinta:#16181C; --tinta-2:#6B6E76; --tinta-suave:#3A3F47;
+  --brasa:#1F4FE0; --oro:#6E93F5; --pizarra:#14171D; --cielo-claro:#EDF3FA;
+  --linea:#E6E7EA;
+  --sf:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter","Segoe UI",Roboto,Arial,sans-serif;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--papel); color:var(--tinta); font-family:var(--sf);
+      font-size:17px; line-height:1.6; letter-spacing:-.01em; -webkit-font-smoothing:antialiased; }
+a{ color:var(--brasa); text-decoration:none; } a:hover{ text-decoration:underline; }
+h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.04em; line-height:1.08; }
+p{ margin:14px 0; }
+:focus-visible{ outline:2px solid var(--brasa); outline-offset:4px; border-radius:6px; }
+.env{ max-width:720px; margin-inline:auto; padding-inline:24px; }
+
+/* ---------- Portada ---------- */
+.cab{ background:linear-gradient(to bottom, var(--cielo-claro), var(--papel)); border-bottom:1px solid var(--linea); }
+.cab .env{ padding-block:26px 52px; }
+.marca{ display:inline-flex; align-items:center; gap:8px; color:var(--tinta); font-weight:700;
+        font-size:.88rem; letter-spacing:.22em; text-transform:uppercase; }
+.marca svg{ color:var(--brasa); }
+.marca:hover{ text-decoration:none; }
+.cab h1{ margin-top:44px; font-size:clamp(2.2rem,6vw,3.3rem); }
+.cab .entrada{ margin-top:16px; font-size:clamp(1.04rem,2.2vw,1.2rem); color:var(--tinta-suave); max-width:44ch; }
+
+.nota{ margin-top:30px; padding:22px 24px; border-radius:20px; background:var(--pizarra); color:rgba(255,255,255,.84); }
+.nota b{ display:block; color:#fff; font-size:1.06rem; letter-spacing:-.025em; margin-bottom:8px; }
+.nota p{ margin:0; font-size:.97rem; }
+
+/* ---------- Secciones ---------- */
+section{ padding-top:56px; }
+section > .env > h2{ font-size:clamp(1.4rem,3.2vw,1.9rem); padding-bottom:14px; border-bottom:1px solid var(--linea); }
+.epi{ font-size:.7rem; font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:var(--oro); margin-bottom:10px; }
+.epi--brasa{ color:var(--brasa); }
+
+/* Los tres bloques */
+.bloque{ margin:22px 0; padding:24px; border:1px solid var(--linea); border-radius:20px; background:#fff; break-inside:avoid; }
+.bloque__cab{ display:flex; align-items:baseline; gap:13px; }
+.bloque__n{ flex:none; width:30px; height:30px; border-radius:50%; display:grid; place-items:center;
+            background:linear-gradient(150deg,var(--oro),var(--brasa)); color:#fff; font-size:.85rem; font-weight:700;
+            transform:translateY(4px); }
+.bloque h3{ font-size:1.2rem; }
+.bloque__t{ font-size:.7rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--tinta-2); margin-top:5px; }
+.bloque p{ color:var(--tinta-suave); }
+.bloque ul{ margin:14px 0 0; padding-left:20px; }
+.bloque li{ margin:8px 0; color:var(--tinta-suave); }
+
+.boton{ display:inline-flex; align-items:center; gap:9px; margin-top:18px; background:var(--tinta);
+        color:#fff; font-weight:500; font-size:1rem; padding:14px 26px; border-radius:100px; }
+.boton:hover{ text-decoration:none; opacity:.9; }
+.boton--claro{ background:#fff; color:var(--tinta); border:1px solid var(--linea); }
+
+/* El calendario */
+.dia{ display:flex; gap:16px; padding:15px 0; border-bottom:1px solid var(--linea); break-inside:avoid; }
+.dia:last-child{ border-bottom:0; }
+.dia__n{ flex:none; width:78px; font-size:.72rem; font-weight:700; letter-spacing:.14em;
+         text-transform:uppercase; color:var(--oro); padding-top:4px; }
+.dia b{ display:block; font-size:1.02rem; }
+.dia span{ display:block; font-size:.95rem; color:var(--tinta-2); margin-top:2px; }
+.dia em{ display:inline-block; font-style:normal; margin-top:7px; font-size:.74rem; font-weight:700;
+         letter-spacing:.06em; color:var(--brasa); background:rgba(31,79,224,.09); border-radius:100px; padding:3px 11px; }
+
+/* Lo que eliges */
+.eliges{ display:grid; gap:10px; margin-top:18px; }
+.eliges div{ display:flex; gap:11px; font-size:.99rem; color:var(--tinta-suave); }
+.eliges div::before{ content:""; flex:none; width:6px; height:6px; margin-top:.6em; border-radius:50%; background:var(--oro); }
+
+/* Lo que no hace falta */
+.tranqui{ margin:22px 0; padding:24px; border-radius:20px; background:rgba(31,79,224,.06);
+          border:1px solid rgba(31,79,224,.18); break-inside:avoid; }
+.tranqui b{ display:block; margin-bottom:12px; font-size:1.06rem; }
+.tranqui ul{ margin:0; padding-left:20px; }
+.tranqui li{ margin:8px 0; color:var(--tinta-suave); }
+
+/* Lo que hay que tener a mano antes de empezar */
+.mano{ margin-top:18px; padding:18px 20px; border-radius:16px; background:var(--cielo-claro); border:1px solid #D6E2F1; }
+.mano b{ display:block; font-size:.98rem; margin-bottom:8px; }
+.mano ul{ margin:0; padding-left:20px; }
+.mano li{ margin:7px 0; font-size:.95rem; color:var(--tinta-suave); }
+
+.aviso{ font-size:.94rem; color:var(--tinta-2); border-left:3px solid var(--oro); padding-left:16px; margin:22px 0; }
+
+.pie{ margin-top:60px; border-top:1px solid var(--linea); background:#fff; }
+.pie .env{ padding-block:28px 46px; display:flex; flex-wrap:wrap; gap:12px 26px; justify-content:space-between;
+           font-size:.87rem; color:var(--tinta-2); }
+
+@media print{
+  body{ font-size:11pt; } .cab{ background:#fff; } section{ padding-top:24px; }
+  .nota{ background:#fff; color:#000; border:1px solid #999; } .nota b{ color:#000; }
+  .boton{ background:#fff; color:#000; border:1px solid #666; }
+  .bloque,.tranqui,.dia{ break-inside:avoid; }
+}
+@media (max-width:540px){
+  .dia{ flex-direction:column; gap:4px; }
+  .dia__n{ width:auto; padding-top:0; }
+}
+</style>
+</head>
+<body>
+
+<header class="cab">
+  <div class="env">
+    <span class="marca">
+      <svg width="19" height="19" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      Nudo
+    </span>
+
+    <h1>Lo que has visto<br>era la maqueta.</h1>
+    <p class="entrada">Ahora la hacemos tuya de verdad: con tus fotos, tu carta y tus palabras. Para eso necesitamos tres cosas de ti, y se tarda unos veinte minutos en total.</p>
+
+    <div class="nota">
+      <b>Gracias por fiarte.</b>
+      <p>A partir de aquí nos ocupamos nosotros. Lo único que depende de ti es mandarnos esas tres cosas: cuanto antes las tengamos, antes está tu web online.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section>
+  <div class="env">
+    <p class="epi">Lo que necesitamos</p>
+    <h2>Tres cosas, y ya está</h2>
+
+    <div class="bloque">
+      <div class="bloque__cab">
+        <span class="bloque__n">1</span>
+        <div>
+          <h3>Rellena el cuestionario</h3>
+          <p class="bloque__t">5 minutos · desde el móvil</p>
+        </div>
+      </div>
+      <p>Doce pantallas cortas sobre tu local y sobre cómo quieres que se vea la web. Todas las de diseño llevan la opción <strong>«elegid vosotros»</strong>, así que no te puedes atascar.</p>
+
+      <div class="mano">
+        <b>Ten dos cosas a mano antes de empezar</b>
+        <ul>
+          <li><strong>Tus datos fiscales</strong>: nombre o razón social, NIF o CIF y domicilio. Por ley tienen que aparecer en la web. Si lo lleva tu gestoría, pídeselo antes de sentarte.</li>
+          <li><strong>Los alérgenos de tus platos</strong>, si los tienes por escrito. Si no los tienes, marca esa casilla y te ayudamos a sacarlos.</li>
+        </ul>
+      </div>
+
+      <a class="boton" href="https://tally.so/r/jaKv16" target="_blank" rel="noopener">Abrir el cuestionario</a>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque__cab">
+        <span class="bloque__n">2</span>
+        <div>
+          <h3>Mándanos la carta y el logo</h3>
+          <p class="bloque__t">Por WhatsApp · como lo tengas</p>
+        </div>
+      </div>
+      <ul>
+        <li><strong>La carta.</strong> Un PDF, una foto de la pizarra, un Word, una foto del menú de la pared. Nos vale cualquier cosa, ya la ordenamos nosotros. En el cuestionario eliges si la subes ahí mismo o nos la mandas por WhatsApp.</li>
+        <li><strong>El logo</strong>, si tienes. Se sube en el propio cuestionario. Si no tienes, no pasa nada: lo montamos con tu nombre y queda bien igual.</li>
+      </ul>
+      <a class="boton boton--claro" href="https://wa.me/34722740211" target="_blank" rel="noopener">Abrir WhatsApp</a>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque__cab">
+        <span class="bloque__n">3</span>
+        <div>
+          <h3>Hazte ocho fotos</h3>
+          <p class="bloque__t">15 minutos · con tu móvil</p>
+        </div>
+      </div>
+      <p>Esta es la que más cambia el resultado. Te hemos preparado una guía con las ocho fotos exactas y seis reglas: no hace falta cámara ni saber de fotografía, solo hacerlas a la hora buena y sin flash.</p>
+      <p>Nosotros las retocamos después: luz, color y encuadre.</p>
+      <a class="boton" href="https://claude.ai/artifact/AgPkP6xE11ZBKBa28ub7Qm" target="_blank" rel="noopener">Ver la guía de fotos</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="env">
+    <p class="epi">Lo que decides tú</p>
+    <h2>La web es tuya, así que mandas tú</h2>
+    <p>Estas son las decisiones que tomas en el cuestionario. En todas puedes decirnos que elijamos nosotros, pero si quieres entrar al detalle, puedes:</p>
+
+    <div class="eliges">
+      <div>El <strong>aspecto</strong>: cálido y de siempre, limpio y moderno, u oscuro y de noche.</div>
+      <div>El <strong>movimiento</strong>: tranquila del todo, con algo de vida, o con movimiento de verdad.</div>
+      <div>Si se ven los <strong>precios de la carta</strong>, solo los platos, o solo los del menú del día.</div>
+      <div>Cómo quieres <strong>recibir las reservas</strong>: teléfono, WhatsApp, un formulario que te llegue al correo, o el programa que ya uses.</div>
+      <div>Si enseñamos el <strong>menú del día</strong>, con su precio y sus horarios.</div>
+      <div>Si sale el <strong>reparto a domicilio</strong> y por qué canal.</div>
+      <div>Qué <strong>tienes tú que no tenga nadie más</strong> en la zona: de ahí sale el titular de tu web.</div>
+      <div>Y la más útil de todas: qué <strong>no</strong> quieres que parezca tu local.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="env">
+    <p class="epi">El calendario</p>
+    <h2>Siete días desde que lo tengamos todo</h2>
+
+    <div class="dia">
+      <span class="dia__n">Día 1</span>
+      <div>
+        <b>Cuestionario, carta y logo</b>
+        <span>Cinco minutos de preguntas y nos mandas lo que tengas por WhatsApp.</span>
+        <em>Te toca a ti</em>
+      </div>
+    </div>
+    <div class="dia">
+      <span class="dia__n">Día 2</span>
+      <div>
+        <b>Las fotos</b>
+        <span>Un cuarto de hora con el móvil, siguiendo la guía.</span>
+        <em>Te toca a ti</em>
+      </div>
+    </div>
+    <div class="dia">
+      <span class="dia__n">Días 3-5</span>
+      <div>
+        <b>La montamos</b>
+        <span>Retocamos tus fotos, ordenamos la carta y escribimos los textos.</span>
+      </div>
+    </div>
+    <div class="dia">
+      <span class="dia__n">Día 6</span>
+      <div>
+        <b>Te la enseñamos</b>
+        <span>Te pasamos un enlace, la abres en tu móvil y nos dices qué cambiar.</span>
+        <em>Te toca a ti</em>
+      </div>
+    </div>
+    <div class="dia">
+      <span class="dia__n">Día 7</span>
+      <div>
+        <b>Online</b>
+        <span>Publicada con tu dominio y funcionando.</span>
+      </div>
+    </div>
+
+    <p class="aviso">El reloj empieza cuando tenemos el cuestionario, la carta y las fotos. Si tardas tres días en mandarlo, la web sale tres días más tarde: es la única parte que depende de ti.</p>
+  </div>
+</section>
+
+<section>
+  <div class="env">
+    <p class="epi epi--brasa">Tranquilo</p>
+    <h2>Lo que no tienes que hacer</h2>
+
+    <div class="tranqui">
+      <b>De esto nos encargamos nosotros:</b>
+      <ul>
+        <li><strong>Escribir los textos.</strong> Los redactamos y tú los apruebas.</li>
+        <li><strong>Retocar las fotos.</strong> Tú solo disparas, del resto nos ocupamos.</li>
+        <li><strong>Pasar la carta a limpio.</strong> Mándala como la tengas.</li>
+        <li><strong>Entender nada técnico.</strong> Dominio, alojamiento, certificados: no vas a oír esas palabras otra vez.</li>
+        <li><strong>Registrarte en ningún sitio.</strong> No necesitas ninguna cuenta nueva.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="env">
+    <p class="epi">Una cosa más</p>
+    <h2>Que no se quede vieja</h2>
+    <p>Por <strong>39 € al mes</strong> nos encargamos de que tu web siga viva: cambias la carta o los horarios y lo tienes hecho en 24 horas, tantas veces como haga falta. Incluye también el dominio, el alojamiento y las copias de seguridad, y si algo deja de funcionar lo arreglamos nosotros sin que tengas que llamar a nadie.</p>
+    <p>Sin permanencia: te das de baja cuando quieras.</p>
+    <p class="aviso">Si no lo quieres, tu web es tuya igualmente y se queda publicada. Solo que los cambios tendrías que hacerlos tú.</p>
+  </div>
+</section>
+
+<section>
+  <div class="env">
+    <p class="epi">Si algo no cuadra</p>
+    <h2>Nos escribes y ya</h2>
+    <p>Si una pregunta del cuestionario no la entiendes, si las fotos no te salen o si prefieres contárnoslo hablando en vez de escribiendo: llámanos y lo rellenamos juntos por teléfono en cinco minutos. Sin problema.</p>
+    <a class="boton" href="https://wa.me/34722740211" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="pie">
+  <div class="env">
+    <p>Nudo · Webs para bares y restaurantes</p>
+    <p><a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
