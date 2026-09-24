@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Webs para bares y restaurantes | Nudo</title>
-<meta name="description" content="Webs para bares, restaurantes y hoteles desde 249 €, un solo pago. Carta con alérgenos, reservas y móvil. Lista en 7 días y te la enseñamos antes de pagar.">
+<meta name="description" content="Webs para bares y restaurantes: carta con alérgenos, reservas y pensada para el móvil. Lista en 7 días y te la enseñamos antes de pagar. Pide tu presupuesto sin compromiso.">
 <meta name="theme-color" content="#0B0C10">
 <meta name="google-site-verification" content="Wtpsc8K9g6XZHmQRXuEmZZ80hzLTDTXOk9IkE-a_Iic">
 
@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Nudo">
 <meta property="og:title" content="Webs para bares y restaurantes | Nudo">
-<meta property="og:description" content="Webs rápidas y claras para bares, restaurantes y hoteles. Desde 249 €, un solo pago.">
+<meta property="og:description" content="Webs claras para bares y restaurantes, listas en 7 días. Pide tu presupuesto sin compromiso.">
 <meta property="og:url" content="https://nudodesign.es/">
 <meta property="og:locale" content="es_ES">
 <meta property="og:image" content="https://nudodesign.es/nudo-og.png">
@@ -1225,6 +1225,74 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 /* Barra con fondo fuera de la portada (la clase la pone pintar()). Claro u oscuro según --sobre */
 .barra{ transition:background-color .35s ease; }
 .barra--fondo{ background:color-mix(in srgb, rgba(255,255,255,.9) calc((1 - var(--sobre))*100%), rgba(6,7,10,.88)); -webkit-backdrop-filter:saturate(1.4) blur(12px); backdrop-filter:saturate(1.4) blur(12px); box-shadow:0 1px 0 color-mix(in srgb, rgba(11,11,12,.08) calc((1 - var(--sobre))*100%), rgba(255,255,255,.08)); }
+
+/* =====================================================================
+   PRESUPUESTO: el botón de la portada y el formulario
+   ===================================================================== */
+.hero__cta{ display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; }
+.hero__boton{ background:var(--brasa); color:#fff; font-size:1.2rem; padding:19px 40px; box-shadow:0 14px 40px -12px rgba(16,30,60,.55); }
+/* Sobre las nubes el blanco no se leía: va sobre una píldora oscura */
+.hero__cta-nota{ font-size:clamp(.95rem,1.6vw,1.05rem); font-weight:500; color:#fff; background:rgba(12,20,40,.5); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); padding:7px 16px; border-radius:100px; }
+
+.presu{ position:fixed; inset:0; z-index:135; display:flex; align-items:center; justify-content:center; padding:16px; }
+.presu[hidden]{ display:none; }
+.presu__fondo{ position:absolute; inset:0; background:rgba(6,7,10,.62); opacity:0; transition:opacity .35s ease; }
+.presu__hoja{
+  position:relative; width:min(640px,100%); max-height:calc(100svh - 32px); overflow:auto;
+  background:#fff; color:var(--tinta); border-radius:28px; padding:clamp(24px,4.5vw,40px);
+  box-shadow:0 30px 80px rgba(0,0,0,.35); text-align:left;
+  opacity:0; transform:translateY(24px) scale(.98); transition:opacity .35s ease, transform .45s cubic-bezier(.32,.72,0,1);
+}
+.presu.abierto .presu__fondo{ opacity:1; }
+.presu.abierto .presu__hoja{ opacity:1; transform:none; }
+.presu__x{ position:absolute; top:16px; right:16px; width:44px; height:44px; border-radius:14px; border:0; background:#F1F2F4; color:var(--tinta); font-size:1.6rem; line-height:1; cursor:pointer; }
+.presu h3{ font-size:clamp(1.6rem,4.4vw,2.2rem); letter-spacing:-.04em; line-height:1.08; padding-right:48px; }
+.presu h3 span{ color:#9A9BA3; }
+.presu__lead{ margin-top:10px; font-size:1.05rem; line-height:1.5; color:#55565C; }
+.presu form{ margin-top:22px; display:grid; gap:14px; }
+.presu__rejilla{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.presu label{ display:grid; gap:7px; font-size:1rem; font-weight:600; }
+.presu input,.presu textarea{
+  width:100%; font:inherit; font-size:1.05rem; font-weight:400; color:var(--tinta);
+  background:#F1F2F5; border:1.5px solid transparent; border-radius:14px; padding:15px 18px; outline:none;
+  transition:border-color .2s ease, background-color .2s ease;
+}
+.presu textarea{ resize:vertical; min-height:110px; }
+.presu input::placeholder,.presu textarea::placeholder{ color:#8C8D95; }
+.presu input:focus,.presu textarea:focus{ border-color:var(--brasa); background:#fff; }
+.presu input:user-invalid{ border-color:#D93A3A; }
+.presu__trampa{ position:absolute !important; left:-9999px; width:1px; height:1px; overflow:hidden; }
+.presu__error{ min-height:0; color:#C62E2E; font-weight:600; font-size:.98rem; }
+.presu__error:empty{ display:none; }
+.presu__enviar{
+  width:100%; border:0; border-radius:16px; padding:18px 22px; cursor:pointer;
+  background:var(--brasa); color:#fff; font:inherit; font-size:1.15rem; font-weight:700;
+  transition:transform .3s cubic-bezier(.32,.72,0,1), opacity .2s ease;
+}
+.presu__enviar:hover{ transform:scale(1.015); }
+.presu__enviar:disabled{ opacity:.6; cursor:wait; }
+.presu__enviar.enviando::after{ content:" …"; }
+.presu__legal{ font-size:.92rem; color:#6E6E73; text-align:center; }
+.presu__enlace{ background:none; border:0; padding:0; font:inherit; color:var(--brasa); text-decoration:underline; cursor:pointer; }
+.presu__o{ margin-top:20px; text-align:center; color:#6E6E73; font-size:.98rem; }
+.presu__wa{
+  margin-top:10px; display:flex; align-items:center; justify-content:center; gap:10px;
+  border:1.5px solid #DADBE0; border-radius:16px; padding:16px; font-weight:600; font-size:1.05rem; color:var(--tinta);
+}
+.presu__wa:hover{ border-color:#25D366; }
+.presu__gracias{ display:none; text-align:center; padding:12px 0 4px; }
+.presu.hecho .presu__pedir{ display:none; }
+.presu.hecho .presu__gracias{ display:block; }
+.presu__gracias h3{ padding-right:0; }
+.presu__gracias .presu__enviar{ margin-top:22px; }
+.presu__ok{ width:64px; height:64px; margin:0 auto 16px; border-radius:50%; display:grid; place-items:center; background:#E8EEFD; color:var(--brasa); font-size:2rem; font-weight:700; }
+@media (max-width:560px){
+  .presu{ align-items:flex-end; padding:0; }
+  .presu__hoja{ border-radius:26px 26px 0 0; max-height:94svh; padding-bottom:calc(24px + env(safe-area-inset-bottom,0px)); }
+  .presu__rejilla{ grid-template-columns:1fr; }
+  .hero__boton{ font-size:1.1rem; padding:17px 30px; }
+}
+@media (prefers-reduced-motion:reduce){ .presu__hoja,.presu__fondo{ transition:none; } }
 </style>
 
 
@@ -1245,7 +1313,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 <header class="barra" id="barra">
   <div class="barra__int">
     <a class="marca" href="#acto1" aria-label="Nudo, inicio"><svg class="marca__logo" viewBox="-1 0 450 75" aria-hidden="true"><path transform="translate(-26.4 -33.8) scale(2.1)" d="M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26" fill="none" style="stroke:var(--marca-simbolo)" stroke-width="7" stroke-linecap="round"/><path d="M162.8 71.6 132.9 18.6Q133.7 26.3 133.7 31V71.6H121V2.8H137.4L167.8 56.2Q167 48.8 167 42.8V2.8H179.7V71.6ZM235.8 72.6Q221.6 72.6 214 65.6Q206.5 58.7 206.5 45.8V2.8H220.9V44.7Q220.9 52.8 224.8 57.1Q228.7 61.3 236.2 61.3Q243.9 61.3 248 56.9Q252.2 52.5 252.2 44.2V2.8H266.6V45.1Q266.6 58.2 258.5 65.4Q250.4 72.6 235.8 72.6ZM354.7 36.7Q354.7 47.3 350.5 55.3Q346.4 63.2 338.7 67.4Q331.1 71.6 321.2 71.6H293.4V2.8H318.3Q335.7 2.8 345.2 11.6Q354.7 20.3 354.7 36.7ZM340.2 36.7Q340.2 25.6 334.5 19.8Q328.7 13.9 318 13.9H307.8V60.5H320Q329.3 60.5 334.7 54.1Q340.2 47.7 340.2 36.7ZM446.5 36.9Q446.5 47.6 442.3 55.8Q438 63.9 430.1 68.3Q422.2 72.6 411.6 72.6Q395.4 72.6 386.2 63Q377 53.5 377 36.9Q377 20.3 386.2 11.1Q395.4 1.8 411.7 1.8Q428.1 1.8 437.3 11.2Q446.5 20.5 446.5 36.9ZM431.8 36.9Q431.8 25.8 426.5 19.4Q421.3 13.1 411.7 13.1Q402.1 13.1 396.8 19.4Q391.5 25.7 391.5 36.9Q391.5 48.2 396.9 54.7Q402.3 61.2 411.6 61.2Q421.3 61.2 426.6 54.9Q431.8 48.6 431.8 36.9Z" fill="currentColor"/></svg></a>
-    <a class="btn" href="https://calendly.com/eric-nudodesign/llamada" target="_blank" rel="noopener" data-cita>Reservar llamada</a>
+    <a class="btn" href="#presupuesto" data-presupuesto>Pedir presupuesto</a>
   </div>
 </header>
 
@@ -1280,18 +1348,14 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     </div>
 
     <div class="hero__txt hero__3d" id="heroTxt">
-      <button class="tarj" type="button" data-abre="web">
-        <span class="tarj__et">Tu web</span>
-        <span class="tarj__precio"><small>Desde</small>249 €</span>
-        <span class="tarj__cond">Un solo pago · 7 días</span>
-        <span class="tarj__mas">Qué incluye →</span>
-      </button>
-      <button class="tarj" type="button" data-abre="mant">
-        <span class="tarj__et">Mantenimiento</span>
-        <span class="tarj__precio"><small>Desde</small>39 €<i> /mes</i></span>
-        <span class="tarj__cond">Opcional · sin permanencia</span>
-        <span class="tarj__mas">Qué incluye →</span>
-      </button>
+      <!-- Sin precios: cada local es distinto. Un solo botón, y que nos cuenten -->
+      <div class="hero__cta">
+        <button class="btn btn--grande hero__boton" type="button" data-presupuesto>
+          Pide tu presupuesto
+          <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </button>
+        <p class="hero__cta-nota">Gratis y sin compromiso · Respuesta en 24 h</p>
+      </div>
     </div>
 
     <div class="remate" id="remate">
@@ -1301,8 +1365,8 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       </h2>
       <span class="raya" id="raya" aria-hidden="true"></span>
       <p class="remate__sub" id="letraPeq">Te enseñamos una maqueta de tu local antes de cobrarte nada.</p>
-      <a class="btn btn--grande btn--blanco" href="https://calendly.com/eric-nudodesign/llamada" target="_blank" rel="noopener" data-cita>
-        Reservar llamada
+      <a class="btn btn--grande btn--blanco" href="#presupuesto" data-presupuesto>
+        Pide tu presupuesto
         <svg class="flecha" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
     </div>
@@ -1360,8 +1424,8 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
     <div class="nos__cierre" id="nosCierre">
       <p class="nos__frase">Dos socios, un solo oficio: webs para bares y restaurantes.</p>
-      <a class="btn btn--grande btn--blanco" href="https://calendly.com/eric-nudodesign/llamada" target="_blank" rel="noopener" data-cita>
-        Reservar llamada
+      <a class="btn btn--grande btn--blanco" href="#presupuesto" data-presupuesto>
+        Pide tu presupuesto
         <svg class="flecha" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
     </div>
@@ -1399,8 +1463,8 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
         <strong>¿Vemos cómo quedaría la tuya?</strong>
         <span>Cinco minutos por teléfono y te preparamos la maqueta. O llámanos: <a class="tel" href="tel:+34722740211">722 74 02 11</a></span>
       </div>
-      <a class="btn btn--grande btn--blanco" href="https://calendly.com/eric-nudodesign/llamada" target="_blank" rel="noopener" data-cita>
-        Reservar llamada
+      <a class="btn btn--grande btn--blanco" href="#presupuesto" data-presupuesto>
+        Pide tu presupuesto
         <svg class="flecha" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
     </div>
@@ -1435,8 +1499,8 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <p class="panel__sub" id="panelSub" hidden></p>
     <ul class="panel__lista" id="panelLista2" hidden></ul>
     <p class="panel__nota" id="panelNota"></p>
-    <a class="btn panel__cta" href="https://calendly.com/eric-nudodesign/llamada" target="_blank" rel="noopener" data-cita>
-      Reservar llamada
+    <a class="btn panel__cta" href="#presupuesto" data-presupuesto>
+      Pide tu presupuesto
       <svg class="flecha" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
     </a>
   </div>
@@ -1451,6 +1515,49 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   </svg>
 </a>
 
+<!-- ===================== PRESUPUESTO (formulario propio) =====================
+     Sustituye a los precios: cada local es distinto, así que se pide presupuesto.
+     Lo que se envía va a la hoja de Google y avisa a hola@ con «PRESUPUESTO #001». -->
+<div class="presu" id="presu" hidden>
+  <div class="presu__fondo" data-cierra-presu></div>
+  <div class="presu__hoja" role="dialog" aria-modal="true" aria-labelledby="presuTit">
+    <button class="presu__x" type="button" data-cierra-presu aria-label="Cerrar">&times;</button>
+
+    <div class="presu__pedir">
+      <h3 id="presuTit">¿Quieres una web <span>para tu local?</span></h3>
+      <p class="presu__lead">Cuéntanos qué necesitas. Te respondemos en menos de 24 h laborables, gratis y sin compromiso.</p>
+
+      <form id="presuForm" novalidate>
+        <div class="presu__rejilla">
+          <label>Tu nombre*<input name="nombre" type="text" autocomplete="name" placeholder="Nombre" required maxlength="80"></label>
+          <label>Tu local*<input name="empresa" type="text" autocomplete="organization" placeholder="Nombre del bar o restaurante" required maxlength="120"></label>
+          <label>E-mail*<input name="email" type="email" autocomplete="email" placeholder="tu@correo.com" required maxlength="120"></label>
+          <label>Teléfono*<input name="telefono" type="tel" autocomplete="tel" placeholder="600 000 000" required maxlength="30" pattern="[0-9 +().-]{9,}"></label>
+        </div>
+        <label>Cuéntanos tu local<textarea name="proyecto" rows="3" maxlength="2000" placeholder="Qué tipo de local es, si ya tienes web, qué te gustaría que tuviera…"></textarea></label>
+        <!-- Trampa para robots: una persona no ve este campo y lo deja vacío -->
+        <label class="presu__trampa" aria-hidden="true">Web<input name="web" type="text" tabindex="-1" autocomplete="off"></label>
+        <p class="presu__error" role="alert"></p>
+        <button class="presu__enviar" type="submit">Pedir presupuesto <span aria-hidden="true">→</span></button>
+        <p class="presu__legal">Usamos tus datos solo para responderte. <button type="button" class="presu__enlace" data-legal>Privacidad</button></p>
+      </form>
+
+      <p class="presu__o">¿Prefieres escribirnos? Hazlo por WhatsApp</p>
+      <a class="presu__wa" id="presuWa" href="https://wa.me/34722740211" target="_blank" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.5c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.5.9.9-3.4-.2-.4A9.5 9.5 0 1 1 12 21.5zm0-20.9A11.4 11.4 0 0 0 2.2 17.8L.6 23.4l5.8-1.5A11.4 11.4 0 1 0 12 .6z"/></svg>
+        Enviar por WhatsApp
+      </a>
+    </div>
+
+    <div class="presu__gracias" aria-live="polite">
+      <p class="presu__ok" aria-hidden="true">✓</p>
+      <h3>¡Recibido! <span id="presuNum"></span></h3>
+      <p class="presu__lead">Te respondemos en menos de 24 h laborables. Si tienes prisa, escríbenos por WhatsApp o llámanos al <a href="tel:+34722740211">722 74 02 11</a>.</p>
+      <button class="presu__enviar" type="button" data-cierra-presu>Cerrar</button>
+    </div>
+  </div>
+</div>
+
 <div class="legalov" id="legalov" hidden>
   <div class="legalov__fondo" data-cierra-legal></div>
   <div class="legalov__hoja" role="dialog" aria-modal="true" aria-labelledby="legalTit">
@@ -1464,7 +1571,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
     <h4>Qué datos tratamos</h4>
     <p>Si nos escribes o te llamamos: nombre del negocio, persona de contacto, teléfono, correo y dirección del local, para poder contactar contigo y prepararte una propuesta. La base legal es tu consentimiento cuando escribes tú, y nuestro interés legítimo en ofrecer servicios a negocios cuando llamamos nosotros a partir de datos profesionales publicados. Pídenos que dejemos de contactarte y lo hacemos al momento.</p>
-    <p>Si reservas una llamada desde el calendario: tu nombre, correo y teléfono, y lo que quieras contarnos, para llamarte a la hora que elijas.</p>
+    <p>Si nos pides presupuesto desde el formulario: tu nombre, el nombre de tu local, tu correo, tu teléfono y lo que nos cuentes, para prepararte el presupuesto y responderte. Se guardan en una hoja de cálculo privada de Google a la que solo accedemos nosotros. La base legal es tu consentimiento al enviarlo.</p>
     <p>Si nos contratas: además los datos de facturación y de pago, y el material de tu web (textos, carta, logotipo y fotos), para ejecutar el contrato y cumplir las obligaciones fiscales.</p>
 
     <h4>Cuánto los guardamos</h4>
@@ -1475,16 +1582,16 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     </ul>
 
     <h4>Con quién los compartimos</h4>
-    <p>No vendemos ni cedemos datos para publicidad. Solo los tratan, por cuenta nuestra, los proveedores que necesitamos: GitHub (alojamiento de la web), DonDominio (registro de dominios), Zoho (correo), Calendly (reserva de llamadas), WhatsApp (mensajería), nuestra gestoría y Google si nos autorizas a llevar tu ficha. Si alguno está fuera del Espacio Económico Europeo, la transferencia se ampara en cláusulas contractuales tipo.</p>
+    <p>No vendemos ni cedemos datos para publicidad. Solo los tratan, por cuenta nuestra, los proveedores que necesitamos: GitHub (alojamiento de la web), DonDominio (registro de dominios), Zoho (correo), Calendly (reserva de llamadas), WhatsApp (mensajería), Google (formulario de presupuesto y contador de visitas), nuestra gestoría y Google si nos autorizas a llevar tu ficha. Si alguno está fuera del Espacio Económico Europeo, la transferencia se ampara en cláusulas contractuales tipo.</p>
 
     <h4>Tus derechos</h4>
     <p>Puedes pedir acceso, rectificación, supresión, oposición, limitación y portabilidad, y retirar tu consentimiento, escribiendo a <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a>. Respondemos en un mes como máximo y no hace falta que justifiques nada. Si no te atendemos bien, puedes reclamar ante la Agencia Española de Protección de Datos en aepd.es.</p>
 
     <h4 id="legalCookies">Cookies</h4>
-    <p><strong>Esta web no instala cookies por sí misma.</strong> No hay analítica, ni píxeles, ni rastreadores de publicidad.</p>
-    <p>Hay una excepción: si pulsas «Reservar llamada», se abre el calendario de Calendly dentro de la web, y Calendly puede usar sus propias cookies técnicas para que la reserva funcione. Solo se carga si tú lo abres. Si prefieres evitarlo, escríbenos por WhatsApp o a hola@nudodesign.es. Las fuentes de letra se cargan desde Google Fonts, que recibe la dirección IP de tu navegador para servirlas.</p>
-    <p>Lo único que se guarda es un dato técnico en tu propio navegador para recordar que ya has visto la animación de entrada y no repetírtela. No sale de tu dispositivo, no nos llega, no te identifica y se borra al cerrar la pestaña. Según la normativa española es una finalidad técnica exenta de consentimiento.</p>
-    <p>Si algún día añadimos analítica, lo haremos con una herramienta sin cookies o te pediremos permiso antes de activarla, y rechazar será tan fácil como aceptar.</p>
+    <p><strong>Esta web no instala cookies por sí misma.</strong> Contamos las visitas y los clics en los botones de forma anónima, sin cookies y sin guardar tu dirección IP ni nada que te identifique, solo para saber qué funciona. No hay píxeles ni rastreadores de publicidad.</p>
+    <p>Hay una excepción: si eliges reservar una llamada, se abre el calendario de Calendly, y Calendly puede usar sus propias cookies técnicas para que la reserva funcione. Solo se carga si tú lo abres. Si prefieres evitarlo, escríbenos por WhatsApp o a hola@nudodesign.es. Las fuentes de letra se cargan desde Google Fonts, que recibe la dirección IP de tu navegador para servirlas.</p>
+    <p>Lo único que se guarda es un dato técnico en tu propio navegador para recordar que ya has visto la animación de entrada y no repetírtela, y para no contar dos veces tu visita. No sale de tu dispositivo, no nos llega, no te identifica y se borra al cerrar la pestaña. Según la normativa española es una finalidad técnica exenta de consentimiento.</p>
+    <p>Si algún día añadimos algo que use cookies, te pediremos permiso antes de activarlo, y rechazar será tan fácil como aceptar.</p>
 
     <h4>Servicios y precios</h4>
     <p>Tu web desde 249 €, un solo pago, que se abona íntegro al aceptar la maqueta. Mantenimiento desde 39 €/mes, opcional y sin permanencia. El precio de la web incluye dominio y alojamiento durante el primer año. Precios sin IVA: al importe hay que sumarle el 21 %. Pueden cambiar para nuevas contrataciones; a quien ya es cliente se le respeta el precio mientras siga dado de alta.</p>
@@ -1525,8 +1632,8 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <div class="pie__marca">
       <a class="marca" href="#acto1" aria-label="Nudo, inicio"><svg class="marca__logo" viewBox="-1 0 450 75" aria-hidden="true"><path transform="translate(-26.4 -33.8) scale(2.1)" d="M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26" fill="none" style="stroke:var(--marca-simbolo)" stroke-width="7" stroke-linecap="round"/><path d="M162.8 71.6 132.9 18.6Q133.7 26.3 133.7 31V71.6H121V2.8H137.4L167.8 56.2Q167 48.8 167 42.8V2.8H179.7V71.6ZM235.8 72.6Q221.6 72.6 214 65.6Q206.5 58.7 206.5 45.8V2.8H220.9V44.7Q220.9 52.8 224.8 57.1Q228.7 61.3 236.2 61.3Q243.9 61.3 248 56.9Q252.2 52.5 252.2 44.2V2.8H266.6V45.1Q266.6 58.2 258.5 65.4Q250.4 72.6 235.8 72.6ZM354.7 36.7Q354.7 47.3 350.5 55.3Q346.4 63.2 338.7 67.4Q331.1 71.6 321.2 71.6H293.4V2.8H318.3Q335.7 2.8 345.2 11.6Q354.7 20.3 354.7 36.7ZM340.2 36.7Q340.2 25.6 334.5 19.8Q328.7 13.9 318 13.9H307.8V60.5H320Q329.3 60.5 334.7 54.1Q340.2 47.7 340.2 36.7ZM446.5 36.9Q446.5 47.6 442.3 55.8Q438 63.9 430.1 68.3Q422.2 72.6 411.6 72.6Q395.4 72.6 386.2 63Q377 53.5 377 36.9Q377 20.3 386.2 11.1Q395.4 1.8 411.7 1.8Q428.1 1.8 437.3 11.2Q446.5 20.5 446.5 36.9ZM431.8 36.9Q431.8 25.8 426.5 19.4Q421.3 13.1 411.7 13.1Q402.1 13.1 396.8 19.4Q391.5 25.7 391.5 36.9Q391.5 48.2 396.9 54.7Q402.3 61.2 411.6 61.2Q421.3 61.2 426.6 54.9Q431.8 48.6 431.8 36.9Z" fill="currentColor"/></svg></a>
       <p class="pie__lema">Tu web lista en siete días. Si no te convence, no pagas.</p>
-      <a class="btn btn--blanco" href="https://calendly.com/eric-nudodesign/llamada" target="_blank" rel="noopener" data-cita>
-        Reservar llamada
+      <a class="btn btn--blanco" href="#presupuesto" data-presupuesto>
+        Pide tu presupuesto
         <svg class="flecha" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
     </div>
@@ -1535,9 +1642,9 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       <div>
         <h4>Qué hacemos</h4>
         <ul>
-          <li><button class="pie__enlace" type="button" data-abre="web">Tu web · desde 249 €</button></li>
+          <li><button class="pie__enlace" type="button" data-abre="web">Tu web</button></li>
           <li><a href="ejemplos/">Ver ejemplos de webs</a></li>
-          <li><button class="pie__enlace" type="button" data-abre="mant">Mantenimiento · desde 39 €/mes</button></li>
+          <li><button class="pie__enlace" type="button" data-abre="mant">Mantenimiento</button></li>
         </ul>
       </div>
       <div>
@@ -1973,7 +2080,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
     var FICHAS = {
       web: {
-        precio: 'desde 249 \u20ac',
+        precio: 'Qu\u00e9 incluye',
         tit: 'Tu web',
         puntos: [
           'Una sola p\u00e1gina, pensada para el m\u00f3vil',
@@ -1988,7 +2095,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
         nota: 'Un solo pago, al aceptar la maqueta de tu local. Antes de eso no pagas nada: si la maqueta no te convence, ah\u00ed se queda. Las fotos las haces t\u00fa con nuestra gu\u00eda; si no puedes, la montamos con las que tengas.'
       },
       mant: {
-        precio: 'desde 39 \u20ac / mes',
+        precio: 'Qu\u00e9 incluye',
         tit: 'Mantenimiento',
         puntos: [
           'Cambios de carta, precios y horarios en 24 h, los que hagan falta',
@@ -2310,5 +2417,111 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     if (e.target.closest && e.target.closest('[data-cierra-cita]')) cierra();
   });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !cita.hidden) cierra(); });
+})();
+
+/* PRESUPUESTO y ESTADÍSTICAS.
+   API_URL es la app web de NudoDesign/admin/api (ver admin/README.md): guarda la
+   solicitud en la hoja de Google, le pone número y avisa a hola@ con
+   «PRESUPUESTO #001». Mientras esté vacía, el formulario manda el mensaje por
+   WhatsApp para que ninguna petición se pierda.
+   Las estadísticas son solo contadores anónimos (sin cookies, sin IP). */
+(function(){
+  var API_URL = '';
+  var WA = '34722740211';
+
+  function avisa(evento){
+    if (!API_URL) return;
+    try {
+      var d = JSON.stringify({ tipo:'evento', evento:evento, pagina:location.pathname, ref:document.referrer || '' });
+      if (navigator.sendBeacon) navigator.sendBeacon(API_URL, new Blob([d], { type:'text/plain' }));
+      else fetch(API_URL, { method:'POST', body:d, keepalive:true });
+    } catch(e){}
+  }
+
+  /* Una visita por pestaña, para no contar cada recarga */
+  var contada = false;
+  try { contada = sessionStorage.getItem('nudo-visita') === '1'; sessionStorage.setItem('nudo-visita', '1'); } catch(e){}
+  if (!contada) avisa('visita');
+
+  document.addEventListener('click', function(e){
+    var a = e.target.closest ? e.target.closest('a,button') : null;
+    if (!a) return;
+    var h = a.getAttribute('href') || '';
+    if (a.hasAttribute('data-presupuesto')) avisa('clic_presupuesto');
+    else if (h.indexOf('wa.me') > -1) avisa('clic_whatsapp');
+    else if (h.indexOf('tel:') === 0) avisa('clic_telefono');
+    else if (h.indexOf('calendly.com') > -1) avisa('clic_llamada');
+    else if (h.indexOf('ejemplos') > -1) avisa('clic_ejemplos');
+    else if (a.getAttribute('data-abre') === 'web') avisa('abrir_panel_web');
+    else if (a.getAttribute('data-abre') === 'mant') avisa('abrir_panel_mant');
+  }, true);
+
+  var caja = document.getElementById('presu'), form = document.getElementById('presuForm');
+  if (!caja || !form) return;
+  var ultimo = null;
+
+  function abre(origen){
+    ultimo = origen || null;
+    caja.classList.remove('hecho');
+    caja.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ caja.classList.add('abierto'); }); });
+    /* En móvil no se enfoca solo: abriría el teclado encima del título */
+    if (window.innerWidth > 560) setTimeout(function(){ var i = form.querySelector('input'); if (i) i.focus(); }, 350);
+  }
+  function cierra(){
+    caja.classList.remove('abierto');
+    document.documentElement.style.overflow = '';
+    setTimeout(function(){ caja.hidden = true; if (ultimo && ultimo.focus) ultimo.focus(); }, 400);
+  }
+  document.addEventListener('click', function(e){
+    var b = e.target.closest ? e.target.closest('[data-presupuesto]') : null;
+    if (b){
+      e.preventDefault();
+      var p = document.querySelector('.panel.abierto .panel__x'); if (p) p.click();
+      abre(b); return;
+    }
+    if (e.target.closest && e.target.closest('[data-cierra-presu]')) cierra();
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !caja.hidden) cierra(); });
+  /* nudodesign.es/#presupuesto abre el formulario: sirve para enlazarlo desde fuera */
+  if (location.hash === '#presupuesto') setTimeout(function(){ abre(null); }, 600);
+
+  /* WhatsApp con lo que ya haya escrito, para que no tenga que repetirlo */
+  function enlaceWa(){
+    var f = new FormData(form), t = 'Hola, quiero pedir presupuesto para la web de mi local.';
+    if (f.get('empresa'))  t += '\nLocal: ' + f.get('empresa');
+    if (f.get('nombre'))   t += '\nMe llamo ' + f.get('nombre');
+    if (f.get('telefono')) t += '\nTeléfono: ' + f.get('telefono');
+    if (f.get('proyecto')) t += '\n' + f.get('proyecto');
+    return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t);
+  }
+  var wa = document.getElementById('presuWa');
+  if (wa) wa.addEventListener('click', function(){ wa.href = enlaceWa(); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var err = form.querySelector('.presu__error'); err.textContent = '';
+    if (!form.checkValidity()){ form.reportValidity(); return; }
+    if (!API_URL){ window.open(enlaceWa(), '_blank', 'noopener'); return; }
+
+    var d = { tipo:'solicitud', pagina:location.pathname };
+    new FormData(form).forEach(function(v, k){ d[k] = String(v).trim(); });
+    var boton = form.querySelector('.presu__enviar');
+    boton.disabled = true; boton.classList.add('enviando');
+
+    fetch(API_URL, { method:'POST', body:JSON.stringify(d) })
+      .then(function(r){ return r.json(); })
+      .then(function(r){
+        if (!r || !r.ok) throw new Error((r && r.error) || '');
+        document.getElementById('presuNum').textContent = r.numero ? 'Solicitud #' + r.numero : '';
+        caja.classList.add('hecho');
+        form.reset();
+      })
+      .catch(function(x){
+        err.textContent = (x && x.message) ? x.message : 'No se ha podido enviar. Prueba otra vez o escríbenos por WhatsApp.';
+      })
+      .then(function(){ boton.disabled = false; boton.classList.remove('enviando'); });
+  });
 })();
 </script>
