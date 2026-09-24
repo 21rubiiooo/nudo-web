@@ -1293,6 +1293,19 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   .hero__boton{ font-size:1.1rem; padding:17px 30px; }
 }
 @media (prefers-reduced-motion:reduce){ .presu__hoja,.presu__fondo{ transition:none; } }
+
+/* Enlace «Ejemplos» en la barra: mismo color que el logo, cambia con --sobre */
+.barra__nav{ display:flex; align-items:center; gap:clamp(12px,2.4vw,26px); }
+.barra__enlace{ font-weight:600; font-size:1rem; padding:8px 2px; color:color-mix(in srgb, var(--tinta) calc((1 - var(--sobre))*100%), #fff); border-bottom:2px solid transparent; }
+.barra__enlace:hover{ border-bottom-color:currentColor; }
+.barra__nav .btn{ white-space:nowrap; }
+.barra__corto{ display:none; }
+/* En móvil el botón en dos líneas quedaba torpe: texto corto */
+@media (max-width:480px){ .barra__largo{ display:none; } .barra__corto{ display:inline; } .barra__enlace{ font-size:.95rem; } .barra__int .btn{ padding:10px 16px; font-size:.95rem; } }
+@media (max-width:360px){ .barra__int{ padding-inline:14px; } .barra .marca__logo{ height:18px; } .barra__nav{ gap:10px; } .barra__int .btn{ padding:10px 13px; } }
+
+/* La escena 3D de la portada se salía unos píxeles en móviles muy estrechos: se recorta (clip no rompe los sticky) */
+html{ overflow-x:clip; }
 </style>
 
 
@@ -1313,7 +1326,11 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 <header class="barra" id="barra">
   <div class="barra__int">
     <a class="marca" href="#acto1" aria-label="Nudo, inicio"><svg class="marca__logo" viewBox="-1 0 450 75" aria-hidden="true"><path transform="translate(-26.4 -33.8) scale(2.1)" d="M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26" fill="none" style="stroke:var(--marca-simbolo)" stroke-width="7" stroke-linecap="round"/><path d="M162.8 71.6 132.9 18.6Q133.7 26.3 133.7 31V71.6H121V2.8H137.4L167.8 56.2Q167 48.8 167 42.8V2.8H179.7V71.6ZM235.8 72.6Q221.6 72.6 214 65.6Q206.5 58.7 206.5 45.8V2.8H220.9V44.7Q220.9 52.8 224.8 57.1Q228.7 61.3 236.2 61.3Q243.9 61.3 248 56.9Q252.2 52.5 252.2 44.2V2.8H266.6V45.1Q266.6 58.2 258.5 65.4Q250.4 72.6 235.8 72.6ZM354.7 36.7Q354.7 47.3 350.5 55.3Q346.4 63.2 338.7 67.4Q331.1 71.6 321.2 71.6H293.4V2.8H318.3Q335.7 2.8 345.2 11.6Q354.7 20.3 354.7 36.7ZM340.2 36.7Q340.2 25.6 334.5 19.8Q328.7 13.9 318 13.9H307.8V60.5H320Q329.3 60.5 334.7 54.1Q340.2 47.7 340.2 36.7ZM446.5 36.9Q446.5 47.6 442.3 55.8Q438 63.9 430.1 68.3Q422.2 72.6 411.6 72.6Q395.4 72.6 386.2 63Q377 53.5 377 36.9Q377 20.3 386.2 11.1Q395.4 1.8 411.7 1.8Q428.1 1.8 437.3 11.2Q446.5 20.5 446.5 36.9ZM431.8 36.9Q431.8 25.8 426.5 19.4Q421.3 13.1 411.7 13.1Q402.1 13.1 396.8 19.4Q391.5 25.7 391.5 36.9Q391.5 48.2 396.9 54.7Q402.3 61.2 411.6 61.2Q421.3 61.2 426.6 54.9Q431.8 48.6 431.8 36.9Z" fill="currentColor"/></svg></a>
-    <a class="btn" href="#presupuesto" data-presupuesto>Pedir presupuesto</a>
+    <!-- Los ejemplos a mano desde cualquier punto: es lo que más convence -->
+    <nav class="barra__nav">
+      <a class="barra__enlace" href="ejemplos/">Ejemplos</a>
+      <a class="btn" href="#presupuesto" data-presupuesto><span class="barra__largo">Pedir presupuesto</span><span class="barra__corto">Presupuesto</span></a>
+    </nav>
   </div>
 </header>
 
