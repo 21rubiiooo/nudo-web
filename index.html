@@ -1199,6 +1199,32 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   .srv__cuerpo{ padding-top:22px; }
   .srv__cab p{ display:none; }
 }
+
+/* Nosotros en móvil: en columna, uno debajo de otro. Antes Eric iba anclado
+   arriba y Leman abajo; en pantallas bajas (o con la letra grande) se pisaban.
+   En el móvil ya no se queda pegada ni aparece por partes: se lee de corrido. */
+@media (max-width:760px){
+  #nosotros{ height:auto; }
+  #nosotros .acto__pega{ position:relative; height:auto; min-height:100svh; justify-content:flex-start; align-items:stretch; text-align:left; padding:calc(var(--barra) + 5svh) 24px 9svh; }
+  #nosotros .nos__tag,#nosotros .nos__titular,#nosotros .socio,#nosotros .nos__cierre{
+    position:relative; inset:auto; top:auto; right:auto; bottom:auto; left:auto;
+    width:auto; max-width:36ch; padding-inline:0; text-align:left;
+    opacity:1 !important; transform:none !important;
+  }
+  #nosotros .nos__titular{ margin-top:10px; }
+  #nosotros .nos__titular h2{ font-size:clamp(2.6rem,13vw,3.4rem); }
+  #nosotros .nos__regla{ transform:scaleX(1) !important; }
+  #nosotros .socio{ margin-top:34px; }
+  #nosotros .socio h3{ font-size:clamp(2.2rem,11vw,2.8rem); }
+  #nosotros .socio__rol{ margin-top:6px; font-size:.78rem; }
+  #nosotros .socio p.socio__txt{ margin-top:10px; font-size:1.05rem; }
+  #nosotros .nos__cierre{ margin-top:40px; max-width:none; text-align:center; pointer-events:auto !important; }
+  #nosotros .nos__frase{ margin-bottom:16px; font-size:1rem; }
+}
+
+/* Barra con fondo fuera de la portada (la clase la pone pintar()). Claro u oscuro según --sobre */
+.barra{ transition:background-color .35s ease; }
+.barra--fondo{ background:color-mix(in srgb, rgba(255,255,255,.9) calc((1 - var(--sobre))*100%), rgba(6,7,10,.88)); -webkit-backdrop-filter:saturate(1.4) blur(12px); backdrop-filter:saturate(1.4) blur(12px); box-shadow:0 1px 0 color-mix(in srgb, rgba(11,11,12,.08) calc((1 - var(--sobre))*100%), rgba(255,255,255,.08)); }
 </style>
 
 
@@ -1492,10 +1518,10 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <button class="legalov__x" type="button" data-cierra-legal aria-label="Cerrar">&times;</button>
 
     <h3 id="legalTit">Aviso legal, privacidad y cookies</h3>
-    <p class="legalov__fecha">Última actualización: 23 de septiembre de 2026</p>
+    <p class="legalov__fecha">Última actualización: 24 de septiembre de 2026</p>
 
     <h4>Quiénes somos</h4>
-    <p>Titular: Eric Rubio López · NIF 79282793E · domicilio Plaza Joan Alsina, 08440 Cardedeu (Barcelona). Nombre comercial: Nudo. Correo: <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a>. Actividad: diseño y mantenimiento de webs para hostelería.</p>
+    <p>Titular: Leman Cerrillo. Nombre comercial: Nudo. Correo: <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a>. Actividad: diseño y mantenimiento de webs para hostelería.</p>
 
     <h4>Qué datos tratamos</h4>
     <p>Si nos escribes o te llamamos: nombre del negocio, persona de contacto, teléfono, correo y dirección del local, para poder contactar contigo y prepararte una propuesta. La base legal es tu consentimiento cuando escribes tú, y nuestro interés legítimo en ofrecer servicios a negocios cuando llamamos nosotros a partir de datos profesionales publicados. Pídenos que dejemos de contactarte y lo hacemos al momento.</p>
@@ -1979,6 +2005,10 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     /* De "Cómo trabajamos" hacia abajo todo es oscuro. Si se llega de un salto
        (un enlace, un deslizamiento rápido) ningún acto pinta la barra y se
        quedaría clara sobre negro, con el logo invisible. */
+    /* Pasada la portada la barra lleva fondo: si no, al hacer scroll el texto
+       pasa por debajo del logo y parece que las letras se pisan. */
+    if (barra && servSec){ barra.classList.toggle('barra--fondo', y >= servSec.offsetTop - 60); }
+
     var oficioSec = Q('oficio');
     if (barra && oficioSec && y >= oficioSec.offsetTop - 60){ barra.style.setProperty('--sobre','1'); }
 
