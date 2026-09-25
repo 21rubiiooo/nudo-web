@@ -6,7 +6,7 @@ Landing de **Nudo** — webs para bares y restaurantes · [nudodesign.es](https:
 
 - `index.html` — la web entera en un solo archivo (fotos, CSS y JS dentro). No necesita build.
 - `CNAME` — el dominio para GitHub Pages. No borrar.
-- `nudo-og.png` — la imagen que sale al compartir el enlace (WhatsApp, redes). 1200 × 630.
+- `nudo-og-2.png` — la imagen que sale al compartir el enlace (WhatsApp, redes). 1200 × 630.
 
 ## Cómo actualizarla
 
