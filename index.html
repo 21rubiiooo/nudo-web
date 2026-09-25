@@ -1304,8 +1304,26 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 @media (max-width:480px){ .barra__largo{ display:none; } .barra__corto{ display:inline; } .barra__enlace{ font-size:.95rem; } .barra__int .btn{ padding:10px 16px; font-size:.95rem; } }
 @media (max-width:360px){ .barra__int{ padding-inline:14px; } .barra .marca__logo{ height:18px; } .barra__nav{ gap:10px; } .barra__int .btn{ padding:10px 13px; } }
 
-/* La escena 3D de la portada se salía unos píxeles en móviles muy estrechos: se recorta (clip no rompe los sticky) */
-html{ overflow-x:clip; }
+/* OJO: aquí había un html{ overflow-x:clip }. Parecía inofensivo, pero cualquier
+   overflow distinto de visible en el <html> se propaga al viewport y deja
+   INERTES todos los position:sticky de la página: los .acto__pega dejaban de
+   quedarse fijos y cada acto se veía como una pantalla de contenido seguida de
+   medio scroll de fondo vacío. Lo que de verdad se salía en pantallas de 320 px
+   era la barra de arriba, y eso se arregla abajo estrechando la barra.
+   La escena 3D ya la recorta .acto__pega con su propio overflow:hidden. */
+
+@media (max-width:359px){
+  .barra__int{ padding-inline:10px; gap:8px; }
+  .barra__nav{ gap:8px; }
+  .barra__enlace{ font-size:.88rem; }
+  .barra__int .btn{ padding:9px 11px; font-size:.88rem; }
+  .barra .marca__logo{ height:17px; }
+  /* A dos columnas, el correo no cabe y empujaba la pagina a lo ancho */
+  .pie__cols{ grid-template-columns:1fr; gap:24px; }
+}
+
+/* Red de seguridad: el correo es una palabra larga y sin esto no parte nunca */
+.pie a, .pie__enlace{ overflow-wrap:anywhere; }
 
 /* En movil se cargan versiones mas ligeras de las mismas fotos */
 @media (max-width: 760px){
