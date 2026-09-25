@@ -23,7 +23,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- La fuente llega sin bloquear: el texto sale ya con la del sistema y cambia a Inter al cargar -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
 
 <style>
 /* ==========================================================================
@@ -1333,6 +1335,30 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     --nos: url('imagenes/nosotros-movil.jpg');
   }
 }
+
+/* =====================================================================
+   VELOCIDAD (25/09/2026)
+   Medido en móvil con la CPU a 1/4: las nubes que cruzan la portada eran
+   las responsables de los tirones al hacer scroll (18 % de frames lentos;
+   sin ellas, 1 %). Y la cortina de entrada tapaba la web 2,5 s aunque ya
+   estuviera cargada: se nota como «va lenta». Ahora dura la mitad.
+   ===================================================================== */
+.splash{ animation-delay:1.3s; }
+.splash__telon,.splash__telon::after{ animation-duration:.7s; animation-delay:.72s; }
+.splash__centro{ animation-duration:.35s; animation-delay:.62s; }
+.splash__nudo path{ animation-duration:.6s; animation-delay:.05s; }
+.splash__nombre span{ animation-duration:.42s; }
+.splash__nombre span:nth-child(1){ animation-delay:.24s; }
+.splash__nombre span:nth-child(2){ animation-delay:.29s; }
+.splash__nombre span:nth-child(3){ animation-delay:.34s; }
+.splash__nombre span:nth-child(4){ animation-delay:.39s; }
+.splash__lema{ animation-duration:.35s; animation-delay:.42s; }
+.splash__filo i{ animation-duration:.45s; animation-delay:.38s; }
+
+/* Móvil: sin nubes en movimiento (eran el cuello de botella) */
+@media (max-width:760px){
+  .nubes1{ display:none; }
+}
 </style>
 
 
@@ -2105,7 +2131,8 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
     /* Nubes: deriva continua, barata (sólo transform) */
     var deriva = y * 0.06;
-    for (var n = 0; n < nubes.length; n++){
+    /* En móvil las nubes están ocultas (ver VELOCIDAD): ni se calculan */
+    for (var n = 0; n < (anchoVista > 760 ? nubes.length : 0); n++){
       var vel = parseFloat(nubes[n].getAttribute('data-nube')) || 1;
       var x = ((deriva * vel * 6) + performance.now() * 0.004 * vel) % 190;
       nubes[n].style.transform = 'translate3d(' + x.toFixed(1) + 'vw,0,0)';
