@@ -235,6 +235,29 @@
     .barra__btn { padding: 7px 9px; font-size: 14px; }
     .barra__btn:first-of-type { margin-left: auto; }
   }
+
+  /* ── Registros: llamadas, trabajo, eventos ────────────────── */
+  .reg { display: grid; gap: 4px 12px; grid-template-columns: 1fr auto; background: var(--papel);
+         border: 2px solid transparent; border-radius: var(--radio); padding: 12px 16px; text-align: left; width: 100%; }
+  button.reg { cursor: pointer; }
+  button.reg:hover { border-color: var(--oro); }
+  .reg__titulo { font-weight: 700; font-size: 17px; }
+  .reg__meta { color: var(--tinta-2); font-size: 15px; grid-column: 1 / -1; }
+  .reg__lado { text-align: right; font-weight: 700; white-space: nowrap; }
+  .chip--r0 { background: var(--cielo-2); color: var(--tinta-2); }
+  .chip--r1 { background: #FFF1CC; color: #7A5200; }
+  .chip--r2 { background: #FDE2E0; color: #8C1D18; }
+  .chip--r3 { background: #E3EAFF; color: #16379E; }
+  .chip--r4 { background: var(--brasa); color: #fff; }
+  .chip--r5 { background: #D9F5E3; color: #0E6B34; }
+  .tres { display: grid; gap: 0 12px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .tres { grid-template-columns: 1fr 1fr; } }
+  .tabla-ev { width: 100%; border-collapse: collapse; background: var(--papel); border-radius: var(--radio); overflow: hidden; font-size: 15px; }
+  .tabla-ev th, .tabla-ev td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  .tabla-ev th { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--tinta-2); }
+  .tabla-ev td.corto { white-space: nowrap; }
+  .tabla-ev td.largo { word-break: break-all; color: var(--tinta-2); }
+  @media (max-width: 640px) { .tabla-ev .solo-ancho { display: none; } }
 </style>
 </head>
 <body>
@@ -286,6 +309,7 @@
   </div>
   <span class="barra__usuario" id="usuario"></span>
   <button class="barra__btn" id="actualizar" type="button">Actualizar</button>
+  <button class="barra__btn" id="excel" type="button" title="Descargar todo en un Excel">Excel</button>
   <button class="barra__btn" id="abrir-cambio" type="button">Contraseña</button>
   <button class="barra__btn" id="salir" type="button">Salir</button>
 </header>
@@ -295,6 +319,9 @@
   <button type="button" role="tab" data-pestana="solicitudes" aria-selected="false">Solicitudes <span class="globo" id="globo-nuevas" hidden></span></button>
   <button type="button" role="tab" data-pestana="presupuesto" aria-selected="false">Presupuesto</button>
   <button type="button" role="tab" data-pestana="ventas" aria-selected="false">Ventas</button>
+  <button type="button" role="tab" data-pestana="llamadas" aria-selected="false">Llamadas</button>
+  <button type="button" role="tab" data-pestana="trabajo" aria-selected="false">Trabajo</button>
+  <button type="button" role="tab" data-pestana="eventos" aria-selected="false">Eventos</button>
 </nav>
 
 <main>
@@ -311,6 +338,18 @@
   </section>
   <section id="p-presupuesto" hidden></section>
   <section id="p-ventas" hidden></section>
+  <section id="p-llamadas" hidden>
+    <h1>Llamadas</h1>
+    <div id="ll-cifras"></div>
+    <div class="acciones" style="margin:16px 0"><button type="button" class="btn" data-llamada="">+ Apuntar llamada</button></div>
+    <div class="filtros">
+      <input type="search" id="ll-buscar" placeholder="Buscar local, zona, teléfono o notas" aria-label="Buscar llamadas">
+      <select id="ll-filtro" aria-label="Filtrar por resultado"></select>
+    </div>
+    <div class="lista" id="ll-lista"></div>
+  </section>
+  <section id="p-trabajo" hidden></section>
+  <section id="p-eventos" hidden></section>
 </main>
 </div>
 
@@ -341,6 +380,8 @@ const E = {
   pestana: 'resumen',
   filtro: '',
   busqueda: '',
+  llFiltro: '',
+  llBusqueda: '',
   presu: { numero: '', lineas: [], validez: 30, texto: '' }
 };
 
@@ -630,6 +671,9 @@ function pintarTodo() {
   pintarSolicitudes();
   pintarPresupuesto();
   pintarVentas();
+  pintarLlamadas();
+  pintarTrabajo();
+  pintarEventos();
   mostrarPestana(E.pestana);
 }
 
@@ -638,7 +682,7 @@ function mostrarPestana(nombre) {
   document.querySelectorAll('.pestanas button').forEach(function (b) {
     b.setAttribute('aria-selected', b.dataset.pestana === nombre ? 'true' : 'false');
   });
-  ['resumen', 'solicitudes', 'presupuesto', 'ventas'].forEach(function (p) {
+  ['resumen', 'solicitudes', 'presupuesto', 'ventas', 'llamadas', 'trabajo', 'eventos'].forEach(function (p) {
     $('#p-' + p).hidden = !E.datos || p !== nombre;
   });
 }
@@ -1063,6 +1107,215 @@ function pintarVentas() {
     lista;
 }
 
+// ── 5. Llamadas ──────────────────────────────────────────────────────
+// Registro de las llamadas a bares: quién llamó, qué dijeron y cuándo volver.
+
+function hoyISO() {
+  return new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' }); // aaaa-mm-dd
+}
+function isoDe(ms) {
+  return ms ? new Date(ms).toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' }) : '';
+}
+function chipResultado(r) {
+  const i = (E.datos.resultados || []).indexOf(r);
+  return '<span class="chip chip--r' + (i < 0 ? 0 : i) + '">' + esc(r || '—') + '</span>';
+}
+
+function pintarLlamadas() {
+  const ll = E.datos.llamadas || [];
+  const hoy = hoyISO();
+  const deHoy = ll.filter(function (l) { return isoDe(l.fecha) === hoy; }).length;
+  const interesados = ll.filter(function (l) { return ['Interesado', 'Maqueta pedida', 'Cliente'].indexOf(l.resultado) !== -1; }).length;
+  const toca = ll.filter(function (l) {
+    return l.fechaProxima && isoDe(l.fechaProxima) <= hoy && ['No interesa', 'Cliente'].indexOf(l.resultado) === -1;
+  }).length;
+  $('#ll-cifras').innerHTML = '<div class="cifras">' +
+    cifra('Hoy', deHoy, deHoy === 1 ? 'llamada' : 'llamadas', 'azul') +
+    cifra('Total', ll.length, 'llamadas apuntadas') +
+    cifra('Interesados', interesados, 'interesado, maqueta o cliente', 'negra') +
+    cifra('Toca volver a llamar', toca, 'con fecha de hoy o anterior') +
+    '</div>';
+
+  const sel = $('#ll-filtro');
+  const cuenta = {};
+  ll.forEach(function (l) { cuenta[l.resultado] = (cuenta[l.resultado] || 0) + 1; });
+  sel.innerHTML = '<option value="">Todos los resultados (' + ll.length + ')</option>' +
+    '<option value="__toca">Toca volver a llamar (' + toca + ')</option>' +
+    (E.datos.resultados || []).map(function (r) {
+      return '<option value="' + esc(r) + '">' + esc(r) + ' (' + (cuenta[r] || 0) + ')</option>';
+    }).join('');
+  sel.value = E.llFiltro;
+
+  const q = E.llBusqueda.trim().toLowerCase();
+  const lista = ll.filter(function (l) {
+    if (E.llFiltro === '__toca') {
+      if (!(l.fechaProxima && isoDe(l.fechaProxima) <= hoy && ['No interesa', 'Cliente'].indexOf(l.resultado) === -1)) return false;
+    } else if (E.llFiltro && l.resultado !== E.llFiltro) return false;
+    return !q || [l.local, l.zona, l.telefono, l.tipo, l.notas, l.proxima].join(' ').toLowerCase().indexOf(q) !== -1;
+  });
+  $('#ll-lista').innerHTML = !ll.length
+    ? '<div class="vacio">Aún no hay llamadas. Pulsa «+ Apuntar llamada» después de cada una.</div>'
+    : !lista.length ? '<div class="vacio">Ninguna llamada coincide con el filtro.</div>'
+    : lista.map(function (l) {
+      return '<button type="button" class="reg" data-llamada="' + esc(l.id) + '">' +
+        '<span class="reg__titulo">' + esc(l.local) + '</span>' + chipResultado(l.resultado) +
+        '<span class="reg__meta">' + fecha(l.fecha, true) + ' · ' + esc(l.quien) +
+        (l.zona ? ' · ' + esc(l.zona) : '') + (l.telefono ? ' · ' + esc(l.telefono) : '') +
+        (l.fechaProxima ? ' · <strong>Volver: ' + fecha(l.fechaProxima) + '</strong>' : '') +
+        (l.proxima ? ' — ' + esc(l.proxima) : '') + '</span>' +
+        '</button>';
+    }).join('');
+}
+
+function abrirLlamada(id) {
+  const l = id ? (E.datos.llamadas || []).find(function (x) { return x.id === id; }) : null;
+  if (id && !l) return;
+  const v = l || { local: '', telefono: '', zona: '', tipo: '', resultado: '', proxima: '', fechaProxima: null, notas: '' };
+  const opciones = '<option value="">Elige…</option>' + (E.datos.resultados || []).map(function (r) {
+    return '<option' + (r === v.resultado ? ' selected' : '') + '>' + esc(r) + '</option>';
+  }).join('');
+  $('#ficha-caja').innerHTML =
+    '<button type="button" class="capa__cerrar" data-cerrar aria-label="Cerrar">×</button>' +
+    '<div class="rotulo">' + (l ? 'Llamada · ' + fecha(l.fecha, true) + ' · ' + esc(l.quien) : 'Nueva llamada') + '</div>' +
+    '<h1 id="ficha-titulo" style="margin:6px 48px 4px 0">' + (l ? esc(l.local) : 'Apuntar llamada') + '</h1>' +
+    (l && l.telefono ? '<div class="contacto" style="margin-top:10px"><a class="btn btn--peque" href="' + esc(enlaceTel(l.telefono)) + '">Llamar</a>' +
+      '<a class="btn btn--peque" href="' + esc(enlaceWhatsApp(l.telefono)) + '" target="_blank" rel="noopener">WhatsApp</a></div>' : '') +
+    '<label for="ll-local">Local</label><input type="text" id="ll-local" value="' + esc(v.local) + '" placeholder="Ej.: Bar Manolo">' +
+    '<div class="tres">' +
+      '<div><label for="ll-tel">Teléfono</label><input type="text" inputmode="tel" id="ll-tel" value="' + esc(v.telefono) + '"></div>' +
+      '<div><label for="ll-zona">Zona</label><input type="text" id="ll-zona" value="' + esc(v.zona) + '" placeholder="Ej.: Gràcia"></div>' +
+      '<div><label for="ll-tipo">Tipo de local</label><input type="text" id="ll-tipo" value="' + esc(v.tipo) + '" placeholder="Bar, restaurante, cafetería…"></div>' +
+      '<div><label for="ll-res">Resultado</label><select id="ll-res">' + opciones + '</select></div>' +
+      '<div><label for="ll-prox">Próxima acción</label><input type="text" id="ll-prox" value="' + esc(v.proxima) + '" placeholder="Ej.: llamar al dueño por la tarde"></div>' +
+      '<div><label for="ll-fprox">Fecha para volver</label><input type="date" id="ll-fprox" value="' + esc(isoDe(v.fechaProxima)) + '" style="width:100%;min-height:48px;border:2px solid var(--linea);border-radius:10px;padding:8px 12px"></div>' +
+    '</div>' +
+    '<label for="ll-notas">Notas</label><textarea id="ll-notas" placeholder="Qué os han dicho, con quién habéis hablado…">' + esc(v.notas) + '</textarea>' +
+    '<div class="acciones">' +
+      '<button type="button" class="btn" id="ll-guardar" data-id="' + esc(l ? l.id : '') + '">Guardar</button>' +
+      '<button type="button" class="btn btn--linea" data-cerrar>Cancelar</button>' +
+    '</div>';
+  $('#ficha').hidden = false;
+  document.body.style.overflow = 'hidden';
+  if (!l) $('#ll-local').focus();
+}
+
+async function guardarLlamada(id) {
+  const btn = $('#ll-guardar');
+  btn.disabled = true; btn.textContent = 'Guardando…';
+  try {
+    aplicar(await pedir('guardarLlamada', {
+      id: id, local: $('#ll-local').value, telefono: $('#ll-tel').value, zona: $('#ll-zona').value,
+      tipo: $('#ll-tipo').value, resultado: $('#ll-res').value, proxima: $('#ll-prox').value,
+      fechaProxima: $('#ll-fprox').value, notas: $('#ll-notas').value
+    }));
+    cerrarFicha();
+    avisar('Llamada guardada.');
+  } catch (err) {
+    avisar(mensajeError(err), true);
+    btn.disabled = false; btn.textContent = 'Guardar';
+  }
+}
+
+// ── 6. Trabajo ───────────────────────────────────────────────────────
+// Lo que hace cada uno cada día. El informe de la noche lo incluye.
+
+function pintarTrabajo() {
+  const t = E.datos.trabajo || [];
+  const semana = Date.now() - 7 * 86400000;
+  const horas = function (quien, desde) {
+    return t.filter(function (x) { return (!quien || x.quien === quien) && (x.fecha || 0) >= desde; })
+      .reduce(function (a, x) { return a + x.horas; }, 0);
+  };
+  const hoy = new Date(hoyISO() + 'T00:00:00').getTime();
+  const n = function (h) { return String(Math.round(h * 10) / 10).replace('.', ','); };
+  $('#p-trabajo').innerHTML =
+    '<h1>Trabajo</h1>' +
+    '<div class="cifras">' +
+      cifra('Horas hoy', n(horas('', hoy)), 'entre los dos', 'azul') +
+      cifra('Horas 7 días', n(horas('', semana)), 'Eric ' + n(horas('eric', semana)) + ' · Leman ' + n(horas('leman', semana)), 'negra') +
+    '</div>' +
+    '<div class="caja" style="margin-top:16px">' +
+      '<div class="rotulo">Apuntar lo que has hecho</div>' +
+      '<div class="dos-campos">' +
+        '<div><label for="tr-fecha">Día</label><input type="date" id="tr-fecha" value="' + hoyISO() + '" style="width:100%;min-height:48px;border:2px solid var(--linea);border-radius:10px;padding:8px 12px"></div>' +
+        '<div><label for="tr-horas">Horas</label><input type="text" inputmode="decimal" id="tr-horas" placeholder="Ej.: 2,5"></div>' +
+      '</div>' +
+      '<label for="tr-que">Qué has hecho</label><textarea id="tr-que" style="min-height:80px" placeholder="Ej.: 25 llamadas en Gràcia, 3 interesados"></textarea>' +
+      '<div class="acciones"><button type="button" class="btn" id="tr-guardar">Guardar</button></div>' +
+    '</div>' +
+    '<h2>Registro</h2>' +
+    (t.length ? '<div class="lista">' + t.map(function (x) {
+      return '<div class="reg"><span class="reg__titulo">' + esc(x.que) + '</span>' +
+        '<span class="reg__lado">' + (x.horas ? n(x.horas) + ' h' : '') + '</span>' +
+        '<span class="reg__meta">' + fecha(x.fecha) + ' · ' + esc(x.quien) + '</span></div>';
+    }).join('') + '</div>' : '<div class="vacio">Aún no hay nada apuntado.</div>');
+}
+
+async function guardarTrabajo() {
+  const btn = $('#tr-guardar');
+  btn.disabled = true; btn.textContent = 'Guardando…';
+  try {
+    aplicar(await pedir('guardarTrabajo', { fecha: $('#tr-fecha').value, horas: $('#tr-horas').value, que: $('#tr-que').value }));
+    avisar('Apuntado.');
+  } catch (err) {
+    avisar(mensajeError(err), true);
+    btn.disabled = false; btn.textContent = 'Guardar';
+  }
+}
+
+// ── 7. Eventos de la web ─────────────────────────────────────────────
+
+function pintarEventos() {
+  const ev = E.datos.eventos || [];
+  $('#p-eventos').innerHTML =
+    '<h1>Eventos de la web</h1>' +
+    '<p class="suave">Los 200 últimos: visitas y clics. Solo cuentan quienes aceptan las estadísticas en el aviso de cookies. Todos están en el Excel.</p>' +
+    (ev.length ? '<table class="tabla-ev"><thead><tr><th>Cuándo</th><th>Qué</th><th class="solo-ancho">Página</th><th class="solo-ancho">Viene de</th></tr></thead><tbody>' +
+      ev.map(function (e) {
+        return '<tr><td class="corto">' + fecha(e.fecha, true) + '</td><td>' + esc(e.evento === 'visita' ? 'Visita' : (NOMBRES_EVENTO[e.evento] || e.evento)) + '</td>' +
+          '<td class="largo solo-ancho">' + esc(e.pagina) + '</td><td class="largo solo-ancho">' + esc(e.referrer || '—') + '</td></tr>';
+      }).join('') + '</tbody></table>'
+      : '<div class="vacio">Aún no hay eventos.</div>');
+}
+
+// ── 8. Excel ─────────────────────────────────────────────────────────
+// Descarga todas las pestañas de la hoja en un .xlsx. La librería (SheetJS)
+// solo se carga al pulsar el botón.
+
+function cargarScript(src) {
+  return new Promise(function (ok, ko) {
+    const s = document.createElement('script');
+    s.src = src; s.onload = ok; s.onerror = function () { ko(new Error('No se pudo cargar la librería de Excel.')); };
+    document.head.appendChild(s);
+  });
+}
+
+async function descargarExcel() {
+  const btn = $('#excel');
+  btn.disabled = true; btn.textContent = 'Preparando…';
+  try {
+    const [hojas] = await Promise.all([
+      pedir('exportarTodo'),
+      window.XLSX ? null : cargarScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js')
+    ]);
+    const libro = XLSX.utils.book_new();
+    hojas.forEach(function (h) {
+      const ws = XLSX.utils.aoa_to_sheet(h.filas.length ? h.filas : [['(vacía)']]);
+      ws['!cols'] = (h.filas[0] || []).map(function (_, i) {
+        const ancho = h.filas.slice(0, 200).reduce(function (m, f) { return Math.max(m, String(f[i] || '').length); }, 6);
+        return { wch: Math.min(60, ancho + 2) };
+      });
+      XLSX.utils.book_append_sheet(libro, ws, h.nombre);
+    });
+    XLSX.writeFile(libro, 'Nudo - Registro ' + hoyISO() + '.xlsx');
+    avisar('Excel descargado.');
+  } catch (err) {
+    avisar(mensajeError(err), true);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Excel';
+  }
+}
+
 // ── Eventos de la página ─────────────────────────────────────────────
 // Un único listener por tipo, delegado: el HTML se repinta entero a menudo
 // y así no hay que volver a enganchar nada.
@@ -1081,6 +1334,10 @@ document.addEventListener('click', function (ev) {
   if (t.dataset.presupuestar) { prepararPresupuesto(t.dataset.presupuestar); return; }
   if (t.id === 'f-guardar') { guardarFicha(t.dataset.numero); return; }
   if (t.id === 'actualizar') { cargar(); return; }
+  if (t.id === 'excel') { descargarExcel(); return; }
+  if (t.dataset.llamada !== undefined) { abrirLlamada(t.dataset.llamada); return; }
+  if (t.id === 'll-guardar') { guardarLlamada(t.dataset.id); return; }
+  if (t.id === 'tr-guardar') { guardarTrabajo(); return; }
   if (t.id === 'salir') { salir(); return; }
   if (t.id === 'abrir-cambio') { mostrarCambio(false); return; }
   if (t.id === 'c-cancelar') {
@@ -1109,6 +1366,7 @@ document.addEventListener('click', function (ev) {
 document.addEventListener('input', function (ev) {
   const t = ev.target;
   if (t.id === 'buscar') { E.busqueda = t.value; pintarSolicitudes(); return; }
+  if (t.id === 'll-buscar') { E.llBusqueda = t.value; pintarLlamadas(); return; }
   if (t.id === 'pr-validez') { E.presu.validez = t.value; return; }
   if (t.id === 'pr-texto') { E.presu.texto = t.value; return; }
   const fila = t.closest('[data-linea]');
@@ -1125,6 +1383,7 @@ document.addEventListener('input', function (ev) {
 document.addEventListener('change', function (ev) {
   const t = ev.target;
   if (t.id === 'filtro-estado') { E.filtro = t.value; pintarSolicitudes(); return; }
+  if (t.id === 'll-filtro') { E.llFiltro = t.value; pintarLlamadas(); return; }
   if (t.id === 'pr-sol') {
     if (t.value) prepararPresupuesto(t.value);
     else { E.presu.numero = ''; pintarPresupuesto(); }
