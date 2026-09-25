@@ -21,11 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://nudodesign.es/nudo-og.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- La fuente llega sin bloquear: el texto sale ya con la del sistema y cambia a Inter al cargar -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+<!-- Inter (Google Fonts) solo se carga si la persona lo acepta en el aviso de cookies: Google recibe la IP -->
 
 <style>
 /* ==========================================================================
@@ -1359,6 +1355,20 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 @media (max-width:760px){
   .nubes1{ display:none; }
 }
+
+/* Aviso de cookies: grande y claro, aceptar y rechazar con el mismo peso */
+.galleta{ max-width:460px; }
+.galleta b{ font-size:1.15rem; }
+.galleta p{ font-size:1rem; line-height:1.5; color:rgba(255,255,255,.9); }
+.galleta .btn{ font-size:1rem; padding:13px 18px; flex:1 1 110px; }
+.galleta__mas{ flex:none; display:inline; padding:0; font-size:1rem; color:#fff; }
+.galleta__opciones{ display:grid; gap:10px; margin-top:14px; }
+.galleta__op{ display:flex; gap:10px; align-items:flex-start; font-size:.98rem; line-height:1.4; color:rgba(255,255,255,.92); cursor:pointer; }
+.galleta__op input{ width:22px; height:22px; flex:none; margin-top:1px; accent-color:var(--oro); }
+@media (max-width:560px){ .galleta{ left:12px; right:12px; bottom:12px; max-width:none; } }
+.legalov__indice{ margin:4px 0 8px; font-size:.98rem; }
+.legalov__indice a{ color:var(--brasa); font-weight:600; }
+.legalov ul li{ margin:4px 0; }
 </style>
 
 
@@ -1634,66 +1644,99 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <button class="legalov__x" type="button" data-cierra-legal aria-label="Cerrar">&times;</button>
 
     <h3 id="legalTit">Aviso legal, privacidad y cookies</h3>
-    <p class="legalov__fecha">Última actualización: 24 de septiembre de 2026</p>
+    <p class="legalov__fecha">Última actualización: 25 de septiembre de 2026</p>
+    <p class="legalov__indice"><a href="#legalAviso" data-salta>Aviso legal</a> · <a href="#legalPrivacidad" data-salta>Privacidad</a> · <a href="#legalCookies" data-salta>Cookies</a> · <a href="#legalCondiciones" data-salta>Condiciones</a></p>
 
-    <h4>Quiénes somos</h4>
-    <p>Titular: Leman Cerrillo. Nombre comercial: Nudo. Correo: <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a>. Actividad: diseño y mantenimiento de webs para hostelería.</p>
-
-    <h4>Qué datos tratamos</h4>
-    <p>Si nos escribes o te llamamos: nombre del negocio, persona de contacto, teléfono, correo y dirección del local, para poder contactar contigo y prepararte una propuesta. La base legal es tu consentimiento cuando escribes tú, y nuestro interés legítimo en ofrecer servicios a negocios cuando llamamos nosotros a partir de datos profesionales publicados. Pídenos que dejemos de contactarte y lo hacemos al momento.</p>
-    <p>Si nos pides presupuesto desde el formulario: tu nombre, el nombre de tu local, tu correo, tu teléfono y lo que nos cuentes, para prepararte el presupuesto y responderte. Se guardan en una hoja de cálculo privada de Google a la que solo accedemos nosotros. La base legal es tu consentimiento al enviarlo.</p>
-    <p>Si nos contratas: además los datos de facturación y de pago, y el material de tu web (textos, carta, logotipo y fotos), para ejecutar el contrato y cumplir las obligaciones fiscales.</p>
-
-    <h4>Cuánto los guardamos</h4>
+    <!-- ============ 1. AVISO LEGAL (Ley 34/2002, LSSI, art. 10) ============ -->
+    <h4 id="legalAviso">1. Aviso legal</h4>
+    <p>Esta web, nudodesign.es, es de:</p>
     <ul>
-      <li>Contactos que no llegan a cliente: un año desde el último contacto.</li>
-      <li>Clientes: mientras dure la relación y después lo que exija la ley fiscal, por lo general seis años.</li>
-      <li>Fotos: mientras dure la relación y hasta un año después, salvo que pidas borrarlos antes.</li>
+      <li><strong>Titular:</strong> Leman Cerrillo, profesional autónoma.</li>
+      <li><strong>NIF:</strong> 47119434R</li>
+      <li><strong>Domicilio:</strong> Avinguda Jaume I, 08100 Mollet del Vallès (Barcelona)</li>
+      <li><strong>Nombre comercial:</strong> Nudo</li>
+      <li><strong>Correo:</strong> <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a> · <strong>Teléfono y WhatsApp:</strong> <a href="tel:+34722740211">722 74 02 11</a></li>
+      <li><strong>Actividad:</strong> diseño, publicación y mantenimiento de páginas web para negocios de hostelería.</li>
+    </ul>
+    <p>Los textos, el diseño, el logotipo y el código de esta web son de Nudo o se usan con permiso. No se pueden copiar ni reutilizar con fines comerciales sin autorización. Las fotos de los ejemplos son de bancos de imágenes libres (Unsplash) y los locales de los ejemplos son inventados.</p>
+    <p>Intentamos que todo lo que publicamos sea correcto y esté al día, pero no respondemos de los errores puntuales ni de las interrupciones del servicio que no dependan de nosotros. Si enlazamos a otras webs (WhatsApp, Calendly, Google…), no somos responsables de su contenido.</p>
+
+    <!-- ============ 2. PRIVACIDAD (RGPD art. 13 y LOPDGDD) ============ -->
+    <h4 id="legalPrivacidad">2. Privacidad: qué hacemos con tus datos</h4>
+    <p><strong>Responsable:</strong> Leman Cerrillo (Nudo), con los datos de contacto de arriba. Para cualquier cosa sobre tus datos, escribe a <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a>.</p>
+
+    <p><strong>Qué datos, para qué y con qué base legal:</strong></p>
+    <ul>
+      <li><strong>Si nos pides presupuesto desde el formulario:</strong> nombre, nombre del local, correo, teléfono y lo que nos cuentes. Los usamos para prepararte el presupuesto y responderte. Base legal: tu solicitud, es decir, medidas precontractuales que tú pides (art. 6.1.b RGPD).</li>
+      <li><strong>Si nos escribes por WhatsApp o correo, o nos llamas:</strong> los datos que nos des, para atenderte. Base legal: tu consentimiento al contactarnos (art. 6.1.a) y, si pides un presupuesto, las medidas precontractuales (art. 6.1.b).</li>
+      <li><strong>Si te llamamos nosotros:</strong> solo a negocios, usando los datos profesionales que el propio negocio ha hecho públicos (nombre del local, teléfono, dirección), para ofrecerte nuestros servicios. Base legal: interés legítimo en la prospección comercial entre empresas (art. 6.1.f). Si nos dices que no te volvamos a llamar, no lo hacemos y apuntamos tu número para no llamarte más.</li>
+      <li><strong>Si nos contratas:</strong> además los datos de facturación y pago y el material de tu web (carta, textos, logotipo, fotos), para hacer y mantener tu web y cumplir con Hacienda. Base legal: el contrato (art. 6.1.b) y las obligaciones legales (art. 6.1.c).</li>
+      <li><strong>Estadísticas de la web:</strong> solo si las aceptas en el aviso de cookies, contamos visitas y clics en los botones de forma anónima: sin tu IP, sin cookies y sin nada que te identifique. Base legal: tu consentimiento (art. 6.1.a).</li>
+    </ul>
+    <p>No tomamos decisiones automatizadas sobre ti ni hacemos perfiles. No vendemos ni cedemos tus datos a nadie para publicidad. Nuestros servicios son para negocios y no están dirigidos a menores de 14 años.</p>
+
+    <p><strong>Cuánto tiempo los guardamos:</strong></p>
+    <ul>
+      <li>Solicitudes y contactos que no llegan a ser clientes: un año desde el último contacto; después se borran.</li>
+      <li>Clientes: mientras dure la relación y, después, el tiempo que exige la ley (en general, seis años para la documentación fiscal y mercantil).</li>
+      <li>Fotos y material de tu web: mientras dure la relación y hasta un año después, salvo que pidas borrarlos antes.</li>
+      <li>Si nos pides que no te llamemos: guardamos solo tu número en una lista de exclusión, para cumplirlo.</li>
     </ul>
 
-    <h4>Con quién los compartimos</h4>
-    <p>No vendemos ni cedemos datos para publicidad. Solo los tratan, por cuenta nuestra, los proveedores que necesitamos: GitHub (alojamiento de la web), DonDominio (registro de dominios), Zoho (correo), Calendly (reserva de llamadas), WhatsApp (mensajería), Google (formulario de presupuesto y contador de visitas), nuestra gestoría y Google si nos autorizas a llevar tu ficha. Si alguno está fuera del Espacio Económico Europeo, la transferencia se ampara en cláusulas contractuales tipo.</p>
+    <p><strong>Quién más los trata (por encargo nuestro):</strong> solo los proveedores que necesitamos para trabajar, con contrato de encargo de tratamiento:</p>
+    <ul>
+      <li>Google (hoja de cálculo privada donde se guardan las solicitudes, envío de correos y tipografía de la web si la aceptas).</li>
+      <li>GitHub (alojamiento de esta web) y DonDominio (dominio).</li>
+      <li>Zoho (correo electrónico).</li>
+      <li>WhatsApp / Meta (mensajería), si nos escribes por ahí.</li>
+      <li>Calendly (reserva de llamadas), si reservas una.</li>
+      <li>Stripe (cobros con tarjeta), si nos contratas y pagas con tarjeta.</li>
+      <li>Nuestra gestoría, para la contabilidad y los impuestos.</li>
+    </ul>
+    <p>Algunos de ellos (Google, GitHub, Meta, Calendly, Stripe) pueden tratar datos en Estados Unidos. Esas transferencias están amparadas por el Marco de Privacidad de Datos UE-EE. UU. o por las cláusulas contractuales tipo de la Comisión Europea.</p>
 
-    <h4>Tus derechos</h4>
-    <p>Puedes pedir acceso, rectificación, supresión, oposición, limitación y portabilidad, y retirar tu consentimiento, escribiendo a <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a>. Respondemos en un mes como máximo y no hace falta que justifiques nada. Si no te atendemos bien, puedes reclamar ante la Agencia Española de Protección de Datos en aepd.es.</p>
+    <p><strong>Tus derechos:</strong> puedes pedirnos acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad, y retirar tu consentimiento cuando quieras, escribiendo a <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a>. Te respondemos en un mes como máximo. Si crees que no hemos tratado bien tus datos, puedes reclamar ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener">aepd.es</a>).</p>
 
-    <h4 id="legalCookies">Cookies</h4>
-    <p><strong>Esta web no instala cookies por sí misma.</strong> Contamos las visitas y los clics en los botones de forma anónima, sin cookies y sin guardar tu dirección IP ni nada que te identifique, solo para saber qué funciona. No hay píxeles ni rastreadores de publicidad.</p>
-    <p>Hay una excepción: si eliges reservar una llamada, se abre el calendario de Calendly, y Calendly puede usar sus propias cookies técnicas para que la reserva funcione. Solo se carga si tú lo abres. Si prefieres evitarlo, escríbenos por WhatsApp o a hola@nudodesign.es. Las fuentes de letra se cargan desde Google Fonts, que recibe la dirección IP de tu navegador para servirlas.</p>
-    <p>Lo único que se guarda es un dato técnico en tu propio navegador para recordar que ya has visto la animación de entrada y no repetírtela, y para no contar dos veces tu visita. No sale de tu dispositivo, no nos llega, no te identifica y se borra al cerrar la pestaña. Según la normativa española es una finalidad técnica exenta de consentimiento.</p>
-    <p>Si algún día añadimos algo que use cookies, te pediremos permiso antes de activarlo, y rechazar será tan fácil como aceptar.</p>
+    <!-- ============ 3. COOKIES (LSSI art. 22.2 y guía de la AEPD) ============ -->
+    <h4 id="legalCookies">3. Cookies y almacenamiento en tu navegador</h4>
+    <p><strong>Esta web no instala cookies publicitarias ni de seguimiento.</strong> Al entrar te preguntamos qué quieres permitir, y rechazar es igual de fácil que aceptar. Puedes cambiar tu elección cuando quieras con el botón «Configurar cookies» del pie de la página.</p>
+    <ul>
+      <li><strong>Técnicas (siempre activas):</strong> un dato en tu navegador que recuerda tu elección de cookies (se guarda hasta que la cambies o borres los datos del navegador) y otro que recuerda que ya has visto la animación de entrada (se borra al cerrar la pestaña). Son necesarios para que la web funcione como pides y no requieren consentimiento.</li>
+      <li><strong>Estadísticas (solo si las aceptas):</strong> contamos las visitas y los clics en los botones principales para saber qué funciona. No usan cookies ni guardan tu IP ni nada que te identifique; solo se guarda en tu navegador, durante la visita, un dato para no contar dos veces la misma visita. Los recuentos se guardan en una hoja de Google privada.</li>
+      <li><strong>Tipografía de Google (solo si la aceptas):</strong> la letra de la web se descarga de Google Fonts, y para enviártela Google recibe la dirección IP de tu navegador. Si no la aceptas, la web se ve igual de bien con la letra de tu dispositivo.</li>
+    </ul>
+    <p>Si pulsas en WhatsApp, Calendly o Google Maps, sales a esas webs y se aplican sus propias políticas de cookies.</p>
 
-    <h4>Servicios y precios</h4>
-    <p>Tu web desde 249 €, un solo pago, que se abona íntegro al aceptar la maqueta. Mantenimiento desde 39 €/mes, opcional y sin permanencia. El precio de la web incluye dominio y alojamiento durante el primer año. Precios sin IVA: al importe hay que sumarle el 21 %. Pueden cambiar para nuevas contrataciones; a quien ya es cliente se le respeta el precio mientras siga dado de alta.</p>
-
-    <h4>La garantía</h4>
-    <p>Antes de cobrarte nada te enseñamos una maqueta de tu local: una web de verdad, que puedes abrir en el móvil y tocar. Si no te convence, ahí se queda y no nos debes nada. El pago se hace cuando aceptas esa maqueta y nos encargas la web definitiva; desde ese momento el importe no se devuelve.</p>
-    <p>Lo que sí garantizamos es que la web final te convenza: el precio incluye dos rondas de cambios sobre ella y, si después de esas sigue habiendo algo que no encaja, lo hablamos y lo corregimos. La garantía no cubre cuotas de mantenimiento ya facturadas ni extras ya realizados.</p>
-
-    <h4>El mantenimiento</h4>
-    <p>Sin permanencia. Se factura mes a mes por adelantado y puedes darte de baja cuando quieras, avisando antes de la siguiente renovación; el mes ya facturado no se devuelve. Si te das de baja, te damos el control del dominio, que ya está a tu nombre, sin ningún coste, y te entregamos tus archivos en quince días. A partir de ese momento el dominio y el alojamiento corren de tu cuenta.</p>
-
-    <h4>Las fotos de tu local</h4>
-    <p>Las fotos las haces tú siguiendo nuestra guía, y son tuyas para tu web y tus redes, sin límite. Al mandárnoslas nos autorizas a publicarlas en tu web y a usarlas como muestra de nuestro trabajo, salvo que nos digas que no. Si aparece personal o clientela identificable, es responsabilidad tuya contar con su autorización.</p>
-
-    <h4>De quién es la web</h4>
-    <p>Tuyo: el dominio, los textos, tu marca, tus fotos, y el diseño de tu página una vez pagada. Nuestro: el sistema y el código base que reutilizamos entre proyectos, y la marca Nudo.</p>
-
-    <h4>Responsabilidad</h4>
-    <p>Ponemos todos los medios razonables para que tu web esté disponible, pero dependemos de proveedores de alojamiento, registradores y servicios de terceros. No garantizamos resultados comerciales concretos: una web bien hecha ayuda a que te encuentren, pero no podemos prometer un número de visitas o de reservas.</p>
-
-    <h4>Ley aplicable</h4>
-    <p>Se aplica la legislación española, en particular el Reglamento (UE) 2016/679, la Ley Orgánica 3/2018 y la Ley 34/2002. Nuestros servicios se dirigen a profesionales, no a consumidores. Para cualquier controversia, las partes se someten a los juzgados y tribunales del domicilio del titular, salvo que la ley imponga otro fuero.</p>
+    <!-- ============ 4. CONDICIONES (resumen; el contrato es la Confirmación de pedido) ============ -->
+    <h4 id="legalCondiciones">4. Condiciones del servicio (resumen)</h4>
+    <p>Nuestros servicios son para profesionales y empresas, no para consumidores. Lo que manda en cada encargo es el presupuesto aceptado y la confirmación de pedido que firmamos contigo; esto es un resumen.</p>
+    <ul>
+      <li><strong>Precio:</strong> el del presupuesto que te enviamos. Como referencia, la web parte de 249 € (pago único) y el mantenimiento de 39 €/mes, opcional y sin permanencia. A estos importes hay que sumarles el IVA (21 %). El precio de la web incluye dominio y alojamiento durante el primer año.</li>
+      <li><strong>La garantía:</strong> antes de cobrarte nada te enseñamos una maqueta de tu local. Si no te convence, no nos debes nada. Se paga al aceptar la maqueta y encargarnos la web definitiva; desde ese momento el importe no se devuelve. La web final incluye dos rondas de cambios.</li>
+      <li><strong>Mantenimiento:</strong> se paga mes a mes por adelantado y puedes darte de baja cuando quieras, avisando antes de la siguiente renovación; el mes ya pagado no se devuelve. Si te das de baja, te damos el control del dominio, que está a tu nombre, y tus archivos en quince días.</li>
+      <li><strong>Tus fotos y tu contenido:</strong> son tuyos. Al mandárnoslos nos autorizas a publicarlos en tu web y, salvo que nos digas que no, a enseñarla como ejemplo de nuestro trabajo. Si en las fotos sale personal o clientela reconocible, necesitas su permiso. La carta, los precios y los alérgenos que publiquemos son los que nos mandes; su exactitud es responsabilidad del local (Reglamento UE 1169/2011).</li>
+      <li><strong>De quién es la web:</strong> tuyos son el dominio, tus textos, tu marca, tus fotos y el diseño de tu página una vez pagada. Nuestro es el código base que reutilizamos entre proyectos y la marca Nudo.</li>
+      <li><strong>Responsabilidad:</strong> ponemos los medios razonables para que tu web funcione, pero dependemos de proveedores de alojamiento y dominio. No garantizamos resultados comerciales concretos (visitas o reservas).</li>
+    </ul>
+    <p><strong>Ley aplicable:</strong> legislación española, en particular el Reglamento (UE) 2016/679 (RGPD), la Ley Orgánica 3/2018 (LOPDGDD) y la Ley 34/2002 (LSSI). Para cualquier controversia, las partes se someten a los juzgados y tribunales del domicilio de la titular, salvo que la ley disponga otro fuero.</p>
   </div>
 </div>
 
-<div class="galleta" id="galleta" hidden>
-  <b>Cookies</b>
-  <p>Usamos cookies propias para que la web funcione y, con tu permiso, una analítica para saber cuánta gente nos visita. Rechazarlas no cambia nada de lo que ves.</p>
+<!-- ===================== AVISO DE COOKIES =====================
+     Sale al entrar si aún no has elegido. Aceptar y rechazar pesan lo mismo.
+     Hasta que se acepta: ni estadísticas ni Google Fonts. -->
+<div class="galleta" id="galleta" role="dialog" aria-labelledby="galletaTit" hidden>
+  <b id="galletaTit">Tu privacidad</b>
+  <p>No usamos cookies de publicidad. Con tu permiso, contamos visitas de forma anónima y cargamos la tipografía de Google. <button class="galleta__mas" type="button" data-legal="cookies">Más información</button></p>
+  <div class="galleta__opciones" id="galletaOpciones" hidden>
+    <label class="galleta__op"><input type="checkbox" checked disabled> <span><strong>Técnicas</strong> · necesarias, siempre activas</span></label>
+    <label class="galleta__op"><input type="checkbox" id="galletaEstadisticas"> <span><strong>Estadísticas</strong> · visitas y clics, anónimas y sin cookies</span></label>
+    <label class="galleta__op"><input type="checkbox" id="galletaExternos"> <span><strong>Tipografía de Google</strong> · la letra de la web (Google recibe tu IP)</span></label>
+  </div>
   <div class="galleta__botones">
     <button class="btn galleta__no" type="button" data-cookies="no">Rechazar</button>
-    <button class="btn btn--blanco" type="button" data-cookies="si">Aceptar</button>
-    <button class="galleta__mas" type="button" data-legal="cookies">Ver la política de cookies</button>
+    <button class="btn galleta__no" type="button" data-cookies="config" id="galletaConfig">Configurar</button>
+    <button class="btn btn--blanco" type="button" data-cookies="si" id="galletaSi">Aceptar</button>
   </div>
 </div>
 
@@ -1729,6 +1772,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
         <ul>
           <li><button class="pie__enlace" type="button" data-legal>Aviso legal y privacidad</button></li>
           <li><button class="pie__enlace" type="button" data-legal="cookies">Política de cookies</button></li>
+          <li><button class="pie__enlace" type="button" data-cookies-config>Configurar cookies</button></li>
         </ul>
       </div>
     </div>
@@ -2285,32 +2329,72 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
      que la persona acepta, y rechazar cuesta lo mismo que aceptar.
      ------------------------------------------------------------------ */
   (function(){
-    var ANALITICA = false;              /* <-- el único interruptor */
+    /* COOKIES Y CONSENTIMIENTO (25/09/2026)
+       Al entrar se pregunta. Hasta que se acepta no se cuentan visitas ni se
+       carga Google Fonts. La elección se guarda en este navegador (es un dato
+       técnico, exento de consentimiento) y se cambia con «Configurar cookies». */
+    var CLAVE = 'nudo-consentimiento';
+    var FUENTE = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
+    var caja = Q('galleta'), ops = Q('galletaOpciones'), cEst = Q('galletaEstadisticas'),
+        cExt = Q('galletaExternos'), bSi = Q('galletaSi'), bCfg = Q('galletaConfig');
 
-    var caja = Q('galleta');
-    if (!caja || !ANALITICA) { return; }
-
-    function enciendeAnalitica(){
-      /* Aquí dentro va el script de analítica. Fuera de aquí, en ningún sitio. */
+    function lee(){
+      try { var v = JSON.parse(localStorage.getItem(CLAVE) || 'null'); return (v && v.v === 1) ? v : null; }
+      catch(e){ return null; }
+    }
+    function aplica(c){
+      window.nudoConsentimiento = c;
+      if (c.externos && !document.getElementById('fuenteInter')){
+        var l = document.createElement('link'); l.id = 'fuenteInter'; l.rel = 'stylesheet'; l.href = FUENTE;
+        document.head.appendChild(l);
+      }
+      try { document.dispatchEvent(new CustomEvent('nudo-consentimiento', { detail:c })); } catch(e){}
+    }
+    function cierra(){
+      if (!caja) { return; }
+      caja.classList.remove('se-ve');
+      setTimeout(function(){ caja.hidden = true; ops.hidden = true; bSi.textContent = 'Aceptar'; bCfg.hidden = false; }, 620);
+    }
+    function guarda(est, ext){
+      var c = { v:1, estadisticas:!!est, externos:!!ext, fecha:new Date().toISOString() };
+      try { localStorage.setItem(CLAVE, JSON.stringify(c)); } catch(e){}
+      aplica(c); cierra();
+    }
+    function abre(config){
+      if (!caja) { return; }
+      if (config){
+        var c = lee() || {};
+        cEst.checked = !!c.estadisticas; cExt.checked = !!c.externos;
+        ops.hidden = false; bSi.textContent = 'Guardar'; bCfg.hidden = true;
+      }
+      caja.hidden = false;
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ caja.classList.add('se-ve'); }); });
     }
 
-    var guardado = null;
-    try { guardado = localStorage.getItem('nudo-cookies'); } catch(e){}
-
-    if (guardado === 'si'){ enciendeAnalitica(); return; }
-    if (guardado === 'no'){ return; }
-
-    caja.hidden = false;
-    setTimeout(function(){ caja.classList.add('se-ve'); }, 900);
+    var previo = lee();
+    if (previo) { aplica(previo); }
+    else {
+      window.nudoConsentimiento = { v:0, estadisticas:false, externos:false };
+      /* Si hay cortina de entrada, el aviso sale cuando se levanta */
+      setTimeout(function(){ abre(false); }, document.getElementById('splash') ? 1500 : 500);
+    }
 
     document.addEventListener('click', function(e){
-      var b = e.target.closest ? e.target.closest('[data-cookies]') : null;
+      if (!e.target.closest) { return; }
+      var salta = e.target.closest('[data-salta]');
+      if (salta){                                   /* índice del texto legal */
+        e.preventDefault();
+        var hoja = document.querySelector('.legalov__hoja'), dest = document.querySelector(salta.getAttribute('href'));
+        if (hoja && dest) { hoja.scrollTop = dest.offsetTop - 20; }
+        return;
+      }
+      var b = e.target.closest('[data-cookies],[data-cookies-config]');
       if (!b) { return; }
+      if (b.hasAttribute('data-cookies-config')) { e.preventDefault(); abre(true); return; }
       var r = b.getAttribute('data-cookies');
-      try { localStorage.setItem('nudo-cookies', r); } catch(e){}
-      if (r === 'si') { enciendeAnalitica(); }
-      caja.classList.remove('se-ve');
-      setTimeout(function(){ caja.hidden = true; }, 620);
+      if (r === 'config') { abre(true); }
+      else if (r === 'no') { guarda(false, false); }
+      else if (r === 'si') { if (!ops.hidden) { guarda(cEst.checked, cExt.checked); } else { guarda(true, true); } }
     });
   })();
 
@@ -2502,6 +2586,8 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
   function avisa(evento){
     if (!API_URL) return;
+    /* Solo si la persona ha aceptado las estadísticas en el aviso de cookies */
+    if (!window.nudoConsentimiento || !window.nudoConsentimiento.estadisticas) return;
     try {
       var d = JSON.stringify({ tipo:'evento', evento:evento, pagina:location.pathname, ref:document.referrer || '' });
       if (navigator.sendBeacon) navigator.sendBeacon(API_URL, new Blob([d], { type:'text/plain' }));
@@ -2510,9 +2596,14 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   }
 
   /* Una visita por pestaña, para no contar cada recarga */
-  var contada = false;
-  try { contada = sessionStorage.getItem('nudo-visita') === '1'; sessionStorage.setItem('nudo-visita', '1'); } catch(e){}
-  if (!contada) avisa('visita');
+  function cuentaVisita(){
+    if (!window.nudoConsentimiento || !window.nudoConsentimiento.estadisticas) return;
+    var contada = false;
+    try { contada = sessionStorage.getItem('nudo-visita') === '1'; sessionStorage.setItem('nudo-visita', '1'); } catch(e){}
+    if (!contada) avisa('visita');
+  }
+  cuentaVisita();                                              /* si ya lo había aceptado otro día */
+  document.addEventListener('nudo-consentimiento', cuentaVisita); /* si lo acepta ahora */
 
   document.addEventListener('click', function(e){
     var a = e.target.closest ? e.target.closest('a,button') : null;
