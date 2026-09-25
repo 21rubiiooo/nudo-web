@@ -1,24 +1,1152 @@
-<!doctype html>
+<!-- Copia de NudoDesign/admin/panel/Panel.html para nudodesign.es/admin. Si cambias el panel, cambia los dos. -->
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Panel admin · Nudo</title>
-<!-- Privado: que no salga en Google -->
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0B0B0C">
+<title>Panel admin · Nudo</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0C10'/%3E%3Cpath d='M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26' fill='none' stroke='%231F4FE0' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* El panel vive en Google Apps Script (gratis y con la hoja de cálculo al lado).
-   Esta página solo lo muestra con la dirección de Nudo. El acceso, las
-   contraseñas y los datos los controla el propio panel, no esta página. */
-html,body{ margin:0; height:100%; background:#F3F3F4; }
-iframe{ display:block; width:100%; height:100%; border:0; }
-.cargando{ position:fixed; inset:0; display:grid; place-items:center; font:500 1.05rem/1.4 -apple-system,"Segoe UI",Roboto,Arial,sans-serif; color:#6E6E73; }
+  :root {
+    --brasa: #1F4FE0;
+    --oro: #6E93F5;
+    --tinta: #0B0B0C;
+    --tinta-2: #6E6E73;
+    --papel: #FFFFFF;
+    --cielo-2: #F3F3F4;
+    --linea: #E6E6E8;
+    --radio: 14px;
+    --fuente: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--cielo-2); color: var(--tinta);
+    font-family: var(--fuente); font-size: 17px; line-height: 1.5;
+  }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  a { color: var(--brasa); }
+  [hidden] { display: none !important; }
+
+  /* ── Barra superior ─────────────────────────────────────────── */
+  .barra {
+    background: var(--tinta); color: var(--papel);
+    display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+    position: sticky; top: 0; z-index: 20;
+  }
+  .barra__marca { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 20px; letter-spacing: -.03em; }
+  .barra__marca svg { width: 32px; height: 32px; }
+  .barra__usuario { margin-left: auto; font-size: 14px; color: #c9c9ce; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+  .barra__btn {
+    background: transparent; border: 2px solid #3a3a3f; color: var(--papel);
+    border-radius: 10px; padding: 8px 12px; font-weight: 600; font-size: 15px; cursor: pointer; flex: none;
+  }
+  .barra__btn:hover { border-color: var(--oro); }
+
+  /* ── Pestañas ──────────────────────────────────────────────── */
+  .pestanas {
+    display: flex; gap: 4px; padding: 8px 16px 0; background: var(--papel);
+    border-bottom: 1px solid var(--linea); overflow-x: auto; position: sticky; top: 56px; z-index: 15;
+  }
+  .pestanas button {
+    border: 0; background: none; padding: 12px 14px; font-weight: 700; font-size: 16px; cursor: pointer;
+    color: var(--tinta-2); border-bottom: 3px solid transparent; white-space: nowrap;
+  }
+  .pestanas button[aria-selected="true"] { color: var(--brasa); border-bottom-color: var(--brasa); }
+  .pestanas .globo {
+    display: inline-block; min-width: 22px; padding: 0 6px; margin-left: 4px; border-radius: 99px;
+    background: var(--brasa); color: #fff; font-size: 13px; line-height: 22px; text-align: center;
+  }
+
+  main { max-width: 1120px; margin: 0 auto; padding: 20px 16px 80px; }
+  h1 { font-size: 28px; letter-spacing: -.035em; margin: 4px 0 16px; }
+  h2 { font-size: 20px; letter-spacing: -.02em; margin: 28px 0 12px; }
+  .rotulo { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--tinta-2); }
+  .suave { color: var(--tinta-2); }
+
+  /* ── Tarjetas de cifras ────────────────────────────────────── */
+  /* En el móvil, dos tarjetas por fila: se ve todo sin scroll infinito. */
+  .cifras { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  @media (min-width: 820px) { .cifras { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); } }
+  @media (max-width: 819px) { .cifra { padding: 14px; } .cifra__valor { font-size: 27px; overflow-wrap: anywhere; } }
+  .cifra { background: var(--papel); border-radius: var(--radio); padding: 16px 18px; }
+  .cifra__valor { font-size: 34px; font-weight: 700; letter-spacing: -.04em; line-height: 1.1; margin-top: 6px; }
+  .cifra__nota { font-size: 15px; color: var(--tinta-2); margin-top: 4px; }
+  .cifra--azul { background: var(--brasa); color: #fff; }
+  .cifra--azul .rotulo, .cifra--azul .cifra__nota { color: #dbe3ff; }
+  .cifra--negra { background: var(--tinta); color: #fff; }
+  .cifra--negra .rotulo, .cifra--negra .cifra__nota { color: #b5b5ba; }
+
+  .caja { background: var(--papel); border-radius: var(--radio); padding: 16px 18px; }
+  .clics { list-style: none; margin: 0; padding: 0; }
+  .clics li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--linea); }
+  .clics li:last-child { border-bottom: 0; }
+  .clics strong { font-size: 19px; }
+
+  /* ── Gráfico de barras hecho a mano ────────────────────────── */
+  .grafica { display: flex; align-items: flex-end; gap: 3px; height: 140px; padding-top: 8px; }
+  .grafica__col { flex: 1; height: 100%; display: flex; align-items: flex-end; min-width: 0; }
+  .grafica__barra { width: 100%; border-radius: 4px 4px 0 0; background: var(--brasa); min-height: 2px; }
+  .grafica__barra--vacia { background: var(--linea); }
+  .grafica--negra .grafica__barra { background: var(--tinta); }
+  .grafica__ejes { display: flex; justify-content: space-between; font-size: 13px; color: var(--tinta-2); margin-top: 6px; }
+  .dos { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 820px) { .dos { grid-template-columns: 1fr 1fr; } }
+
+  /* ── Filtros y lista de solicitudes ────────────────────────── */
+  .filtros { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+  .filtros input, .filtros select { flex: 1 1 200px; }
+  input[type="text"], input[type="search"], input[type="number"], input[type="email"], input[type="password"], select, textarea {
+    width: 100%; border: 2px solid var(--linea); border-radius: 10px; padding: 11px 12px;
+    background: var(--papel); font-size: 17px; min-height: 48px;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--brasa); }
+  textarea { min-height: 110px; resize: vertical; }
+  label { display: block; font-weight: 600; margin: 14px 0 6px; }
+
+  .lista { display: grid; gap: 10px; }
+  .fila {
+    display: grid; gap: 4px 12px; text-align: left; width: 100%; cursor: pointer;
+    background: var(--papel); border: 2px solid transparent; border-radius: var(--radio); padding: 14px 16px;
+    grid-template-columns: 1fr auto;
+  }
+  .fila:hover, .fila:focus-visible { border-color: var(--oro); outline: none; }
+  .fila__num { font-weight: 700; color: var(--brasa); }
+  .fila__empresa { font-weight: 700; font-size: 18px; grid-column: 1 / -1; }
+  .fila__nombre { color: var(--tinta-2); }
+  .fila__importe { font-weight: 700; text-align: right; }
+  .fila__fecha { color: var(--tinta-2); font-size: 15px; text-align: right; }
+  .cabecera-lista { display: none; }
+  /* En el móvil, tarjeta: nº y fecha arriba, local grande, y a la derecha
+     el estado con el importe debajo. */
+  .fila .chip { justify-self: end; }
+  .fila__importe { grid-column: 2; }
+  /* En pantalla ancha, la lista se ordena en columnas como una tabla. */
+  @media (min-width: 820px) {
+    .fila, .cabecera-lista {
+      grid-template-columns: 70px 120px 1.3fr 1fr 190px 110px; align-items: center;
+    }
+    .fila__empresa { grid-column: auto; font-size: 17px; }
+    .fila__fecha { text-align: left; }
+    .fila .chip { justify-self: start; }
+    .fila__importe { grid-column: auto; }
+    .cabecera-lista { display: grid; gap: 12px; padding: 0 18px 4px; }
+  }
+
+  .chip {
+    display: inline-block; padding: 4px 10px; border-radius: 99px; font-size: 14px; font-weight: 700; white-space: nowrap;
+    justify-self: start;
+  }
+  .chip--nueva { background: var(--brasa); color: #fff; }
+  .chip--contactado { background: #E3EAFF; color: #16379E; }
+  .chip--enviado { background: #FFF1CC; color: #7A5200; }
+  .chip--ganada { background: #D9F5E3; color: #0E6B34; }
+  .chip--perdida { background: var(--cielo-2); color: var(--tinta-2); border: 1px solid var(--linea); }
+  .chip--otro { background: var(--cielo-2); color: var(--tinta); }
+
+  .vacio { background: var(--papel); border-radius: var(--radio); padding: 28px; text-align: center; color: var(--tinta-2); }
+
+  /* ── Botones ───────────────────────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border: 2px solid var(--brasa); background: var(--brasa); color: #fff; border-radius: 12px;
+    padding: 12px 18px; font-weight: 700; font-size: 17px; cursor: pointer; text-decoration: none; min-height: 50px;
+  }
+  .btn:disabled { opacity: .5; cursor: wait; }
+  .btn--linea { background: var(--papel); color: var(--brasa); }
+  .btn--negro { background: var(--tinta); border-color: var(--tinta); }
+  .btn--peque { padding: 8px 12px; min-height: 42px; font-size: 15px; }
+  .acciones { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+
+  /* ── Ficha de una solicitud (capa) ─────────────────────────── */
+  .capa {
+    position: fixed; inset: 0; background: rgba(11, 11, 12, .55); z-index: 50;
+    display: flex; justify-content: center; align-items: flex-start; overflow-y: auto; padding: 24px 12px;
+  }
+  .capa__caja {
+    background: var(--papel); border-radius: 18px; width: 100%; max-width: 680px; padding: 20px 20px 24px; position: relative;
+  }
+  .capa__cerrar {
+    position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%;
+    border: 0; background: var(--cielo-2); font-size: 24px; cursor: pointer; line-height: 1;
+  }
+  @media (max-width: 600px) {
+    .capa { padding: 0; }
+    .capa__caja { border-radius: 0; min-height: 100%; }
+  }
+  .datos { display: grid; grid-template-columns: 130px 1fr; gap: 8px 12px; margin: 16px 0; }
+  .datos dt { color: var(--tinta-2); }
+  .datos dd { margin: 0; font-weight: 600; word-break: break-word; }
+  .datos dd.texto { font-weight: 400; white-space: pre-wrap; }
+  @media (max-width: 480px) {
+    .datos { grid-template-columns: 1fr; gap: 0; }
+    .datos dd { margin-bottom: 10px; }
+  }
+  .contacto { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* ── Presupuesto ───────────────────────────────────────────── */
+  .linea { display: grid; grid-template-columns: 1fr 130px 140px 48px; gap: 8px; margin-bottom: 8px; align-items: center; }
+  .linea__quitar { width: 48px; height: 48px; border-radius: 10px; border: 2px solid var(--linea); background: var(--papel); cursor: pointer; font-size: 22px; }
+  @media (max-width: 640px) {
+    .linea { grid-template-columns: 1fr 1fr 48px; background: var(--cielo-2); padding: 10px; border-radius: 12px; }
+    .linea .linea__concepto { grid-column: 1 / -1; }
+  }
+  .totales { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 16px; }
+  .totales table { width: 100%; border-collapse: collapse; }
+  .totales td { padding: 4px 0; }
+  .totales td:last-child { text-align: right; font-weight: 600; }
+  .totales tr.total td { font-size: 21px; font-weight: 700; padding-top: 8px; }
+  .totales tr.total td:last-child { color: var(--brasa); }
+  .previa { width: 100%; height: 640px; border: 2px solid var(--linea); border-radius: var(--radio); background: #fff; margin-top: 12px; }
+  .dos-campos { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .dos-campos { grid-template-columns: 200px 1fr; } }
+
+  /* ── Aviso flotante ────────────────────────────────────────── */
+  .aviso {
+    position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 80;
+    background: var(--tinta); color: #fff; padding: 14px 20px; border-radius: 12px; font-weight: 600;
+    max-width: calc(100% - 32px); box-shadow: 0 8px 30px rgba(0, 0, 0, .25);
+  }
+  .aviso--error { background: #B3261E; }
+  .cargando { padding: 40px; text-align: center; color: var(--tinta-2); font-size: 18px; }
+
+  /* ── Entrada y cambio de contraseña ────────────────────────── */
+  .puerta {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 24px 16px; background: var(--tinta);
+  }
+  .puerta__caja {
+    background: var(--papel); border-radius: 20px; width: 100%; max-width: 440px; padding: 28px 24px 24px;
+  }
+  .puerta__logo { width: 56px; height: 56px; display: block; margin: 0 0 8px -6px; }
+  .puerta h1 { font-size: 34px; margin: 4px 0 8px; }
+  .puerta input { font-size: 19px; min-height: 56px; }
+  .puerta__btn { width: 100%; margin-top: 18px; font-size: 19px; min-height: 58px; }
+  .puerta__btn + .puerta__btn { margin-top: 10px; }
+  .puerta__error { color: #B3261E; font-weight: 600; margin: 14px 0 0; }
+  .puerta__nota { color: var(--tinta-2); font-size: 16px; margin: 18px 0 0; }
+  @media (max-width: 440px) {
+    .barra { gap: 8px; }
+    .barra__nombre, .barra__usuario { display: none; }
+    .barra__btn { padding: 7px 9px; font-size: 14px; }
+    .barra__btn:first-of-type { margin-left: auto; }
+  }
 </style>
 </head>
 <body>
-<p class="cargando">Cargando el panel…</p>
-<iframe src="https://script.google.com/macros/s/AKfycbw5F6UQ49vumAps1P53yLRPhlOAO-0nNHnzlApLWS3SJ67eRlG00t-uOsG9R3mL68qVtA/exec" title="Panel de administración de Nudo" allow="clipboard-write"></iframe>
+
+<!-- Pantalla de entrada. Es lo único que ve quien abre la URL sin sesión. -->
+<section class="puerta" id="entrada" hidden>
+  <form class="puerta__caja" id="form-entrar" autocomplete="on" novalidate>
+    <svg class="puerta__logo" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26" fill="none" stroke="#1F4FE0" stroke-width="7" stroke-linecap="round"/></svg>
+    <div class="rotulo">Nudo · Panel</div>
+    <h1>Entrar</h1>
+    <label for="e-email">Email</label>
+    <input type="email" id="e-email" name="username" autocomplete="username" inputmode="email" placeholder="tu@nudodesign.es" required>
+    <label for="e-clave">Contraseña</label>
+    <input type="password" id="e-clave" name="password" autocomplete="current-password" required>
+    <p class="puerta__error" id="e-error" role="alert" hidden></p>
+    <button class="btn puerta__btn" id="e-entrar" type="submit">Entrar</button>
+    <p class="puerta__nota">¿La has olvidado? Pídesela a tu socio o escribe a <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a></p>
+  </form>
+</section>
+
+<!-- Cambio de contraseña: obligatorio la primera vez, y siempre a mano
+     desde el botón «Contraseña» de la barra. -->
+<section class="puerta" id="cambio" hidden>
+  <form class="puerta__caja" id="form-cambio" novalidate>
+    <svg class="puerta__logo" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26" fill="none" stroke="#1F4FE0" stroke-width="7" stroke-linecap="round"/></svg>
+    <div class="rotulo" id="c-rotulo">Cambiar contraseña</div>
+    <h1 id="c-titulo">Cambiar contraseña</h1>
+    <p class="suave" id="c-explica" hidden>Es tu primera vez: pon una contraseña tuya para sustituir la temporal que te llegó por correo.</p>
+    <input type="text" name="username" autocomplete="username" id="c-usuario" hidden>
+    <div id="c-actual-caja">
+      <label for="c-actual">Contraseña actual</label>
+      <input type="password" id="c-actual" autocomplete="current-password">
+    </div>
+    <label for="c-nueva">Contraseña nueva <span class="suave" style="font-weight:400">(mínimo 10 caracteres)</span></label>
+    <input type="password" id="c-nueva" autocomplete="new-password" minlength="10">
+    <label for="c-repetir">Repite la contraseña nueva</label>
+    <input type="password" id="c-repetir" autocomplete="new-password" minlength="10">
+    <p class="puerta__error" id="c-error" role="alert" hidden></p>
+    <button class="btn puerta__btn" id="c-guardar" type="submit">Guardar contraseña</button>
+    <button class="btn btn--linea puerta__btn" id="c-cancelar" type="button">Cancelar</button>
+  </form>
+</section>
+
+<div id="app" hidden>
+<header class="barra">
+  <div class="barra__marca">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26" fill="none" stroke="#1F4FE0" stroke-width="8" stroke-linecap="round"/></svg>
+    <span class="barra__nombre">Nudo</span>
+  </div>
+  <span class="barra__usuario" id="usuario"></span>
+  <button class="barra__btn" id="actualizar" type="button">Actualizar</button>
+  <button class="barra__btn" id="abrir-cambio" type="button">Contraseña</button>
+  <button class="barra__btn" id="salir" type="button">Salir</button>
+</header>
+
+<nav class="pestanas" role="tablist">
+  <button type="button" role="tab" data-pestana="resumen" aria-selected="true">Resumen</button>
+  <button type="button" role="tab" data-pestana="solicitudes" aria-selected="false">Solicitudes <span class="globo" id="globo-nuevas" hidden></span></button>
+  <button type="button" role="tab" data-pestana="presupuesto" aria-selected="false">Presupuesto</button>
+  <button type="button" role="tab" data-pestana="ventas" aria-selected="false">Ventas</button>
+</nav>
+
+<main>
+  <div class="cargando" id="cargando">Cargando datos…</div>
+  <section id="p-resumen" hidden></section>
+  <section id="p-solicitudes" hidden>
+    <h1>Solicitudes</h1>
+    <div class="filtros">
+      <input type="search" id="buscar" placeholder="Buscar nombre, local, email o número" aria-label="Buscar">
+      <select id="filtro-estado" aria-label="Filtrar por estado"></select>
+    </div>
+    <div class="cabecera-lista rotulo"><span>Nº</span><span>Fecha</span><span>Local</span><span>Nombre</span><span>Estado</span><span style="text-align:right">Importe</span></div>
+    <div class="lista" id="lista"></div>
+  </section>
+  <section id="p-presupuesto" hidden></section>
+  <section id="p-ventas" hidden></section>
+</main>
+</div>
+
+<div class="capa" id="ficha" hidden role="dialog" aria-modal="true" aria-labelledby="ficha-titulo">
+  <div class="capa__caja" id="ficha-caja"></div>
+</div>
+
+<div class="capa" id="confirmar" hidden role="dialog" aria-modal="true" aria-labelledby="confirmar-titulo">
+  <div class="capa__caja" style="max-width:480px;margin-top:10vh">
+    <h2 id="confirmar-titulo" style="margin-top:0">¿Enviar el presupuesto?</h2>
+    <p id="confirmar-texto"></p>
+    <div class="acciones">
+      <button class="btn" id="confirmar-si" type="button">Sí, enviar</button>
+      <button class="btn btn--linea" id="confirmar-no" type="button">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div class="aviso" id="aviso" role="status" hidden></div>
+
+<script>
+'use strict';
+
+// Estado de la página. Los datos vienen enteros de obtenerDatos() y se
+// repintan desde aquí: una sola fuente, sin trocitos desincronizados.
+const E = {
+  datos: null,
+  pestana: 'resumen',
+  filtro: '',
+  busqueda: '',
+  presu: { numero: '', lineas: [], validez: 30, texto: '' }
+};
+
+const CHIPS = {
+  'Nueva': 'nueva', 'Contactado': 'contactado', 'Presupuesto enviado': 'enviado',
+  'Ganada': 'ganada', 'Perdida': 'perdida'
+};
+
+const NOMBRES_EVENTO = {
+  clic_presupuesto: 'Botón «Pedir presupuesto»',
+  envio_presupuesto: 'Formulario enviado',
+  clic_whatsapp: 'WhatsApp',
+  clic_telefono: 'Teléfono',
+  clic_llamada: 'Reservar llamada (Calendly)',
+  clic_ejemplos: 'Ver ejemplos',
+  abrir_panel_web: 'Abrir panel «Tu web»',
+  abrir_panel_mant: 'Abrir panel «Mantenimiento»'
+};
+
+const $ = function (sel) { return document.querySelector(sel); };
+
+// Todo lo que viene de la hoja lo ha podido escribir un desconocido desde
+// el formulario: se escapa SIEMPRE antes de meterlo en el HTML.
+function esc(s) {
+  return String(s === null || s === undefined ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function euros(n) {
+  if (n === '' || n === null || n === undefined || isNaN(Number(n))) return '—';
+  return Number(n).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+}
+
+function fecha(ms, conHora) {
+  if (!ms) return '—';
+  const o = { timeZone: 'Europe/Madrid', day: '2-digit', month: '2-digit', year: 'numeric' };
+  if (conHora) { o.hour = '2-digit'; o.minute = '2-digit'; }
+  return new Date(ms).toLocaleString('es-ES', o);
+}
+
+function porcentaje(x) {
+  if (x === null || x === undefined) return '—';
+  return (x * 100).toLocaleString('es-ES', { maximumFractionDigits: 1 }) + ' %';
+}
+
+function chip(estado) {
+  return '<span class="chip chip--' + (CHIPS[estado] || 'otro') + '">' + esc(estado) + '</span>';
+}
+
+function numeroDe(v) {
+  const n = Number(String(v).trim().replace(/\s|€/g, '').replace(',', '.'));
+  return isFinite(n) ? n : NaN;
+}
+
+// Llama al servidor. Desde nudodesign.es/admin va por fetch a la app web
+// (sin cookies de Google: con varias cuentas abiertas google.script.run
+// fallaba). Si la página la sirve el propio Apps Script, usa google.script.run.
+const PANEL_API = 'https://script.google.com/macros/s/AKfycbw5F6UQ49vumAps1P53yLRPhlOAO-0nNHnzlApLWS3SJ67eRlG00t-uOsG9R3mL68qVtA/exec';
+function llamar(funcion) {
+  const args = Array.prototype.slice.call(arguments, 1);
+  if (window.google && google.script && google.script.run) {
+    return new Promise(function (ok, ko) {
+      const r = google.script.run.withSuccessHandler(ok).withFailureHandler(ko);
+      r[funcion].apply(r, args);
+    });
+  }
+  return fetch(PANEL_API, { method: 'POST', body: JSON.stringify({ fn: funcion, args: args }) })
+    .then(function (r) { return r.json(); })
+    .then(function (r) {
+      if (!r || !r.ok) throw new Error((r && r.error) || 'No se ha podido conectar con el panel.');
+      return r.resultado;
+    });
+}
+
+let temporizadorAviso = null;
+function avisar(texto, error) {
+  const a = $('#aviso');
+  a.textContent = texto;
+  a.className = 'aviso' + (error ? ' aviso--error' : '');
+  a.hidden = false;
+  clearTimeout(temporizadorAviso);
+  temporizadorAviso = setTimeout(function () { a.hidden = true; }, error ? 7000 : 3500);
+}
+
+function mensajeError(err) {
+  const m = (err && err.message) ? err.message : String(err || '');
+  return m.replace(/^Exception:\s*/, '').replace(/^SESION:\s*/, '') || 'Algo ha fallado. Prueba otra vez.';
+}
+
+function esErrorSesion(err) {
+  const m = (err && err.message) ? err.message : String(err || '');
+  return /^(Exception:\s*)?SESION:/.test(m);
+}
+
+// ── Sesión ───────────────────────────────────────────────────────────
+// El token vive en sessionStorage: aguanta una recarga, pero se borra al
+// cerrar la pestaña. Si el navegador no deja usarlo (modo privado raro),
+// se queda solo en memoria y al recargar toca volver a entrar.
+
+const CLAVE_TOKEN = 'nudo_panel_token';
+let token = '';
+let claveTemporal = ''; // solo en memoria, para no pedirla dos veces al cambiarla
+
+function guardarToken(t) {
+  token = t || '';
+  try {
+    if (token) sessionStorage.setItem(CLAVE_TOKEN, token);
+    else sessionStorage.removeItem(CLAVE_TOKEN);
+  } catch (e) { /* sin sessionStorage: solo memoria */ }
+}
+
+function leerToken() {
+  try { return sessionStorage.getItem(CLAVE_TOKEN) || ''; } catch (e) { return ''; }
+}
+
+// Llamada con sesión: el token va siempre como primer argumento. Si el
+// servidor dice que la sesión no vale, de vuelta a la pantalla de entrada.
+function pedir(funcion) {
+  const args = Array.prototype.slice.call(arguments, 1);
+  return llamar.apply(null, [funcion, token].concat(args)).catch(function (err) {
+    if (esErrorSesion(err)) mostrarEntrada(mensajeError(err));
+    throw err;
+  });
+}
+
+function mostrarSolo(id) {
+  ['entrada', 'cambio', 'app'].forEach(function (x) { $('#' + x).hidden = x !== id; });
+  document.querySelectorAll('.capa').forEach(function (c) { c.hidden = true; });
+  document.body.style.overflow = '';
+}
+
+function mostrarEntrada(mensaje) {
+  guardarToken('');
+  E.datos = null;
+  mostrarSolo('entrada');
+  $('#e-clave').value = '';
+  const error = $('#e-error');
+  error.hidden = !mensaje;
+  error.textContent = mensaje || '';
+  $('#e-email').focus();
+}
+
+// obligatorio = primera vez con contraseña temporal: sin «Cancelar» y sin
+// pedir la actual (la acaba de escribir al entrar).
+function mostrarCambio(obligatorio) {
+  mostrarSolo('cambio');
+  $('#cambio').dataset.obligatorio = obligatorio ? '1' : '';
+  $('#c-titulo').textContent = obligatorio ? 'Pon tu contraseña' : 'Cambiar contraseña';
+  $('#c-explica').hidden = !obligatorio;
+  $('#c-actual-caja').hidden = obligatorio && !!claveTemporal;
+  $('#c-cancelar').textContent = obligatorio ? 'Salir' : 'Cancelar';
+  ['c-actual', 'c-nueva', 'c-repetir'].forEach(function (id) { $('#' + id).value = ''; });
+  $('#c-usuario').value = $('#usuario').textContent || $('#e-email').value;
+  $('#c-error').hidden = true;
+  (obligatorio && claveTemporal ? $('#c-nueva') : $('#c-actual')).focus();
+}
+
+async function entrar(ev) {
+  ev.preventDefault();
+  const email = $('#e-email').value.trim();
+  const clave = $('#e-clave').value;
+  const error = $('#e-error');
+  if (!email || !clave) {
+    error.textContent = 'Escribe tu email y tu contraseña.';
+    error.hidden = false;
+    return;
+  }
+  const btn = $('#e-entrar');
+  btn.disabled = true;
+  btn.textContent = 'Entrando…';
+  error.hidden = true;
+  try {
+    const r = await llamar('entrar', email, clave);
+    guardarToken(r.token);
+    $('#usuario').textContent = r.email;
+    if (r.debeCambiar) {
+      claveTemporal = clave;
+      mostrarCambio(true);
+    } else {
+      abrirPanel();
+    }
+  } catch (err) {
+    error.textContent = mensajeError(err);
+    error.hidden = false;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Entrar';
+    $('#e-clave').value = '';
+  }
+}
+
+async function cambiarClave(ev) {
+  ev.preventDefault();
+  const obligatorio = $('#cambio').dataset.obligatorio === '1';
+  const actual = (obligatorio && claveTemporal) ? claveTemporal : $('#c-actual').value;
+  const nueva = $('#c-nueva').value;
+  const repetida = $('#c-repetir').value;
+  const error = $('#c-error');
+  const fallo =
+    !actual ? 'Escribe tu contraseña actual.' :
+    nueva.length < 10 ? 'La contraseña nueva tiene que tener al menos 10 caracteres.' :
+    nueva !== repetida ? 'Las dos contraseñas nuevas no coinciden.' :
+    nueva === actual ? 'La contraseña nueva tiene que ser distinta de la actual.' : '';
+  if (fallo) { error.textContent = fallo; error.hidden = false; return; }
+
+  const btn = $('#c-guardar');
+  btn.disabled = true;
+  btn.textContent = 'Guardando…';
+  try {
+    const r = await pedir('cambiarClave', actual, nueva, repetida);
+    guardarToken(r.token);
+    claveTemporal = '';
+    abrirPanel();
+    avisar('Contraseña cambiada.');
+  } catch (err) {
+    if (!esErrorSesion(err)) {
+      error.textContent = mensajeError(err);
+      error.hidden = false;
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Guardar contraseña';
+  }
+}
+
+async function salir() {
+  const t = token;
+  claveTemporal = '';
+  mostrarEntrada('');
+  try { await llamar('salir', t); } catch (e) { /* el token se ha borrado aquí igualmente */ }
+}
+
+function abrirPanel() {
+  mostrarSolo('app');
+  if (E.datos) pintarTodo();
+  else { $('#cargando').hidden = false; $('#cargando').textContent = 'Cargando datos…'; mostrarPestana(E.pestana); }
+  cargar();
+}
+
+// Al abrir la página: si hay token de antes, se comprueba; si no, a entrar.
+async function arrancar() {
+  const t = leerToken();
+  if (!t) { mostrarEntrada(''); return; }
+  token = t;
+  try {
+    const r = await llamar('comprobarSesion', t);
+    $('#usuario').textContent = r.email;
+    if (r.debeCambiar) mostrarCambio(true);
+    else abrirPanel();
+  } catch (err) {
+    mostrarEntrada('');
+  }
+}
+
+// ── Carga ────────────────────────────────────────────────────────────
+
+async function cargar() {
+  const btn = $('#actualizar');
+  btn.disabled = true;
+  try {
+    const datos = await pedir('obtenerDatos');
+    aplicar(datos);
+  } catch (err) {
+    $('#cargando').hidden = false;
+    $('#cargando').textContent = mensajeError(err);
+    avisar(mensajeError(err), true);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function aplicar(datos) {
+  E.datos = datos;
+  $('#cargando').hidden = true;
+  $('#usuario').textContent = datos.usuario;
+  const nuevas = datos.resumen.solicitudes.nuevas;
+  const globo = $('#globo-nuevas');
+  globo.hidden = !nuevas;
+  globo.textContent = nuevas;
+  pintarFiltroEstados();
+  pintarTodo();
+}
+
+function pintarTodo() {
+  pintarResumen();
+  pintarSolicitudes();
+  pintarPresupuesto();
+  pintarVentas();
+  mostrarPestana(E.pestana);
+}
+
+function mostrarPestana(nombre) {
+  E.pestana = nombre;
+  document.querySelectorAll('.pestanas button').forEach(function (b) {
+    b.setAttribute('aria-selected', b.dataset.pestana === nombre ? 'true' : 'false');
+  });
+  ['resumen', 'solicitudes', 'presupuesto', 'ventas'].forEach(function (p) {
+    $('#p-' + p).hidden = !E.datos || p !== nombre;
+  });
+}
+
+// ── 1. Resumen ───────────────────────────────────────────────────────
+
+function cifra(rotulo, valor, nota, clase) {
+  return '<div class="cifra' + (clase ? ' cifra--' + clase : '') + '">' +
+    '<div class="rotulo">' + esc(rotulo) + '</div>' +
+    '<div class="cifra__valor">' + esc(valor) + '</div>' +
+    (nota ? '<div class="cifra__nota">' + esc(nota) + '</div>' : '') + '</div>';
+}
+
+function grafica(serie, campo, negra, unidad) {
+  const max = Math.max.apply(null, serie.map(function (d) { return d[campo]; }).concat([1]));
+  const barras = serie.map(function (d) {
+    const v = d[campo];
+    const alto = v ? Math.max(4, Math.round(v / max * 100)) : 0;
+    const p = d.dia.split('-');
+    return '<div class="grafica__col" title="' + esc(p[2] + '/' + p[1] + ': ' + v + ' ' + unidad) + '">' +
+      '<div class="grafica__barra' + (v ? '' : ' grafica__barra--vacia') + '" style="height:' + (v ? alto + '%' : '2px') + '"></div></div>';
+  }).join('');
+  const etiqueta = function (d) { const p = d.dia.split('-'); return p[2] + '/' + p[1]; };
+  return '<div class="grafica' + (negra ? ' grafica--negra' : '') + '" role="img" aria-label="' +
+    esc(unidad + ' por día, últimos 30 días') + '">' + barras + '</div>' +
+    '<div class="grafica__ejes"><span>' + etiqueta(serie[0]) + '</span><span>' +
+    etiqueta(serie[15]) + '</span><span>Hoy</span></div>';
+}
+
+function pintarResumen() {
+  const r = E.datos.resumen;
+  const clics = r.clics.length
+    ? '<ul class="clics">' + r.clics.map(function (c) {
+      return '<li><span>' + esc(NOMBRES_EVENTO[c.evento] || c.evento) + '</span><strong>' + c.total + '</strong></li>';
+    }).join('') + '</ul>'
+    : '<p class="suave" style="margin:0">Aún no hay clics en los últimos 30 días.</p>';
+
+  $('#p-resumen').innerHTML =
+    '<h1>Resumen</h1>' +
+    '<div class="rotulo" style="margin-bottom:8px">Visitas a la web</div>' +
+    '<div class="cifras">' +
+      cifra('Hoy', r.visitas.hoy, '') +
+      cifra('Últimos 7 días', r.visitas.d7, '') +
+      cifra('Últimos 30 días', r.visitas.d30, '') +
+    '</div>' +
+    '<h2>Negocio</h2>' +
+    '<div class="cifras">' +
+      cifra('Solicitudes', r.solicitudes.total, r.solicitudes.nuevas + (r.solicitudes.nuevas === 1 ? ' nueva sin atender' : ' nuevas sin atender'), r.solicitudes.nuevas ? 'azul' : '') +
+      cifra('Presupuestos enviados', r.presupuestosEnviados, '') +
+      cifra('Ventas ganadas', r.ventas.numero, euros(r.ventas.importe) + ' en total', 'negra') +
+      cifra('Visita → solicitud', porcentaje(r.conversionVisitaSolicitud), r.solicitudes.d30 + ' solicitudes / ' + r.visitas.d30 + ' visitas (30 días)') +
+      cifra('Solicitud → venta', porcentaje(r.conversionSolicitudVenta), r.ventas.numero + ' ganadas de ' + r.solicitudes.total + ' (desde el principio)') +
+    '</div>' +
+    '<h2>Últimos 30 días</h2>' +
+    '<div class="dos">' +
+      '<div class="caja"><div class="rotulo">Visitas por día</div>' + grafica(r.serie, 'visitas', false, 'visitas') + '</div>' +
+      '<div class="caja"><div class="rotulo">Solicitudes por día</div>' + grafica(r.serie, 'solicitudes', true, 'solicitudes') + '</div>' +
+    '</div>' +
+    '<h2>Clics por tipo (30 días)</h2>' +
+    '<div class="caja">' + clics + '</div>';
+}
+
+// ── 2. Solicitudes ───────────────────────────────────────────────────
+
+function pintarFiltroEstados() {
+  const sel = $('#filtro-estado');
+  const cuenta = {};
+  E.datos.solicitudes.forEach(function (s) { cuenta[s.estado] = (cuenta[s.estado] || 0) + 1; });
+  sel.innerHTML = '<option value="">Todos los estados (' + E.datos.solicitudes.length + ')</option>' +
+    E.datos.estados.map(function (e) {
+      return '<option value="' + esc(e) + '">' + esc(e) + ' (' + (cuenta[e] || 0) + ')</option>';
+    }).join('');
+  sel.value = E.filtro;
+}
+
+function solicitudesFiltradas() {
+  const q = E.busqueda.trim().toLowerCase();
+  return E.datos.solicitudes.filter(function (s) {
+    if (E.filtro && s.estado !== E.filtro) return false;
+    if (!q) return true;
+    return [s.numero, '#' + s.numero, s.nombre, s.empresa, s.email, s.telefono].join(' ').toLowerCase().indexOf(q) !== -1;
+  });
+}
+
+function pintarSolicitudes() {
+  const lista = solicitudesFiltradas();
+  if (!E.datos.solicitudes.length) {
+    $('#lista').innerHTML = '<div class="vacio">Todavía no ha llegado ninguna solicitud. Cuando alguien rellene el formulario de la web, aparecerá aquí.</div>';
+    return;
+  }
+  if (!lista.length) {
+    $('#lista').innerHTML = '<div class="vacio">Ninguna solicitud coincide con el filtro.</div>';
+    return;
+  }
+  $('#lista').innerHTML = lista.map(function (s) {
+    return '<button type="button" class="fila" data-abrir="' + esc(s.numero) + '">' +
+      '<span class="fila__num">#' + esc(s.numero) + '</span>' +
+      '<span class="fila__fecha">' + fecha(s.fecha) + '</span>' +
+      '<span class="fila__empresa">' + esc(s.empresa || '(sin local)') + '</span>' +
+      '<span class="fila__nombre">' + esc(s.nombre) + '</span>' +
+      chip(s.estado) +
+      '<span class="fila__importe">' + (s.importe === '' ? '' : euros(s.importe)) + '</span>' +
+      '</button>';
+  }).join('');
+}
+
+function buscarSolicitud(numero) {
+  return E.datos.solicitudes.find(function (s) { return s.numero === numero; });
+}
+
+// Enlaces de contacto. Se construyen solo con los caracteres que valen en
+// cada esquema, así un teléfono raro no se convierte en un enlace raro.
+function enlaceTel(t) { return 'tel:' + String(t).replace(/[^\d+]/g, ''); }
+function enlaceWhatsApp(t) {
+  let d = String(t).replace(/\D/g, '');
+  if (d.indexOf('00') === 0) d = d.slice(2);
+  if (d.length === 9) d = '34' + d; // móvil español sin prefijo
+  return 'https://wa.me/' + d;
+}
+
+function abrirFicha(numero) {
+  const s = buscarSolicitud(numero);
+  if (!s) return;
+  const opciones = E.datos.estados.map(function (e) {
+    return '<option value="' + esc(e) + '"' + (e === s.estado ? ' selected' : '') + '>' + esc(e) + '</option>';
+  }).join('');
+  const importe = s.importe === '' ? '' : String(s.importe).replace('.', ',');
+
+  $('#ficha-caja').innerHTML =
+    '<button type="button" class="capa__cerrar" data-cerrar aria-label="Cerrar">×</button>' +
+    '<div class="rotulo">Solicitud #' + esc(s.numero) + ' · ' + fecha(s.fecha, true) + '</div>' +
+    '<h1 id="ficha-titulo" style="margin:6px 48px 4px 0">' + esc(s.empresa || '(sin local)') + '</h1>' +
+    '<div>' + chip(s.estado) + '</div>' +
+    '<dl class="datos">' +
+      '<dt>Nombre</dt><dd>' + esc(s.nombre) + '</dd>' +
+      '<dt>Email</dt><dd>' + esc(s.email) + '</dd>' +
+      '<dt>Teléfono</dt><dd>' + esc(s.telefono) + '</dd>' +
+      '<dt>Proyecto</dt><dd class="texto">' + esc(s.proyecto || '—') + '</dd>' +
+      '<dt>Desde</dt><dd>' + esc(s.pagina || '—') + '</dd>' +
+      (s.fechaPresupuesto ? '<dt>Presupuesto</dt><dd>' + fecha(s.fechaPresupuesto) + '</dd>' : '') +
+      (s.fechaVenta ? '<dt>Ganada el</dt><dd>' + fecha(s.fechaVenta) + '</dd>' : '') +
+    '</dl>' +
+    '<div class="contacto">' +
+      (s.telefono ? '<a class="btn btn--peque" href="' + esc(enlaceTel(s.telefono)) + '">Llamar</a>' : '') +
+      (s.telefono ? '<a class="btn btn--peque" href="' + esc(enlaceWhatsApp(s.telefono)) + '" target="_blank" rel="noopener">WhatsApp</a>' : '') +
+      (s.email ? '<a class="btn btn--peque btn--linea" href="mailto:' + esc(encodeURIComponent(s.email)) + '">Escribir correo</a>' : '') +
+    '</div>' +
+    '<h2>Seguimiento</h2>' +
+    '<label for="f-estado">Estado</label><select id="f-estado">' + opciones + '</select>' +
+    '<label for="f-importe">Importe (€, sin IVA)</label><input type="text" inputmode="decimal" id="f-importe" value="' + esc(importe) + '" placeholder="Ej.: 249">' +
+    '<label for="f-notas">Notas</label><textarea id="f-notas" placeholder="Lo que habéis hablado, próximos pasos…">' + esc(s.notas) + '</textarea>' +
+    '<div class="acciones">' +
+      '<button type="button" class="btn" id="f-guardar" data-numero="' + esc(s.numero) + '">Guardar</button>' +
+      '<button type="button" class="btn btn--negro" data-presupuestar="' + esc(s.numero) + '">Preparar presupuesto</button>' +
+      '<button type="button" class="btn btn--linea" data-cerrar>Cerrar</button>' +
+    '</div>';
+  $('#ficha').hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarFicha() {
+  $('#ficha').hidden = true;
+  document.body.style.overflow = '';
+}
+
+async function guardarFicha(numero) {
+  const importe = $('#f-importe').value.trim();
+  if (importe !== '' && (isNaN(numeroDe(importe)) || numeroDe(importe) < 0)) {
+    avisar('El importe no es un número válido.', true);
+    return;
+  }
+  const btn = $('#f-guardar');
+  btn.disabled = true;
+  btn.textContent = 'Guardando…';
+  try {
+    const datos = await pedir('guardarSolicitud', numero, {
+      estado: $('#f-estado').value,
+      importe: importe,
+      notas: $('#f-notas').value
+    });
+    aplicar(datos);
+    cerrarFicha();
+    avisar('Guardado.');
+  } catch (err) {
+    avisar(mensajeError(err), true);
+    btn.disabled = false;
+    btn.textContent = 'Guardar';
+  }
+}
+
+// ── 3. Enviar presupuesto ────────────────────────────────────────────
+
+function lineasPorDefecto() {
+  return [
+    { concepto: 'Web para tu local', precio: '249', mensual: false },
+    { concepto: 'Mantenimiento mensual (opcional)', precio: '39', mensual: true }
+  ];
+}
+
+function prepararPresupuesto(numero) {
+  const s = buscarSolicitud(numero);
+  E.presu = {
+    numero: numero,
+    lineas: lineasPorDefecto(),
+    validez: 30,
+    texto: 'Gracias por contarnos lo que necesitas' + (s && s.empresa ? ' para ' + s.empresa : '') +
+      '. Te pasamos el presupuesto de tu web. Primero te enseñamos la maqueta y solo pagas si te convence.'
+  };
+  cerrarFicha();
+  pintarPresupuesto();
+  mostrarPestana('presupuesto');
+  window.scrollTo(0, 0);
+}
+
+// Totales solo para enseñarlos mientras se escribe; los de verdad (los del
+// correo y la hoja) los recalcula el servidor.
+function calcularTotales() {
+  const iva = E.datos.iva;
+  const t = function (mensual) {
+    const base = E.presu.lineas.reduce(function (a, l) {
+      const n = numeroDe(l.precio);
+      return a + (l.mensual === mensual && l.concepto.trim() && !isNaN(n) ? n : 0);
+    }, 0);
+    const b = Math.round(base * 100) / 100;
+    const i = Math.round(b * iva * 100) / 100;
+    return { base: b, iva: i, total: Math.round((b + i) * 100) / 100 };
+  };
+  return { unico: t(false), mensual: t(true) };
+}
+
+function tablaTotales(titulo, t, sufijo) {
+  const pct = Math.round(E.datos.iva * 100);
+  return '<div class="caja"><div class="rotulo">' + esc(titulo) + '</div><table>' +
+    '<tr><td>Base</td><td>' + euros(t.base) + sufijo + '</td></tr>' +
+    '<tr><td>IVA (' + pct + ' %)</td><td>' + euros(t.iva) + sufijo + '</td></tr>' +
+    '<tr class="total"><td>Total</td><td>' + euros(t.total) + sufijo + '</td></tr></table></div>';
+}
+
+function pintarTotales() {
+  const t = calcularTotales();
+  const zona = $('#pr-totales');
+  if (zona) {
+    zona.innerHTML = tablaTotales('Pago único', t.unico, '') +
+      (t.mensual.base > 0 ? tablaTotales('Cuota mensual', t.mensual, '/mes') : '');
+  }
+}
+
+function pintarPresupuesto() {
+  const cont = $('#p-presupuesto');
+  const candidatas = E.datos.solicitudes;
+  const opciones = '<option value="">Elige una solicitud…</option>' + candidatas.map(function (s) {
+    return '<option value="' + esc(s.numero) + '"' + (s.numero === E.presu.numero ? ' selected' : '') + '>#' +
+      esc(s.numero) + ' · ' + esc(s.empresa || s.nombre) + ' (' + esc(s.estado) + ')</option>';
+  }).join('');
+  const s = E.presu.numero ? buscarSolicitud(E.presu.numero) : null;
+
+  let html = '<h1>Enviar presupuesto</h1>' +
+    '<label for="pr-sol">Solicitud</label><select id="pr-sol">' + opciones + '</select>';
+
+  if (!s) {
+    html += '<p class="suave">Elige una solicitud, o ábrela en «Solicitudes» y pulsa «Preparar presupuesto».</p>';
+    cont.innerHTML = html;
+    return;
+  }
+
+  const lineas = E.presu.lineas.map(function (l, i) {
+    return '<div class="linea" data-linea="' + i + '">' +
+      '<input class="linea__concepto" type="text" data-campo="concepto" value="' + esc(l.concepto) + '" placeholder="Concepto" aria-label="Concepto">' +
+      '<input type="text" inputmode="decimal" data-campo="precio" value="' + esc(l.precio) + '" placeholder="Precio €" aria-label="Precio sin IVA">' +
+      '<select data-campo="mensual" aria-label="Periodicidad">' +
+        '<option value="0"' + (l.mensual ? '' : ' selected') + '>Pago único</option>' +
+        '<option value="1"' + (l.mensual ? ' selected' : '') + '>Al mes</option>' +
+      '</select>' +
+      '<button type="button" class="linea__quitar" data-quitar="' + i + '" aria-label="Quitar línea">×</button>' +
+      '</div>';
+  }).join('');
+
+  html +=
+    '<div class="caja" style="margin-top:16px">' +
+      '<div><strong>' + esc(s.nombre) + '</strong> · ' + esc(s.empresa) + '</div>' +
+      '<div class="suave">Se enviará a <strong>' + esc(s.email) + '</strong>, con copia a hola@nudodesign.es</div>' +
+    '</div>' +
+    '<h2>Conceptos <span class="suave" style="font-weight:400;font-size:16px">(precios sin IVA)</span></h2>' +
+    '<div id="pr-lineas">' + lineas + '</div>' +
+    '<button type="button" class="btn btn--linea btn--peque" id="pr-anadir">+ Añadir línea</button>' +
+    '<div class="totales" id="pr-totales"></div>' +
+    '<div class="dos-campos">' +
+      '<div><label for="pr-validez">Validez (días)</label><input type="number" min="1" max="365" id="pr-validez" value="' + esc(E.presu.validez) + '"></div>' +
+      '<div><label for="pr-texto">Texto para el cliente</label><textarea id="pr-texto">' + esc(E.presu.texto) + '</textarea></div>' +
+    '</div>' +
+    '<div class="acciones">' +
+      '<button type="button" class="btn btn--linea" id="pr-previa">Vista previa del correo</button>' +
+      '<button type="button" class="btn" id="pr-enviar">Enviar presupuesto</button>' +
+    '</div>' +
+    '<div id="pr-zona-previa"></div>';
+
+  cont.innerHTML = html;
+  pintarTotales();
+}
+
+function datosPresupuesto() {
+  return {
+    lineas: E.presu.lineas.map(function (l) { return { concepto: l.concepto, precio: l.precio, mensual: l.mensual }; }),
+    validez: E.presu.validez,
+    texto: E.presu.texto
+  };
+}
+
+function comprobarPresupuesto() {
+  const validas = E.presu.lineas.filter(function (l) { return l.concepto.trim(); });
+  if (!validas.length) return 'Añade al menos un concepto.';
+  for (let i = 0; i < validas.length; i++) {
+    const n = numeroDe(validas[i].precio);
+    if (isNaN(n) || n < 0) return 'Revisa el precio de «' + validas[i].concepto + '».';
+  }
+  return '';
+}
+
+async function verPrevia() {
+  const fallo = comprobarPresupuesto();
+  if (fallo) { avisar(fallo, true); return; }
+  const btn = $('#pr-previa');
+  btn.disabled = true;
+  try {
+    const r = await pedir('vistaPreviaPresupuesto', E.presu.numero, datosPresupuesto());
+    $('#pr-zona-previa').innerHTML =
+      '<h2>Vista previa</h2>' +
+      '<div class="caja"><div><span class="suave">Para:</span> <strong>' + esc(r.para) + '</strong> · <span class="suave">CC:</span> hola@nudodesign.es</div>' +
+      '<div><span class="suave">Asunto:</span> <strong>' + esc(r.asunto) + '</strong></div></div>' +
+      // sandbox vacío: el HTML del correo se ve pero no puede ejecutar nada.
+      '<iframe class="previa" sandbox="" title="Vista previa del correo"></iframe>';
+    $('#pr-zona-previa iframe').srcdoc =
+      '<!DOCTYPE html><html><head><meta charset="utf-8"><base target="_blank"></head>' +
+      '<body style="margin:0;padding:20px;background:#fff">' + r.html + '</body></html>';
+    $('#pr-zona-previa').scrollIntoView({ behavior: 'smooth' });
+  } catch (err) {
+    avisar(mensajeError(err), true);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function pedirConfirmacion() {
+  const fallo = comprobarPresupuesto();
+  if (fallo) { avisar(fallo, true); return; }
+  const s = buscarSolicitud(E.presu.numero);
+  const t = calcularTotales();
+  $('#confirmar-texto').innerHTML =
+    'Se enviará el presupuesto <strong>#' + esc(s.numero) + '</strong> a <strong>' + esc(s.email) + '</strong> ' +
+    '(copia a hola@nudodesign.es) por un total de <strong>' + euros(t.unico.total) + '</strong> IVA incluido' +
+    (t.mensual.base > 0 ? ' + <strong>' + euros(t.mensual.total) + '/mes</strong>' : '') +
+    '. Una vez enviado no se puede deshacer.';
+  $('#confirmar').hidden = false;
+  $('#confirmar-si').focus();
+}
+
+async function enviar() {
+  const si = $('#confirmar-si');
+  si.disabled = true;
+  si.textContent = 'Enviando…';
+  try {
+    const numero = E.presu.numero;
+    const datos = await pedir('enviarPresupuesto', numero, datosPresupuesto());
+    $('#confirmar').hidden = true;
+    E.presu = { numero: '', lineas: [], validez: 30, texto: '' };
+    aplicar(datos);
+    mostrarPestana('solicitudes');
+    avisar('Presupuesto #' + numero + ' enviado.');
+  } catch (err) {
+    $('#confirmar').hidden = true;
+    avisar(mensajeError(err), true);
+  } finally {
+    si.disabled = false;
+    si.textContent = 'Sí, enviar';
+  }
+}
+
+// ── 4. Ventas ────────────────────────────────────────────────────────
+
+function pintarVentas() {
+  const ganadas = E.datos.solicitudes.filter(function (s) { return s.estado === 'Ganada'; })
+    .map(function (s) {
+      // Si se marcó Ganada a mano en la hoja no hay fecha de venta: se usa
+      // la del presupuesto o, en último caso, la de la solicitud.
+      return { s: s, cuando: s.fechaVenta || s.fechaPresupuesto || s.fecha };
+    })
+    .sort(function (a, b) { return (b.cuando || 0) - (a.cuando || 0); });
+
+  const mesClave = function (ms) {
+    return new Date(ms).toLocaleDateString('es-ES', { timeZone: 'Europe/Madrid', month: '2-digit', year: 'numeric' });
+  };
+  const esteMes = mesClave(Date.now());
+  let totalMes = 0, total = 0, nMes = 0;
+  ganadas.forEach(function (g) {
+    const imp = Number(g.s.importe) || 0;
+    total += imp;
+    if (g.cuando && mesClave(g.cuando) === esteMes) { totalMes += imp; nMes++; }
+  });
+  const nombreMes = new Date().toLocaleDateString('es-ES', { timeZone: 'Europe/Madrid', month: 'long', year: 'numeric' });
+
+  const lista = ganadas.length
+    ? '<div class="lista">' + ganadas.map(function (g) {
+      return '<button type="button" class="fila" data-abrir="' + esc(g.s.numero) + '">' +
+        '<span class="fila__num">#' + esc(g.s.numero) + '</span>' +
+        '<span class="fila__fecha">' + fecha(g.cuando) + '</span>' +
+        '<span class="fila__empresa">' + esc(g.s.empresa || '(sin local)') + '</span>' +
+        '<span class="fila__nombre">' + esc(g.s.nombre) + '</span>' +
+        chip(g.s.estado) +
+        '<span class="fila__importe">' + euros(g.s.importe === '' ? 0 : g.s.importe) + '</span>' +
+        '</button>';
+    }).join('') + '</div>'
+    : '<div class="vacio">Aún no hay ventas. Cuando marquéis una solicitud como «Ganada», aparecerá aquí.</div>';
+
+  $('#p-ventas').innerHTML =
+    '<h1>Ventas</h1>' +
+    '<div class="cifras">' +
+      cifra('Este mes', euros(totalMes), nMes + (nMes === 1 ? ' venta' : ' ventas') + ' en ' + nombreMes, 'azul') +
+      cifra('Acumulado', euros(total), ganadas.length + (ganadas.length === 1 ? ' venta' : ' ventas') + ' en total', 'negra') +
+    '</div>' +
+    '<p class="suave">Importes sin IVA. La fecha es la del día en que se marcó como «Ganada».</p>' +
+    '<div class="cabecera-lista rotulo" style="margin-top:16px"><span>Nº</span><span>Fecha</span><span>Local</span><span>Nombre</span><span>Estado</span><span style="text-align:right">Importe</span></div>' +
+    lista;
+}
+
+// ── Eventos de la página ─────────────────────────────────────────────
+// Un único listener por tipo, delegado: el HTML se repinta entero a menudo
+// y así no hay que volver a enganchar nada.
+
+document.addEventListener('click', function (ev) {
+  const t = ev.target.closest('button, a');
+  if (!t) {
+    // Clic en el fondo oscuro de la capa = cerrar.
+    if (ev.target.id === 'ficha') cerrarFicha();
+    if (ev.target.id === 'confirmar') $('#confirmar').hidden = true;
+    return;
+  }
+  if (t.dataset.pestana) { mostrarPestana(t.dataset.pestana); return; }
+  if (t.dataset.abrir) { abrirFicha(t.dataset.abrir); return; }
+  if (t.hasAttribute('data-cerrar')) { cerrarFicha(); return; }
+  if (t.dataset.presupuestar) { prepararPresupuesto(t.dataset.presupuestar); return; }
+  if (t.id === 'f-guardar') { guardarFicha(t.dataset.numero); return; }
+  if (t.id === 'actualizar') { cargar(); return; }
+  if (t.id === 'salir') { salir(); return; }
+  if (t.id === 'abrir-cambio') { mostrarCambio(false); return; }
+  if (t.id === 'c-cancelar') {
+    if ($('#cambio').dataset.obligatorio === '1') salir();
+    else abrirPanel();
+    return;
+  }
+  if (t.id === 'pr-anadir') {
+    E.presu.lineas.push({ concepto: '', precio: '', mensual: false });
+    pintarPresupuesto();
+    const inputs = document.querySelectorAll('#pr-lineas .linea__concepto');
+    if (inputs.length) inputs[inputs.length - 1].focus();
+    return;
+  }
+  if (t.dataset.quitar !== undefined) {
+    E.presu.lineas.splice(Number(t.dataset.quitar), 1);
+    pintarPresupuesto();
+    return;
+  }
+  if (t.id === 'pr-previa') { verPrevia(); return; }
+  if (t.id === 'pr-enviar') { pedirConfirmacion(); return; }
+  if (t.id === 'confirmar-si') { enviar(); return; }
+  if (t.id === 'confirmar-no') { $('#confirmar').hidden = true; return; }
+});
+
+document.addEventListener('input', function (ev) {
+  const t = ev.target;
+  if (t.id === 'buscar') { E.busqueda = t.value; pintarSolicitudes(); return; }
+  if (t.id === 'pr-validez') { E.presu.validez = t.value; return; }
+  if (t.id === 'pr-texto') { E.presu.texto = t.value; return; }
+  const fila = t.closest('[data-linea]');
+  if (fila && t.dataset.campo) {
+    const l = E.presu.lineas[Number(fila.dataset.linea)];
+    if (t.dataset.campo === 'mensual') l.mensual = t.value === '1';
+    else l[t.dataset.campo] = t.value;
+    // Solo se repintan los totales: repintar las líneas quitaría el foco
+    // del campo en el que se está escribiendo.
+    pintarTotales();
+  }
+});
+
+document.addEventListener('change', function (ev) {
+  const t = ev.target;
+  if (t.id === 'filtro-estado') { E.filtro = t.value; pintarSolicitudes(); return; }
+  if (t.id === 'pr-sol') {
+    if (t.value) prepararPresupuesto(t.value);
+    else { E.presu.numero = ''; pintarPresupuesto(); }
+    return;
+  }
+  if (t.dataset.campo === 'mensual') {
+    const fila = t.closest('[data-linea]');
+    E.presu.lineas[Number(fila.dataset.linea)].mensual = t.value === '1';
+    pintarTotales();
+  }
+});
+
+document.addEventListener('keydown', function (ev) {
+  if (ev.key !== 'Escape') return;
+  if (!$('#confirmar').hidden) $('#confirmar').hidden = true;
+  else if (!$('#ficha').hidden) cerrarFicha();
+});
+
+$('#form-entrar').addEventListener('submit', entrar);
+$('#form-cambio').addEventListener('submit', cambiarClave);
+
+arrancar();
+</script>
 </body>
 </html>
