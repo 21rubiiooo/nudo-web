@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel admin · Nudo</title>
+<!-- Privado: que no salga en Google -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0B0B0C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0C10'/%3E%3Cpath d='M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26' fill='none' stroke='%231F4FE0' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+/* El panel vive en Google Apps Script (gratis y con la hoja de cálculo al lado).
+   Esta página solo lo muestra con la dirección de Nudo. El acceso, las
+   contraseñas y los datos los controla el propio panel, no esta página. */
+html,body{ margin:0; height:100%; background:#F3F3F4; }
+iframe{ display:block; width:100%; height:100%; border:0; }
+.cargando{ position:fixed; inset:0; display:grid; place-items:center; font:500 1.05rem/1.4 -apple-system,"Segoe UI",Roboto,Arial,sans-serif; color:#6E6E73; }
+</style>
+</head>
+<body>
+<p class="cargando">Cargando el panel…</p>
+<iframe src="https://script.google.com/macros/s/AKfycbw5F6UQ49vumAps1P53yLRPhlOAO-0nNHnzlApLWS3SJ67eRlG00t-uOsG9R3mL68qVtA/exec" title="Panel de administración de Nudo" allow="clipboard-write"></iframe>
+</body>
+</html>
