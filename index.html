@@ -2495,8 +2495,23 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   var API_URL = 'https://script.google.com/macros/s/AKfycbxIyzrXfyt10tbjZ076XILiEGrwhoZ7prslY7z1vD4txGbbxcUNAXThviLmc0LdZDXsYA/exec';
   var WA = '34722740211';
 
+  /* Nuestros propios navegadores no cuentan en las estadísticas. Se marcan solos
+     al entrar en el panel (/admin) y a mano con nudodesign.es/?interno=1
+     (?interno=0 lo deshace). Solo afecta a visitas y clics, no al formulario. */
+  var interno = false;
+  try {
+    var q = /[?&]interno=([01])/.exec(location.search);
+    if (q) {
+      if (q[1] === '1') localStorage.setItem('nudo-interno', '1'); else localStorage.removeItem('nudo-interno');
+      alert(q[1] === '1' ? 'Hecho: las visitas desde este navegador ya no cuentan en las estadísticas de Nudo.'
+                         : 'Hecho: este navegador vuelve a contar en las estadísticas.');
+      history.replaceState(null, '', location.pathname + location.hash);
+    }
+    interno = localStorage.getItem('nudo-interno') === '1';
+  } catch(e){}
+
   function avisa(evento){
-    if (!API_URL) return;
+    if (!API_URL || interno) return;
     /* Solo si la persona ha aceptado las estadísticas en el aviso de cookies */
     if (!window.nudoConsentimiento || !window.nudoConsentimiento.estadisticas) return;
     try {

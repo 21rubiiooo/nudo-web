@@ -616,6 +616,8 @@ async function salir() {
 }
 
 function abrirPanel() {
+  // Quien entra al panel es de Nudo: sus visitas a la web dejan de contar en las estadísticas.
+  try { localStorage.setItem('nudo-interno', '1'); } catch (e) { /* sin almacenamiento: no pasa nada */ }
   mostrarSolo('app');
   if (E.datos) pintarTodo();
   else { $('#cargando').hidden = false; $('#cargando').textContent = 'Cargando datos…'; mostrarPestana(E.pestana); }
