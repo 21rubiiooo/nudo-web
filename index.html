@@ -881,34 +881,6 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 @media (prefers-reduced-motion:reduce){ .aparece{ opacity:1 !important; transform:none !important; } }
 
 
-/* ==========================================================================
-   CITA — el calendario de Calendly dentro de la web
-   ========================================================================== */
-.cita{ position:fixed; inset:0; z-index:160; display:flex; align-items:flex-end; justify-content:center; }
-.cita[hidden]{ display:none; }
-.cita__fondo{ position:absolute; inset:0; background:rgba(6,8,14,.72); opacity:0; transition:opacity .4s ease; }
-.cita.abierto .cita__fondo{ opacity:1; }
-.cita__hoja{
-  position:relative; width:min(1000px,100%); height:92svh; display:flex; flex-direction:column;
-  background:#fff; color:var(--tinta); border-radius:24px 24px 0 0; overflow:hidden;
-  transform:translateY(100%); transition:transform .55s cubic-bezier(.32,.72,0,1);
-}
-.cita.abierto .cita__hoja{ transform:none; }
-@media (min-width:760px){
-  .cita{ align-items:center; }
-  .cita__hoja{ height:min(760px,90svh); border-radius:24px; transform:translateY(30px) scale(.97); opacity:0; transition:transform .5s cubic-bezier(.32,.72,0,1), opacity .35s ease; }
-  .cita.abierto .cita__hoja{ transform:none; opacity:1; }
-}
-.cita__cab{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 22px; border-bottom:1px solid var(--linea); }
-.cita__cab b{ display:block; font-size:1.15rem; letter-spacing:-.02em; }
-.cita__cab span{ display:block; font-size:.9rem; color:var(--tinta-2); margin-top:2px; }
-.cita__x{ flex:none; width:38px; height:38px; border-radius:50%; border:0; background:#F1F2F4; color:var(--tinta); font-size:1.3rem; line-height:1; cursor:pointer; }
-.cita__x:hover{ background:#E4E6EA; }
-.cita__marco{ position:relative; flex:1; background:#fff; }
-.cita__marco iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
-.cita__carga{ position:absolute; inset:0; display:grid; place-items:center; color:var(--tinta-2); font-size:.95rem; }
-.cita__pie{ padding:12px 22px calc(12px + env(safe-area-inset-bottom,0px)); border-top:1px solid var(--linea); font-size:.88rem; color:var(--tinta-2); text-align:center; }
-.cita__pie a{ color:var(--brasa); font-weight:600; }
 
 /* ==========================================================================
    PIE — el cierre
@@ -1153,7 +1125,6 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 .pie{ color:rgba(255,255,255,.78); }
 .pie h4{ font-size:.8rem; color:rgba(255,255,255,.62); }
 .pie ul{ font-size:1.05rem; gap:12px; }
-.cita__pie{ font-size:1rem; }
 
 /* Cómo funciona: los seis pasos a la vista */
 #acto5.pasos{ height:auto; background:radial-gradient(ellipse 70% 60% at 50% 46%, #FFFFFF, var(--papel) 60%, #E4E8F0 100%); color:var(--tinta); padding:clamp(90px,14svh,150px) clamp(18px,5vw,48px); }
@@ -1553,18 +1524,6 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
 
 
-<!-- ===================== CITA (Calendly) ===================== -->
-<div class="cita" id="cita" hidden role="dialog" aria-modal="true" aria-labelledby="citaTit">
-  <div class="cita__fondo" data-cierra-cita></div>
-  <div class="cita__hoja">
-    <div class="cita__cab">
-      <div><b id="citaTit">Reserva tu llamada</b><span>Cinco minutos. Elige el día y la hora que te vaya bien.</span></div>
-      <button class="cita__x" type="button" data-cierra-cita aria-label="Cerrar">×</button>
-    </div>
-    <div class="cita__marco" id="citaMarco"><p class="cita__carga">Cargando el calendario…</p></div>
-    <p class="cita__pie">¿Prefieres llamar? <a href="tel:+34722740211">722 74 02 11</a> · ¿O escribirnos? <a href="https://wa.me/34722740211" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a></p>
-  </div>
-</div>
 
 <!-- ===================== PANEL DE SERVICIO ===================== -->
 <div class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="panelTit" hidden>
@@ -1659,7 +1618,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       <li><strong>Actividad:</strong> diseño, publicación y mantenimiento de páginas web para negocios de hostelería.</li>
     </ul>
     <p>Los textos, el diseño, el logotipo y el código de esta web son de Nudo o se usan con permiso. No se pueden copiar ni reutilizar con fines comerciales sin autorización. Las fotos de los ejemplos son de bancos de imágenes libres (Unsplash) y los locales de los ejemplos son inventados.</p>
-    <p>Intentamos que todo lo que publicamos sea correcto y esté al día, pero no respondemos de los errores puntuales ni de las interrupciones del servicio que no dependan de nosotros. Si enlazamos a otras webs (WhatsApp, Calendly, Google…), no somos responsables de su contenido.</p>
+    <p>Intentamos que todo lo que publicamos sea correcto y esté al día, pero no respondemos de los errores puntuales ni de las interrupciones del servicio que no dependan de nosotros. Si enlazamos a otras webs (WhatsApp, Google…), no somos responsables de su contenido.</p>
 
     <!-- ============ 2. PRIVACIDAD (RGPD art. 13 y LOPDGDD) ============ -->
     <h4 id="legalPrivacidad">2. Privacidad: qué hacemos con tus datos</h4>
@@ -1689,11 +1648,9 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       <li>GitHub (alojamiento de esta web) y DonDominio (dominio).</li>
       <li>Zoho (correo electrónico).</li>
       <li>WhatsApp / Meta (mensajería), si nos escribes por ahí.</li>
-      <li>Calendly (reserva de llamadas), si reservas una.</li>
-      <li>Stripe (cobros con tarjeta), si nos contratas y pagas con tarjeta.</li>
       <li>Nuestra gestoría, para la contabilidad y los impuestos.</li>
     </ul>
-    <p>Algunos de ellos (Google, GitHub, Meta, Calendly, Stripe) pueden tratar datos en Estados Unidos. Esas transferencias están amparadas por el Marco de Privacidad de Datos UE-EE. UU. o por las cláusulas contractuales tipo de la Comisión Europea.</p>
+    <p>Algunos de ellos (Google, GitHub, Meta) pueden tratar datos en Estados Unidos. Esas transferencias están amparadas por el Marco de Privacidad de Datos UE-EE. UU. o por las cláusulas contractuales tipo de la Comisión Europea.</p>
 
     <p><strong>Tus derechos:</strong> puedes pedirnos acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad, y retirar tu consentimiento cuando quieras, escribiendo a <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a>. Te respondemos en un mes como máximo. Si crees que no hemos tratado bien tus datos, puedes reclamar ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener">aepd.es</a>).</p>
 
@@ -1705,14 +1662,14 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       <li><strong>Estadísticas (solo si las aceptas):</strong> contamos las visitas y los clics en los botones principales para saber qué funciona. No usan cookies ni guardan tu IP ni nada que te identifique; solo se guarda en tu navegador, durante la visita, un dato para no contar dos veces la misma visita. Los recuentos se guardan en una hoja de Google privada.</li>
       <li><strong>Tipografía de Google (solo si la aceptas):</strong> la letra de la web se descarga de Google Fonts, y para enviártela Google recibe la dirección IP de tu navegador. Si no la aceptas, la web se ve igual de bien con la letra de tu dispositivo.</li>
     </ul>
-    <p>Si pulsas en WhatsApp, Calendly o Google Maps, sales a esas webs y se aplican sus propias políticas de cookies.</p>
+    <p>Si pulsas en WhatsApp o Google Maps, sales a esas webs y se aplican sus propias políticas de cookies.</p>
 
     <!-- ============ 4. CONDICIONES (resumen; el contrato es la Confirmación de pedido) ============ -->
     <h4 id="legalCondiciones">4. Condiciones del servicio (resumen)</h4>
     <p>Nuestros servicios son para profesionales y empresas, no para consumidores. Lo que manda en cada encargo es el presupuesto aceptado y la confirmación de pedido que firmamos contigo; esto es un resumen.</p>
     <ul>
       <li><strong>Precio:</strong> el del presupuesto que te enviamos. Como referencia, la web parte de 249 € (pago único) y el mantenimiento de 39 €/mes, opcional y sin permanencia. A estos importes hay que sumarles el IVA (21 %). El precio de la web incluye dominio y alojamiento durante el primer año.</li>
-      <li><strong>La garantía:</strong> antes de cobrarte nada te enseñamos una maqueta de tu local. Si no te convence, no nos debes nada. Se paga al aceptar la maqueta y encargarnos la web definitiva; desde ese momento el importe no se devuelve. La web final incluye dos rondas de cambios.</li>
+      <li><strong>La garantía:</strong> antes de cobrarte nada te enseñamos una maqueta de tu local. Si no te convence, no nos debes nada. Se paga al aceptar la maqueta y encargarnos la web definitiva, por transferencia bancaria o Bizum; desde ese momento el importe no se devuelve. La web final incluye dos rondas de cambios.</li>
       <li><strong>Mantenimiento:</strong> se paga mes a mes por adelantado y puedes darte de baja cuando quieras, avisando antes de la siguiente renovación; el mes ya pagado no se devuelve. Si te das de baja, te damos el control del dominio, que está a tu nombre, y tus archivos en quince días.</li>
       <li><strong>Tus fotos y tu contenido:</strong> son tuyos. Al mandárnoslos nos autorizas a publicarlos en tu web y, salvo que nos digas que no, a enseñarla como ejemplo de nuestro trabajo. Si en las fotos sale personal o clientela reconocible, necesitas su permiso. La carta, los precios y los alérgenos que publiquemos son los que nos mandes; su exactitud es responsabilidad del local (Reglamento UE 1169/2011).</li>
       <li><strong>De quién es la web:</strong> tuyos son el dominio, tus textos, tu marca, tus fotos y el diseño de tu página una vez pagada. Nuestro es el código base que reutilizamos entre proyectos y la marca Nudo.</li>
@@ -2528,52 +2485,6 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   for (var j=0;j<els.length;j++){ els[j].style.transitionDelay = (els[j].parentNode.classList.contains('compro__rej') || els[j].classList.contains('pilar') ? ((j%3)*90)+'ms' : '0ms'); io.observe(els[j]); }
 })();
 
-/* Reservar llamada: abre Calendly dentro de la web.
-   Para cambiar de calendario, cambia solo CALENDLY. */
-(function(){
-  var CALENDLY = 'https://calendly.com/eric-nudodesign/llamada';
-  var cita = document.getElementById('cita'), marco = document.getElementById('citaMarco');
-  if (!cita) return;
-  var cargado = false, ultimo = null;
-  function url(){
-    var sep = CALENDLY.indexOf('?') < 0 ? '?' : '&';
-    return CALENDLY + sep + 'hide_gdpr_banner=1&primary_color=1f4fe0&embed_domain=' +
-      encodeURIComponent(location.hostname || 'nudodesign.es') + '&embed_type=Inline';
-  }
-  function abre(origen){
-    ultimo = origen || null;
-    if (!cargado){
-      var f = document.createElement('iframe');
-      f.src = url(); f.title = 'Calendario para reservar una llamada con Nudo'; f.loading = 'lazy';
-      f.addEventListener('load', function(){ var c = marco.querySelector('.cita__carga'); if (c) c.remove(); });
-      marco.appendChild(f); cargado = true;
-    }
-    cita.hidden = false;
-    document.documentElement.style.overflow = 'hidden';
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ cita.classList.add('abierto'); }); });
-    var x = cita.querySelector('.cita__x'); if (x) x.focus();
-  }
-  function cierra(){
-    cita.classList.remove('abierto');
-    document.documentElement.style.overflow = '';
-    setTimeout(function(){ cita.hidden = true; if (ultimo && ultimo.focus) ultimo.focus(); }, 450);
-  }
-  document.addEventListener('click', function(e){
-    var b = e.target.closest ? e.target.closest('[data-cita]') : null;
-    if (b){
-      if (CALENDLY.indexOf('TU_USUARIO') > -1){      /* sin Calendly todavía: va a WhatsApp */
-        e.preventDefault(); window.open('https://wa.me/34722740211', '_blank', 'noopener'); return;
-      }
-      if (e.metaKey || e.ctrlKey) return;            /* nueva pestaña: que vaya a Calendly */
-      e.preventDefault();
-      var panel = document.querySelector('.panel.abierto .panel__x'); if (panel) panel.click();
-      abre(b); return;
-    }
-    if (e.target.closest && e.target.closest('[data-cierra-cita]')) cierra();
-  });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !cita.hidden) cierra(); });
-})();
-
 /* PRESUPUESTO y ESTADÍSTICAS.
    API_URL es la app web de NudoDesign/admin/api (ver admin/README.md): guarda la
    solicitud en la hoja de Google, le pone número y avisa a hola@ con
@@ -2612,7 +2523,6 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     if (a.hasAttribute('data-presupuesto')) avisa('clic_presupuesto');
     else if (h.indexOf('wa.me') > -1) avisa('clic_whatsapp');
     else if (h.indexOf('tel:') === 0) avisa('clic_telefono');
-    else if (h.indexOf('calendly.com') > -1) avisa('clic_llamada');
     else if (h.indexOf('ejemplos') > -1) avisa('clic_ejemplos');
     else if (a.getAttribute('data-abre') === 'web') avisa('abrir_panel_web');
     else if (a.getAttribute('data-abre') === 'mant') avisa('abrir_panel_mant');
