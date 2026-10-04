@@ -5,88 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Local ficticio: no debe aparecer en buscadores -->
 <meta name="robots" content="noindex, nofollow">
-<title>Café Nudo · Desayunos y brunch (ejemplo)</title>
-<meta name="description" content="Maqueta de ejemplo de una web para cafetería de desayunos y brunch. Local ficticio. Hecha por Nudo.">
-<meta name="theme-color" content="#F8F4EC">
-<!-- Icono en línea: evita el 404 de /favicon.ico -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%239A4A28'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia' font-size='20' fill='%23fff'%3EN%3C/text%3E%3C/svg%3E">
+<title>Café Nudo · Café de especialidad y brunch (ejemplo)</title>
+<meta name="description" content="Maqueta de ejemplo de una web para cafetería de especialidad con desayunos y brunch. Local ficticio. Hecha por Nudo.">
+<meta name="theme-color" content="#1A1411">
+<meta name="color-scheme" content="dark">
+<!-- Icono en línea (SVG en texto plano): evita el 404 de /favicon.ico -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231A1411'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23C8894B' stroke-width='2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://images.unsplash.com">
 <style>
 /* =========================================================
-   PALETA: papel crema, barro (acento cálido) y salvia.
-   Estética clara de revista: mucho aire, serif grande y
-   ninguna foto a pantalla completa (así se distingue del bar
-   de tapas y del menú del día, que abren con foto oscura).
+   CONCEPTO: café de especialidad nocturno.
+   Fondo espresso casi negro, texto crema, un único acento
+   caramelo, líneas finas de 1 px y mucho aire.
+   Titulares en sans geométrica fina (Space Grotesk) con
+   números grandes; texto en Inter.
    ========================================================= */
 :root{
-  --papel:#F8F4EC;          /* fondo general */
-  --papel-2:#EFE7D9;        /* bandas alternas */
-  --blanco:#FFFDF9;
-  --tinta:#2A2320;          /* texto principal */
-  --tinta-2:#574A41;        /* texto secundario: contraste > 7:1 sobre papel */
-  --barro:#9A4A28;          /* acento: botones y precios (AA con blanco y sobre papel) */
-  --barro-osc:#7C3A1E;
-  --barro-suave:#F3E1D3;
-  --salvia:#7D9173;
-  --salvia-osc:#3D5236;
-  --salvia-suave:#E3E9DC;
-  --borde:#DDD1BF;
-  --rojo:#A23B2A;
-  --radio:22px;
+  --fondo:#1A1411;          /* espresso */
+  --fondo-2:#211915;        /* bandas alternas */
+  --fondo-3:#2A201B;        /* campos y superficies */
+  --crema:#F2E8DC;          /* texto principal: 15:1 sobre el fondo */
+  --crema-2:#BFAF9F;        /* texto secundario: 8:1 */
+  --crema-3:#9C8C7C;        /* solo detalles grandes: 5,2:1 */
+  --caramelo:#C8894B;       /* acento único: 5,6:1 sobre el fondo */
+  --caramelo-claro:#D9A06A;
+  --linea:rgba(242,232,220,.14);
+  --linea-2:rgba(242,232,220,.26);
+  --verde-ok:#5DC77A;
+  --rojo-ko:#E77B62;
   --banda-h:64px;
-  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
-  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --titulo:"Space Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --texto:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   margin:0;
-  font-family:var(--sans);
-  font-size:18px;            /* texto base grande: público mayor */
-  line-height:1.6;
-  color:var(--tinta);
-  background:var(--papel);
+  font-family:var(--texto);
+  font-size:18px;
+  line-height:1.65;
+  color:var(--crema);
+  background:var(--fondo);
   /* En móvil la banda de Nudo va abajo: dejamos hueco */
-  padding-bottom:calc(var(--banda-h) + 24px);
+  padding-bottom:calc(var(--banda-h) + 20px);
 }
-/* height:auto: los atributos width/height solo reservan la proporción, no fijan el alto */
 img{max-width:100%;height:auto;display:block}
-a{color:var(--barro)}
-h1,h2{font-family:var(--serif);font-weight:400;line-height:1.02;margin:0 0 .4em;letter-spacing:-.01em}
-h2{font-size:clamp(2.6rem,9vw,4.2rem)}
-h2 em,h1 em{font-style:italic;color:var(--barro)}
-h3{font-size:1.3rem;line-height:1.25;margin:0 0 .4em;font-weight:700}
+a{color:var(--caramelo-claro)}
+h1,h2,h3,h4{font-family:var(--titulo);font-weight:400;margin:0;letter-spacing:-.02em}
+h2{font-size:clamp(2.3rem,8vw,4rem);line-height:1.02;font-weight:300}
+h2 span{color:var(--caramelo)}
 p{margin:0 0 1em}
-.contenedor{width:100%;max-width:1180px;margin:0 auto;padding:0 20px}
-section{padding:72px 0;scroll-margin-top:80px}
-.antetitulo{
-  display:flex;align-items:center;gap:12px;
-  font-weight:600;font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--salvia-osc);margin-bottom:14px
-}
-/* Filete fino delante del antetítulo, recurso de revista */
-.antetitulo::before{content:"";width:34px;height:2px;background:currentColor;flex:none}
-.intro{font-size:1.12rem;color:var(--tinta-2);max-width:36em}
-:focus-visible{outline:3px solid var(--barro);outline-offset:3px;border-radius:8px}
+.contenedor{width:100%;max-width:1240px;margin:0 auto;padding:0 20px}
+section{padding:88px 0;scroll-margin-top:72px}
+:focus-visible{outline:2px solid var(--caramelo);outline-offset:4px}
 
-/* ---------- Botones grandes (≥ 56 px) ---------- */
+/* Etiqueta pequeña con número: "02 — La carta" */
+.rotulo{
+  display:flex;align-items:center;gap:14px;margin:0 0 22px;
+  font-family:var(--titulo);font-size:.9rem;letter-spacing:.18em;text-transform:uppercase;color:var(--crema-2)
+}
+.rotulo b{color:var(--caramelo);font-weight:500}
+.rotulo::after{content:"";flex:1;max-width:120px;height:1px;background:var(--linea-2)}
+.entradilla{font-size:1.1rem;color:var(--crema-2);max-width:34em;margin-top:18px}
+.cabeza-seccion{display:grid;gap:8px;margin-bottom:48px}
+
+/* ---------- Botones (≥ 52 px) ---------- */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.6em;
-  min-height:56px;padding:.8em 1.5em;border-radius:14px;border:2px solid transparent;
-  font:inherit;font-weight:700;font-size:1.05rem;text-decoration:none;cursor:pointer;
-  transition:background .2s ease,border-color .2s ease;
+  min-height:54px;padding:.8em 1.6em;border-radius:2px;border:1px solid transparent;
+  font:inherit;font-weight:600;font-size:1rem;letter-spacing:.02em;text-decoration:none;cursor:pointer;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
 }
-.btn svg{width:22px;height:22px;flex:none}
-.btn-barro{background:var(--barro);color:#fff}
-.btn-barro:hover{background:var(--barro-osc)}
-.btn-linea{background:transparent;color:var(--tinta);border-color:var(--tinta)}
-.btn-linea:hover{background:var(--tinta);color:var(--papel)}
-.btn-salvia{background:var(--salvia-osc);color:#fff}
-.btn-salvia:hover{background:#2E3F29}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-caramelo{background:var(--caramelo);color:#1A1411}
+.btn-caramelo:hover{background:var(--caramelo-claro)}
+.btn-linea{background:transparent;color:var(--crema);border-color:var(--linea-2)}
+.btn-linea:hover{border-color:var(--crema)}
 .btn-whatsapp{background:#25D366;color:#0B2B16}
 .btn-whatsapp:hover{background:#3be07a}
 .btn-bloque{width:100%}
@@ -96,14 +94,13 @@ section{padding:72px 0;scroll-margin-top:80px}
    ========================================================= */
 .banda-nudo{
   position:fixed;left:0;right:0;bottom:0;z-index:100;
-  background:#1F1A17;color:#fff;
+  background:#0E0A08;color:#fff;border-top:1px solid var(--linea);
   display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
-  box-shadow:0 -6px 24px rgba(0,0,0,.25);
+  padding:8px 14px calc(8px + env(safe-area-inset-bottom));
   min-height:var(--banda-h);
 }
-.banda-nudo p{margin:0;font-size:.9rem;line-height:1.3;font-weight:600}
-.banda-nudo p strong{color:#F4D9A8}
+.banda-nudo p{margin:0;font-size:.9rem;line-height:1.3;font-weight:500;color:var(--crema-2)}
+.banda-nudo p strong{color:var(--crema);font-weight:600}
 .banda-nudo a{
   flex:none;background:#25D366;color:#0B2B16;text-decoration:none;font-weight:700;
   font-size:.95rem;padding:.7em 1em;border-radius:999px;min-height:48px;
@@ -112,293 +109,307 @@ section{padding:72px 0;scroll-margin-top:80px}
 .banda-nudo a svg{width:20px;height:20px}
 .banda-nudo a:hover{background:#3be07a}
 
-/* ---------- Cabecera: fondo sólido (sin backdrop-filter, que lastra el scroll en móvil) ---------- */
-.cabecera{position:sticky;top:0;z-index:50;background:var(--papel);border-bottom:1px solid var(--borde)}
-.cabecera .contenedor{display:flex;align-items:center;justify-content:space-between;height:70px;gap:16px}
-.logo{display:flex;align-items:baseline;gap:8px;text-decoration:none;color:var(--tinta)}
-.logo b{font-family:var(--serif);font-weight:400;font-size:2rem;line-height:1}
-.logo i{font-family:var(--serif);color:var(--barro);font-size:2rem;line-height:1}
-.menu-escritorio{display:none;gap:30px;align-items:center}
-.menu-escritorio a{color:var(--tinta);text-decoration:none;font-weight:600}
-.menu-escritorio a:hover{color:var(--barro)}
-.cabecera .btn{min-height:48px;padding:.5em 1.1em;font-size:1rem}
+/* ---------- Cabecera ---------- */
+.cabecera{position:sticky;top:0;z-index:50;background:var(--fondo);border-bottom:1px solid var(--linea)}
+.cabecera .contenedor{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--crema);font-family:var(--titulo);font-size:1.35rem;font-weight:500;letter-spacing:-.01em}
+.logo::before{content:"";width:16px;height:16px;border:1.5px solid var(--caramelo);border-radius:50%;flex:none}
+.menu-escritorio{display:none;gap:34px;align-items:center}
+.menu-escritorio a{color:var(--crema-2);text-decoration:none;font-size:1rem;font-weight:500}
+.menu-escritorio a:hover{color:var(--crema)}
+.cabecera .btn{min-height:48px;padding:.5em 1.2em}
 
 /* =========================================================
-   1. PORTADA PARTIDA: texto a un lado, mosaico al otro
+   1. PORTADA: foto vertical recortada + texto
    ========================================================= */
-.portada{padding:36px 0 56px}
+.portada{padding:0 0 72px}
 .portada-grid{display:grid;gap:36px}
-.portada-lugar{font-weight:600;color:var(--tinta-2);font-size:1rem;margin-bottom:10px}
-.portada h1{font-size:clamp(4rem,19vw,8.2rem);margin-bottom:.12em}
-.portada h1 em{display:block;font-size:.5em;line-height:1.1;margin-top:.1em}
-.portada .frase{font-size:clamp(1.15rem,4.2vw,1.35rem);color:var(--tinta-2);max-width:26em;margin-bottom:22px}
-.estado{
-  display:inline-flex;align-items:center;flex-wrap:wrap;gap:.5em;font-weight:700;font-size:1.02rem;
-  background:var(--blanco);color:var(--tinta);padding:.6em 1.1em;border-radius:999px;
-  border:1px solid var(--borde);margin-bottom:22px
+.portada-foto{margin:16px 0 0;position:relative;height:min(52vh,420px);min-height:280px;background:var(--fondo-3)}
+.portada-foto img{width:100%;height:100%;object-fit:cover}
+.portada-foto figcaption{
+  position:absolute;left:0;bottom:0;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--crema);background:rgba(26,20,17,.78);padding:.35em .8em
 }
-.estado .punto{width:12px;height:12px;border-radius:50%;background:#999;flex:none}
-.estado.abierto .punto{background:#2E8B47;box-shadow:0 0 0 4px rgba(46,139,71,.2)}
-.estado.cerrado .punto{background:var(--rojo);box-shadow:0 0 0 4px rgba(162,59,42,.18)}
-.estado small{font-weight:500;color:var(--tinta-2);font-size:.98rem}
+.portada-lugar{font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;color:var(--crema-2);margin-bottom:18px}
+.portada h1{font-size:clamp(3.6rem,18vw,7.4rem);line-height:.92;font-weight:300;letter-spacing:-.045em;margin-bottom:24px}
+.portada h1 span{display:block;color:var(--caramelo)}
+.portada .frase{font-size:clamp(1.12rem,3.6vw,1.3rem);color:var(--crema-2);max-width:26em;margin-bottom:28px}
+
+.estado{
+  display:inline-flex;align-items:center;flex-wrap:wrap;gap:.6em;
+  font-weight:600;font-size:1rem;padding:.7em 0;margin-bottom:26px;
+  border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)
+}
+.estado .punto{width:9px;height:9px;border-radius:50%;background:var(--crema-3);flex:none}
+.estado.abierto .punto{background:var(--verde-ok);box-shadow:0 0 0 4px rgba(93,199,122,.18)}
+.estado.cerrado .punto{background:var(--rojo-ko);box-shadow:0 0 0 4px rgba(231,123,98,.16)}
+.estado small{font-weight:400;color:var(--crema-2);font-size:1rem}
 .portada-botones{display:flex;flex-direction:column;gap:12px}
 
-/* Mosaico: arco alto + círculo + rectángulo redondeado */
-.mosaico{position:relative;display:grid;grid-template-columns:1.1fr 1fr;grid-template-rows:auto auto;gap:12px}
-.mosaico figure{margin:0;overflow:hidden;background:var(--papel-2)}
-.mosaico img{width:100%;height:100%;object-fit:cover}
-/* El arco ocupa las dos filas y toma su alto del círculo + el rectángulo */
-.mosaico .m-arco{grid-row:1 / span 2;border-radius:999px 999px 22px 22px;position:relative}
-.mosaico .m-arco img{position:absolute;inset:0}
-.mosaico .m-circulo{border-radius:50%;aspect-ratio:1}
-.mosaico .m-rect{border-radius:22px;aspect-ratio:1/1.05}
-/* Sello redondo del brunch, apoyado sobre el mosaico */
-.sello{
-  position:absolute;left:50%;bottom:-18px;transform:translateX(-50%);
-  width:132px;height:132px;border-radius:50%;background:var(--salvia-osc);color:#fff;
-  display:grid;place-content:center;text-align:center;line-height:1.15;
-  border:5px solid var(--papel);text-decoration:none
-}
-.sello small{font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
-.sello b{font-family:var(--serif);font-weight:400;font-size:1.9rem;line-height:1}
-
-/* Franja de tres ideas bajo la portada */
-.franja{border-top:1px solid var(--borde);border-bottom:1px solid var(--borde);background:var(--blanco)}
-.franja ul{list-style:none;margin:0 auto;padding:0 20px;max-width:1180px;display:grid}
-.franja li{padding:18px 0;display:flex;gap:14px;align-items:center;font-weight:600;border-bottom:1px solid var(--borde)}
-.franja li:last-child{border-bottom:0}
-.franja span{font-family:var(--serif);font-size:2rem;color:var(--barro);line-height:1;width:1.2em;flex:none}
+.claves{list-style:none;margin:40px 0 0;padding:0;display:grid;border-top:1px solid var(--linea)}
+.claves li{display:flex;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--linea);color:var(--crema-2);font-size:1rem}
+.claves b{font-family:var(--titulo);font-weight:400;color:var(--caramelo);font-size:.95rem;flex:none;width:1.8em}
 
 /* =========================================================
-   2. DESAYUNOS CON OFERTA (tickets)
+   2. DESAYUNOS DE OFERTA: tres columnas con precio grande
    ========================================================= */
-.combos{background:var(--salvia-suave)}
-.combos-cabeza{display:grid;gap:8px;margin-bottom:28px}
-.tickets{list-style:none;margin:0;padding:0;display:grid;gap:16px}
-.ticket{
-  position:relative;background:var(--blanco);border-radius:18px;padding:24px 22px;
-  display:grid;grid-template-columns:1fr auto;gap:6px 16px;align-items:end;
-  border:1px solid #CFD8C6
-}
-/* Muescas laterales, como un ticket de papel */
-.ticket::before,.ticket::after{
-  content:"";position:absolute;top:50%;width:22px;height:22px;border-radius:50%;
-  background:var(--salvia-suave);transform:translateY(-50%);border:1px solid #CFD8C6
-}
-.ticket::before{left:-12px;clip-path:inset(0 0 0 50%)}
-.ticket::after{right:-12px;clip-path:inset(0 50% 0 0)}
-.ticket .hasta{grid-column:1 / -1;font-size:.9rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--salvia-osc)}
-.ticket h3{font-family:var(--serif);font-weight:400;font-size:2rem;line-height:1.05;margin:0}
-.ticket p{margin:4px 0 0;color:var(--tinta-2);font-size:1rem}
-.ticket .precio-ticket{font-family:var(--serif);font-size:2.6rem;color:var(--barro);line-height:1;white-space:nowrap}
-.combos .nota{margin-top:18px}
+.ofertas{background:var(--fondo-2);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+.lista-ofertas{list-style:none;margin:0;padding:0;display:grid}
+.oferta{padding:28px 0;border-top:1px solid var(--linea);display:grid;grid-template-columns:1fr auto;gap:4px 20px;align-items:end}
+.oferta:last-child{border-bottom:1px solid var(--linea)}
+.oferta .tipo{grid-column:1 / -1;font-family:var(--titulo);font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--crema-2)}
+.oferta h3{font-size:1.45rem;font-weight:400;line-height:1.2}
+.oferta p{margin:4px 0 0;color:var(--crema-2);font-size:1rem}
+.oferta .cifra{font-family:var(--titulo);font-weight:300;font-size:clamp(2.6rem,9vw,3.6rem);line-height:1;color:var(--caramelo);white-space:nowrap;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.nota{font-size:1rem;color:var(--crema-2);margin-top:20px}
 
 /* =========================================================
-   3. LA CARTA: pestañas con miniatura + hoja de menú impreso
+   3. LA CARTA: pestañas finas subrayadas + lista en 2 columnas
    ========================================================= */
-.pestanas{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:30px 0 22px}
+.pestanas{
+  display:flex;gap:28px;border-bottom:1px solid var(--linea);margin-bottom:40px;
+  overflow-x:auto;scrollbar-width:none
+}
+.pestanas::-webkit-scrollbar{display:none}
 .pestana{
-  display:flex;align-items:center;gap:12px;min-height:64px;padding:8px 14px 8px 8px;
-  border-radius:16px;border:2px solid var(--borde);background:var(--blanco);color:var(--tinta);
-  font:inherit;font-weight:700;font-size:1.02rem;text-align:left;cursor:pointer;line-height:1.2
+  flex:none;position:relative;background:none;border:0;color:var(--crema-2);cursor:pointer;
+  font:inherit;font-family:var(--titulo);font-size:1.1rem;font-weight:400;letter-spacing:.01em;
+  min-height:52px;padding:0 0 4px;display:inline-flex;align-items:center;gap:8px
 }
-.pestana img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none;background:var(--papel-2)}
-.pestana:hover{border-color:var(--barro)}
-.pestana[aria-selected="true"]{background:var(--tinta);border-color:var(--tinta);color:var(--papel)}
-.pestanas .pestana:last-child{grid-column:1 / -1}
+.pestana small{font-size:.8rem;color:var(--crema-3);font-variant-numeric:tabular-nums}
+.pestana::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:transparent;transition:background .2s ease}
+.pestana:hover{color:var(--crema)}
+.pestana[aria-selected="true"]{color:var(--crema)}
+.pestana[aria-selected="true"]::after{background:var(--caramelo)}
 
-/* La hoja: papel blanco con doble filete, como una carta impresa */
-.hoja{
-  background:var(--blanco);border:1px solid var(--borde);border-radius:6px;
-  padding:10px;box-shadow:0 1px 0 var(--borde),0 18px 40px -24px rgba(42,35,32,.35)
-}
-.hoja-dentro{border:1px solid var(--borde);border-radius:3px;padding:30px 18px 22px}
 .panel[hidden]{display:none}
-.panel-cabeza{text-align:center;margin-bottom:26px}
-.panel-cabeza h3{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,8vw,3.2rem);line-height:1;margin:0 0 .2em}
-.panel-cabeza p{margin:0;color:var(--tinta-2);font-style:italic;font-family:var(--serif);font-size:1.3rem}
-.adorno{display:block;width:60px;height:14px;margin:12px auto 0;color:var(--barro)}
+.panel + .panel{margin-top:56px}          /* sin JS se ven seguidos */
+.panel-cabeza{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 20px;margin-bottom:12px}
+.panel-cabeza h3{font-size:clamp(1.8rem,6vw,2.4rem);font-weight:300}
+.panel-cabeza p{margin:0;color:var(--crema-2);font-size:1rem}
+.subgrupo{font-family:var(--titulo);font-size:.9rem;letter-spacing:.16em;text-transform:uppercase;color:var(--caramelo);margin:44px 0 4px}
 
-.platos{list-style:none;margin:0;padding:0;display:grid;gap:0 48px}
-.plato{padding:16px 0;border-bottom:1px dashed var(--borde)}
-.plato-linea{display:flex;align-items:baseline;gap:10px}
-.plato h4{margin:0;font-size:1.15rem;font-weight:700;line-height:1.3}
-/* Puntos guía entre el nombre y el precio, como en las cartas de papel */
-.puntos{flex:1;border-bottom:2px dotted #BFAF98;transform:translateY(-5px);min-width:16px}
-.precio{flex:none;font-weight:700;font-size:1.15rem;color:var(--barro);white-space:nowrap}
-.plato p{margin:.3em 0 .6em;color:var(--tinta-2);font-size:1rem;line-height:1.5}
+.platos{list-style:none;margin:0;padding:0;display:grid;column-gap:64px}
+.plato{padding:20px 0;border-bottom:1px solid var(--linea)}
+.plato-linea{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.plato h4{font-family:var(--texto);font-size:1.08rem;font-weight:600;line-height:1.35;letter-spacing:0}
+.precio{flex:none;font-family:var(--titulo);font-weight:500;font-size:1.15rem;color:var(--caramelo);white-space:nowrap;font-variant-numeric:tabular-nums}
+.plato p{margin:.25em 0 .65em;color:var(--crema-2);font-size:1rem;line-height:1.5}
 .marcas{display:flex;flex-wrap:wrap;gap:6px}
 .etiqueta{
-  display:inline-flex;align-items:center;gap:5px;font-size:.86rem;font-weight:700;
-  padding:.25em .75em;border-radius:6px;line-height:1.3
+  display:inline-flex;align-items:center;font-size:.85rem;font-weight:600;
+  padding:.2em .7em;border-radius:2px;line-height:1.35;border:1px solid
 }
-.etiqueta.vegano{background:#DCEBD5;color:#264423}
-.etiqueta.singluten{background:#F6E3BE;color:#5E3F0C}
+.etiqueta.vegano{color:#B7D6A3;border-color:rgba(183,214,163,.45);background:rgba(183,214,163,.08)}
+.etiqueta.singluten{color:#E9C891;border-color:rgba(233,200,145,.45);background:rgba(233,200,145,.08)}
 .alergeno{
-  display:inline-flex;align-items:center;gap:5px;font-size:.86rem;font-weight:600;
-  padding:.2em .65em .2em .25em;border-radius:999px;background:var(--papel);border:1px solid var(--borde);color:var(--tinta);line-height:1.3
+  display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:500;
+  padding:.18em .7em .18em .22em;border-radius:999px;border:1px solid var(--linea-2);color:var(--crema);line-height:1.35
 }
 .alergeno i,.leyenda i{
   font-style:normal;width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;
-  font-size:.7rem;font-weight:700;color:#fff;flex:none
+  font-size:.66rem;font-weight:700;color:#fff;flex:none;letter-spacing:0
 }
-.sin-alergenos{font-size:.86rem;color:var(--tinta-2);font-weight:600}
+.sin-alergenos{font-size:.85rem;color:var(--crema-2);font-weight:500;align-self:center}
 
-/* Colores de cada alérgeno (misma letra/código en carta y leyenda) */
-.a-gluten i{background:#9C6A22}.a-crustaceos i{background:#B24A30}.a-huevo i{background:#A77F0C}
+/* Colores de cada alérgeno (mismo código en carta y leyenda) */
+.a-gluten i{background:#9C6A22}.a-crustaceos i{background:#B24A30}.a-huevo i{background:#97730B}
 .a-pescado i{background:#3D6F99}.a-cacahuetes i{background:#8A5A36}.a-soja i{background:#5C7C30}
 .a-lacteos i{background:#4F739A}.a-frutos i{background:#7B4B2A}.a-apio i{background:#447A44}
-.a-mostaza i{background:#97780B}.a-sesamo i{background:#8A6A40}.a-sulfitos i{background:#8A3B5C}
-.a-altramuces i{background:#86701F}.a-moluscos i{background:#4B6C80}
+.a-mostaza i{background:#8C6F0A}.a-sesamo i{background:#8A6A40}.a-sulfitos i{background:#8A3B5C}
+.a-altramuces i{background:#7E6A1D}.a-moluscos i{background:#4B6C80}
 
-.leyenda-caja{margin-top:30px;padding:26px 0 0;border-top:2px solid var(--tinta)}
-.leyenda-caja h3{font-family:var(--serif);font-weight:400;font-size:2rem;margin-bottom:.2em}
-.leyenda-caja > p{font-size:1rem;color:var(--tinta-2)}
-.leyenda{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
-.leyenda li{display:flex;align-items:center;gap:8px;font-size:1rem;font-weight:500}
-.leyenda i{width:28px;height:28px;font-size:.78rem}
-.leyenda-etiquetas{display:grid;gap:10px;margin-top:18px}
-.leyenda-etiquetas div{display:flex;align-items:center;gap:10px;font-size:1rem}
+.leyenda-caja{margin-top:64px;padding:32px 0 0;border-top:1px solid var(--linea-2)}
+.leyenda-caja h3{font-size:1.6rem;font-weight:400;margin-bottom:8px}
+.leyenda-caja > p{font-size:1rem;color:var(--crema-2);max-width:40em}
+.leyenda{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.leyenda li{display:flex;align-items:center;gap:10px;font-size:1rem;color:var(--crema-2)}
+.leyenda i{width:28px;height:28px;font-size:.74rem}
+.leyenda-etiquetas{display:grid;gap:10px;margin-top:22px}
+.leyenda-etiquetas div{display:flex;align-items:center;gap:12px;font-size:1rem;color:var(--crema-2)}
 
 /* =========================================================
-   4. BRUNCH DE FIN DE SEMANA (destacado, precio cerrado)
+   4. ORIGEN DEL CAFÉ: tres cifras grandes
    ========================================================= */
-.brunch{background:var(--barro-suave)}
-.brunch-grid{display:grid;gap:32px;align-items:center}
-.brunch-foto{margin:0;position:relative}
-.brunch-foto img{width:100%;aspect-ratio:4/3.4;object-fit:cover;border-radius:260px 260px 26px 26px;background:var(--papel-2)}
-.brunch-foto figcaption{
-  position:absolute;right:14px;bottom:14px;background:var(--blanco);color:var(--tinta);
-  font-weight:700;padding:.45em 1em;border-radius:999px;font-size:.95rem
+.origen{background:var(--fondo-2);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+.cifras{list-style:none;margin:0;padding:0;display:grid}
+.cifras li{padding:32px 0;border-top:1px solid var(--linea)}
+.cifras li:last-child{border-bottom:1px solid var(--linea)}
+.cifras strong{display:block;font-family:var(--titulo);font-weight:300;font-size:clamp(4.6rem,20vw,7.5rem);line-height:.9;letter-spacing:-.05em;color:var(--crema)}
+.cifras strong sup{font-size:.32em;color:var(--caramelo);vertical-align:top;margin-left:.1em;letter-spacing:0;position:relative;top:.35em}
+.cifras h3{font-size:1.3rem;font-weight:500;margin:18px 0 6px}
+.cifras p{margin:0;color:var(--crema-2);font-size:1rem;max-width:22em}
+
+/* =========================================================
+   5. BRUNCH DE FIN DE SEMANA
+   ========================================================= */
+.brunch-grid{display:grid;gap:40px;align-items:center}
+.brunch-foto{margin:0;position:relative;background:var(--fondo-3)}
+.brunch-foto img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.brunch-foto figcaption{position:absolute;left:0;bottom:0;background:var(--fondo);color:var(--crema);font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;padding:.6em 1em}
+.precio-grande{display:flex;align-items:flex-end;flex-wrap:wrap;gap:6px 18px;margin:28px 0 30px}
+.precio-grande strong{font-family:var(--titulo);font-weight:300;font-size:clamp(5rem,22vw,9rem);line-height:.82;letter-spacing:-.06em;color:var(--caramelo);font-variant-numeric:tabular-nums}
+.precio-grande span{color:var(--crema-2);font-size:1rem;max-width:16em;line-height:1.4;padding-bottom:.4em}
+.incluye{list-style:none;counter-reset:inc;padding:0;margin:0 0 26px}
+.incluye li{counter-increment:inc;display:flex;gap:18px;align-items:baseline;padding:14px 0;border-top:1px solid var(--linea);font-size:1.05rem}
+.incluye li:last-child{border-bottom:1px solid var(--linea)}
+.incluye li::before{content:counter(inc,decimal-leading-zero);font-family:var(--titulo);font-size:.95rem;color:var(--caramelo);flex:none;width:1.8em}
+.brunch-nota{color:var(--crema-2)}
+
+/* =========================================================
+   6. GALERÍA: mosaico asimétrico
+   ========================================================= */
+.galeria-grid{
+  display:grid;gap:10px;grid-template-columns:1fr 1fr;grid-auto-rows:150px;
+  grid-template-areas:"a a" "a a" "b c" "e e" "d d"
 }
-.brunch-precio{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;margin:6px 0 20px}
-.brunch-precio strong{font-family:var(--serif);font-weight:400;font-size:clamp(4rem,16vw,5.6rem);color:var(--barro);line-height:.9}
-.brunch-precio span{color:var(--tinta-2);font-weight:600}
-.incluye{list-style:none;counter-reset:inc;padding:0;margin:0 0 22px;display:grid;gap:0}
-.incluye li{counter-increment:inc;display:flex;gap:16px;align-items:baseline;padding:12px 0;border-top:1px solid #E2C8B5;font-size:1.08rem}
-.incluye li:last-child{border-bottom:1px solid #E2C8B5}
-.incluye li::before{content:counter(inc,decimal-leading-zero);font-family:var(--serif);font-size:1.6rem;color:var(--barro);line-height:1;flex:none;width:1.4em}
-.brunch-nota{color:var(--tinta-2)}
+.galeria-grid figure{margin:0;background:var(--fondo-3);position:relative;overflow:hidden}
+.galeria-grid img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.galeria-grid figure:hover img{transform:scale(1.03)}
+.g-a{grid-area:a}.g-b{grid-area:b}.g-c{grid-area:c}.g-d{grid-area:d}.g-e{grid-area:e}
 
 /* =========================================================
-   5. HORARIO, DÓNDE ESTAMOS Y RESERVAR
+   7. HORARIO, DIRECCIÓN Y RESERVA
    ========================================================= */
-.visita-grid{display:grid;gap:22px;margin-top:30px}
-.tarjeta{background:var(--blanco);border:1px solid var(--borde);border-radius:var(--radio);padding:26px 20px}
-.tarjeta h3{font-family:var(--serif);font-weight:400;font-size:2.1rem;line-height:1;margin-bottom:14px}
-.tabla-horario{width:100%;border-collapse:collapse;font-size:1.05rem}
-.tabla-horario th,.tabla-horario td{padding:12px 8px;border-bottom:1px solid var(--borde);text-align:left;font-weight:500}
-.tabla-horario td{text-align:right;font-weight:700}
-.tabla-horario tr:last-child th,.tabla-horario tr:last-child td{border-bottom:0}
-.tabla-horario tr.hoy{background:var(--salvia-suave)}
-.tabla-horario tr.hoy th{font-weight:700}
+.visita{border-top:1px solid var(--linea)}
+.dos-col{display:grid;gap:56px}
+.bloque h3{font-size:1.6rem;font-weight:400;margin-bottom:18px}
+.tabla-horario{width:100%;border-collapse:collapse;font-size:1.02rem}
+.tabla-horario th,.tabla-horario td{padding:13px 0;border-bottom:1px solid var(--linea);text-align:left;font-weight:400;color:var(--crema-2)}
+.tabla-horario td{text-align:right;font-family:var(--titulo);color:var(--crema);font-variant-numeric:tabular-nums}
+.tabla-horario tr:first-child th,.tabla-horario tr:first-child td{border-top:1px solid var(--linea)}
+.tabla-horario tr.hoy th,.tabla-horario tr.hoy td{color:var(--crema);font-weight:600}
 .tabla-horario tr.hoy th::after{
-  content:"Hoy";margin-left:8px;font-size:.78rem;background:var(--salvia-osc);color:#fff;
-  padding:.15em .6em;border-radius:999px;vertical-align:middle
+  content:"hoy";margin-left:10px;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--caramelo);border:1px solid var(--caramelo);padding:.05em .5em;vertical-align:middle
 }
-.tabla-horario .cerrado-dia{color:var(--rojo)}
-.nota{font-size:.98rem;color:var(--tinta-2);margin-top:12px}
+.tabla-horario .cerrado-dia{color:var(--rojo-ko)}
 
-/* Plano dibujado a mano (SVG), sin iframe de Google Maps */
-.plano{margin:0 0 16px;border:2px dashed #C9B89F;border-radius:16px;padding:8px;background:var(--papel)}
-.plano svg{display:block;width:100%;height:auto}
-.direccion{font-size:1.2rem;font-weight:700;margin-bottom:.1em}
+/* Mapa estilizado hecho solo con CSS: retícula fina, calles y un punto */
+.mapa{
+  position:relative;aspect-ratio:4/3;margin:0 0 22px;border:1px solid var(--linea-2);overflow:hidden;
+  background-color:#1E1713;
+  background-image:
+    linear-gradient(rgba(242,232,220,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(242,232,220,.05) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+.mapa .calle{position:absolute;background:rgba(242,232,220,.32)}
+.mapa .c-h{left:0;right:0;top:56%;height:1px}
+.mapa .c-h2{left:0;right:0;top:22%;height:1px;background:rgba(242,232,220,.16)}
+.mapa .c-v{top:0;bottom:0;left:46%;width:1px}
+.mapa .c-v2{top:0;bottom:0;left:80%;width:1px;background:rgba(242,232,220,.16)}
+.mapa .c-d{left:-20%;width:140%;top:50%;height:1px;transform:rotate(-24deg);background:rgba(242,232,220,.22)}
+.mapa .parque{position:absolute;left:8%;top:30%;width:28%;height:20%;border:1px dashed rgba(170,180,120,.7);background:rgba(130,140,90,.10)}
+.mapa .plaza{position:absolute;left:46%;top:56%;width:84px;height:84px;margin:-42px 0 0 -42px;border:1px solid rgba(242,232,220,.4);border-radius:50%}
+.mapa .pin{position:absolute;left:46%;top:56%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--caramelo)}
+.mapa .pin::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid var(--caramelo);animation:latido 2.4s ease-out infinite}
+.mapa .rot{position:absolute;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--crema-2);white-space:nowrap}
+.mapa .r-calle{left:10px;top:calc(56% + 6px)}
+.mapa .r-av{left:calc(46% + 8px);top:8px}
+.mapa .r-parque{left:calc(8% + 8px);top:calc(30% + 6px);color:#C3CB99}
+.mapa .r-local{left:calc(46% + 50px);top:calc(56% - 36px);font-family:var(--titulo);font-size:1rem;letter-spacing:.02em;text-transform:none;color:var(--crema)}
+@keyframes latido{0%{transform:scale(.6);opacity:1}100%{transform:scale(2.2);opacity:0}}
+.direccion{font-family:var(--titulo);font-size:1.35rem;margin-bottom:.1em}
 
-.reservar-botones{display:grid;gap:12px;margin:6px 0 22px}
-.formulario{display:grid;gap:14px}
-.formulario label{display:block;font-weight:700;font-size:1rem;margin-bottom:4px}
+.reserva{margin-top:88px;padding-top:56px;border-top:1px solid var(--linea)}
+.reserva-grid{display:grid;gap:40px}
+.reservar-botones{display:grid;gap:12px;margin-top:26px}
+.formulario{display:grid;gap:18px}
+.formulario label{display:block;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;color:var(--crema-2);margin-bottom:6px}
 .formulario input,.formulario select{
-  width:100%;min-height:54px;font:inherit;font-size:1.05rem;padding:.6em .8em;color:var(--tinta);
-  border:2px solid var(--borde);border-radius:12px;background:var(--papel)
+  width:100%;min-height:54px;font:inherit;font-size:1.05rem;padding:.6em .2em;color:var(--crema);
+  border:0;border-bottom:1px solid var(--linea-2);border-radius:0;background:transparent;color-scheme:dark
 }
-.formulario input:focus,.formulario select:focus{outline:none;border-color:var(--barro);background:#fff}
-.fila-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.separador{display:flex;align-items:center;gap:12px;color:var(--tinta-2);font-weight:600;font-size:.98rem;margin:4px 0 16px}
-.separador::before,.separador::after{content:"";flex:1;height:1px;background:var(--borde)}
+.formulario select option{background:var(--fondo-3);color:var(--crema)}
+.formulario input::placeholder{color:var(--crema-3)}
+.formulario input:focus,.formulario select:focus{outline:none;border-bottom-color:var(--caramelo)}
+.fila-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.separador{display:flex;align-items:center;gap:14px;color:var(--crema-2);font-size:.95rem;margin:28px 0 8px}
+.separador::after{content:"";flex:1;height:1px;background:var(--linea)}
 
 /* =========================================================
-   6. PIE (claro, a juego con el resto)
+   8. PIE
    ========================================================= */
-.pie{background:var(--papel-2);padding:56px 0 30px;border-top:1px solid var(--borde)}
-.pie-grid{display:grid;gap:26px}
-.pie p{margin:.3em 0;font-size:1rem}
-.pie .logo b,.pie .logo i{font-size:2.6rem}
-.redes{display:flex;gap:12px;margin-top:10px}
-.redes a{
-  width:52px;height:52px;border-radius:50%;border:2px solid var(--tinta);display:grid;place-items:center;color:var(--tinta)
-}
-.redes a:hover{background:var(--tinta);color:var(--papel)}
-.redes svg{width:22px;height:22px}
+.pie{background:#120E0C;padding:64px 0 32px;border-top:1px solid var(--linea)}
+.pie-grid{display:grid;gap:32px}
+.pie p{margin:.3em 0;font-size:1rem;color:var(--crema-2)}
+.pie p strong{color:var(--crema);font-weight:600}
+.pie .logo{font-size:1.8rem}
+.redes{display:flex;gap:12px;margin-top:12px}
+.redes a{width:50px;height:50px;border-radius:50%;border:1px solid var(--linea-2);display:grid;place-items:center;color:var(--crema)}
+.redes a:hover{border-color:var(--caramelo);color:var(--caramelo)}
+.redes svg{width:20px;height:20px}
 .pie-final{
-  border-top:1px solid var(--borde);margin-top:30px;padding-top:20px;font-size:.98rem;
-  display:flex;flex-direction:column;gap:6px;color:var(--tinta-2)
+  border-top:1px solid var(--linea);margin-top:40px;padding-top:22px;font-size:.95rem;
+  display:flex;flex-direction:column;gap:6px;color:var(--crema-2)
 }
-.pie-final a{color:var(--barro);font-weight:700}
+.pie-final a{color:var(--caramelo-claro);font-weight:600}
 
 /* ---------- Aviso (toast) ---------- */
 .toast{
-  position:fixed;left:50%;bottom:calc(var(--banda-h) + 24px);z-index:200;
-  transform:translate(-50%,20px);opacity:0;pointer-events:none;
+  position:fixed;left:50%;bottom:calc(var(--banda-h) + 20px);z-index:200;
+  transform:translate(-50%,16px);opacity:0;pointer-events:none;
   width:calc(100% - 32px);max-width:440px;
-  background:var(--tinta);color:#fff;padding:16px 18px;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.3);
+  background:var(--crema);color:#1A1411;padding:16px 18px;border-radius:2px;box-shadow:0 14px 34px rgba(0,0,0,.5);
   display:flex;gap:12px;align-items:flex-start;font-size:1rem;line-height:1.45;font-weight:500;
   transition:opacity .25s ease,transform .25s ease
 }
 .toast.visible{opacity:1;transform:translate(-50%,0);pointer-events:auto}
-.toast svg{width:24px;height:24px;flex:none;color:#F4D9A8;margin-top:1px}
+.toast svg{width:22px;height:22px;flex:none;color:#8A5527;margin-top:1px}
 
 /* =========================================================
    TABLET Y ESCRITORIO
    ========================================================= */
 @media (min-width:640px){
   .portada-botones{flex-direction:row;flex-wrap:wrap}
-  .franja ul{grid-template-columns:repeat(3,1fr);gap:0 28px}
-  .franja li{border-bottom:0}
-  .tickets{grid-template-columns:repeat(3,1fr)}
-  .ticket{grid-template-columns:1fr;align-items:start}
-  .pestanas{grid-template-columns:repeat(5,1fr)}
-  .pestanas .pestana:last-child{grid-column:auto}
-  .pestana{flex-direction:column;text-align:center;padding:14px 8px;gap:8px}
-  .pestana img{width:64px;height:64px}
+  .lista-ofertas{grid-template-columns:repeat(3,1fr);gap:0 40px}
+  .oferta,.oferta:last-child{grid-template-columns:1fr;border-bottom:1px solid var(--linea);align-items:start;padding:32px 0}
+  .oferta .cifra{margin-top:18px}
+  .cifras{grid-template-columns:repeat(3,1fr);gap:0 40px}
+  .cifras li,.cifras li:last-child{border-bottom:1px solid var(--linea)}
   .leyenda{grid-template-columns:repeat(3,1fr)}
   .leyenda-etiquetas{grid-template-columns:1fr 1fr}
   .reservar-botones{grid-template-columns:1fr 1fr}
   .pie-grid{grid-template-columns:1fr 1fr}
-  .hoja-dentro{padding:40px 36px 30px}
+  .galeria-grid{grid-template-columns:repeat(5,1fr);grid-auto-rows:200px;
+    grid-template-areas:"a a a b b" "a a a c c" "d d e e e"}
+  .galeria-grid .g-e{grid-row:3}
 }
 @media (min-width:900px){
   body{padding-bottom:0;padding-top:var(--banda-h)}
-  /* La banda de Nudo pasa arriba */
-  .banda-nudo{top:0;bottom:auto;justify-content:center;gap:24px;padding:10px 20px;box-shadow:0 6px 24px rgba(0,0,0,.2)}
+  .banda-nudo{top:0;bottom:auto;border-top:0;border-bottom:1px solid var(--linea);justify-content:center;gap:24px;padding:8px 20px}
   .banda-nudo p{font-size:1rem}
   .cabecera{top:var(--banda-h)}
   .menu-escritorio{display:flex}
-  section{scroll-margin-top:calc(var(--banda-h) + 80px);padding:100px 0}
+  section{scroll-margin-top:calc(var(--banda-h) + 72px);padding:120px 0}
   .toast{bottom:28px}
-  .portada{padding:56px 0 80px}
-  .portada-grid{grid-template-columns:1.05fr 1fr;align-items:center;gap:56px}
-  .mosaico{gap:16px}
-  .sello{left:auto;right:-14px;bottom:-22px;transform:none;width:146px;height:146px}
-  .sello b{font-size:2.3rem}
-  .combos-cabeza{grid-template-columns:1fr 1fr;align-items:end;gap:40px}
-  .combos-cabeza .intro{margin-bottom:.6em}
+  .portada{padding:56px 0 120px}
+  .portada-grid{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:80px;align-items:center}
+  .portada-foto{margin:0;height:auto;aspect-ratio:4/5;max-height:calc(100vh - 200px);min-height:520px}
+  .portada-foto figcaption{left:0;bottom:0}
+  .cabeza-seccion{grid-template-columns:1fr 1fr;align-items:end;gap:60px}
+  .cabeza-seccion .entradilla{margin:0 0 .3em}
   .platos{grid-template-columns:1fr 1fr}
   .leyenda{grid-template-columns:repeat(4,1fr)}
-  .brunch-grid{grid-template-columns:1fr 1fr;gap:64px}
-  .visita-grid{grid-template-columns:1fr 1fr 1.15fr;align-items:start}
+  .brunch-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:96px}
+  .brunch-texto{order:-1}
+  .galeria-grid{grid-auto-rows:240px}
+  .dos-col{grid-template-columns:1fr 1fr;gap:96px}
+  .reserva-grid{grid-template-columns:1fr 1fr;gap:96px}
   .pie-grid{grid-template-columns:2fr 1fr 1fr}
   .pie-final{flex-direction:row;justify-content:space-between}
 }
 @media (max-width:359px){
-  .banda-nudo p{font-size:.82rem}
-  .banda-nudo a{padding:.7em .8em;font-size:.9rem}
-  .pestanas{grid-template-columns:1fr}
-  .pestanas .pestana:last-child{grid-column:auto}
+  .contenedor{padding:0 16px}
+  .banda-nudo p{font-size:.8rem}
+  .banda-nudo a{padding:.7em .8em;font-size:.88rem}
+  .pestanas{gap:20px}
   .fila-2{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  *{transition:none!important}
+  *,*::before,*::after{transition:none!important;animation:none!important}
 }
 </style>
 </head>
@@ -416,89 +427,81 @@ section{padding:72px 0;scroll-margin-top:80px}
 <!-- ===== Cabecera del local ===== -->
 <header class="cabecera">
   <div class="contenedor">
-    <a href="#inicio" class="logo" aria-label="Café Nudo, ir al inicio"><b>Café</b><i>Nudo</i></a>
+    <a href="#inicio" class="logo" aria-label="Café Nudo, ir al inicio">café nudo</a>
     <nav class="menu-escritorio" aria-label="Menú principal">
-      <a href="#desayunos">Desayunos</a>
       <a href="#carta">Carta</a>
+      <a href="#origen">Origen</a>
       <a href="#brunch">Brunch</a>
-      <a href="#visitanos">Horario y dirección</a>
+      <a href="#visitanos">Horario</a>
     </nav>
-    <a href="#reservar" class="btn btn-barro">Reservar</a>
+    <a href="#reservar" class="btn btn-caramelo">Reservar</a>
   </div>
 </header>
 
 <main>
 
 <!-- =========================================================
-     1. PORTADA PARTIDA
-     En móvil el orden es: texto, estado, botones y fotos.
+     1. PORTADA: foto vertical a un lado, texto al otro.
+     En móvil: foto arriba con altura limitada y texto debajo.
      ========================================================= -->
 <section class="portada" id="inicio">
   <div class="contenedor portada-grid">
+    <!-- Foto de portada: sin lazy, es lo primero que se ve -->
+    <figure class="portada-foto">
+      <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&h=1125&q=72" width="900" height="1125" alt="Barista preparando café de filtro con hervidor de cuello de cisne" fetchpriority="high">
+      <figcaption>Filtrado a mano</figcaption>
+    </figure>
+
     <div class="portada-texto">
-      <p class="portada-lugar">Desayunos y brunch · Plaza Ejemplo, 3</p>
-      <h1>Café Nudo <em>buenos días, sin prisas</em></h1>
-      <p class="frase">Desayunos de siempre, brunch sin prisas y el mejor café con leche del barrio. Pan de obrador y huevos camperos.</p>
+      <p class="portada-lugar">Café de especialidad · Plaza Ejemplo, 3</p>
+      <h1>Café <span>Nudo</span></h1>
+      <p class="frase">Desayunos de siempre, brunch sin prisas y café de especialidad. Pan de obrador y huevos camperos.</p>
       <div class="estado" id="estado" aria-live="polite">
         <span class="punto"></span><span id="estado-texto">Consultando horario…</span>
       </div>
       <div class="portada-botones">
-        <a href="#reservar" class="btn btn-barro">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
-          Reservar mesa
-        </a>
-        <a href="#carta" class="btn btn-linea">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M8 9h6M8 13h6"/></svg>
-          Ver la carta
+        <a href="#carta" class="btn btn-caramelo">Ver la carta</a>
+        <a href="#reservar" class="btn btn-linea">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+          Reservar
         </a>
       </div>
-    </div>
-
-    <!-- Fotos de portada: sin lazy, son lo primero que se ve -->
-    <div class="mosaico">
-      <figure class="m-arco"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=70" width="800" height="1170" alt="Interior luminoso de una cafetería con mesas de madera" fetchpriority="high"></figure>
-      <figure class="m-circulo"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=70" width="800" height="800" alt="Café con arte latte"></figure>
-      <figure class="m-rect"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=70" width="800" height="840" alt="Plato de brunch con huevos"></figure>
-      <a class="sello" href="#brunch"><small>Brunch finde</small><b>16,90 €</b></a>
+      <ul class="claves">
+        <li><b>01</b>Pan de masa madre y bollería del día</li>
+        <li><b>02</b>Café de especialidad tostado en España</li>
+        <li><b>03</b>Terraza y opciones veganas y sin gluten</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<div class="franja">
-  <ul>
-    <li><span>i.</span>Pan de masa madre y bollería del día</li>
-    <li><span>ii.</span>Café de especialidad tostado en España</li>
-    <li><span>iii.</span>Terraza y opciones veganas y sin gluten</li>
-  </ul>
-</div>
-
 <!-- =========================================================
-     2. DESAYUNOS CON OFERTA
+     2. DESAYUNOS DE OFERTA
      ========================================================= -->
-<section class="combos" id="desayunos">
+<section class="ofertas" id="desayunos">
   <div class="contenedor">
-    <div class="combos-cabeza">
+    <div class="cabeza-seccion">
       <div>
-        <p class="antetitulo">Hasta las 12:30</p>
-        <h2>Desayunos <em>de oferta</em></h2>
+        <p class="rotulo"><b>01</b> Hasta las 12:30</p>
+        <h2>Desayunos <span>de oferta</span></h2>
       </div>
-      <p class="intro">Todos los días que abrimos, hasta las 12:30. El café puede ser solo, cortado o con leche; con bebida vegetal, +0,20 €.</p>
+      <p class="entradilla">Todos los días que abrimos, hasta las 12:30. El café puede ser solo, cortado o con leche; con bebida vegetal, +0,20 €.</p>
     </div>
-    <ul class="tickets">
-      <li class="ticket">
-        <span class="hasta">El de siempre</span>
+    <ul class="lista-ofertas">
+      <li class="oferta">
+        <span class="tipo">El de siempre</span>
         <div><h3>Café + tostada</h3><p>Tomate y aceite de oliva virgen extra</p></div>
-        <span class="precio-ticket">3,20 €</span>
+        <span class="cifra">3,20 €</span>
       </li>
-      <li class="ticket">
-        <span class="hasta">El completo</span>
+      <li class="oferta">
+        <span class="tipo">El completo</span>
         <div><h3>Café + zumo + croissant</h3><p>Zumo de naranja recién exprimido</p></div>
-        <span class="precio-ticket">4,90 €</span>
+        <span class="cifra">4,90 €</span>
       </li>
-      <li class="ticket">
-        <span class="hasta">El contundente</span>
+      <li class="oferta">
+        <span class="tipo">El contundente</span>
         <div><h3>Café + tostada completa</h3><p>Jamón serrano o aguacate</p></div>
-        <span class="precio-ticket">5,50 €</span>
+        <span class="cifra">5,50 €</span>
       </li>
     </ul>
     <p class="nota">Alérgenos de cada tostada y bollo en la carta de abajo.</p>
@@ -506,279 +509,287 @@ section{padding:72px 0;scroll-margin-top:80px}
 </section>
 
 <!-- =========================================================
-     3. LA CARTA (pestañas; sin JS se ven todas las hojas)
+     3. LA CARTA (pestañas; sin JS se ven todos los apartados)
      ========================================================= -->
 <section class="carta" id="carta">
   <div class="contenedor">
-    <p class="antetitulo">Nuestra carta</p>
-    <h2>Para empezar <em>bien el día</em></h2>
-    <p class="intro">Elige un apartado. Precios con IVA incluido. Cada plato indica sus alérgenos; la leyenda está al final.</p>
-
-    <div class="pestanas" role="tablist" aria-label="Apartados de la carta" id="pestanas">
-      <button type="button" class="pestana" role="tab" id="tab-desayunos" aria-controls="panel-desayunos" aria-selected="true">
-        <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=160&q=70" width="64" height="64" alt="" loading="lazy">Desayunos
-      </button>
-      <button type="button" class="pestana" role="tab" id="tab-brunch" aria-controls="panel-brunch" aria-selected="false">
-        <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=160&q=70" width="64" height="64" alt="" loading="lazy">Brunch
-      </button>
-      <button type="button" class="pestana" role="tab" id="tab-dulces" aria-controls="panel-dulces" aria-selected="false">
-        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=160&q=70" width="64" height="64" alt="" loading="lazy">Dulces y bollería
-      </button>
-      <button type="button" class="pestana" role="tab" id="tab-cafes" aria-controls="panel-cafes" aria-selected="false">
-        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=160&q=70" width="64" height="64" alt="" loading="lazy">Cafés
-      </button>
-      <button type="button" class="pestana" role="tab" id="tab-bebidas" aria-controls="panel-bebidas" aria-selected="false">
-        <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=160&q=70" width="64" height="64" alt="" loading="lazy">Zumos y bebidas
-      </button>
+    <div class="cabeza-seccion">
+      <div>
+        <p class="rotulo"><b>02</b> La carta</p>
+        <h2>Para empezar <span>bien el día</span></h2>
+      </div>
+      <p class="entradilla">Precios con IVA incluido. Cada plato indica sus alérgenos; la leyenda está al final de la carta.</p>
     </div>
 
-    <div class="hoja">
-      <div class="hoja-dentro">
+    <div class="pestanas" role="tablist" aria-label="Apartados de la carta" id="pestanas">
+      <button type="button" class="pestana" role="tab" id="tab-cafes" aria-controls="panel-cafes" aria-selected="true">Cafés <small>12</small></button>
+      <button type="button" class="pestana" role="tab" id="tab-desayunos" aria-controls="panel-desayunos" aria-selected="false">Desayunos <small>05</small></button>
+      <button type="button" class="pestana" role="tab" id="tab-brunch" aria-controls="panel-brunch" aria-selected="false">Brunch <small>06</small></button>
+      <button type="button" class="pestana" role="tab" id="tab-dulces" aria-controls="panel-dulces" aria-selected="false">Dulces <small>06</small></button>
+    </div>
 
-        <!-- ---------- Desayunos ---------- -->
-        <div class="panel" role="tabpanel" id="panel-desayunos" aria-labelledby="tab-desayunos" tabindex="0">
-          <div class="panel-cabeza">
-            <h3>Desayunos</h3>
-            <p>hasta las 12:30 todos los días</p>
-            <svg class="adorno" viewBox="0 0 60 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 7h18M40 7h18M24 7c2-5 10-5 12 0c-2 5-10 5-12 0Z"/></svg>
-          </div>
-          <ul class="platos">
-            <li class="plato">
-              <div class="plato-linea"><h4>Tostada de tomate y aceite</h4><span class="puntos"></span><span class="precio">2,40 €</span></div>
-              <p>Pan de masa madre, tomate rallado y aceite de oliva virgen extra.</p>
-              <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Tostada de aguacate y semillas</h4><span class="puntos"></span><span class="precio">4,50 €</span></div>
-              <p>Aguacate machacado, lima, escamas de sal y semillas tostadas.</p>
-              <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-sesamo"><i>SE</i>Sésamo</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Tostada de jamón serrano</h4><span class="puntos"></span><span class="precio">4,80 €</span></div>
-              <p>Con tomate natural y un hilo de aceite de oliva.</p>
-              <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Tostada sin gluten</h4><span class="puntos"></span><span class="precio">3,20 €</span></div>
-              <p>Pan sin gluten con tomate o aceite. Preparada aparte.</p>
-              <div class="marcas"><span class="etiqueta singluten">Sin gluten</span><span class="etiqueta vegano">Vegano</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Yogur con granola y fruta</h4><span class="puntos"></span><span class="precio">4,20 €</span></div>
-              <p>Yogur griego, granola casera, miel y fruta de temporada.</p>
-              <div class="marcas"><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-frutos"><i>FC</i>Frutos de cáscara</span></div>
-            </li>
-          </ul>
-        </div>
+    <!-- ---------- Cafés (y zumos y bebidas) ---------- -->
+    <div class="panel" role="tabpanel" id="panel-cafes" aria-labelledby="tab-cafes" tabindex="0">
+      <div class="panel-cabeza">
+        <h3>Cafés</h3>
+        <p>café de especialidad tostado en España</p>
+      </div>
+      <ul class="platos">
+        <li class="plato">
+          <div class="plato-linea"><h4>Café solo</h4><span class="precio">1,30 €</span></div>
+          <p>Espresso corto e intenso.</p>
+          <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="etiqueta singluten">Sin gluten</span><span class="sin-alergenos">Sin alérgenos</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Cortado</h4><span class="precio">1,40 €</span></div>
+          <p>Espresso con un toque de leche.</p>
+          <div class="marcas"><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Café con leche</h4><span class="precio">1,60 €</span></div>
+          <p>El de toda la vida, en taza o en vaso.</p>
+          <div class="marcas"><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Café bombón</h4><span class="precio">1,90 €</span></div>
+          <p>Espresso con leche condensada.</p>
+          <div class="marcas"><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Flat white</h4><span class="precio">2,60 €</span></div>
+          <p>Doble espresso y leche cremosa, más café que leche.</p>
+          <div class="marcas"><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Latte con bebida de avena</h4><span class="precio">2,80 €</span></div>
+          <p>También con bebida de soja o de almendra (+0,20 €).</p>
+          <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span></div>
+        </li>
+      </ul>
 
-        <!-- ---------- Brunch ---------- -->
-        <div class="panel" role="tabpanel" id="panel-brunch" aria-labelledby="tab-brunch" tabindex="0">
-          <div class="panel-cabeza">
-            <h3>Brunch</h3>
-            <p>todos los días de 10:00 a cierre</p>
-            <svg class="adorno" viewBox="0 0 60 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 7h18M40 7h18M24 7c2-5 10-5 12 0c-2 5-10 5-12 0Z"/></svg>
-          </div>
-          <ul class="platos">
-            <li class="plato">
-              <div class="plato-linea"><h4>Huevos benedictinos</h4><span class="puntos"></span><span class="precio">9,50 €</span></div>
-              <p>Muffin inglés, jamón asado, huevos pochados y salsa holandesa.</p>
-              <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span><span class="alergeno a-mostaza"><i>MO</i>Mostaza</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Tosta de salmón ahumado</h4><span class="puntos"></span><span class="precio">9,80 €</span></div>
-              <p>Queso crema, salmón, eneldo y semillas de sésamo.</p>
-              <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-pescado"><i>PE</i>Pescado</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span><span class="alergeno a-sesamo"><i>SE</i>Sésamo</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Tortitas americanas</h4><span class="puntos"></span><span class="precio">7,90 €</span></div>
-              <p>Tres tortitas esponjosas con fruta fresca y sirope de arce.</p>
-              <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Shakshuka</h4><span class="puntos"></span><span class="precio">9,20 €</span></div>
-              <p>Huevos al horno en salsa de tomate especiada, con pan para mojar.</p>
-              <div class="marcas"><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-apio"><i>AP</i>Apio</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Tosta de gambas y ensaladilla</h4><span class="puntos"></span><span class="precio">8,90 €</span></div>
-              <p>Ensaladilla casera con gambas cocidas sobre pan tostado.</p>
-              <div class="marcas"><span class="alergeno a-crustaceos"><i>CR</i>Crustáceos</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Bowl de açaí</h4><span class="puntos"></span><span class="precio">8,50 €</span></div>
-              <p>Açaí, plátano, frutos rojos, granola sin gluten y almendra.</p>
-              <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="etiqueta singluten">Sin gluten</span><span class="alergeno a-frutos"><i>FC</i>Frutos de cáscara</span></div>
-            </li>
-          </ul>
-        </div>
+      <p class="subgrupo">Zumos y bebidas · exprimidos al momento</p>
+      <ul class="platos">
+        <li class="plato">
+          <div class="plato-linea"><h4>Zumo de naranja natural</h4><span class="precio">3,00 €</span></div>
+          <p>Naranjas valencianas exprimidas al pedirlo.</p>
+          <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="etiqueta singluten">Sin gluten</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Zumo verde</h4><span class="precio">4,20 €</span></div>
+          <p>Manzana, apio, espinaca, pepino y jengibre.</p>
+          <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="etiqueta singluten">Sin gluten</span><span class="alergeno a-apio"><i>AP</i>Apio</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Batido de plátano y cacahuete</h4><span class="precio">4,50 €</span></div>
+          <p>Plátano, crema de cacahuete, leche y un toque de canela.</p>
+          <div class="marcas"><span class="alergeno a-cacahuetes"><i>CA</i>Cacahuetes</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Chocolate a la taza</h4><span class="precio">2,50 €</span></div>
+          <p>Espeso, como el de antes. Ideal con churros de fin de semana.</p>
+          <div class="marcas"><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Té e infusiones</h4><span class="precio">1,80 €</span></div>
+          <p>Té verde, negro, rooibos, manzanilla o menta poleo.</p>
+          <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="etiqueta singluten">Sin gluten</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Mimosa</h4><span class="precio">5,00 €</span></div>
+          <p>Cava brut y zumo de naranja natural. Solo en brunch.</p>
+          <div class="marcas"><span class="alergeno a-sulfitos"><i>SU</i>Sulfitos</span></div>
+        </li>
+      </ul>
+    </div>
 
-        <!-- ---------- Dulces y bollería ---------- -->
-        <div class="panel" role="tabpanel" id="panel-dulces" aria-labelledby="tab-dulces" tabindex="0">
-          <div class="panel-cabeza">
-            <h3>Dulces y bollería</h3>
-            <p>horneados cada mañana</p>
-            <svg class="adorno" viewBox="0 0 60 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 7h18M40 7h18M24 7c2-5 10-5 12 0c-2 5-10 5-12 0Z"/></svg>
-          </div>
-          <ul class="platos">
-            <li class="plato">
-              <div class="plato-linea"><h4>Croissant de mantequilla</h4><span class="puntos"></span><span class="precio">1,80 €</span></div>
-              <p>Hojaldrado, crujiente por fuera y tierno por dentro.</p>
-              <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Napolitana de chocolate</h4><span class="puntos"></span><span class="precio">2,00 €</span></div>
-              <p>Masa de hojaldre rellena de chocolate negro.</p>
-              <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span><span class="alergeno a-soja"><i>SO</i>Soja</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Tarta de zanahoria</h4><span class="puntos"></span><span class="precio">3,80 €</span></div>
-              <p>Con nueces y crema de queso. La favorita de la casa.</p>
-              <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span><span class="alergeno a-frutos"><i>FC</i>Frutos de cáscara</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Bizcocho de limón</h4><span class="puntos"></span><span class="precio">3,20 €</span></div>
-              <p>Casero, con harina de arroz y glaseado de limón.</p>
-              <div class="marcas"><span class="etiqueta singluten">Sin gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Galleta de avena y chocolate</h4><span class="puntos"></span><span class="precio">2,20 €</span></div>
-              <p>Grande, blandita y sin ingredientes de origen animal.</p>
-              <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-soja"><i>SO</i>Soja</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Rollo de canela</h4><span class="puntos"></span><span class="precio">2,90 €</span></div>
-              <p>Masa brioche, canela y azúcar moreno, recién salido del horno.</p>
-              <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
-            </li>
-          </ul>
-        </div>
+    <!-- ---------- Desayunos ---------- -->
+    <div class="panel" role="tabpanel" id="panel-desayunos" aria-labelledby="tab-desayunos" tabindex="0">
+      <div class="panel-cabeza">
+        <h3>Desayunos</h3>
+        <p>hasta las 12:30 todos los días</p>
+      </div>
+      <ul class="platos">
+        <li class="plato">
+          <div class="plato-linea"><h4>Tostada de tomate y aceite</h4><span class="precio">2,40 €</span></div>
+          <p>Pan de masa madre, tomate rallado y aceite de oliva virgen extra.</p>
+          <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Tostada de aguacate y semillas</h4><span class="precio">4,50 €</span></div>
+          <p>Aguacate machacado, lima, escamas de sal y semillas tostadas.</p>
+          <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-sesamo"><i>SE</i>Sésamo</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Tostada de jamón serrano</h4><span class="precio">4,80 €</span></div>
+          <p>Con tomate natural y un hilo de aceite de oliva.</p>
+          <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Tostada sin gluten</h4><span class="precio">3,20 €</span></div>
+          <p>Pan sin gluten con tomate o aceite. Preparada aparte.</p>
+          <div class="marcas"><span class="etiqueta singluten">Sin gluten</span><span class="etiqueta vegano">Vegano</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Yogur con granola y fruta</h4><span class="precio">4,20 €</span></div>
+          <p>Yogur griego, granola casera, miel y fruta de temporada.</p>
+          <div class="marcas"><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-frutos"><i>FC</i>Frutos de cáscara</span></div>
+        </li>
+      </ul>
+    </div>
 
-        <!-- ---------- Cafés ---------- -->
-        <div class="panel" role="tabpanel" id="panel-cafes" aria-labelledby="tab-cafes" tabindex="0">
-          <div class="panel-cabeza">
-            <h3>Cafés</h3>
-            <p>café de especialidad tostado en España</p>
-            <svg class="adorno" viewBox="0 0 60 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 7h18M40 7h18M24 7c2-5 10-5 12 0c-2 5-10 5-12 0Z"/></svg>
-          </div>
-          <ul class="platos">
-            <li class="plato">
-              <div class="plato-linea"><h4>Café solo</h4><span class="puntos"></span><span class="precio">1,30 €</span></div>
-              <p>Espresso corto e intenso.</p>
-              <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="etiqueta singluten">Sin gluten</span><span class="sin-alergenos">Sin alérgenos</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Cortado</h4><span class="puntos"></span><span class="precio">1,40 €</span></div>
-              <p>Espresso con un toque de leche.</p>
-              <div class="marcas"><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Café con leche</h4><span class="puntos"></span><span class="precio">1,60 €</span></div>
-              <p>El de toda la vida, en taza o en vaso.</p>
-              <div class="marcas"><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Café bombón</h4><span class="puntos"></span><span class="precio">1,90 €</span></div>
-              <p>Espresso con leche condensada.</p>
-              <div class="marcas"><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Flat white</h4><span class="puntos"></span><span class="precio">2,60 €</span></div>
-              <p>Doble espresso y leche cremosa, más café que leche.</p>
-              <div class="marcas"><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Latte con bebida de avena</h4><span class="puntos"></span><span class="precio">2,80 €</span></div>
-              <p>También con bebida de soja o de almendra (+0,20 €).</p>
-              <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span></div>
-            </li>
-          </ul>
-        </div>
+    <!-- ---------- Brunch ---------- -->
+    <div class="panel" role="tabpanel" id="panel-brunch" aria-labelledby="tab-brunch" tabindex="0">
+      <div class="panel-cabeza">
+        <h3>Brunch</h3>
+        <p>todos los días de 10:00 a cierre</p>
+      </div>
+      <ul class="platos">
+        <li class="plato">
+          <div class="plato-linea"><h4>Huevos benedictinos</h4><span class="precio">9,50 €</span></div>
+          <p>Muffin inglés, jamón asado, huevos pochados y salsa holandesa.</p>
+          <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span><span class="alergeno a-mostaza"><i>MO</i>Mostaza</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Tosta de salmón ahumado</h4><span class="precio">9,80 €</span></div>
+          <p>Queso crema, salmón, eneldo y semillas de sésamo.</p>
+          <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-pescado"><i>PE</i>Pescado</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span><span class="alergeno a-sesamo"><i>SE</i>Sésamo</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Tortitas americanas</h4><span class="precio">7,90 €</span></div>
+          <p>Tres tortitas esponjosas con fruta fresca y sirope de arce.</p>
+          <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Shakshuka</h4><span class="precio">9,20 €</span></div>
+          <p>Huevos al horno en salsa de tomate especiada, con pan para mojar.</p>
+          <div class="marcas"><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-apio"><i>AP</i>Apio</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Tosta de gambas y ensaladilla</h4><span class="precio">8,90 €</span></div>
+          <p>Ensaladilla casera con gambas cocidas sobre pan tostado.</p>
+          <div class="marcas"><span class="alergeno a-crustaceos"><i>CR</i>Crustáceos</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Bowl de açaí</h4><span class="precio">8,50 €</span></div>
+          <p>Açaí, plátano, frutos rojos, granola sin gluten y almendra.</p>
+          <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="etiqueta singluten">Sin gluten</span><span class="alergeno a-frutos"><i>FC</i>Frutos de cáscara</span></div>
+        </li>
+      </ul>
+    </div>
 
-        <!-- ---------- Zumos y bebidas ---------- -->
-        <div class="panel" role="tabpanel" id="panel-bebidas" aria-labelledby="tab-bebidas" tabindex="0">
-          <div class="panel-cabeza">
-            <h3>Zumos y bebidas</h3>
-            <p>exprimidos al momento</p>
-            <svg class="adorno" viewBox="0 0 60 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 7h18M40 7h18M24 7c2-5 10-5 12 0c-2 5-10 5-12 0Z"/></svg>
-          </div>
-          <ul class="platos">
-            <li class="plato">
-              <div class="plato-linea"><h4>Zumo de naranja natural</h4><span class="puntos"></span><span class="precio">3,00 €</span></div>
-              <p>Naranjas valencianas exprimidas al pedirlo.</p>
-              <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="etiqueta singluten">Sin gluten</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Zumo verde</h4><span class="puntos"></span><span class="precio">4,20 €</span></div>
-              <p>Manzana, apio, espinaca, pepino y jengibre.</p>
-              <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="etiqueta singluten">Sin gluten</span><span class="alergeno a-apio"><i>AP</i>Apio</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Batido de plátano y cacahuete</h4><span class="puntos"></span><span class="precio">4,50 €</span></div>
-              <p>Plátano, crema de cacahuete, leche y un toque de canela.</p>
-              <div class="marcas"><span class="alergeno a-cacahuetes"><i>CA</i>Cacahuetes</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Chocolate a la taza</h4><span class="puntos"></span><span class="precio">2,50 €</span></div>
-              <p>Espeso, como el de antes. Ideal con churros de fin de semana.</p>
-              <div class="marcas"><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Té e infusiones</h4><span class="puntos"></span><span class="precio">1,80 €</span></div>
-              <p>Té verde, negro, rooibos, manzanilla o menta poleo.</p>
-              <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="etiqueta singluten">Sin gluten</span></div>
-            </li>
-            <li class="plato">
-              <div class="plato-linea"><h4>Mimosa</h4><span class="puntos"></span><span class="precio">5,00 €</span></div>
-              <p>Cava brut y zumo de naranja natural. Solo en brunch.</p>
-              <div class="marcas"><span class="alergeno a-sulfitos"><i>SU</i>Sulfitos</span></div>
-            </li>
-          </ul>
-        </div>
+    <!-- ---------- Dulces y bollería ---------- -->
+    <div class="panel" role="tabpanel" id="panel-dulces" aria-labelledby="tab-dulces" tabindex="0">
+      <div class="panel-cabeza">
+        <h3>Dulces y bollería</h3>
+        <p>horneados cada mañana</p>
+      </div>
+      <ul class="platos">
+        <li class="plato">
+          <div class="plato-linea"><h4>Croissant de mantequilla</h4><span class="precio">1,80 €</span></div>
+          <p>Hojaldrado, crujiente por fuera y tierno por dentro.</p>
+          <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Napolitana de chocolate</h4><span class="precio">2,00 €</span></div>
+          <p>Masa de hojaldre rellena de chocolate negro.</p>
+          <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span><span class="alergeno a-soja"><i>SO</i>Soja</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Tarta de zanahoria</h4><span class="precio">3,80 €</span></div>
+          <p>Con nueces y crema de queso. La favorita de la casa.</p>
+          <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span><span class="alergeno a-frutos"><i>FC</i>Frutos de cáscara</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Bizcocho de limón</h4><span class="precio">3,20 €</span></div>
+          <p>Casero, con harina de arroz y glaseado de limón.</p>
+          <div class="marcas"><span class="etiqueta singluten">Sin gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Galleta de avena y chocolate</h4><span class="precio">2,20 €</span></div>
+          <p>Grande, blandita y sin ingredientes de origen animal.</p>
+          <div class="marcas"><span class="etiqueta vegano">Vegano</span><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-soja"><i>SO</i>Soja</span></div>
+        </li>
+        <li class="plato">
+          <div class="plato-linea"><h4>Rollo de canela</h4><span class="precio">2,90 €</span></div>
+          <p>Masa brioche, canela y azúcar moreno, recién salido del horno.</p>
+          <div class="marcas"><span class="alergeno a-gluten"><i>GL</i>Gluten</span><span class="alergeno a-huevo"><i>HU</i>Huevo</span><span class="alergeno a-lacteos"><i>LA</i>Lácteos</span></div>
+        </li>
+      </ul>
+    </div>
 
-        <!-- ---------- Leyenda de alérgenos (Reglamento UE 1169/2011) ---------- -->
-        <div class="leyenda-caja" id="alergenos">
-          <h3>Alérgenos</h3>
-          <p>Los 14 alérgenos de declaración obligatoria (Reglamento UE 1169/2011). Si tienes alguna alergia, avísanos al pedir.</p>
-          <ul class="leyenda">
-            <li class="a-gluten"><i>GL</i>Gluten</li>
-            <li class="a-crustaceos"><i>CR</i>Crustáceos</li>
-            <li class="a-huevo"><i>HU</i>Huevo</li>
-            <li class="a-pescado"><i>PE</i>Pescado</li>
-            <li class="a-cacahuetes"><i>CA</i>Cacahuetes</li>
-            <li class="a-soja"><i>SO</i>Soja</li>
-            <li class="a-lacteos"><i>LA</i>Lácteos</li>
-            <li class="a-frutos"><i>FC</i>Frutos de cáscara</li>
-            <li class="a-apio"><i>AP</i>Apio</li>
-            <li class="a-mostaza"><i>MO</i>Mostaza</li>
-            <li class="a-sesamo"><i>SE</i>Sésamo</li>
-            <li class="a-sulfitos"><i>SU</i>Sulfitos</li>
-            <li class="a-altramuces"><i>AL</i>Altramuces</li>
-            <li class="a-moluscos"><i>ML</i>Moluscos</li>
-          </ul>
-          <div class="leyenda-etiquetas">
-            <div><span class="etiqueta vegano">Vegano</span>sin ingredientes de origen animal</div>
-            <div><span class="etiqueta singluten">Sin gluten</span>apto para celíacos</div>
-          </div>
-        </div>
-
+    <!-- ---------- Leyenda de alérgenos (Reglamento UE 1169/2011) ---------- -->
+    <div class="leyenda-caja" id="alergenos">
+      <h3>Alérgenos</h3>
+      <p>Los 14 alérgenos de declaración obligatoria (Reglamento UE 1169/2011). Si tienes alguna alergia, avísanos al pedir.</p>
+      <ul class="leyenda">
+        <li class="a-gluten"><i>GL</i>Gluten</li>
+        <li class="a-crustaceos"><i>CR</i>Crustáceos</li>
+        <li class="a-huevo"><i>HU</i>Huevo</li>
+        <li class="a-pescado"><i>PE</i>Pescado</li>
+        <li class="a-cacahuetes"><i>CA</i>Cacahuetes</li>
+        <li class="a-soja"><i>SO</i>Soja</li>
+        <li class="a-lacteos"><i>LA</i>Lácteos</li>
+        <li class="a-frutos"><i>FC</i>Frutos de cáscara</li>
+        <li class="a-apio"><i>AP</i>Apio</li>
+        <li class="a-mostaza"><i>MO</i>Mostaza</li>
+        <li class="a-sesamo"><i>SE</i>Sésamo</li>
+        <li class="a-sulfitos"><i>SU</i>Sulfitos</li>
+        <li class="a-altramuces"><i>AL</i>Altramuces</li>
+        <li class="a-moluscos"><i>ML</i>Moluscos</li>
+      </ul>
+      <div class="leyenda-etiquetas">
+        <div><span class="etiqueta vegano">Vegano</span>sin ingredientes de origen animal</div>
+        <div><span class="etiqueta singluten">Sin gluten</span>apto para celíacos</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- =========================================================
-     4. BRUNCH DE FIN DE SEMANA
+     4. ORIGEN DEL CAFÉ: tres cifras descriptivas
+     ========================================================= -->
+<section class="origen" id="origen">
+  <div class="contenedor">
+    <div class="cabeza-seccion">
+      <div>
+        <p class="rotulo"><b>03</b> Origen del café</p>
+        <h2>Del grano <span>a la taza</span></h2>
+      </div>
+      <p class="entradilla">Café de especialidad tostado en España, leche fresca y pocas cosas más. Lo justo para que cada taza sepa a lo que es.</p>
+    </div>
+    <ul class="cifras">
+      <li>
+        <strong>3</strong>
+        <h3>Orígenes en rotación</h3>
+        <p>Cambiamos de grano según la temporada para servirlo siempre en su mejor momento.</p>
+      </li>
+      <li>
+        <strong>1<sup>/sem.</sup></strong>
+        <h3>Tostado semanal</h3>
+        <p>Tostado en España en pequeñas cantidades, para que llegue fresco a la barra.</p>
+      </li>
+      <li>
+        <strong>4</strong>
+        <h3>Opciones de leche</h3>
+        <p>Leche fresca de granja o bebida de avena, soja o almendra.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- =========================================================
+     5. BRUNCH DE FIN DE SEMANA
      ========================================================= -->
 <section class="brunch" id="brunch">
   <div class="contenedor brunch-grid">
     <figure class="brunch-foto">
-      <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1200&q=70" width="1200" height="1020" alt="Mesa de brunch con varios platos" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=900&h=1125&q=70" width="900" height="1125" alt="Tostada con huevo frito y tomates asados" loading="lazy">
       <figcaption>Sábados y domingos</figcaption>
     </figure>
-    <div>
-      <p class="antetitulo">Menú cerrado</p>
-      <h2>Brunch <em>de fin de semana</em></h2>
-      <div class="brunch-precio"><strong>16,90 €</strong><span>por persona, todo incluido</span></div>
+    <div class="brunch-texto">
+      <p class="rotulo"><b>04</b> Menú cerrado</p>
+      <h2>Brunch <span>de fin de semana</span></h2>
+      <div class="precio-grande"><strong>16,90 €</strong><span>por persona, todo incluido</span></div>
       <ol class="incluye">
         <li>Un café o infusión a elegir</li>
         <li>Zumo de naranja natural o mimosa</li>
@@ -786,22 +797,47 @@ section{padding:72px 0;scroll-margin-top:80px}
         <li>Un dulce casero para terminar</li>
       </ol>
       <p class="brunch-nota">De 10:00 a 13:30. Las mesas vuelan: mejor reservar.</p>
-      <a href="#reservar" class="btn btn-barro">Reservar para el finde</a>
+      <a href="#reservar" class="btn btn-caramelo">Reservar para el finde</a>
     </div>
   </div>
 </section>
 
 <!-- =========================================================
-     5. HORARIO, DÓNDE ESTAMOS Y RESERVAR
+     6. GALERÍA EN MOSAICO
      ========================================================= -->
-<section id="visitanos">
+<section class="galeria" id="galeria" aria-labelledby="titulo-galeria">
   <div class="contenedor">
-    <p class="antetitulo">Ven a vernos</p>
-    <h2>Horario <em>y dónde estamos</em></h2>
+    <div class="cabeza-seccion">
+      <div>
+        <p class="rotulo"><b>05</b> El local</p>
+        <h2 id="titulo-galeria">Luz baja, <span>buen café</span></h2>
+      </div>
+    </div>
+    <div class="galeria-grid">
+      <figure class="g-a"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1000&h=1000&q=70" width="1000" height="1000" alt="Barra de cafetería con lámparas colgantes y luz cálida" loading="lazy"></figure>
+      <figure class="g-b"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&h=500&q=70" width="700" height="500" alt="Dos manos sujetando cafés con arte latte" loading="lazy"></figure>
+      <figure class="g-c"><img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=700&h=500&q=70" width="700" height="500" alt="Portafiltros con café molido y un latte sobre madera" loading="lazy"></figure>
+      <figure class="g-d"><img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=700&h=500&q=70" width="700" height="500" alt="Granos de café tostado" loading="lazy"></figure>
+      <figure class="g-e"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1000&h=500&q=70" width="1000" height="500" alt="Plato de brunch con huevos" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
 
-    <div class="visita-grid">
+<!-- =========================================================
+     7. HORARIO, DIRECCIÓN Y RESERVA
+     ========================================================= -->
+<section class="visita" id="visitanos">
+  <div class="contenedor">
+    <div class="cabeza-seccion">
+      <div>
+        <p class="rotulo"><b>06</b> Ven a vernos</p>
+        <h2>Horario <span>y dónde estamos</span></h2>
+      </div>
+    </div>
+
+    <div class="dos-col">
       <!-- Horario -->
-      <div class="tarjeta">
+      <div class="bloque">
         <h3>Horario</h3>
         <table class="tabla-horario" id="tabla-horario">
           <tbody>
@@ -817,90 +853,79 @@ section{padding:72px 0;scroll-margin-top:80px}
         <p class="nota">Festivos: consulta en nuestras redes.</p>
       </div>
 
-      <!-- Dónde estamos: plano dibujado -->
-      <div class="tarjeta">
+      <!-- Dónde estamos: mapa estilizado en CSS -->
+      <div class="bloque">
         <h3>Dónde estamos</h3>
-        <div class="plano">
-          <svg viewBox="0 0 320 220" role="img" aria-label="Plano ilustrativo: Café Nudo en Plaza Ejemplo, 3, junto al parque">
-            <rect width="320" height="220" fill="#F3ECDF"/>
-            <!-- Manzanas -->
-            <g fill="#E6DCCB">
-              <rect x="218" y="10" width="92" height="62" rx="6"/>
-              <rect x="10" y="148" width="92" height="62" rx="6"/><rect x="218" y="148" width="92" height="62" rx="6"/>
-            </g>
-            <!-- Parque (manzana de arriba a la izquierda) -->
-            <rect x="10" y="10" width="92" height="62" rx="8" fill="#CFDDC4"/>
-            <circle cx="30" cy="30" r="7" fill="#9DB38F"/><circle cx="54" cy="24" r="6" fill="#9DB38F"/><circle cx="80" cy="32" r="7" fill="#9DB38F"/>
-            <!-- Calles -->
-            <g stroke="#FFFDF9" stroke-width="14" stroke-linecap="round">
-              <path d="M0 110H320"/><path d="M160 0V220"/>
-            </g>
-            <path d="M0 110H320M160 0V220" stroke="#D9CCB6" stroke-width="1.5" stroke-dasharray="6 6"/>
-            <!-- Plaza -->
-            <circle cx="160" cy="110" r="30" fill="#FFFDF9" stroke="#C9B89F" stroke-width="2"/>
-            <!-- Marca del local -->
-            <path d="M160 116c-9-11-14-18-14-24a14 14 0 0 1 28 0c0 6-5 13-14 24Z" fill="#9A4A28"/>
-            <circle cx="160" cy="92" r="5" fill="#FFFDF9"/>
-            <g font-family="Instrument Sans, sans-serif" font-size="11" fill="#574A41" font-weight="600">
-              <text x="16" y="104">Calle Mayor</text>
-              <text x="168" y="208">Av. del Río</text>
-              <text x="36" y="60">Parque</text>
-            </g>
-            <text x="160" y="160" text-anchor="middle" font-family="Instrument Serif, serif" font-size="18" fill="#2A2320">Café Nudo</text>
-          </svg>
+        <div class="mapa" role="img" aria-label="Plano ilustrativo: Café Nudo en Plaza Ejemplo, 3, frente al parque">
+          <span class="calle c-h2"></span><span class="calle c-v2"></span>
+          <span class="calle c-d"></span>
+          <span class="calle c-h"></span><span class="calle c-v"></span>
+          <span class="parque"></span>
+          <span class="plaza"></span>
+          <span class="pin"></span>
+          <span class="rot r-calle">Calle Mayor</span>
+          <span class="rot r-av">Av. del Río</span>
+          <span class="rot r-parque">Parque</span>
+          <span class="rot r-local">Café Nudo</span>
         </div>
         <p class="direccion">Plaza Ejemplo, 3</p>
-        <p>00000 Ciudad Ejemplo · frente al parque</p>
+        <p style="color:var(--crema-2)">00000 Ciudad Ejemplo · frente al parque</p>
         <button type="button" class="btn btn-linea btn-bloque" data-demo="Esto es un ejemplo. En tu web, este botón abrirá el mapa para llegar a tu local.">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2Z"/></svg>
           Cómo llegar
         </button>
       </div>
+    </div>
 
-      <!-- Reservar -->
-      <div class="tarjeta" id="reservar">
-        <h3>Reservar mesa</h3>
-        <p style="font-size:1rem;color:var(--tinta-2)">Llámanos, escríbenos o déjanos tus datos.</p>
-        <div class="reservar-botones">
-          <button type="button" class="btn btn-salvia" data-demo="Esto es un ejemplo. En tu web, este botón llamará a tu local.">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
-            Llamar
-          </button>
-          <button type="button" class="btn btn-whatsapp" data-demo="Esto es un ejemplo. En tu web, este botón abrirá el WhatsApp de tu local.">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2Z"/></svg>
-            WhatsApp
-          </button>
+    <!-- Reservar -->
+    <div class="reserva" id="reservar">
+      <div class="reserva-grid">
+        <div>
+          <p class="rotulo"><b>07</b> Reservar</p>
+          <h2>Guárdanos <span>una mesa</span></h2>
+          <p class="entradilla">Llámanos, escríbenos o déjanos tus datos y te confirmamos.</p>
+          <div class="reservar-botones">
+            <button type="button" class="btn btn-linea" data-demo="Esto es un ejemplo. En tu web, este botón llamará a tu local.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+              Llamar
+            </button>
+            <button type="button" class="btn btn-whatsapp" data-demo="Esto es un ejemplo. En tu web, este botón abrirá el WhatsApp de tu local.">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2Z"/></svg>
+              WhatsApp
+            </button>
+          </div>
         </div>
 
-        <div class="separador">o rellena el formulario</div>
-
-        <!-- Formulario de ejemplo: no envía nada -->
-        <form class="formulario" id="form-reserva" novalidate>
-          <div>
-            <label for="r-nombre">Nombre</label>
-            <input id="r-nombre" name="nombre" type="text" autocomplete="off" placeholder="Tu nombre">
-          </div>
-          <div class="fila-2">
+        <div>
+          <p class="separador">o rellena el formulario</p>
+          <!-- Formulario de ejemplo: no envía nada -->
+          <form class="formulario" id="form-reserva" novalidate>
             <div>
-              <label for="r-dia">Día</label>
-              <input id="r-dia" name="dia" type="date">
+              <label for="r-nombre">Nombre</label>
+              <input id="r-nombre" name="nombre" type="text" autocomplete="off" placeholder="Tu nombre">
+            </div>
+            <div class="fila-2">
+              <div>
+                <label for="r-dia">Día</label>
+                <input id="r-dia" name="dia" type="date">
+              </div>
+              <div>
+                <label for="r-hora">Hora</label>
+                <select id="r-hora" name="hora">
+                  <option>9:00</option><option>9:30</option><option selected>10:00</option><option>10:30</option>
+                  <option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option>
+                </select>
+              </div>
             </div>
             <div>
-              <label for="r-hora">Hora</label>
-              <select id="r-hora" name="hora">
-                <option>9:00</option><option>9:30</option><option selected>10:00</option><option>10:30</option>
-                <option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option>
+              <label for="r-personas">Personas</label>
+              <select id="r-personas" name="personas">
+                <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7 o más</option>
               </select>
             </div>
-          </div>
-          <div>
-            <label for="r-personas">Personas</label>
-            <select id="r-personas" name="personas">
-              <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7 o más</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-barro btn-bloque">Reservar mesa</button>
-        </form>
+            <button type="submit" class="btn btn-caramelo btn-bloque">Reservar mesa</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -909,14 +934,14 @@ section{padding:72px 0;scroll-margin-top:80px}
 </main>
 
 <!-- =========================================================
-     6. PIE
+     8. PIE
      ========================================================= -->
 <footer class="pie">
   <div class="contenedor">
     <div class="pie-grid">
       <div>
-        <a href="#inicio" class="logo" aria-label="Café Nudo, volver arriba"><b>Café</b><i>Nudo</i></a>
-        <p style="margin-top:12px">Desayunos y brunch en Plaza Ejemplo, 3.</p>
+        <a href="#inicio" class="logo" aria-label="Café Nudo, volver arriba">café nudo</a>
+        <p style="margin-top:12px">Café de especialidad, desayunos y brunch en Plaza Ejemplo, 3.</p>
       </div>
       <div>
         <p><strong>Horario</strong></p>
@@ -926,7 +951,7 @@ section{padding:72px 0;scroll-margin-top:80px}
       <div>
         <p><strong>Síguenos</strong></p>
         <div class="redes">
-          <a href="#" aria-label="Instagram" data-demo="Esto es un ejemplo. En tu web, este botón abrirá el Instagram de tu local."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Instagram" data-demo="Esto es un ejemplo. En tu web, este botón abrirá el Instagram de tu local."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
           <a href="#" aria-label="Facebook" data-demo="Esto es un ejemplo. En tu web, este botón abrirá el Facebook de tu local."><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5Z"/></svg></a>
           <a href="#" aria-label="TikTok" data-demo="Esto es un ejemplo. En tu web, este botón abrirá el TikTok de tu local."><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.4 2.2 1.8 3.6 4 3.9v3.3a7.6 7.6 0 0 1-4-1.2v6.4A5.6 5.6 0 1 1 11 9.9v3.4a2.3 2.3 0 1 0 2.2 2.3V3h3.3Z"/></svg></a>
         </div>
@@ -941,7 +966,7 @@ section{padding:72px 0;scroll-margin-top:80px}
 
 <!-- Aviso emergente (toast) -->
 <div class="toast" id="toast" role="status" aria-live="polite">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
   <span id="toast-texto"></span>
 </div>
 
@@ -1078,8 +1103,8 @@ section{padding:72px 0;scroll-margin-top:80px}
   }
 
   /* ---------- Pestañas de la carta ----------
-     Sin JS se ven todas las hojas seguidas; con JS, una cada vez.
-     Flechas izquierda/derecha para moverse con teclado. */
+     Sin JS se ven todos los apartados seguidos; con JS, uno cada vez.
+     Flechas izquierda/derecha, Inicio y Fin para moverse con teclado. */
   var pestanas = Array.prototype.slice.call(document.querySelectorAll('#pestanas [role="tab"]'));
 
   function elegir(tab, enfocar) {
@@ -1089,6 +1114,10 @@ section{padding:72px 0;scroll-margin-top:80px}
       t.tabIndex = activa ? 0 : -1;
       document.getElementById(t.getAttribute('aria-controls')).hidden = !activa;
     });
+    // En móvil la fila de pestañas puede desplazarse: que se vea la activa
+    if (tab.parentNode.scrollWidth > tab.parentNode.clientWidth) {
+      tab.parentNode.scrollLeft = tab.offsetLeft - 20;
+    }
     if (enfocar) tab.focus();
   }
 
