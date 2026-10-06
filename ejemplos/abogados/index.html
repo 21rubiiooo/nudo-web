@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Despacho ficticio: no debe aparecer en buscadores -->
+<meta name="robots" content="noindex, nofollow">
+<title>Nudo Abogados &amp; Asesores · Despacho y asesoría (ejemplo)</title>
+<meta name="description" content="Maqueta de ejemplo de una web para despacho de abogados y asesoría. Despacho ficticio. Hecha por Nudo.">
+<meta name="theme-color" content="#0F141C">
+<meta name="color-scheme" content="dark">
+<!-- Icono en línea (SVG en texto plano): evita el 404 de /favicon.ico -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F141C'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23C9A45C' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://images.unsplash.com">
+<style>
+/* =========================================================
+   CONCEPTO: despacho de abogados nocturno y sereno.
+   Mismo sistema que el ejemplo de cafetería: fondo oscuro,
+   texto crema, un único acento (aquí dorado sobrio), líneas
+   finas de 1 px y mucho aire. Fondo llevado a azul noche.
+   Titulares en Space Grotesk fina con números grandes; texto
+   en Inter. Todo el texto a 18 px o más.
+   ========================================================= */
+:root{
+  --fondo:#0F141C;          /* azul noche */
+  --fondo-2:#131A24;        /* bandas alternas */
+  --fondo-3:#1A2330;        /* campos y superficies */
+  --crema:#EFE8DC;          /* texto principal: ~15:1 sobre el fondo */
+  --crema-2:#B5AEA2;        /* texto secundario: ~8,5:1 */
+  --crema-3:#8F897F;        /* solo detalles: ~5,3:1 */
+  --dorado:#C9A45C;         /* acento único: ~6,8:1 sobre el fondo */
+  --dorado-claro:#DDBB78;
+  --linea:rgba(239,232,220,.14);
+  --linea-2:rgba(239,232,220,.26);
+  --verde-ok:#5DC77A;
+  --rojo-ko:#E77B62;
+  --banda-h:64px;           /* JS la ajusta a la altura real de la banda */
+  --titulo:"Space Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --texto:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --t-min:1.125rem;         /* 18 px: tamaño mínimo de cualquier texto */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--texto);
+  font-size:var(--t-min);
+  line-height:1.65;
+  color:var(--crema);
+  background:var(--fondo);
+  /* En móvil la banda de Nudo va abajo: dejamos hueco */
+  padding-bottom:calc(var(--banda-h) + 20px);
+}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--dorado-claro)}
+h1,h2,h3,h4{font-family:var(--titulo);font-weight:400;margin:0;letter-spacing:-.02em}
+h2{font-size:clamp(2.3rem,8vw,4rem);line-height:1.04;font-weight:300}
+h2 span{color:var(--dorado)}
+p{margin:0 0 1em}
+.contenedor{width:100%;max-width:1240px;margin:0 auto;padding:0 20px}
+section{padding:88px 0;scroll-margin-top:72px}
+:focus-visible{outline:2px solid var(--dorado);outline-offset:4px}
+
+/* Etiqueta pequeña con número: "01 — Áreas de práctica" */
+.rotulo{
+  display:flex;align-items:center;gap:14px;margin:0 0 22px;
+  font-family:var(--titulo);font-size:var(--t-min);letter-spacing:.14em;text-transform:uppercase;color:var(--crema-2);line-height:1.3
+}
+.rotulo b{color:var(--dorado);font-weight:500}
+.rotulo::after{content:"";flex:1;max-width:120px;min-width:24px;height:1px;background:var(--linea-2)}
+.entradilla{font-size:1.2rem;color:var(--crema-2);max-width:34em;margin-top:18px}
+.cabeza-seccion{display:grid;gap:8px;margin-bottom:48px}
+.nota{font-size:var(--t-min);color:var(--crema-2);margin-top:20px}
+
+/* ---------- Botones (≥ 48 px) ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  min-height:54px;padding:.8em 1.6em;border-radius:2px;border:1px solid transparent;
+  font:inherit;font-weight:600;font-size:var(--t-min);letter-spacing:.01em;text-decoration:none;cursor:pointer;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;text-align:center;line-height:1.3
+}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-dorado{background:var(--dorado);color:#0F141C}
+.btn-dorado:hover{background:var(--dorado-claro)}
+.btn-linea{background:transparent;color:var(--crema);border-color:var(--linea-2)}
+.btn-linea:hover{border-color:var(--crema)}
+.btn-whatsapp{background:#25D366;color:#0B2B16}
+.btn-whatsapp:hover{background:#3be07a}
+.btn-bloque{width:100%}
+
+/* =========================================================
+   BANDA DE NUDO (abajo en móvil, arriba en escritorio)
+   ========================================================= */
+.banda-nudo{
+  position:fixed;left:0;right:0;bottom:0;z-index:100;
+  background:#090D13;color:#fff;border-top:1px solid var(--linea);
+  display:flex;flex-direction:column;align-items:stretch;gap:6px;
+  padding:8px 14px calc(8px + env(safe-area-inset-bottom));
+}
+.banda-nudo p{margin:0;font-size:var(--t-min);line-height:1.3;font-weight:500;color:var(--crema-2);text-align:center}
+.banda-nudo p strong{color:var(--crema);font-weight:600}
+.banda-nudo a{
+  flex:none;background:#25D366;color:#0B2B16;text-decoration:none;font-weight:700;
+  font-size:var(--t-min);padding:.55em 1.1em;border-radius:999px;min-height:48px;
+  display:inline-flex;align-items:center;justify-content:center;gap:.45em;white-space:nowrap
+}
+.banda-nudo a svg{width:20px;height:20px}
+.banda-nudo a:hover{background:#3be07a}
+
+/* ---------- Cabecera ---------- */
+.cabecera{position:sticky;top:0;z-index:50;background:var(--fondo);border-bottom:1px solid var(--linea)}
+.cabecera .contenedor{display:flex;align-items:center;justify-content:space-between;height:68px;gap:12px}
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--crema);font-family:var(--titulo);font-size:1.35rem;font-weight:500;letter-spacing:-.01em;line-height:1.1}
+.logo::before{content:"";width:16px;height:16px;border:1.5px solid var(--dorado);border-radius:50%;flex:none}
+.menu-escritorio{display:none;gap:30px;align-items:center}
+.menu-escritorio a{color:var(--crema-2);text-decoration:none;font-size:var(--t-min);font-weight:500}
+.menu-escritorio a:hover{color:var(--crema)}
+.cabecera .btn{min-height:48px;padding:.4em 1em}
+.cabecera .btn .largo{display:none}
+
+/* =========================================================
+   1. PORTADA: foto vertical recortada + texto
+   ========================================================= */
+.portada{padding:0 0 72px}
+.portada-grid{display:grid;gap:36px}
+.portada-foto{margin:16px 0 0;position:relative;height:min(52vh,420px);min-height:280px;background:var(--fondo-3)}
+.portada-foto img{width:100%;height:100%;object-fit:cover}
+.portada-foto figcaption{
+  position:absolute;left:0;bottom:0;font-size:var(--t-min);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--crema);background:rgba(15,20,28,.82);padding:.35em .8em;line-height:1.4
+}
+.portada-lugar{font-size:var(--t-min);letter-spacing:.12em;text-transform:uppercase;color:var(--crema-2);margin-bottom:18px;line-height:1.4}
+.portada h1{font-size:clamp(3rem,14vw,6.2rem);line-height:.95;font-weight:300;letter-spacing:-.045em;margin-bottom:24px}
+.portada h1 span{display:block;color:var(--dorado)}
+.portada h1 em{display:block;font-style:normal;font-size:.42em;letter-spacing:-.02em;color:var(--crema-2);margin-top:.35em;line-height:1.1}
+.portada .frase{font-size:clamp(1.2rem,3.6vw,1.4rem);color:var(--crema);max-width:24em;margin-bottom:28px;line-height:1.5}
+
+.estado{
+  display:inline-flex;align-items:center;flex-wrap:wrap;gap:.6em;
+  font-weight:600;font-size:var(--t-min);padding:.7em 0;margin-bottom:26px;
+  border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)
+}
+.estado .punto{width:9px;height:9px;border-radius:50%;background:var(--crema-3);flex:none}
+.estado.abierto .punto{background:var(--verde-ok);box-shadow:0 0 0 4px rgba(93,199,122,.18)}
+.estado.cerrado .punto{background:var(--rojo-ko);box-shadow:0 0 0 4px rgba(231,123,98,.16)}
+.estado small{font-weight:400;color:var(--crema-2);font-size:var(--t-min)}
+.portada-botones{display:flex;flex-direction:column;gap:12px}
+
+.claves{list-style:none;margin:40px 0 0;padding:0;display:grid;border-top:1px solid var(--linea)}
+.claves li{display:flex;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--linea);color:var(--crema-2);font-size:var(--t-min)}
+.claves b{font-family:var(--titulo);font-weight:400;color:var(--dorado);flex:none;width:1.8em}
+
+/* =========================================================
+   2. ÁREAS DE PRÁCTICA: pestañas finas subrayadas
+   ========================================================= */
+.areas{background:var(--fondo-2);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+.pestanas{
+  display:flex;flex-wrap:wrap;gap:0 28px;border-bottom:1px solid var(--linea);margin-bottom:40px
+}
+.pestana{
+  flex:none;position:relative;background:none;border:0;color:var(--crema-2);cursor:pointer;
+  font:inherit;font-family:var(--titulo);font-size:1.2rem;font-weight:400;letter-spacing:.01em;
+  min-height:52px;padding:0 0 4px;display:inline-flex;align-items:center;gap:8px
+}
+.pestana b{font-weight:400;color:var(--crema-3);font-variant-numeric:tabular-nums}
+.pestana::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:transparent;transition:background .2s ease}
+.pestana:hover{color:var(--crema)}
+.pestana[aria-selected="true"]{color:var(--crema)}
+.pestana[aria-selected="true"] b{color:var(--dorado)}
+.pestana[aria-selected="true"]::after{background:var(--dorado)}
+
+.panel[hidden]{display:none}
+.panel + .panel{margin-top:56px}          /* sin JS se ven seguidos */
+.panel-cabeza{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 20px;margin-bottom:12px}
+.panel-cabeza h3{font-size:clamp(1.8rem,6vw,2.4rem);font-weight:300}
+.panel-cabeza p{margin:0;color:var(--crema-2);font-size:var(--t-min)}
+.panel-cabeza p strong{color:var(--dorado);font-family:var(--titulo);font-weight:500}
+
+.servicios{list-style:none;margin:0;padding:0;display:grid;column-gap:64px}
+.servicio{padding:20px 0;border-bottom:1px solid var(--linea)}
+.servicio-linea{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.servicio h4{font-family:var(--texto);font-size:1.15rem;font-weight:600;line-height:1.35;letter-spacing:0}
+.consultar{flex:none;font-family:var(--titulo);font-weight:500;font-size:var(--t-min);color:var(--dorado);white-space:nowrap}
+.servicio p{margin:.3em 0 0;color:var(--crema-2);font-size:var(--t-min);line-height:1.55}
+
+/* =========================================================
+   3. CÓMO TRABAJAMOS: foto + 4 pasos numerados
+   ========================================================= */
+.metodo-grid{display:grid;gap:40px;align-items:center}
+.metodo-foto{margin:0;position:relative;background:var(--fondo-3)}
+.metodo-foto img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.metodo-foto figcaption{position:absolute;left:0;bottom:0;background:var(--fondo);color:var(--crema);font-size:var(--t-min);letter-spacing:.1em;text-transform:uppercase;padding:.5em 1em;line-height:1.4}
+.pasos{list-style:none;counter-reset:paso;padding:0;margin:28px 0 0}
+.pasos li{counter-increment:paso;display:grid;grid-template-columns:auto 1fr;gap:4px 20px;padding:22px 0;border-top:1px solid var(--linea)}
+.pasos li:last-child{border-bottom:1px solid var(--linea)}
+.pasos li::before{
+  content:counter(paso,decimal-leading-zero);grid-row:1 / span 2;
+  font-family:var(--titulo);font-weight:300;font-size:clamp(2.6rem,9vw,3.4rem);line-height:.9;color:var(--dorado);letter-spacing:-.04em;min-width:1.4em
+}
+.pasos h3{font-size:1.4rem;font-weight:400;line-height:1.25}
+.pasos p{margin:0;color:var(--crema-2);font-size:var(--t-min)}
+.precio-grande{display:flex;align-items:flex-end;flex-wrap:wrap;gap:6px 18px;margin:32px 0 26px}
+.precio-grande strong{font-family:var(--titulo);font-weight:300;font-size:clamp(4.4rem,18vw,7.5rem);line-height:.82;letter-spacing:-.06em;color:var(--dorado);font-variant-numeric:tabular-nums}
+.precio-grande span{color:var(--crema-2);font-size:var(--t-min);max-width:20em;line-height:1.4;padding-bottom:.3em}
+
+/* =========================================================
+   4. CIFRAS DESCRIPTIVAS
+   ========================================================= */
+.cifras-sec{background:var(--fondo-2);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+.cifras{list-style:none;margin:0;padding:0;display:grid}
+.cifras li{padding:32px 0;border-top:1px solid var(--linea)}
+.cifras li:last-child{border-bottom:1px solid var(--linea)}
+.cifras strong{display:block;font-family:var(--titulo);font-weight:300;font-size:clamp(4.6rem,20vw,7.5rem);line-height:.9;letter-spacing:-.05em;color:var(--crema)}
+.cifras strong sup{font-size:.26em;color:var(--dorado);vertical-align:top;margin-left:.15em;letter-spacing:0;position:relative;top:.4em}
+.cifras h3{font-size:1.35rem;font-weight:500;margin:18px 0 6px}
+.cifras p{margin:0;color:var(--crema-2);font-size:var(--t-min);max-width:22em}
+
+/* =========================================================
+   5. EQUIPO
+   ========================================================= */
+.equipo-lista{list-style:none;margin:0;padding:0;display:grid;gap:48px}
+.persona figure{margin:0 0 20px;position:relative;background:var(--fondo-3)}
+.persona img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:saturate(.85)}
+.persona figcaption{position:absolute;left:0;bottom:0;background:rgba(15,20,28,.86);color:var(--crema-2);font-size:var(--t-min);padding:.3em .8em;line-height:1.4}
+.persona .esp{font-family:var(--titulo);font-size:var(--t-min);letter-spacing:.12em;text-transform:uppercase;color:var(--dorado);margin:0 0 6px;line-height:1.4}
+.persona h3{font-size:1.7rem;font-weight:400;line-height:1.15;margin-bottom:10px}
+.persona p{color:var(--crema-2);font-size:var(--t-min);margin:0 0 10px}
+.persona .colegiado{padding-top:10px;border-top:1px solid var(--linea);color:var(--crema-2)}
+.persona .colegiado span{color:var(--crema-3)}
+
+/* =========================================================
+   6. PREGUNTAS FRECUENTES (acordeón)
+   ========================================================= */
+.faq-sec{border-top:1px solid var(--linea)}
+.faq-grid{display:grid;gap:40px}
+.faq{list-style:none;margin:0;padding:0;border-top:1px solid var(--linea)}
+.faq li{border-bottom:1px solid var(--linea)}
+.faq h3{margin:0;font-size:inherit}
+.faq-pregunta{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;
+  min-height:64px;padding:16px 0;background:none;border:0;color:var(--crema);cursor:pointer;text-align:left;
+  font-family:var(--titulo);font-size:1.3rem;font-weight:400;line-height:1.3;letter-spacing:-.01em
+}
+.faq-pregunta:hover{color:var(--dorado-claro)}
+.faq-icono{position:relative;flex:none;width:22px;height:22px}
+.faq-icono::before,.faq-icono::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;margin-top:-.75px;background:var(--dorado);transition:transform .25s ease}
+.faq-icono::after{transform:rotate(90deg)}
+.faq-pregunta[aria-expanded="true"] .faq-icono::after{transform:rotate(0)}
+.faq-respuesta{padding:0 40px 22px 0;color:var(--crema-2)}
+.faq-respuesta[hidden]{display:none}
+.faq-respuesta p{margin:0 0 .6em}
+
+/* =========================================================
+   7. HORARIO, DIRECCIÓN Y PRIMERA CONSULTA
+   ========================================================= */
+.visita{background:var(--fondo-2);border-top:1px solid var(--linea)}
+.dos-col{display:grid;gap:56px}
+.bloque h3{font-size:1.6rem;font-weight:400;margin-bottom:18px}
+.tabla-horario{width:100%;border-collapse:collapse;font-size:var(--t-min)}
+.tabla-horario th,.tabla-horario td{padding:13px 0;border-bottom:1px solid var(--linea);text-align:left;font-weight:400;color:var(--crema-2);vertical-align:top}
+.tabla-horario td{text-align:right;font-family:var(--titulo);color:var(--crema);font-variant-numeric:tabular-nums}
+.tabla-horario tr:first-child th,.tabla-horario tr:first-child td{border-top:1px solid var(--linea)}
+.tabla-horario tr.hoy th,.tabla-horario tr.hoy td{color:var(--crema);font-weight:600}
+.tabla-horario tr.hoy th::after{
+  content:"hoy";margin-left:10px;font-size:var(--t-min);font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--dorado);border:1px solid var(--dorado);padding:0 .45em;vertical-align:middle;line-height:1.4
+}
+.tabla-horario .cerrado-dia{color:var(--rojo-ko)}
+.tabla-horario td span{display:block}
+
+/* Mapa estilizado hecho solo con CSS: retícula fina, calles y un punto */
+.mapa{
+  position:relative;aspect-ratio:4/3;margin:0 0 22px;border:1px solid var(--linea-2);overflow:hidden;
+  background-color:#111823;
+  background-image:
+    linear-gradient(rgba(239,232,220,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(239,232,220,.05) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+.mapa .calle{position:absolute;background:rgba(239,232,220,.32)}
+.mapa .c-h{left:0;right:0;top:58%;height:1px}
+.mapa .c-h2{left:0;right:0;top:22%;height:1px;background:rgba(239,232,220,.16)}
+.mapa .c-v{top:0;bottom:0;left:44%;width:1px}
+.mapa .c-v2{top:0;bottom:0;left:82%;width:1px;background:rgba(239,232,220,.16)}
+.mapa .c-d{left:-20%;width:140%;top:48%;height:1px;transform:rotate(-22deg);background:rgba(239,232,220,.2)}
+.mapa .juzgado{position:absolute;left:58%;top:66%;width:18%;height:20%;border:1px solid rgba(239,232,220,.3);background:rgba(239,232,220,.04)}
+.mapa .plaza{position:absolute;left:8%;top:28%;width:26%;height:22%;border:1px dashed rgba(150,175,200,.6);background:rgba(110,140,170,.08)}
+.mapa .pin{position:absolute;left:44%;top:58%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--dorado)}
+.mapa .pin::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid var(--dorado);animation:latido 2.4s ease-out infinite}
+.mapa .rot{position:absolute;font-size:var(--t-min);letter-spacing:.04em;color:var(--crema-2);white-space:nowrap;line-height:1.2}
+.mapa .r-calle{left:10px;top:calc(58% + 6px)}
+.mapa .r-av{left:calc(44% + 8px);top:8px}
+.mapa .r-plaza{left:calc(8% + 6px);top:calc(28% + 4px);color:#B9CCE0}
+.mapa .r-local{left:calc(44% + 18px);top:calc(58% - 34px);font-family:var(--titulo);color:var(--crema)}
+@keyframes latido{0%{transform:scale(.6);opacity:1}100%{transform:scale(2.2);opacity:0}}
+.direccion{font-family:var(--titulo);font-size:1.35rem;margin-bottom:.1em}
+
+.consulta{margin-top:88px;padding-top:56px;border-top:1px solid var(--linea)}
+.consulta-grid{display:grid;gap:40px}
+.contacto-botones{display:grid;gap:12px;margin-top:26px}
+.formulario{display:grid;gap:22px}
+.formulario label,.formulario legend{display:block;font-size:var(--t-min);letter-spacing:.06em;text-transform:uppercase;color:var(--crema-2);margin-bottom:6px;line-height:1.4}
+.formulario input[type="text"],.formulario select,.formulario textarea{
+  width:100%;min-height:54px;font:inherit;font-size:var(--t-min);padding:.6em .2em;color:var(--crema);
+  border:0;border-bottom:1px solid var(--linea-2);border-radius:0;background:transparent;color-scheme:dark
+}
+.formulario textarea{min-height:120px;resize:vertical;line-height:1.5}
+.formulario select option{background:var(--fondo-3);color:var(--crema)}
+.formulario input::placeholder,.formulario textarea::placeholder{color:var(--crema-3)}
+.formulario input:focus,.formulario select:focus,.formulario textarea:focus{outline:none;border-bottom-color:var(--dorado)}
+.formulario fieldset{border:0;margin:0;padding:0;min-width:0}
+.opciones{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.formulario label.opcion{position:relative;margin:0;text-transform:none;letter-spacing:0}
+.opcion input{position:absolute;opacity:0;width:1px;height:1px}
+.opcion span{
+  display:flex;align-items:center;justify-content:center;min-height:52px;padding:.4em .6em;text-align:center;
+  border:1px solid var(--linea-2);color:var(--crema-2);font-size:var(--t-min);cursor:pointer;line-height:1.25;
+  transition:border-color .2s ease,color .2s ease
+}
+.opcion span:hover{border-color:var(--crema);color:var(--crema)}
+.opcion input:checked + span{border-color:var(--dorado);color:var(--crema);box-shadow:inset 0 -2px 0 var(--dorado)}
+.opcion input:focus-visible + span{outline:2px solid var(--dorado);outline-offset:3px}
+.separador{display:flex;align-items:center;gap:14px;color:var(--crema-2);font-size:var(--t-min);margin:28px 0 8px}
+.separador::after{content:"";flex:1;height:1px;background:var(--linea)}
+.aviso-legal{font-size:var(--t-min);color:var(--crema-2);border-left:2px solid var(--dorado);padding:4px 0 4px 16px;margin:28px 0 0}
+
+/* =========================================================
+   8. PIE
+   ========================================================= */
+.pie{background:#0A0E14;padding:64px 0 32px;border-top:1px solid var(--linea)}
+.pie-grid{display:grid;gap:32px}
+.pie p{margin:.3em 0;font-size:var(--t-min);color:var(--crema-2)}
+.pie p strong{color:var(--crema);font-weight:600}
+.pie .logo{font-size:1.7rem}
+.redes{display:flex;gap:12px;margin-top:12px}
+.redes a{width:50px;height:50px;border-radius:50%;border:1px solid var(--linea-2);display:grid;place-items:center;color:var(--crema)}
+.redes a:hover{border-color:var(--dorado);color:var(--dorado)}
+.redes svg{width:20px;height:20px}
+.pie-final{
+  border-top:1px solid var(--linea);margin-top:40px;padding-top:22px;font-size:var(--t-min);
+  display:flex;flex-direction:column;gap:6px;color:var(--crema-2)
+}
+.pie-final a{color:var(--dorado-claro);font-weight:600}
+
+/* ---------- Aviso (toast) ---------- */
+.toast{
+  position:fixed;left:50%;bottom:calc(var(--banda-h) + 16px);z-index:200;
+  transform:translate(-50%,16px);opacity:0;pointer-events:none;
+  width:calc(100% - 32px);max-width:460px;
+  background:var(--crema);color:#0F141C;padding:16px 18px;border-radius:2px;box-shadow:0 14px 34px rgba(0,0,0,.5);
+  display:flex;gap:12px;align-items:flex-start;font-size:var(--t-min);line-height:1.45;font-weight:500;
+  transition:opacity .25s ease,transform .25s ease
+}
+.toast.visible{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.toast svg{width:22px;height:22px;flex:none;color:#7A5A1E;margin-top:2px}
+
+/* =========================================================
+   TABLET Y ESCRITORIO
+   ========================================================= */
+@media (min-width:480px){
+  .cabecera .btn .largo{display:inline}
+  .cabecera .btn .corto{display:none}
+}
+@media (min-width:640px){
+  .banda-nudo{flex-direction:row;align-items:center;justify-content:space-between;gap:16px}
+  .banda-nudo p{text-align:left}
+  .portada-botones{flex-direction:row;flex-wrap:wrap}
+  .cifras{grid-template-columns:repeat(3,1fr);gap:0 40px}
+  .cifras li,.cifras li:last-child{border-bottom:1px solid var(--linea)}
+  .contacto-botones{grid-template-columns:1fr 1fr}
+  .pie-grid{grid-template-columns:1fr 1fr}
+}
+@media (min-width:760px){
+  .equipo-lista{grid-template-columns:repeat(3,1fr);gap:40px}
+}
+@media (min-width:900px){
+  body{padding-bottom:0;padding-top:var(--banda-h)}
+  .banda-nudo{top:0;bottom:auto;border-top:0;border-bottom:1px solid var(--linea);justify-content:center;gap:24px;padding:8px 20px}
+  .cabecera{top:var(--banda-h)}
+  .menu-escritorio{display:flex}
+  section{scroll-margin-top:calc(var(--banda-h) + 72px);padding:120px 0}
+  .toast{bottom:28px}
+  .portada{padding:56px 0 120px}
+  .portada-grid{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:80px;align-items:center}
+  .portada-foto{margin:0;height:auto;aspect-ratio:4/5;max-height:calc(100vh - 200px);min-height:520px}
+  .cabeza-seccion{grid-template-columns:1fr 1fr;align-items:end;gap:60px}
+  .cabeza-seccion .entradilla{margin:0 0 .3em}
+  .servicios{grid-template-columns:1fr 1fr}
+  .metodo-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:96px}
+  .faq-grid{grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:96px;align-items:start}
+  .dos-col{grid-template-columns:1fr 1fr;gap:96px}
+  .consulta-grid{grid-template-columns:1fr 1fr;gap:96px}
+  .pie-grid{grid-template-columns:2fr 1fr 1fr}
+  .pie-final{flex-direction:row;justify-content:space-between}
+}
+@media (min-width:1100px){
+  .menu-escritorio{gap:38px}
+}
+@media (max-width:359px){
+  .contenedor{padding:0 16px}
+  .logo{font-size:1.2rem}
+  .pestanas{gap:0 20px}
+  .opciones{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Banda fija de Nudo: deja claro que es un ejemplo ===== -->
+<div class="banda-nudo" id="banda-nudo" role="region" aria-label="Aviso de ejemplo">
+  <p><strong>Ejemplo de concepto hecho por Nudo</strong> · Local ficticio</p>
+  <a href="https://wa.me/34722740211?text=Hola%2C%20he%20visto%20el%20ejemplo%20del%20despacho%20de%20abogados%20y%20quiero%20una%20web%20as%C3%AD%20para%20mi%20despacho%20o%20asesor%C3%ADa" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2Z"/></svg>
+    Quiero una web así
+  </a>
+</div>
+
+<!-- ===== Cabecera del despacho ===== -->
+<header class="cabecera">
+  <div class="contenedor">
+    <a href="#inicio" class="logo" aria-label="Nudo Abogados y Asesores, ir al inicio">nudo abogados</a>
+    <nav class="menu-escritorio" aria-label="Menú principal">
+      <a href="#areas">Áreas</a>
+      <a href="#metodo">Cómo trabajamos</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#preguntas">Preguntas</a>
+      <a href="#despacho">Horario</a>
+    </nav>
+    <a href="#consulta" class="btn btn-dorado"><span class="corto">Consulta</span><span class="largo">Primera consulta</span></a>
+  </div>
+</header>
+
+<main>
+
+<!-- =========================================================
+     1. PORTADA: foto vertical a un lado, texto al otro.
+     En móvil: foto arriba con altura limitada y texto debajo.
+     ========================================================= -->
+<section class="portada" id="inicio">
+  <div class="contenedor portada-grid">
+    <!-- Foto de portada: sin lazy, es lo primero que se ve -->
+    <figure class="portada-foto">
+      <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=900&h=1125&q=72" width="900" height="1125" alt="Biblioteca jurídica con estanterías de libros antiguos y un busto clásico" fetchpriority="high">
+      <figcaption>Despacho ficticio</figcaption>
+    </figure>
+
+    <div class="portada-texto">
+      <p class="portada-lugar">Abogados y asesoría · Calle Ejemplo, 12</p>
+      <h1>Nudo <span>Abogados</span><em>&amp; Asesores</em></h1>
+      <p class="frase">Te lo explicamos claro. Y te acompañamos hasta el final.</p>
+      <div class="estado" id="estado" aria-live="polite">
+        <span class="punto"></span><span id="estado-texto">Consultando horario…</span>
+      </div>
+      <div class="portada-botones">
+        <a href="#consulta" class="btn btn-dorado">Pide una primera consulta</a>
+        <a href="#areas" class="btn btn-linea">Áreas de práctica</a>
+      </div>
+      <ul class="claves">
+        <li><b>01</b>Sin tecnicismos: te contamos tus opciones con palabras normales</li>
+        <li><b>02</b>Presupuesto cerrado y por escrito antes de empezar</li>
+        <li><b>03</b>Primera consulta online o presencial, como prefieras</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     2. ÁREAS DE PRÁCTICA (pestañas; sin JS se ven todas)
+     ========================================================= -->
+<section class="areas" id="areas">
+  <div class="contenedor">
+    <div class="cabeza-seccion">
+      <div>
+        <p class="rotulo"><b>01</b> Áreas de práctica</p>
+        <h2>En qué te <span>podemos ayudar</span></h2>
+      </div>
+      <p class="entradilla">Cada asunto es distinto, así que no ponemos precio cerrado a nada sin conocerlo antes. Empieza por una primera consulta y te damos presupuesto.</p>
+    </div>
+
+    <div class="pestanas" role="tablist" aria-label="Áreas de práctica" id="pestanas">
+      <button type="button" class="pestana" role="tab" id="tab-familia" aria-controls="panel-familia" aria-selected="true"><b>01</b> Familia</button>
+      <button type="button" class="pestana" role="tab" id="tab-laboral" aria-controls="panel-laboral" aria-selected="false"><b>02</b> Laboral</button>
+      <button type="button" class="pestana" role="tab" id="tab-civil" aria-controls="panel-civil" aria-selected="false"><b>03</b> Civil y herencias</button>
+      <button type="button" class="pestana" role="tab" id="tab-empresas" aria-controls="panel-empresas" aria-selected="false"><b>04</b> Empresas y fiscal</button>
+    </div>
+
+    <!-- ---------- Familia ---------- -->
+    <div class="panel" role="tabpanel" id="panel-familia" aria-labelledby="tab-familia" tabindex="0">
+      <div class="panel-cabeza">
+        <h3>Familia</h3>
+        <p>Primera consulta <strong>50 €</strong> · precio de ejemplo</p>
+      </div>
+      <ul class="servicios">
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Divorcio de mutuo acuerdo</h4><span class="consultar">Consúltanos</span></div>
+          <p>Convenio regulador, custodia y pensiones cuando los dos estáis de acuerdo.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Divorcio contencioso</h4><span class="consultar">Consúltanos</span></div>
+          <p>Cuando no hay acuerdo, te representamos y te explicamos cada paso del procedimiento.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Custodia y régimen de visitas</h4><span class="consultar">Consúltanos</span></div>
+          <p>Establecer o modificar la custodia poniendo a los hijos en el centro.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Pensiones de alimentos</h4><span class="consultar">Consúltanos</span></div>
+          <p>Fijarlas, revisarlas si cambian las circunstancias o reclamar impagos.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Parejas de hecho y capitulaciones</h4><span class="consultar">Consúltanos</span></div>
+          <p>Régimen económico, separación de bienes y acuerdos antes o durante la convivencia.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Mediación familiar</h4><span class="consultar">Consúltanos</span></div>
+          <p>Un espacio para intentar llegar a un acuerdo antes de ir al juzgado.</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ---------- Laboral ---------- -->
+    <div class="panel" role="tabpanel" id="panel-laboral" aria-labelledby="tab-laboral" tabindex="0">
+      <div class="panel-cabeza">
+        <h3>Laboral</h3>
+        <p>Primera consulta <strong>50 €</strong> · precio de ejemplo</p>
+      </div>
+      <ul class="servicios">
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Despidos</h4><span class="consultar">Consúltanos</span></div>
+          <p>Revisamos la carta y la indemnización y te decimos qué opciones tienes.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Reclamación de cantidades</h4><span class="consultar">Consúltanos</span></div>
+          <p>Salarios, horas extra o finiquitos que no te han pagado.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Acoso y vulneración de derechos</h4><span class="consultar">Consúltanos</span></div>
+          <p>Te orientamos sobre cómo documentarlo y qué pasos dar.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Incapacidades y Seguridad Social</h4><span class="consultar">Consúltanos</span></div>
+          <p>Bajas, incapacidad permanente y prestaciones denegadas.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Conciliación previa</h4><span class="consultar">Consúltanos</span></div>
+          <p>Te preparamos y te acompañamos al acto de conciliación antes del juicio.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Asesoría laboral para empresas</h4><span class="consultar">Consúltanos</span></div>
+          <p>Contratos, sanciones, despidos y relación con la plantilla, desde el lado de la empresa.</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ---------- Civil y herencias ---------- -->
+    <div class="panel" role="tabpanel" id="panel-civil" aria-labelledby="tab-civil" tabindex="0">
+      <div class="panel-cabeza">
+        <h3>Civil y herencias</h3>
+        <p>Primera consulta <strong>50 €</strong> · precio de ejemplo</p>
+      </div>
+      <ul class="servicios">
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Herencias</h4><span class="consultar">Consúltanos</span></div>
+          <p>Aceptación, reparto entre herederos e impuestos, explicados paso a paso.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Testamentos</h4><span class="consultar">Consúltanos</span></div>
+          <p>Te ayudamos a dejarlo todo claro para evitar conflictos en la familia.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Alquileres</h4><span class="consultar">Consúltanos</span></div>
+          <p>Contratos, fianzas, impagos y desahucios, tanto si alquilas como si eres inquilino.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Comunidades de propietarios</h4><span class="consultar">Consúltanos</span></div>
+          <p>Derramas, obras, morosidad y conflictos entre vecinos.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Compraventa de vivienda</h4><span class="consultar">Consúltanos</span></div>
+          <p>Revisamos el contrato de arras y la documentación antes de que firmes.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Reclamación de deudas y seguros</h4><span class="consultar">Consúltanos</span></div>
+          <p>Reclamar lo que te deben un particular, una empresa o tu aseguradora.</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ---------- Empresas y autónomos / fiscal ---------- -->
+    <div class="panel" role="tabpanel" id="panel-empresas" aria-labelledby="tab-empresas" tabindex="0">
+      <div class="panel-cabeza">
+        <h3>Empresas, autónomos y fiscal</h3>
+        <p>Cuota mensual a medida · <strong>consúltanos</strong></p>
+      </div>
+      <ul class="servicios">
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Alta de autónomo y sociedades</h4><span class="consultar">Consúltanos</span></div>
+          <p>Te ayudamos a elegir la forma que te conviene y hacemos los trámites.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Impuestos trimestrales</h4><span class="consultar">Consúltanos</span></div>
+          <p>IVA, IRPF y modelos trimestrales, presentados y explicados.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Contabilidad</h4><span class="consultar">Consúltanos</span></div>
+          <p>Libros al día y cuentas anuales, para que sepas cómo va tu negocio.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Declaración de la renta</h4><span class="consultar">Consúltanos</span></div>
+          <p>Para particulares y autónomos, revisando deducciones antes de presentar.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Nóminas y Seguridad Social</h4><span class="consultar">Consúltanos</span></div>
+          <p>Altas, bajas, nóminas y seguros sociales de tu plantilla.</p>
+        </li>
+        <li class="servicio">
+          <div class="servicio-linea"><h4>Requerimientos de Hacienda</h4><span class="consultar">Consúltanos</span></div>
+          <p>Si te llega una carta de Hacienda, la revisamos contigo y preparamos la respuesta.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     3. CÓMO TRABAJAMOS: 4 pasos numerados
+     ========================================================= -->
+<section class="metodo" id="metodo">
+  <div class="contenedor metodo-grid">
+    <figure class="metodo-foto">
+      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&h=1125&q=70" width="900" height="1125" alt="Mano firmando un documento con un bolígrafo sobre la mesa" loading="lazy">
+      <figcaption>Todo por escrito</figcaption>
+    </figure>
+    <div class="metodo-texto">
+      <p class="rotulo"><b>02</b> Cómo trabajamos</p>
+      <h2>Paso a paso, <span>sin sorpresas</span></h2>
+      <div class="precio-grande"><strong>50 €</strong><span>primera consulta orientativa (precio de ejemplo)</span></div>
+      <ol class="pasos">
+        <li>
+          <h3>Primera consulta</h3>
+          <p>Nos cuentas qué te pasa, online o en el despacho. Te escuchamos y te decimos si podemos ayudarte.</p>
+        </li>
+        <li>
+          <h3>Estudio del caso</h3>
+          <p>Revisamos tus documentos y te explicamos tus opciones, con sus pros y sus contras.</p>
+        </li>
+        <li>
+          <h3>Presupuesto cerrado</h3>
+          <p>Antes de empezar, te damos por escrito lo que costará. Sin letra pequeña.</p>
+        </li>
+        <li>
+          <h3>Seguimiento</h3>
+          <p>Te avisamos de cada novedad y resolvemos tus dudas hasta que el asunto se cierra.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     4. CIFRAS DESCRIPTIVAS (no son datos reales)
+     ========================================================= -->
+<section class="cifras-sec" id="compromisos">
+  <div class="contenedor">
+    <div class="cabeza-seccion">
+      <div>
+        <p class="rotulo"><b>03</b> Lo que puedes esperar</p>
+        <h2>Claro <span>desde el principio</span></h2>
+      </div>
+      <p class="entradilla">Así trabajaría este despacho. Es un despacho ficticio: estas cifras describen el servicio, no son estadísticas ni resultados.</p>
+    </div>
+    <ul class="cifras">
+      <li>
+        <strong>1<sup>presupuesto</sup></strong>
+        <h3>Presupuesto cerrado</h3>
+        <p>Un único precio acordado por escrito antes de empezar a trabajar.</p>
+      </li>
+      <li>
+        <strong>2<sup>formas</sup></strong>
+        <h3>Online o presencial</h3>
+        <p>Primera consulta por videollamada o en el despacho, como te venga mejor.</p>
+      </li>
+      <li>
+        <strong>4<sup>áreas</sup></strong>
+        <h3>Un solo despacho</h3>
+        <p>Familia, laboral, civil y empresa: si tu asunto toca varias, lo vemos juntos.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- =========================================================
+     5. EL EQUIPO (personas ficticias)
+     ========================================================= -->
+<section class="equipo" id="equipo">
+  <div class="contenedor">
+    <div class="cabeza-seccion">
+      <div>
+        <p class="rotulo"><b>04</b> El equipo</p>
+        <h2>Quién <span>te atiende</span></h2>
+      </div>
+      <p class="entradilla">Personas ficticias creadas para este ejemplo, con fotos de banco de imágenes. En tu web irían tu equipo real y sus datos.</p>
+    </div>
+    <ul class="equipo-lista">
+      <li class="persona">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=720&h=900&q=70" width="720" height="900" alt="Retrato de una abogada con americana gris" loading="lazy">
+          <figcaption>Persona ficticia</figcaption>
+        </figure>
+        <p class="esp">Familia</p>
+        <h3>Lucía Ejemplo Martín</h3>
+        <p>Divorcios, custodias y mediación. Le gusta resolver con acuerdos siempre que se pueda.</p>
+        <p class="colegiado">Colegiada n.º 0000 <span>· dato de ejemplo</span></p>
+      </li>
+      <li class="persona">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=720&h=900&q=70" width="720" height="900" alt="Retrato de un abogado con traje oscuro y corbata" loading="lazy">
+          <figcaption>Persona ficticia</figcaption>
+        </figure>
+        <p class="esp">Laboral y empresas</p>
+        <h3>Daniel Muestra Ruiz</h3>
+        <p>Despidos, reclamaciones y asesoría laboral para pequeñas empresas y autónomos.</p>
+        <p class="colegiado">Colegiado n.º 0000 <span>· dato de ejemplo</span></p>
+      </li>
+      <li class="persona">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=720&h=900&q=70" width="720" height="900" alt="Retrato de una asesora sonriente en una oficina" loading="lazy">
+          <figcaption>Persona ficticia</figcaption>
+        </figure>
+        <p class="esp">Civil, herencias y fiscal</p>
+        <h3>Carmen Prueba Sanz</h3>
+        <p>Herencias, alquileres e impuestos. La que traduce el lenguaje de Hacienda.</p>
+        <p class="colegiado">Colegiada n.º 0000 <span>· dato de ejemplo</span></p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- =========================================================
+     6. PREGUNTAS FRECUENTES (acordeón; sin JS se ven abiertas)
+     ========================================================= -->
+<section class="faq-sec" id="preguntas">
+  <div class="contenedor faq-grid">
+    <div>
+      <p class="rotulo"><b>05</b> Preguntas frecuentes</p>
+      <h2>Lo que <span>nos suelen preguntar</span></h2>
+      <p class="entradilla">Si tu duda no está aquí, pregúntanos en la primera consulta.</p>
+    </div>
+    <ul class="faq" id="faq">
+      <li>
+        <h3><button type="button" class="faq-pregunta" aria-expanded="false" aria-controls="r1" id="p1">¿Cuánto cuesta la primera consulta?<span class="faq-icono" aria-hidden="true"></span></button></h3>
+        <div class="faq-respuesta" id="r1" role="region" aria-labelledby="p1">
+          <p>En este ejemplo, 50 €. Es una reunión para entender tu situación y explicarte tus opciones. Si después nos encargas el asunto, te damos un presupuesto cerrado aparte.</p>
+        </div>
+      </li>
+      <li>
+        <h3><button type="button" class="faq-pregunta" aria-expanded="false" aria-controls="r2" id="p2">¿Puedo hacer la consulta online?<span class="faq-icono" aria-hidden="true"></span></button></h3>
+        <div class="faq-respuesta" id="r2" role="region" aria-labelledby="p2">
+          <p>Sí. Puedes elegir entre videollamada o venir al despacho. Los documentos nos los puedes enviar antes por correo.</p>
+        </div>
+      </li>
+      <li>
+        <h3><button type="button" class="faq-pregunta" aria-expanded="false" aria-controls="r3" id="p3">¿Qué tengo que llevar?<span class="faq-icono" aria-hidden="true"></span></button></h3>
+        <div class="faq-respuesta" id="r3" role="region" aria-labelledby="p3">
+          <p>Tu DNI y cualquier papel relacionado con el asunto: cartas, contratos, nóminas, notificaciones… Si no sabes qué es importante, tráelo todo y lo miramos juntos.</p>
+        </div>
+      </li>
+      <li>
+        <h3><button type="button" class="faq-pregunta" aria-expanded="false" aria-controls="r4" id="p4">¿Me diréis el precio antes de empezar?<span class="faq-icono" aria-hidden="true"></span></button></h3>
+        <div class="faq-respuesta" id="r4" role="region" aria-labelledby="p4">
+          <p>Sí. Tras estudiar el caso te damos un presupuesto cerrado y por escrito. No empezamos a trabajar hasta que lo aceptas.</p>
+        </div>
+      </li>
+      <li>
+        <h3><button type="button" class="faq-pregunta" aria-expanded="false" aria-controls="r5" id="p5">¿Cuánto tardará mi asunto?<span class="faq-icono" aria-hidden="true"></span></button></h3>
+        <div class="faq-respuesta" id="r5" role="region" aria-labelledby="p5">
+          <p>Depende de muchas cosas que no controlamos, como los juzgados o la otra parte, así que no prometemos plazos. Lo que sí hacemos es explicarte en qué punto está y avisarte de cada novedad.</p>
+        </div>
+      </li>
+      <li>
+        <h3><button type="button" class="faq-pregunta" aria-expanded="false" aria-controls="r6" id="p6">¿Lo que os cuente es confidencial?<span class="faq-icono" aria-hidden="true"></span></button></h3>
+        <div class="faq-respuesta" id="r6" role="region" aria-labelledby="p6">
+          <p>Sí. Todo lo que nos cuentes está protegido por el secreto profesional desde la primera conversación.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- =========================================================
+     7. HORARIO, DIRECCIÓN Y PRIMERA CONSULTA
+     ========================================================= -->
+<section class="visita" id="despacho">
+  <div class="contenedor">
+    <div class="cabeza-seccion">
+      <div>
+        <p class="rotulo"><b>06</b> El despacho</p>
+        <h2>Horario <span>y dónde estamos</span></h2>
+      </div>
+    </div>
+
+    <div class="dos-col">
+      <!-- Horario -->
+      <div class="bloque">
+        <h3>Horario</h3>
+        <table class="tabla-horario" id="tabla-horario">
+          <tbody>
+            <tr data-dia="1"><th scope="row">Lunes</th><td><span>9:00 – 14:00</span><span>16:00 – 19:00</span></td></tr>
+            <tr data-dia="2"><th scope="row">Martes</th><td><span>9:00 – 14:00</span><span>16:00 – 19:00</span></td></tr>
+            <tr data-dia="3"><th scope="row">Miércoles</th><td><span>9:00 – 14:00</span><span>16:00 – 19:00</span></td></tr>
+            <tr data-dia="4"><th scope="row">Jueves</th><td><span>9:00 – 14:00</span><span>16:00 – 19:00</span></td></tr>
+            <tr data-dia="5"><th scope="row">Viernes</th><td>9:00 – 14:00</td></tr>
+            <tr data-dia="6"><th scope="row">Sábado</th><td class="cerrado-dia">Cerrado</td></tr>
+            <tr data-dia="0"><th scope="row">Domingo</th><td class="cerrado-dia">Cerrado</td></tr>
+          </tbody>
+        </table>
+        <p class="nota">Atendemos con cita previa. En agosto, horario de mañana.</p>
+      </div>
+
+      <!-- Dónde estamos: mapa estilizado en CSS -->
+      <div class="bloque">
+        <h3>Dónde estamos</h3>
+        <div class="mapa" role="img" aria-label="Plano ilustrativo: Nudo Abogados en Calle Ejemplo, 12, junto a la plaza">
+          <span class="calle c-h2"></span><span class="calle c-v2"></span>
+          <span class="calle c-d"></span>
+          <span class="calle c-h"></span><span class="calle c-v"></span>
+          <span class="plaza"></span>
+          <span class="juzgado"></span>
+          <span class="pin"></span>
+          <span class="rot r-calle">C. Ejemplo</span>
+          <span class="rot r-av">Av. Central</span>
+          <span class="rot r-plaza">Plaza</span>
+          <span class="rot r-local">Nudo Abogados</span>
+        </div>
+        <p class="direccion">Calle Ejemplo, 12 · 2.º</p>
+        <p style="color:var(--crema-2)">00000 Ciudad Ejemplo · junto a la plaza</p>
+        <button type="button" class="btn btn-linea btn-bloque" data-demo="Esto es un ejemplo. En tu web, este botón abrirá el mapa para llegar a tu despacho.">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2Z"/></svg>
+          Cómo llegar
+        </button>
+      </div>
+    </div>
+
+    <!-- Primera consulta -->
+    <div class="consulta" id="consulta">
+      <div class="consulta-grid">
+        <div>
+          <p class="rotulo"><b>07</b> Primera consulta</p>
+          <h2>Cuéntanos <span>qué te pasa</span></h2>
+          <p class="entradilla">Llámanos, escríbenos o déjanos un resumen y te contactamos para concertar la primera consulta.</p>
+          <div class="contacto-botones">
+            <button type="button" class="btn btn-linea" data-demo="Esto es un ejemplo. En tu web, este botón llamará a tu despacho.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+              Llamar
+            </button>
+            <button type="button" class="btn btn-whatsapp" data-demo="Esto es un ejemplo. En tu web, este botón abrirá el WhatsApp de tu despacho.">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2Z"/></svg>
+              WhatsApp
+            </button>
+            <button type="button" class="btn btn-linea" data-demo="Esto es un ejemplo. En tu web, este botón abrirá un correo a tu despacho.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg>
+              Correo
+            </button>
+            <button type="button" class="btn btn-linea" data-demo="Esto es un ejemplo. En tu web, este botón abrirá tu agenda para reservar una videollamada.">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="1"/><path d="m16 10 6-3v10l-6-3"/></svg>
+              Videollamada
+            </button>
+          </div>
+          <p class="aviso-legal">Nudo Abogados &amp; Asesores es un despacho ficticio. Nada de esta página es asesoramiento jurídico.</p>
+        </div>
+
+        <div>
+          <p class="separador">o rellena el formulario</p>
+          <!-- Formulario de ejemplo: no envía nada -->
+          <form class="formulario" id="form-consulta" novalidate>
+            <div>
+              <label for="c-nombre">Nombre</label>
+              <input id="c-nombre" name="nombre" type="text" autocomplete="off" placeholder="Tu nombre">
+            </div>
+            <div>
+              <label for="c-area">Área</label>
+              <select id="c-area" name="area">
+                <option>Familia</option>
+                <option>Laboral</option>
+                <option>Civil y herencias</option>
+                <option>Empresas, autónomos y fiscal</option>
+                <option>No lo sé, quiero orientación</option>
+              </select>
+            </div>
+            <div>
+              <label for="c-desc">Breve descripción</label>
+              <textarea id="c-desc" name="descripcion" rows="4" placeholder="En dos o tres frases, qué ha pasado y qué te preocupa"></textarea>
+            </div>
+            <fieldset>
+              <legend>¿Cómo prefieres que te contactemos?</legend>
+              <div class="opciones">
+                <label class="opcion"><input type="radio" name="contacto" value="telefono" checked><span>Teléfono</span></label>
+                <label class="opcion"><input type="radio" name="contacto" value="whatsapp"><span>WhatsApp</span></label>
+                <label class="opcion"><input type="radio" name="contacto" value="correo"><span>Correo</span></label>
+                <label class="opcion"><input type="radio" name="contacto" value="videollamada"><span>Videollamada</span></label>
+              </div>
+            </fieldset>
+            <button type="submit" class="btn btn-dorado btn-bloque">Pedir primera consulta</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- =========================================================
+     8. PIE
+     ========================================================= -->
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie-grid">
+      <div>
+        <a href="#inicio" class="logo" aria-label="Nudo Abogados y Asesores, volver arriba">nudo abogados</a>
+        <p style="margin-top:12px">Abogados y asesoría en Calle Ejemplo, 12. Familia, laboral, civil y empresa.</p>
+      </div>
+      <div>
+        <p><strong>Horario</strong></p>
+        <p>Lun–Jue 9:00–14:00<br>y 16:00–19:00</p>
+        <p>Vie 9:00–14:00</p>
+      </div>
+      <div>
+        <p><strong>Síguenos</strong></p>
+        <div class="redes">
+          <a href="#" aria-label="LinkedIn" data-demo="Esto es un ejemplo. En tu web, este botón abrirá el LinkedIn de tu despacho."><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.5 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM3 9h3v12H3V9Zm6 0h2.9v1.7h.1c.4-.8 1.4-1.9 3.2-1.9 3.4 0 4 2.2 4 5.1V21h-3v-6.2c0-1.5 0-3.3-2-3.3s-2.3 1.6-2.3 3.2V21H9V9Z"/></svg></a>
+          <a href="#" aria-label="Instagram" data-demo="Esto es un ejemplo. En tu web, este botón abrirá el Instagram de tu despacho."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook" data-demo="Esto es un ejemplo. En tu web, este botón abrirá el Facebook de tu despacho."><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5Z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="pie-final">
+      <span>© Nudo Abogados &amp; Asesores · Despacho ficticio creado como ejemplo</span>
+      <span>Web hecha por <a href="https://nudodesign.es" target="_blank" rel="noopener">Nudo</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- Aviso emergente (toast) -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+  <span id="toast-texto"></span>
+</div>
+
+<script>
+/* =========================================================
+   JS de la maqueta (sin librerías)
+   ========================================================= */
+(function () {
+  'use strict';
+
+  /* ---------- Altura real de la banda de Nudo ----------
+     En móvil la banda ocupa dos filas; ajustamos el hueco inferior. */
+  var banda = document.getElementById('banda-nudo');
+  function medirBanda() {
+    document.documentElement.style.setProperty('--banda-h', banda.offsetHeight + 'px');
+  }
+  medirBanda();
+  window.addEventListener('resize', medirBanda);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(medirBanda);
+
+  /* ---------- Horario del despacho (0 = domingo … 6 = sábado) ----------
+     Cada día: lista de tramos [apertura, cierre] en minutos desde las 00:00 */
+  var MANANA = [9 * 60, 14 * 60];
+  var TARDE = [16 * 60, 19 * 60];
+  var HORARIO = {
+    0: [],
+    1: [MANANA, TARDE],
+    2: [MANANA, TARDE],
+    3: [MANANA, TARDE],
+    4: [MANANA, TARDE],
+    5: [MANANA],
+    6: []
+  };
+  var NOMBRES_DIA = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+
+  /* Pasa minutos a texto "9:00" */
+  function aHora(min) {
+    var h = Math.floor(min / 60), m = min % 60;
+    return h + ':' + (m < 10 ? '0' + m : m);
+  }
+
+  /* Hora actual en España (el despacho está en España aunque el visitante no) */
+  function ahoraEnEspana() {
+    try {
+      var partes = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Madrid', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false
+      }).formatToParts(new Date());
+      var dias = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+      var d = 0, h = 0, m = 0;
+      partes.forEach(function (p) {
+        if (p.type === 'weekday') d = dias[p.value];
+        if (p.type === 'hour') h = parseInt(p.value, 10) % 24;
+        if (p.type === 'minute') m = parseInt(p.value, 10);
+      });
+      return { dia: d, min: h * 60 + m };
+    } catch (e) {
+      var ahora = new Date();
+      return { dia: ahora.getDay(), min: ahora.getHours() * 60 + ahora.getMinutes() };
+    }
+  }
+
+  /* Calcula si está abierto y el texto a mostrar */
+  function calcularEstado() {
+    var ahora = ahoraEnEspana();
+    var tramos = HORARIO[ahora.dia];
+
+    for (var i = 0; i < tramos.length; i++) {
+      if (ahora.min >= tramos[i][0] && ahora.min < tramos[i][1]) {
+        return { abierto: true, texto: 'Abierto ahora', detalle: 'cierra a las ' + aHora(tramos[i][1]) };
+      }
+    }
+    // ¿Abre más tarde hoy? (también cubre la pausa del mediodía)
+    for (var j = 0; j < tramos.length; j++) {
+      if (ahora.min < tramos[j][0]) {
+        return { abierto: false, texto: 'Cerrado', detalle: 'abre hoy a las ' + aHora(tramos[j][0]) };
+      }
+    }
+    // Buscar el próximo día con apertura
+    for (var k = 1; k <= 7; k++) {
+      var dia = (ahora.dia + k) % 7;
+      if (HORARIO[dia].length) {
+        var cuando = k === 1 ? 'mañana' : 'el ' + NOMBRES_DIA[dia];
+        return { abierto: false, texto: 'Cerrado', detalle: 'abre ' + cuando + ' a las ' + aHora(HORARIO[dia][0][0]) };
+      }
+    }
+    return { abierto: false, texto: 'Cerrado', detalle: '' };
+  }
+
+  function pintarEstado() {
+    var caja = document.getElementById('estado');
+    var texto = document.getElementById('estado-texto');
+    var e = calcularEstado();
+    caja.classList.remove('abierto', 'cerrado');
+    caja.classList.add(e.abierto ? 'abierto' : 'cerrado');
+    texto.innerHTML = '';
+    texto.appendChild(document.createTextNode(e.texto + (e.detalle ? ' ' : '')));
+    if (e.detalle) {
+      var s = document.createElement('small');
+      s.textContent = '· ' + e.detalle;
+      texto.appendChild(s);
+    }
+    // Resaltar el día de hoy en la tabla
+    var hoy = ahoraEnEspana().dia;
+    var filas = document.querySelectorAll('#tabla-horario tr');
+    for (var i = 0; i < filas.length; i++) {
+      filas[i].classList.toggle('hoy', parseInt(filas[i].getAttribute('data-dia'), 10) === hoy);
+    }
+  }
+  pintarEstado();
+  setInterval(pintarEstado, 60 * 1000); // se actualiza cada minuto
+
+  /* ---------- Aviso (toast) ---------- */
+  var toast = document.getElementById('toast');
+  var toastTexto = document.getElementById('toast-texto');
+  var temporizador = null;
+
+  function mostrarAviso(msg) {
+    toastTexto.textContent = msg || 'Esto es un ejemplo. En tu web, este botón funcionará de verdad.';
+    toast.classList.add('visible');
+    clearTimeout(temporizador);
+    temporizador = setTimeout(function () { toast.classList.remove('visible'); }, 4000);
+  }
+  toast.addEventListener('click', function () { toast.classList.remove('visible'); });
+
+  // Botones del despacho (Llamar, WhatsApp, Correo, Cómo llegar, redes): solo muestran el aviso
+  var botonesDemo = document.querySelectorAll('[data-demo]');
+  for (var b = 0; b < botonesDemo.length; b++) {
+    botonesDemo[b].addEventListener('click', function (ev) {
+      ev.preventDefault();
+      mostrarAviso(this.getAttribute('data-demo'));
+    });
+  }
+
+  // Formulario de primera consulta: no envía nada
+  document.getElementById('form-consulta').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    mostrarAviso('Esto es un ejemplo. En tu web, la consulta le llegará a tu despacho al momento.');
+  });
+
+  /* ---------- Pestañas de áreas ----------
+     Sin JS se ven todas las áreas seguidas; con JS, una cada vez.
+     Flechas izquierda/derecha, Inicio y Fin para moverse con teclado. */
+  var pestanas = Array.prototype.slice.call(document.querySelectorAll('#pestanas [role="tab"]'));
+
+  function elegir(tab, enfocar) {
+    pestanas.forEach(function (t) {
+      var activa = t === tab;
+      t.setAttribute('aria-selected', activa ? 'true' : 'false');
+      t.tabIndex = activa ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !activa;
+    });
+    if (enfocar) tab.focus();
+  }
+
+  pestanas.forEach(function (t, i) {
+    t.addEventListener('click', function () { elegir(t, false); });
+    t.addEventListener('keydown', function (ev) {
+      var destino = null;
+      if (ev.key === 'ArrowRight' || ev.key === 'ArrowDown') destino = pestanas[(i + 1) % pestanas.length];
+      if (ev.key === 'ArrowLeft' || ev.key === 'ArrowUp') destino = pestanas[(i - 1 + pestanas.length) % pestanas.length];
+      if (ev.key === 'Home') destino = pestanas[0];
+      if (ev.key === 'End') destino = pestanas[pestanas.length - 1];
+      if (destino) { ev.preventDefault(); elegir(destino, true); }
+    });
+  });
+  if (pestanas.length) elegir(pestanas[0], false);
+
+  /* ---------- Acordeón de preguntas ----------
+     Sin JS todas las respuestas se ven; con JS se pliegan y se abren de una en una. */
+  var preguntas = Array.prototype.slice.call(document.querySelectorAll('#faq .faq-pregunta'));
+
+  function abrir(btn, abierta) {
+    btn.setAttribute('aria-expanded', abierta ? 'true' : 'false');
+    document.getElementById(btn.getAttribute('aria-controls')).hidden = !abierta;
+  }
+  preguntas.forEach(function (btn, i) {
+    abrir(btn, i === 0); // la primera abierta para que se entienda el patrón
+    btn.addEventListener('click', function () {
+      var abierta = btn.getAttribute('aria-expanded') === 'true';
+      preguntas.forEach(function (otro) { if (otro !== btn) abrir(otro, false); });
+      abrir(btn, !abierta);
+    });
+  });
+
+  /* ---------- Si alguna foto falla, se queda el fondo de color ---------- */
+  document.querySelectorAll('img').forEach(function (img) {
+    img.addEventListener('error', function () { img.style.visibility = 'hidden'; });
+  });
+})();
+</script>
+</body>
+</html>

@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ejemplos de webs para bares y restaurantes | Nudo</title>
-<meta name="description" content="Tres ejemplos de cómo quedaría la web de tu bar, restaurante o cafetería. Ábrelos en el móvil y tócalos.">
+<title>Ejemplos de webs para negocios | Nudo</title>
+<meta name="description" content="Ejemplos de webs para negocios de sectores distintos: restaurante, peluquería, fisioterapia, taller y despacho. Ábrelos en el móvil y tócalos.">
 <meta name="theme-color" content="#0B0B0C">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0C10'/%3E%3Cpath d='M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26' fill='none' stroke='%231F4FE0' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E">
-<meta property="og:title" content="Ejemplos de webs para bares y restaurantes | Nudo">
-<meta property="og:description" content="Ábrelos en el móvil y tócalos: así quedaría la web de tu local.">
-<meta property="og:image" content="https://nudodesign.es/nudo-og-3.png">
+<meta property="og:title" content="Ejemplos de webs para negocios | Nudo">
+<meta property="og:description" content="Ábrelos en el móvil y tócalos: así quedaría la web de tu negocio.">
+<meta property="og:image" content="https://nudodesign.es/nudo-og-4.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -30,7 +30,9 @@ main{ max-width:1080px; margin:0 auto; padding:clamp(40px,8vw,80px) clamp(16px,4
 h1{ margin-top:12px; font-size:clamp(2.1rem,5vw,3.4rem); line-height:1.05; letter-spacing:-.045em; max-width:18ch; }
 .intro{ margin-top:16px; font-size:clamp(1.08rem,1.8vw,1.25rem); color:var(--tinta-2); max-width:52ch; }
 .aviso{ margin-top:14px; font-size:.95rem; color:var(--tinta-2); }
-.rejilla{ margin-top:clamp(32px,5vw,48px); display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.rejilla{ margin-top:clamp(32px,5vw,48px); display:grid; grid-template-columns:repeat(6,1fr); gap:20px; }
+.rejilla .ej{ grid-column:span 2; }
+.rejilla .ej:nth-child(4){ grid-column:2 / span 2; }
 .ej{ display:flex; flex-direction:column; background:var(--papel); border:1px solid rgba(11,11,12,.08); border-radius:22px; overflow:hidden; box-shadow:0 12px 34px -20px rgba(16,30,60,.35); transition:transform .3s cubic-bezier(.32,.72,0,1); }
 .ej:hover{ transform:translateY(-4px); }
 .ej__foto{ height:190px; background-size:cover; background-position:center; background-color:#ddd; }
@@ -44,7 +46,7 @@ h1{ margin-top:12px; font-size:clamp(2.1rem,5vw,3.4rem); line-height:1.05; lette
 .cierre span{ display:block; margin-top:6px; color:rgba(255,255,255,.85); }
 .cierre .btn{ background:#fff; color:var(--tinta); font-size:1.1rem; padding:16px 28px; }
 .pie{ max-width:1080px; margin:0 auto; padding:0 clamp(16px,4vw,32px) 40px; font-size:.95rem; color:var(--tinta-2); }
-@media (max-width:900px){ .rejilla{ grid-template-columns:1fr 1fr; } }
+@media (max-width:900px){ .rejilla{ grid-template-columns:1fr 1fr; } .rejilla .ej, .rejilla .ej:nth-child(4){ grid-column:auto; } }
 @media (max-width:600px){ .rejilla{ grid-template-columns:1fr; } .barra .btn{ padding:11px 16px; font-size:.95rem; } }
 </style>
 </head>
@@ -61,35 +63,53 @@ h1{ margin-top:12px; font-size:clamp(2.1rem,5vw,3.4rem); line-height:1.05; lette
 
 <main>
   <p class="rotulo">Ejemplos</p>
-  <h1>Así quedaría la web de tu local.</h1>
-  <p class="intro">Tres locales distintos, tres necesidades distintas. Ábrelos en el móvil y tócalos: la carta con alérgenos, los horarios, las reservas… Todo funciona como en una web de verdad.</p>
-  <p class="aviso">Son locales inventados, hechos por nosotros para enseñar. La tuya la hacemos con tu carta, tus fotos y tu estilo.</p>
+  <h1>Así quedaría la web de tu negocio.</h1>
+  <p class="intro">Cinco negocios distintos, cinco necesidades distintas. Ábrelos en el móvil y tócalos: citas, precios, horarios, reservas… Todo funciona como en una web de verdad.</p>
+  <p class="aviso">Son negocios inventados, hechos por nosotros para enseñar. La tuya la hacemos con tus servicios, tus fotos y tu estilo.</p>
 
   <div class="rejilla">
     <a class="ej" href="bar-de-tapas/">
       <div class="ej__foto" style="background-image:url('https://images.unsplash.com/photo-1515669097368-22e68427d265?auto=format&fit=crop&w=800&q=70')"></div>
       <div class="ej__cuerpo">
-        <span class="ej__tipo">Bar de tapas</span>
+        <span class="ej__tipo">Restaurante y bar</span>
         <h2>La Taberna del Nudo</h2>
-        <p>Estilo cartel de bar de toda la vida, con azulejos. Carta con los 14 alérgenos y un filtro para quitar lo que no puedes comer.</p>
+        <p>Estilo cartel de toda la vida. Carta con los 14 alérgenos y un filtro para quitar lo que no puedes comer.</p>
         <span class="ej__ver">Ver el ejemplo →</span>
       </div>
     </a>
-    <a class="ej" href="menu-del-dia/">
-      <div class="ej__foto" style="background-image:url('https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=70')"></div>
+    <a class="ej" href="peluqueria/">
+      <div class="ej__foto" style="background-image:url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=800&h=600&q=70')"></div>
       <div class="ej__cuerpo">
-        <span class="ej__tipo">Menú del día</span>
-        <h2>Casa Nudo</h2>
-        <p>Como una app: el menú de hoy nada más entrar, un día por pestaña, precio bien grande y pedidos para llevar.</p>
+        <span class="ej__tipo">Peluquería y estética</span>
+        <h2>Estudio Nudo</h2>
+        <p>Elegante y luminosa: servicios con precio y duración, el equipo, el antes y después y cita online eligiendo profesional, día y hora.</p>
         <span class="ej__ver">Ver el ejemplo →</span>
       </div>
     </a>
-    <a class="ej" href="cafeteria/">
-      <div class="ej__foto" style="background-image:url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&h=600&q=70')"></div>
+    <a class="ej" href="fisioterapia/">
+      <div class="ej__foto" style="background-image:url('https://images.unsplash.com/photo-1597764690523-15bea4c581c9?auto=format&fit=crop&w=800&h=600&q=70')"></div>
       <div class="ej__cuerpo">
-        <span class="ej__tipo">Cafetería y brunch</span>
-        <h2>Café Nudo</h2>
-        <p>Oscura y elegante, de café de especialidad. Desayunos, brunch y un aviso de «abierto ahora» que se actualiza solo.</p>
+        <span class="ej__tipo">Salud y fisioterapia</span>
+        <h2>Fisio Nudo</h2>
+        <p>Limpia y de confianza: tratamientos explicados sin tecnicismos, cómo es la primera visita y cita online.</p>
+        <span class="ej__ver">Ver el ejemplo →</span>
+      </div>
+    </a>
+    <a class="ej" href="taller/">
+      <div class="ej__foto" style="background-image:url('https://images.unsplash.com/photo-1504222490345-c075b6008014?auto=format&fit=crop&w=800&h=600&q=70')"></div>
+      <div class="ej__cuerpo">
+        <span class="ej__tipo">Taller mecánico</span>
+        <h2>Taller Nudo</h2>
+        <p>Como una app: el cliente elige el servicio, ve qué incluye, el precio orientativo y el tiempo, y pide cita desde el móvil.</p>
+        <span class="ej__ver">Ver el ejemplo →</span>
+      </div>
+    </a>
+    <a class="ej" href="abogados/">
+      <div class="ej__foto" style="background-image:url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=800&h=600&q=72')"></div>
+      <div class="ej__cuerpo">
+        <span class="ej__tipo">Despacho y asesoría</span>
+        <h2>Nudo Abogados & Asesores</h2>
+        <p>Sobria y clara: áreas de práctica, cómo trabajamos paso a paso, equipo, preguntas frecuentes y primera consulta.</p>
         <span class="ej__ver">Ver el ejemplo →</span>
       </div>
     </a>
@@ -97,8 +117,8 @@ h1{ margin-top:12px; font-size:clamp(2.1rem,5vw,3.4rem); line-height:1.05; lette
 
   <div class="cierre">
     <div>
-      <strong>¿Quieres una así para tu local?</strong>
-      <span>Te preparamos una maqueta con tu carta antes de cobrarte nada. O llámanos: <a href="tel:+34722740211"><b>722 74 02 11</b></a></span>
+      <strong>¿Quieres una así para tu negocio?</strong>
+      <span>Te preparamos una maqueta de tu web antes de cobrarte nada. O llámanos: <a href="tel:+34722740211"><b>722 74 02 11</b></a></span>
     </div>
     <a class="btn" href="/#presupuesto">Pide tu presupuesto</a>
   </div>

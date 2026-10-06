@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Negocio ficticio: no debe aparecer en buscadores -->
+<meta name="robots" content="noindex, nofollow">
+<title>Taller Nudo · Taller mecánico (ejemplo)</title>
+<meta name="description" content="Ejemplo de concepto de web para un taller mecánico: cita previa, servicios con precios orientativos y horario. Negocio ficticio creado por Nudo.">
+<meta name="theme-color" content="#1E5AA8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%231E5AA8'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     COLORES Y MEDIDAS — estilo «app»: limpio, blanco y azul taller
+     (1rem = 18 px: así ningún texto baja de 18 px)
+     ========================================================= */
+  :root {
+    --azul: #1E5AA8;
+    --azul-osc: #15437F;
+    --azul-claro: #E8F0FA;
+    --azul-borde: #C3D6EE;
+    --naranja: #E8590C;
+    --naranja-osc: #B54708;
+    --naranja-claro: #FFF1E7;
+    --fondo: #F2F5F8;
+    --blanco: #FFFFFF;
+    --tinta: #141C26;
+    --tinta-suave: #4E5B69;
+    --linea: #E1E7EE;
+    --radio-xl: 28px;
+    --radio: 20px;
+    --radio-s: 14px;
+    --sombra: 0 1px 2px rgba(16, 24, 40, .05), 0 10px 30px rgba(16, 24, 40, .07);
+    --sombra-alta: 0 -1px 0 rgba(16, 24, 40, .06), 0 -8px 24px rgba(16, 24, 40, .10);
+    --alto-banda: 64px;   /* lo recalcula el JS según lo que ocupe de verdad */
+    --alto-tabs: 0px;
+    --alto-top: 68px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { font-size: 112.5%; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--tinta);
+    background: var(--fondo);
+    /* Hueco para la barra de accesos + la banda de Nudo (fijas abajo) */
+    padding-bottom: calc(var(--alto-banda) + var(--alto-tabs));
+  }
+  img { max-width: 100%; display: block; }
+  h1, h2, h3, h4 { line-height: 1.2; margin: 0; letter-spacing: -.02em; }
+  p { margin: 0 0 1em; }
+  a { color: var(--azul); }
+  button, input, select { font-family: inherit; }
+  :focus-visible { outline: 3px solid var(--naranja); outline-offset: 3px; border-radius: 8px; }
+  [id] { scroll-margin-top: calc(var(--alto-top) + 12px); }
+
+  .contenedor { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+  .seccion { padding: 44px 0 8px; }
+  .cabeza { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .cabeza h2 { font-size: clamp(1.5rem, 5.5vw, 2rem); font-weight: 800; }
+  .cabeza p { margin: 6px 0 0; color: var(--tinta-suave); }
+  .etiqueta {
+    display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px;
+    font-size: 1rem; font-weight: 700; color: var(--azul); text-transform: uppercase; letter-spacing: .06em;
+  }
+  .tarjeta { background: var(--blanco); border-radius: var(--radio-xl); box-shadow: var(--sombra); }
+
+  /* ---------- BOTONES ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 56px; padding: 12px 22px;
+    font: 700 1rem/1.2 "Plus Jakarta Sans", sans-serif;
+    border-radius: 16px; border: 2px solid transparent;
+    cursor: pointer; text-decoration: none; text-align: center;
+    transition: transform .15s ease, background-color .15s ease, box-shadow .15s ease;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn svg { width: 22px; height: 22px; flex: none; }
+  .btn-azul { background: var(--azul); color: #fff; box-shadow: 0 6px 16px rgba(30, 90, 168, .28); }
+  .btn-azul:hover { background: var(--azul-osc); }
+  .btn-naranja { background: var(--naranja-claro); color: var(--naranja-osc); border-color: #FFD3B5; }
+  .btn-naranja:hover { background: #FFE4D1; }
+  .btn-suave { background: var(--azul-claro); color: var(--azul-osc); }
+  .btn-suave:hover { background: #d9e6f6; }
+  .btn-wa { background: #25d366; color: #0b2e17; }
+  .btn-wa:hover { background: #3ee07c; }
+  .btn-bloque { width: 100%; }
+
+  /* =========================================================
+     BARRA SUPERIOR COMPACTA
+     ========================================================= */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 255, 255, .94);
+    backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--linea);
+  }
+  .topbar .contenedor { display: flex; align-items: center; gap: 10px; min-height: var(--alto-top); }
+  .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--tinta); min-width: 0; margin-right: auto; }
+  .marca-icono {
+    width: 44px; height: 44px; border-radius: 13px; flex: none;
+    background: var(--azul); color: #fff; display: grid; place-items: center;
+    font-weight: 800; font-size: 1rem; letter-spacing: -.02em;
+  }
+  .marca-texto { display: flex; flex-direction: column; min-width: 0; }
+  .marca-nombre { font-weight: 800; font-size: 1.05rem; line-height: 1.15; white-space: nowrap; }
+  .estado { display: inline-flex; align-items: center; gap: 6px; font-size: 1rem; font-weight: 700; white-space: nowrap; line-height: 1.2; }
+  .estado .punto { width: 9px; height: 9px; border-radius: 50%; background: #9aa5a0; flex: none; }
+  .estado.abierto { color: #0F7B4F; }
+  .estado.abierto .punto { background: #12b76a; box-shadow: 0 0 0 4px rgba(18, 183, 106, .18); }
+  .estado.cerrado { color: #b42318; }
+  .estado.cerrado .punto { background: #f04438; }
+  .topbar-nav { display: none; gap: 2px; }
+  .topbar-nav a {
+    min-height: 48px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 12px;
+    color: var(--tinta); text-decoration: none; font-weight: 600; font-size: 1rem;
+  }
+  .topbar-nav a:hover { background: var(--fondo); }
+  .btn-llamar { min-height: 48px; padding: 8px 16px; border-radius: 14px; flex: none; }
+
+  /* =========================================================
+     PORTADA = PIDE CITA
+     ========================================================= */
+  .inicio { padding: 22px 0 8px; }
+  .saludo { margin-bottom: 16px; }
+  .saludo h1 { font-size: clamp(1.7rem, 7vw, 2.5rem); font-weight: 800; }
+  .saludo h1 span { color: var(--azul); }
+  .chip-estado {
+    display: inline-flex; align-items: center; gap: 8px; margin: 10px 0 0;
+    background: var(--blanco); border: 1px solid var(--linea); border-radius: 999px;
+    padding: 6px 14px 6px 12px; font-size: 1rem; font-weight: 600; color: var(--tinta-suave); line-height: 1.3;
+  }
+  .chip-estado .punto { width: 10px; height: 10px; border-radius: 50%; background: #9aa5a0; flex: none; }
+  .chip-estado.abierto .punto { background: #12b76a; }
+  .chip-estado.cerrado .punto { background: #f04438; }
+
+  /* Selector de servicio: pastillas tipo control segmentado */
+  .pregunta { font-weight: 700; margin: 0 0 8px; }
+  .servicios-pick {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px;
+    background: #E2E8EF; padding: 5px; border-radius: 22px; margin-bottom: 14px;
+  }
+  .servicios-pick button {
+    min-height: 60px; border: 0; border-radius: 17px; background: transparent; cursor: pointer;
+    color: var(--tinta-suave); padding: 8px 10px; display: flex; align-items: center; gap: 8px; text-align: left;
+    font-size: 1rem; font-weight: 700; line-height: 1.15;
+    transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
+  }
+  .servicios-pick button:hover { background: rgba(255, 255, 255, .6); color: var(--tinta); }
+  .servicios-pick svg { width: 24px; height: 24px; flex: none; }
+  .servicios-pick button[aria-pressed="true"] { background: var(--blanco); color: var(--azul-osc); box-shadow: 0 2px 8px rgba(16, 24, 40, .12); }
+  .servicios-pick button[aria-pressed="true"] svg { color: var(--naranja); }
+
+  .inicio-rejilla { display: grid; gap: 16px; align-items: start; }
+
+  /* Tarjeta del servicio elegido */
+  .serv-card { overflow: hidden; display: grid; }
+  .serv-foto { position: relative; background: var(--azul-claro); }
+  .serv-foto img { width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: opacity .25s ease; }
+  .serv-foto img.cambiando { opacity: .35; }
+  .serv-cuerpo { padding: 20px; }
+  .serv-cuerpo h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 6px; }
+  .serv-desc { color: var(--tinta-suave); margin: 0 0 14px; }
+  .incluye-titulo { font-weight: 800; margin: 0 0 8px; }
+  .incluye { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .incluye li { display: flex; align-items: flex-start; gap: 10px; font-weight: 600; }
+  .incluye svg { width: 26px; height: 26px; flex: none; color: var(--azul); background: var(--azul-claro); border-radius: 8px; padding: 4px; margin-top: 1px; }
+
+  /* Columna del precio, el tiempo y los botones */
+  .precio-card { padding: 22px 20px; }
+  .p-etiqueta { font-weight: 700; color: var(--tinta-suave); margin: 0; }
+  .precio-grande { font-size: clamp(2.6rem, 13vw, 3.4rem); font-weight: 800; color: var(--naranja); line-height: 1; letter-spacing: -.04em; margin: 6px 0 4px; }
+  .precio-grande small { font-size: 1rem; color: var(--tinta-suave); letter-spacing: 0; font-weight: 600; }
+  .precio-extra { color: var(--tinta-suave); margin: 0 0 14px; font-weight: 600; }
+  .tiempo {
+    display: flex; align-items: center; gap: 12px; background: var(--fondo); border-radius: var(--radio-s);
+    padding: 12px 14px; margin: 0 0 18px;
+  }
+  .tiempo svg { width: 28px; height: 28px; flex: none; color: var(--azul); }
+  .tiempo b { display: block; }
+  .tiempo span { color: var(--tinta-suave); font-weight: 600; }
+  .acciones { display: grid; gap: 10px; }
+  .acciones .btn { min-height: 60px; font-size: 1.05rem; }
+  .nota-precio { margin: 14px 0 0; color: var(--tinta-suave); }
+
+  /* =========================================================
+     CÓMO FUNCIONA — 3 pasos
+     ========================================================= */
+  .pasos { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .paso { display: flex; gap: 16px; align-items: flex-start; padding: 20px; }
+  .paso-num {
+    width: 52px; height: 52px; border-radius: 16px; flex: none; display: grid; place-items: center;
+    background: var(--azul); color: #fff; font-weight: 800; font-size: 1.35rem;
+  }
+  .paso:last-child .paso-num { background: #25d366; color: #0b2e17; }
+  .paso h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
+  .paso p { margin: 0; color: var(--tinta-suave); }
+
+  /* =========================================================
+     SERVICIOS — acordeones
+     ========================================================= */
+  .acordeones { display: grid; gap: 10px; }
+  .acordeon { overflow: hidden; }
+  .acordeon summary {
+    list-style: none; cursor: pointer; min-height: 72px; padding: 12px 20px;
+    display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 1.1rem; line-height: 1.25;
+  }
+  .acordeon summary::-webkit-details-marker { display: none; }
+  .acordeon summary .cuenta { margin-left: auto; font-size: 1rem; font-weight: 600; color: var(--tinta-suave); white-space: nowrap; }
+  .acordeon .a-ico {
+    width: 44px; height: 44px; border-radius: 14px; flex: none; display: grid; place-items: center;
+    background: var(--azul-claro); color: var(--azul);
+  }
+  .acordeon .a-ico svg { width: 24px; height: 24px; }
+  .acordeon-cuerpo { padding: 0 20px 10px; }
+  .linea-serv { display: flex; align-items: baseline; gap: 12px; padding: 12px 0; border-top: 1px solid var(--linea); }
+  .linea-serv span:first-child { flex: 1; min-width: 0; font-weight: 600; }
+  .linea-serv small { display: block; color: var(--tinta-suave); font-size: 1rem; font-weight: 500; }
+  .precio-serv { font-weight: 800; color: var(--naranja-osc); white-space: nowrap; text-align: right; }
+  .precio-serv em { display: block; font-style: normal; font-weight: 600; font-size: 1rem; color: var(--tinta-suave); }
+  .mas { width: 36px; height: 36px; border-radius: 12px; background: var(--fondo); display: grid; place-items: center; flex: none; transition: transform .2s ease; }
+  .mas svg { width: 18px; height: 18px; }
+  details[open] > summary .mas { transform: rotate(45deg); }
+  .nota-serv { margin: 14px 4px 0; color: var(--tinta-suave); }
+
+  /* =========================================================
+     POR QUÉ NOSOTROS — rejilla de iconos
+     ========================================================= */
+  .iconos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .iconos li { padding: 18px; display: flex; align-items: flex-start; gap: 14px; }
+  .iconos .i-circ {
+    width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; flex: none;
+    background: var(--azul-claro); color: var(--azul);
+  }
+  .iconos .i-circ.nar { background: var(--naranja-claro); color: var(--naranja); }
+  .iconos svg { width: 28px; height: 28px; }
+  .iconos strong { display: block; font-size: 1.05rem; line-height: 1.25; margin-bottom: 2px; }
+  .iconos span.desc { display: block; color: var(--tinta-suave); line-height: 1.4; }
+  .marcas { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+  .marcas li { background: var(--blanco); border: 1px solid var(--linea); border-radius: 999px; padding: 6px 14px; font-weight: 700; color: var(--tinta-suave); }
+
+  /* =========================================================
+     GALERÍA — carrusel horizontal con scroll-snap
+     ========================================================= */
+  .carrusel {
+    display: grid; grid-auto-flow: column; grid-auto-columns: 80%; gap: 12px;
+    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    padding: 4px 16px 14px; margin: 0 -16px; scrollbar-width: thin;
+    scroll-padding: 0 16px;
+  }
+  .carrusel figure { margin: 0; scroll-snap-align: start; }
+  .carrusel img {
+    width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radio);
+    background: var(--azul-claro);
+  }
+  .carrusel figcaption { font-weight: 600; color: var(--tinta-suave); padding: 8px 4px 0; }
+  .flechas { display: none; gap: 8px; }
+  .flecha {
+    width: 48px; height: 48px; border-radius: 14px; border: 1px solid var(--linea); background: var(--blanco);
+    display: grid; place-items: center; cursor: pointer; color: var(--tinta);
+  }
+  .flecha:hover { background: var(--azul-claro); }
+  .flecha svg { width: 20px; height: 20px; }
+
+  /* =========================================================
+     CITA — formulario
+     ========================================================= */
+  .cita-card { padding: 22px 20px; display: grid; gap: 20px; }
+  .formulario { display: grid; gap: 14px; }
+  .campo { display: grid; gap: 6px; }
+  .campo label { font-weight: 700; }
+  .campo .ayuda { color: var(--tinta-suave); font-weight: 500; }
+  .campo input, .campo select {
+    width: 100%; min-height: 56px; padding: 10px 14px; font: 500 1rem "Plus Jakarta Sans", sans-serif;
+    border: 1.5px solid #CBD5E1; border-radius: var(--radio-s); background: var(--blanco); color: var(--tinta);
+  }
+  .campo input::placeholder { color: #7A8796; }
+  .campo input:focus, .campo select:focus { border-color: var(--azul); outline: none; box-shadow: 0 0 0 4px rgba(30, 90, 168, .15); }
+  #matricula { text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
+  .fila-campos { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .cita-lado { display: grid; gap: 12px; align-content: start; }
+  .cita-lado h3 { font-size: 1.15rem; font-weight: 800; }
+  .cita-lado ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .cita-lado li { display: flex; gap: 10px; align-items: flex-start; color: var(--tinta-suave); font-weight: 600; }
+  .cita-lado li svg { width: 24px; height: 24px; flex: none; color: var(--azul); margin-top: 2px; }
+
+  /* =========================================================
+     HORARIO Y DIRECCIÓN
+     ========================================================= */
+  .info-rejilla { display: grid; gap: 16px; }
+  .horario-card { padding: 8px 20px 18px; }
+  .tabla-horario { width: 100%; border-collapse: collapse; }
+  .tabla-horario th, .tabla-horario td { padding: 14px 4px; text-align: left; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  .tabla-horario td { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .tabla-horario td span { display: block; white-space: nowrap; }
+  .tabla-horario th { font-weight: 600; }
+  .tabla-horario tr:last-child th, .tabla-horario tr:last-child td { border-bottom: 0; }
+  .tabla-horario .cerrado td { color: #b42318; }
+  .tabla-horario tr.es-hoy th, .tabla-horario tr.es-hoy td { color: var(--azul-osc); font-weight: 800; }
+  .tabla-horario tr.es-hoy th::after {
+    content: "Hoy"; display: inline-block; margin-left: 8px; font-size: 1rem; line-height: 1.2; font-weight: 700; color: #fff; background: var(--azul);
+    border-radius: 999px; padding: 1px 10px;
+  }
+  .tabla-horario caption { caption-side: top; text-align: left; padding: 14px 0 6px; font-weight: 800; font-size: 1.15rem; }
+  .franjas { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .franja { background: var(--fondo); border-radius: 12px; padding: 8px 12px; font-weight: 600; }
+  .franja b { color: var(--azul); }
+
+  .direccion-card { overflow: hidden; }
+  .mapa { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #E9EEF4; }
+  .direccion-cuerpo { padding: 18px 20px 20px; }
+  .direccion-cuerpo h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
+  .direccion-cuerpo p { color: var(--tinta-suave); margin-bottom: 14px; }
+  .botones-dos { display: grid; grid-template-columns: 1fr; gap: 10px; }
+
+  /* =========================================================
+     CONTACTO
+     ========================================================= */
+  .contacto-card { padding: 22px 20px; display: grid; gap: 16px; }
+  .contacto-card p { margin: 0; color: var(--tinta-suave); }
+  .botones-contacto { display: grid; gap: 10px; }
+
+  /* =========================================================
+     PIE
+     ========================================================= */
+  .pie { margin-top: 48px; background: var(--blanco); border-top: 1px solid var(--linea); padding: 32px 0 28px; text-align: center; }
+  .pie .marca { justify-content: center; margin: 0 auto 16px; display: inline-flex; }
+  .redes { display: flex; justify-content: center; gap: 10px; margin: 0 0 18px; padding: 0; list-style: none; }
+  .redes a {
+    width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center;
+    background: var(--fondo); color: var(--tinta); transition: background-color .15s;
+  }
+  .redes a:hover { background: var(--azul-claro); color: var(--azul); }
+  .redes svg { width: 24px; height: 24px; }
+  .pie p { color: var(--tinta-suave); margin-bottom: .4em; }
+  .pie .firma a { font-weight: 800; }
+
+  /* =========================================================
+     ABAJO DEL TODO: barra de accesos (móvil) + banda de Nudo
+     La banda de Nudo va siempre pegada al borde; los accesos, encima.
+     ========================================================= */
+  .banda-nudo {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 100;
+    background: #101814; color: #fff;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+  }
+  .banda-nudo p { margin: 0; font-size: 1rem; line-height: 1.3; }
+  .banda-nudo strong { color: #7ee2b0; }
+  .banda-nudo .btn { min-height: 48px; padding: 8px 14px; font-size: 1rem; border-radius: 12px; background: #25d366; color: #0b2e17; flex: none; box-shadow: none; }
+  .banda-nudo .btn:hover { background: #3ee07c; }
+
+  .tabs {
+    position: fixed; left: 0; right: 0; bottom: var(--alto-banda); z-index: 90;
+    background: rgba(255, 255, 255, .97); box-shadow: var(--sombra-alta);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-radius: 22px 22px 0 0; padding: 6px 6px 4px;
+  }
+  .tabs a {
+    min-height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+    text-decoration: none; color: var(--tinta-suave); font-size: 1rem; line-height: 1.15; font-weight: 700; border-radius: 14px;
+    min-width: 0;
+  }
+  .tabs a svg { width: 24px; height: 24px; }
+  .tabs a.activa { color: var(--azul); background: var(--azul-claro); }
+
+  /* ---------- AVISO FLOTANTE (toast) ---------- */
+  .toast {
+    position: fixed; left: 50%; bottom: calc(var(--alto-banda) + var(--alto-tabs) + 14px); z-index: 200;
+    transform: translate(-50%, 16px); opacity: 0; pointer-events: none;
+    width: calc(100% - 32px); max-width: 460px;
+    background: var(--tinta); color: #fff; border-radius: 18px;
+    padding: 16px 18px; font-size: 1rem; font-weight: 600; line-height: 1.4;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .3);
+    display: flex; gap: 12px; align-items: flex-start;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .toast::before { content: "i"; flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--naranja); display: grid; place-items: center; font-weight: 800; font-size: 1rem; }
+  .toast.visible { opacity: 1; transform: translate(-50%, 0); }
+
+  /* =========================================================
+     TAMAÑOS
+     ========================================================= */
+  @media (max-width: 899.98px) {
+    :root { --alto-tabs: 72px; }
+  }
+  /* Móviles estrechos: la banda de Nudo y las etiquetas de los accesos
+     son la única letra que baja un poco (16 px) para caber en una línea. */
+  @media (max-width: 419.98px) {
+    .tabs a { font-size: .9rem; }
+    .banda-nudo p { font-size: .9rem; }
+    .banda-nudo .btn { font-size: .9rem; padding: 8px 12px; }
+    .acordeon summary .cuenta { display: none; }
+    .acordeon summary .mas { margin-left: auto; }
+  }
+  @media (max-width: 359.98px) {
+    .marca-icono { display: none; }
+    .btn-llamar { padding: 8px 12px; }
+    .servicios-pick button { padding: 8px 8px; gap: 6px; }
+    .servicios-pick svg { width: 20px; height: 20px; }
+    .banda-nudo { flex-direction: column; align-items: stretch; gap: 6px; text-align: center; }
+  }
+  @media (min-width: 560px) {
+    .contenedor { padding: 0 24px; }
+    .carrusel { grid-auto-columns: 46%; margin: 0 -24px; padding: 4px 24px 14px; scroll-padding: 0 24px; }
+    .servicios-pick { grid-template-columns: repeat(3, 1fr); }
+    .iconos { grid-template-columns: 1fr 1fr; }
+    .acciones { grid-template-columns: 1fr 1fr; }
+    .botones-dos { grid-template-columns: 1fr 1fr; }
+    .fila-campos { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 768px) {
+    .pasos { grid-template-columns: repeat(3, 1fr); }
+    .paso { flex-direction: column; }
+    .serv-card { grid-template-columns: 1fr 1fr; }
+    .serv-foto img { aspect-ratio: auto; min-height: 100%; position: absolute; inset: 0; }
+    .info-rejilla { grid-template-columns: 1fr 1fr; align-items: start; }
+    .cita-card { grid-template-columns: 1.4fr 1fr; gap: 28px; padding: 28px; }
+    .contacto-card { grid-template-columns: 1fr auto; align-items: center; padding: 26px 28px; }
+    .botones-contacto { grid-template-columns: repeat(3, auto); }
+    .flechas { display: flex; }
+  }
+  @media (min-width: 900px) {
+    .topbar-nav { display: flex; }
+    .tabs { display: none; }
+    .banda-nudo { justify-content: center; gap: 24px; padding: 8px 20px; }
+    .seccion { padding-top: 64px; }
+    .inicio { padding-top: 36px; }
+    .servicios-pick { grid-template-columns: repeat(6, 1fr); }
+    .servicios-pick button { flex-direction: column; justify-content: center; text-align: center; gap: 4px; min-height: 76px; }
+    .iconos { grid-template-columns: repeat(3, 1fr); }
+    .carrusel { grid-auto-columns: calc((100% - 36px) / 3.3); margin: 0; padding: 4px 0 14px; scroll-padding: 0; }
+  }
+  @media (min-width: 1040px) {
+    .inicio-rejilla { grid-template-columns: minmax(0, 1fr) 370px; gap: 24px; }
+    .precio-lateral { position: sticky; top: calc(var(--alto-top) + 20px); }
+    .acciones { grid-template-columns: 1fr; }
+    .serv-cuerpo { padding: 24px 26px; }
+    .saludo { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+    .saludo .chip-estado { margin: 0 0 6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ BARRA SUPERIOR: nombre, estado y llamar ============ -->
+<header class="topbar">
+  <div class="contenedor">
+    <a class="marca" href="#inicio" aria-label="Taller Nudo, ir al inicio">
+      <span class="marca-icono" aria-hidden="true">TN</span>
+      <span class="marca-texto">
+        <span class="marca-nombre">Taller Nudo</span>
+        <span class="estado" id="estadoTop"><span class="punto" aria-hidden="true"></span><span class="txt">Horario</span></span>
+      </span>
+    </a>
+    <nav class="topbar-nav" aria-label="Secciones">
+      <a href="#servicios">Servicios</a>
+      <a href="#como">Cómo funciona</a>
+      <a href="#cita">Cita</a>
+      <a href="#horario">Horario</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <button class="btn btn-azul btn-llamar js-demo" type="button" data-aviso="Esto es un ejemplo. En tu web, este botón llamará a tu taller.">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+      Llamar
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- ============ PORTADA: PIDE CITA ============ -->
+  <section class="inicio" id="inicio" aria-labelledby="tituloInicio">
+    <div class="contenedor">
+      <div class="saludo">
+        <div>
+          <span class="etiqueta">Mecánica general · todas las marcas</span>
+          <h1 id="tituloInicio">Pide cita en tu <span>taller</span></h1>
+        </div>
+        <p class="chip-estado" id="estadoHoy"><span class="punto" aria-hidden="true"></span><span class="txt">Consultando horario…</span></p>
+      </div>
+
+      <p class="pregunta" id="preguntaServicio">¿Qué necesita tu coche?</p>
+      <div class="servicios-pick" role="group" aria-labelledby="preguntaServicio" id="selectorServicio">
+        <button type="button" data-servicio="revision" aria-pressed="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3h6v3H9z"/><path d="M9 13l2 2 4-4"/></svg>
+          Revisión
+        </button>
+        <button type="button" data-servicio="aceite" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/></svg>
+          Cambio de aceite
+        </button>
+        <button type="button" data-servicio="neumaticos" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v5.5M12 15.5V21M3 12h5.5M15.5 12H21"/></svg>
+          Neumáticos
+        </button>
+        <button type="button" data-servicio="frenos" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="13" r="8"/><circle cx="11" cy="13" r="2.5"/><path d="M15 3.5a9 9 0 0 1 5.5 5.5l-4 1.5a5 5 0 0 0-3-3z"/></svg>
+          Frenos
+        </button>
+        <button type="button" data-servicio="preitv" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+          Pre-ITV
+        </button>
+        <button type="button" data-servicio="diagnosis" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M6 11h3l2-3 2 6 2-3h3"/><path d="M9 21h6M12 17v4"/></svg>
+          Diagnosis
+        </button>
+      </div>
+
+      <div class="inicio-rejilla">
+        <!-- Tarjeta con lo que incluye el servicio elegido -->
+        <article class="tarjeta serv-card" aria-labelledby="servTitulo">
+          <div class="serv-foto">
+            <img id="servFoto" src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=900&h=600&q=70" alt="Mecánico revisando el motor de un coche con el capó abierto" width="900" height="600" loading="lazy">
+          </div>
+          <div class="serv-cuerpo" aria-live="polite">
+            <h2 id="servTitulo">Revisión completa</h2>
+            <p class="serv-desc" id="servDesc">La puesta a punto de siempre: miramos lo importante para que el coche vaya fino y seguro.</p>
+            <p class="incluye-titulo">Qué incluye</p>
+            <ul class="incluye" id="servIncluye"></ul>
+          </div>
+        </article>
+
+        <!-- Precio orientativo, tiempo y botones -->
+        <aside class="precio-lateral" aria-label="Precio orientativo y cita">
+          <div class="tarjeta precio-card">
+            <p class="p-etiqueta">Precio orientativo, desde</p>
+            <p class="precio-grande" id="servPrecio">89 € <small>IVA incl.</small></p>
+            <p class="precio-extra" id="servPrecioExtra">Aceite y filtros según tu coche</p>
+            <div class="tiempo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <div><b>Tiempo aproximado</b><span id="servTiempo">unas 2 horas</span></div>
+            </div>
+            <div class="acciones">
+              <a class="btn btn-azul" href="#cita" id="btnPedirCita">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+                Pedir cita
+              </a>
+              <button class="btn btn-naranja js-demo" type="button" data-aviso="Esto es un ejemplo. En tu web, desde aquí te pedirán presupuesto para su coche.">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+                Pedir presupuesto
+              </button>
+            </div>
+            <p class="nota-precio">Precios de ejemplo. El precio y el tiempo reales dependen de tu coche: te lo confirmamos antes de empezar.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CÓMO FUNCIONA: 3 PASOS ============ -->
+  <section class="seccion" id="como" aria-labelledby="tituloComo">
+    <div class="contenedor">
+      <div class="cabeza">
+        <div>
+          <span class="etiqueta">Sin complicaciones</span>
+          <h2 id="tituloComo">Cómo funciona</h2>
+          <p>Tres pasos y te olvidas del coche hasta que esté listo.</p>
+        </div>
+      </div>
+      <ol class="pasos">
+        <li class="tarjeta paso">
+          <span class="paso-num" aria-hidden="true">1</span>
+          <div><h3>Pides cita</h3><p>Desde la web, por WhatsApp o llamando. Eliges el servicio y el día que mejor te venga.</p></div>
+        </li>
+        <li class="tarjeta paso">
+          <span class="paso-num" aria-hidden="true">2</span>
+          <div><h3>Traes el coche</h3><p>Nos cuentas qué le notas. Si hay que reparar algo, te damos el presupuesto antes de tocar nada.</p></div>
+        </li>
+        <li class="tarjeta paso">
+          <span class="paso-num" aria-hidden="true">3</span>
+          <div><h3>Te avisamos por WhatsApp</h3><p>Cuando el coche esté listo te escribimos. Pasas a recogerlo y te explicamos lo que se ha hecho.</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ SERVICIOS EN ACORDEONES ============ -->
+  <section class="seccion" id="servicios" aria-labelledby="tituloServicios">
+    <div class="contenedor">
+      <div class="cabeza">
+        <div>
+          <span class="etiqueta">Precios orientativos</span>
+          <h2 id="tituloServicios">Servicios</h2>
+          <p>Lo que más nos piden, con su precio «desde». Si no ves lo tuyo, pregúntanos.</p>
+        </div>
+      </div>
+      <div class="acordeones">
+        <details class="tarjeta acordeon" open>
+          <summary>
+            <span class="a-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3 17.8V21h3.2l6.3-6.3a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span>
+            Mantenimiento <span class="cuenta">4 servicios</span>
+            <span class="mas" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </summary>
+          <div class="acordeon-cuerpo">
+            <div class="linea-serv"><span>Revisión básica<small>Niveles, luces, neumáticos y frenos</small></span><span class="precio-serv"><em>desde</em>49 €</span></div>
+            <div class="linea-serv"><span>Revisión completa<small>Con aceite y filtros</small></span><span class="precio-serv"><em>desde</em>89 €</span></div>
+            <div class="linea-serv"><span>Cambio de aceite y filtro</span><span class="precio-serv"><em>desde</em>59 €</span></div>
+            <div class="linea-serv"><span>Filtros de aire y de habitáculo</span><span class="precio-serv"><em>desde</em>35 €</span></div>
+          </div>
+        </details>
+        <details class="tarjeta acordeon">
+          <summary>
+            <span class="a-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v5.5M12 15.5V21M3 12h5.5M15.5 12H21"/></svg></span>
+            Neumáticos <span class="cuenta">4 servicios</span>
+            <span class="mas" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </summary>
+          <div class="acordeon-cuerpo">
+            <div class="linea-serv"><span>Montaje y equilibrado<small>Por rueda, sin el neumático</small></span><span class="precio-serv"><em>desde</em>15 €</span></div>
+            <div class="linea-serv"><span>Alineado de dirección</span><span class="precio-serv"><em>desde</em>45 €</span></div>
+            <div class="linea-serv"><span>Reparación de pinchazo</span><span class="precio-serv"><em>desde</em>18 €</span></div>
+            <div class="linea-serv"><span>Neumáticos nuevos<small>Te damos precio según medida y marca</small></span><span class="precio-serv">Consultar</span></div>
+          </div>
+        </details>
+        <details class="tarjeta acordeon">
+          <summary>
+            <span class="a-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="13" r="8"/><circle cx="11" cy="13" r="2.5"/><path d="M15 3.5a9 9 0 0 1 5.5 5.5l-4 1.5a5 5 0 0 0-3-3z"/></svg></span>
+            Frenos y suspensión <span class="cuenta">4 servicios</span>
+            <span class="mas" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </summary>
+          <div class="acordeon-cuerpo">
+            <div class="linea-serv"><span>Pastillas de freno<small>Por eje</small></span><span class="precio-serv"><em>desde</em>79 €</span></div>
+            <div class="linea-serv"><span>Discos y pastillas<small>Por eje</small></span><span class="precio-serv"><em>desde</em>169 €</span></div>
+            <div class="linea-serv"><span>Cambio de líquido de frenos</span><span class="precio-serv"><em>desde</em>45 €</span></div>
+            <div class="linea-serv"><span>Amortiguadores<small>La pareja</small></span><span class="precio-serv"><em>desde</em>220 €</span></div>
+          </div>
+        </details>
+        <details class="tarjeta acordeon">
+          <summary>
+            <span class="a-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M6 11h3l2-3 2 6 2-3h3"/><path d="M9 21h6M12 17v4"/></svg></span>
+            Electricidad y diagnosis <span class="cuenta">4 servicios</span>
+            <span class="mas" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </summary>
+          <div class="acordeon-cuerpo">
+            <div class="linea-serv"><span>Diagnosis electrónica<small>Lectura de averías con máquina</small></span><span class="precio-serv"><em>desde</em>35 €</span></div>
+            <div class="linea-serv"><span>Cambio de batería<small>Batería incluida</small></span><span class="precio-serv"><em>desde</em>95 €</span></div>
+            <div class="linea-serv"><span>Carga de aire acondicionado</span><span class="precio-serv"><em>desde</em>69 €</span></div>
+            <div class="linea-serv"><span>Cambio de lámparas</span><span class="precio-serv"><em>desde</em>10 €</span></div>
+          </div>
+        </details>
+        <details class="tarjeta acordeon">
+          <summary>
+            <span class="a-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>
+            ITV <span class="cuenta">2 servicios</span>
+            <span class="mas" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          </summary>
+          <div class="acordeon-cuerpo">
+            <div class="linea-serv"><span>Pre-ITV<small>Revisamos lo que miran en la ITV</small></span><span class="precio-serv"><em>desde</em>25 €</span></div>
+            <div class="linea-serv"><span>Te llevamos el coche a la ITV<small>La tasa de la ITV aparte</small></span><span class="precio-serv"><em>desde</em>30 €</span></div>
+          </div>
+        </details>
+      </div>
+      <p class="nota-serv">Precios de ejemplo con IVA incluido. Cada coche es distinto: antes de reparar te damos el presupuesto cerrado.</p>
+    </div>
+  </section>
+
+  <!-- ============ POR QUÉ NOSOTROS ============ -->
+  <section class="seccion" id="porque" aria-labelledby="tituloPorque">
+    <div class="contenedor">
+      <div class="cabeza">
+        <div>
+          <span class="etiqueta">Tranquilidad</span>
+          <h2 id="tituloPorque">Por qué nosotros</h2>
+        </div>
+      </div>
+      <ul class="iconos">
+        <li class="tarjeta">
+          <span class="i-circ" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17v-4l2.2-5.2A2 2 0 0 1 7 6.5h10a2 2 0 0 1 1.8 1.3L21 13v4z"/><path d="M3 13h18"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/></svg></span>
+          <span><strong>Coche de sustitución</strong><span class="desc">Para reparaciones largas, según disponibilidad.</span></span>
+        </li>
+        <li class="tarjeta">
+          <span class="i-circ nar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span>
+          <span><strong>Presupuesto antes de reparar</strong><span class="desc">No tocamos nada sin que sepas lo que cuesta.</span></span>
+        </li>
+        <li class="tarjeta">
+          <span class="i-circ" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>
+          <span><strong>Garantía en las reparaciones</strong><span class="desc">Y factura detallada de cada trabajo.</span></span>
+        </li>
+        <li class="tarjeta">
+          <span class="i-circ nar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M16 7l2 2M14 9l2 2"/></svg></span>
+          <span><strong>Todas las marcas</strong><span class="desc">Gasolina, diésel e híbridos.</span></span>
+        </li>
+        <li class="tarjeta">
+          <span class="i-circ" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/></svg></span>
+          <span><strong>Te avisamos por WhatsApp</strong><span class="desc">Con fotos si encontramos algo que debas ver.</span></span>
+        </li>
+        <li class="tarjeta">
+          <span class="i-circ nar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></span>
+          <span><strong>Recambio de calidad</strong><span class="desc">Original o equivalente: tú eliges.</span></span>
+        </li>
+      </ul>
+      <ul class="marcas" aria-label="Algunas marcas que trabajamos (ejemplo)">
+        <li>Seat</li><li>Renault</li><li>Peugeot</li><li>Volkswagen</li><li>Toyota</li><li>Ford</li><li>Citroën</li><li>Y muchas más</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ GALERÍA EN CARRUSEL ============ -->
+  <section class="seccion" aria-labelledby="tituloGaleria">
+    <div class="contenedor">
+      <div class="cabeza">
+        <div>
+          <span class="etiqueta">Un vistazo</span>
+          <h2 id="tituloGaleria">Así es el taller</h2>
+        </div>
+        <div class="flechas">
+          <button class="flecha" type="button" data-dir="-1" aria-label="Fotos anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+          <button class="flecha" type="button" data-dir="1" aria-label="Fotos siguientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <div class="carrusel" id="carrusel" tabindex="0" aria-label="Galería de fotos, desliza para ver más">
+        <figure><img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=720&h=540&q=70" alt="Pared del taller con las herramientas ordenadas" width="720" height="540" loading="lazy"><figcaption>Cada herramienta en su sitio</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1504222490345-c075b6008014?auto=format&fit=crop&w=720&h=540&q=70" alt="Mecánico sonriente junto a un coche con el capó abierto" width="720" height="540" loading="lazy"><figcaption>Con el capó abierto</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1613214149922-f1809c99b414?auto=format&fit=crop&w=720&h=540&q=70" alt="Mecánico apretando los tornillos de una rueda" width="720" height="540" loading="lazy"><figcaption>Cambio de ruedas</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=720&h=540&q=70" alt="Mecánico trabajando en el motor de un coche" width="720" height="540" loading="lazy"><figcaption>Trabajo con calma</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=720&h=540&q=70" alt="Rellenando el aceite del motor" width="720" height="540" loading="lazy"><figcaption>Cambio de aceite</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=720&h=540&q=70" alt="Manos con una llave trabajando en el motor" width="720" height="540" loading="lazy"><figcaption>Mecánica de toda la vida</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PEDIR CITA ============ -->
+  <section class="seccion" id="cita" aria-labelledby="tituloCita">
+    <div class="contenedor">
+      <div class="cabeza">
+        <div>
+          <span class="etiqueta">Cita previa</span>
+          <h2 id="tituloCita">Pide cita</h2>
+          <p>Déjanos los datos del coche y te confirmamos el día por WhatsApp.</p>
+        </div>
+      </div>
+      <div class="tarjeta cita-card">
+        <form class="formulario" id="formCita" novalidate>
+          <div class="fila-campos">
+            <div class="campo">
+              <label for="matricula">Matrícula</label>
+              <input id="matricula" name="matricula" type="text" autocomplete="off" placeholder="1234 ABC" maxlength="10">
+            </div>
+            <div class="campo">
+              <label for="modelo">Marca y modelo</label>
+              <input id="modelo" name="modelo" type="text" autocomplete="off" placeholder="Por ejemplo: Seat Ibiza">
+            </div>
+          </div>
+          <div class="campo">
+            <label for="servicioCita">Servicio</label>
+            <select id="servicioCita" name="servicio">
+              <option value="revision">Revisión</option>
+              <option value="aceite">Cambio de aceite</option>
+              <option value="neumaticos">Neumáticos</option>
+              <option value="frenos">Frenos</option>
+              <option value="preitv">Pre-ITV</option>
+              <option value="diagnosis">Diagnosis</option>
+              <option value="otro">Otra cosa / no sé qué le pasa</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="diaCita">Día <span class="ayuda">(de lunes a sábado)</span></label>
+            <select id="diaCita" name="dia"></select>
+          </div>
+          <button class="btn btn-azul btn-bloque" type="submit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+            Pedir cita
+          </button>
+        </form>
+        <div class="cita-lado">
+          <h3>Antes de venir</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Trae la documentación del coche si vas a pasar la ITV.</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Apunta los ruidos o testigos que te salen: nos ayuda mucho.</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Recibimos coches desde las 8:00.</li>
+          </ul>
+          <button class="btn btn-wa js-demo" type="button" data-aviso="Esto es un ejemplo. En tu web, este botón abrirá un WhatsApp con tu taller.">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+            Pedir cita por WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HORARIO Y DIRECCIÓN ============ -->
+  <section class="seccion" id="horario" aria-labelledby="tituloHorario">
+    <div class="contenedor">
+      <div class="cabeza">
+        <div>
+          <span class="etiqueta">Cuándo y dónde</span>
+          <h2 id="tituloHorario">Horario y dirección</h2>
+        </div>
+      </div>
+      <div class="info-rejilla">
+        <div class="tarjeta horario-card">
+          <table class="tabla-horario" id="tablaHorario">
+            <caption>Horario del taller</caption>
+            <tbody>
+              <tr data-dia="1"><th scope="row">Lunes</th><td><span>8:00 – 13:30</span><span>15:00 – 19:00</span></td></tr>
+              <tr data-dia="2"><th scope="row">Martes</th><td><span>8:00 – 13:30</span><span>15:00 – 19:00</span></td></tr>
+              <tr data-dia="3"><th scope="row">Miércoles</th><td><span>8:00 – 13:30</span><span>15:00 – 19:00</span></td></tr>
+              <tr data-dia="4"><th scope="row">Jueves</th><td><span>8:00 – 13:30</span><span>15:00 – 19:00</span></td></tr>
+              <tr data-dia="5"><th scope="row">Viernes</th><td><span>8:00 – 13:30</span><span>15:00 – 19:00</span></td></tr>
+              <tr data-dia="6"><th scope="row">Sábado</th><td><span>9:00 – 13:00</span></td></tr>
+              <tr data-dia="0" class="cerrado"><th scope="row">Domingo</th><td>Cerrado</td></tr>
+            </tbody>
+          </table>
+          <div class="franjas">
+            <span class="franja"><b>Recepción</b> desde las 8:00</span>
+            <span class="franja"><b>Sábados</b> solo mañanas</span>
+          </div>
+        </div>
+
+        <div class="tarjeta direccion-card">
+          <!-- Mapa dibujado (sin Google Maps) -->
+          <svg class="mapa" viewBox="0 0 640 360" role="img" aria-label="Plano de situación de Taller Nudo en la Calle del Motor, 8, en el polígono">
+            <rect width="640" height="360" fill="#E9EEF4"/>
+            <rect x="40" y="70" width="130" height="90" rx="10" fill="#D7DFE8"/>
+            <rect x="290" y="230" width="140" height="100" rx="10" fill="#D7DFE8"/>
+            <rect x="500" y="70" width="110" height="70" rx="10" fill="#D7DFE8"/>
+            <rect x="30" y="240" width="160" height="100" rx="18" fill="#D3E8DA"/>
+            <circle cx="70" cy="280" r="14" fill="#B9DCC5"/><circle cx="120" cy="310" r="18" fill="#B9DCC5"/><circle cx="155" cy="265" r="11" fill="#B9DCC5"/>
+            <g stroke="#FFFFFF" stroke-linecap="round" fill="none">
+              <path d="M-20 205 L660 180" stroke-width="34"/>
+              <path d="M230 -20 L250 380" stroke-width="22"/>
+              <path d="M470 -20 L460 380" stroke-width="18"/>
+              <path d="M-20 30 L660 44" stroke-width="14"/>
+            </g>
+            <path d="M-20 205 L660 180" stroke="#D5DEE8" stroke-width="2" stroke-dasharray="14 12" fill="none"/>
+            <text x="40" y="200" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="700" fill="#748396" letter-spacing="2" transform="rotate(-2.1 40 200)">CALLE DEL MOTOR</text>
+            <text x="310" y="286" font-family="Plus Jakarta Sans, sans-serif" font-size="14" font-weight="700" fill="#748396" letter-spacing="1.5">POLÍGONO</text>
+            <g transform="translate(370 182)">
+              <ellipse cx="0" cy="4" rx="16" ry="5" fill="rgba(0,0,0,.15)"/>
+              <path d="M0 0 C-6 -14 -24 -26 -24 -44 A24 24 0 0 1 24 -44 C24 -26 6 -14 0 0Z" fill="#1E5AA8"/>
+              <circle cx="0" cy="-44" r="9" fill="#FFFFFF"/>
+              <rect x="-66" y="-104" width="132" height="34" rx="12" fill="#141C26"/>
+              <text x="0" y="-81" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF">Taller Nudo</text>
+            </g>
+          </svg>
+          <div class="direccion-cuerpo">
+            <h3>Calle del Motor, 8</h3>
+            <p>Polígono Ejemplo · 00000 Tu Ciudad. Aparcamiento para clientes en la puerta.</p>
+            <div class="botones-dos">
+              <button class="btn btn-suave js-demo" type="button" data-aviso="Esto es un ejemplo. En tu web, este botón abrirá el mapa para llegar a tu taller.">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8z"/></svg>
+                Cómo llegar
+              </button>
+              <button class="btn btn-suave js-demo" type="button" data-aviso="Esto es un ejemplo. En tu web, este botón llamará a tu taller.">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+                Llamar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section class="seccion" id="contacto" aria-labelledby="tituloContacto">
+    <div class="contenedor">
+      <div class="cabeza">
+        <div>
+          <span class="etiqueta">Hablamos</span>
+          <h2 id="tituloContacto">Contacto</h2>
+        </div>
+      </div>
+      <div class="tarjeta contacto-card">
+        <p>¿Dudas con tu coche o con un presupuesto? Escríbenos o llámanos y te atendemos en horario de taller.</p>
+        <div class="botones-contacto">
+          <button class="btn btn-wa js-demo" type="button" data-aviso="Esto es un ejemplo. En tu web, este botón abrirá un WhatsApp con tu taller.">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+            WhatsApp
+          </button>
+          <button class="btn btn-suave js-demo" type="button" data-aviso="Esto es un ejemplo. En tu web, este botón llamará a tu taller.">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+            Llamar al taller
+          </button>
+          <button class="btn btn-suave js-demo" type="button" data-aviso="Esto es un ejemplo. En tu web, este botón abrirá un correo para tu taller.">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            Correo
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="pie">
+  <div class="contenedor">
+    <a class="marca" href="#inicio" aria-label="Taller Nudo, volver arriba">
+      <span class="marca-icono" aria-hidden="true">TN</span>
+      <span class="marca-nombre">Taller Nudo</span>
+    </a>
+    <ul class="redes">
+      <li><a href="#" aria-label="Instagram (ejemplo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></li>
+      <li><a href="#" aria-label="Facebook (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/></svg></a></li>
+      <li><a href="#" aria-label="Google (ejemplo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M12 12h8"/></svg></a></li>
+    </ul>
+    <p>Calle del Motor, 8 · L-V 8:00–13:30 y 15:00–19:00 · Sáb. 9:00–13:00</p>
+    <p>Negocio ficticio creado como ejemplo. Fotos: Unsplash.</p>
+    <p class="firma">Web hecha por <a href="https://nudodesign.es" target="_blank" rel="noopener">Nudo</a></p>
+  </div>
+</footer>
+
+<!-- ============ BARRA DE ACCESOS (solo móvil) ============ -->
+<nav class="tabs" id="tabs" aria-label="Accesos rápidos">
+  <a href="#servicios">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3 17.8V21h3.2l6.3-6.3a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>
+    Servicios
+  </a>
+  <a href="#cita">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+    Cita
+  </a>
+  <a href="#horario">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+    Horario
+  </a>
+  <a href="#contacto">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/></svg>
+    Contacto
+  </a>
+</nav>
+
+<!-- ============ BANDA DE NUDO: deja claro que es un ejemplo ============ -->
+<div class="banda-nudo" id="bandaNudo" role="note" aria-label="Aviso: esta web es un ejemplo">
+  <p><strong>Ejemplo de concepto hecho por Nudo</strong> · Local ficticio</p>
+  <a class="btn" href="https://wa.me/34722740211?text=Hola%2C%20he%20visto%20el%20ejemplo%20del%20taller%20mec%C3%A1nico%20y%20quiero%20una%20web%20as%C3%AD%20para%20mi%20taller" target="_blank" rel="noopener">Quiero una web así</a>
+</div>
+
+<!-- Aviso flotante para los botones de demostración -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  /* =========================================================
+     SERVICIOS DE LA PORTADA (precios orientativos de ejemplo)
+     ========================================================= */
+  var FOTO = "https://images.unsplash.com/photo-";
+  var AJUSTES_FOTO = "?auto=format&fit=crop&w=900&h=600&q=70";
+  var SERVICIOS = {
+    revision: {
+      titulo: "Revisión completa",
+      desc: "La puesta a punto de siempre: miramos lo importante para que el coche vaya fino y seguro.",
+      incluye: ["Cambio de aceite y filtro de aceite", "Filtros de aire y de habitáculo", "Revisión de frenos, luces y neumáticos", "Niveles y estado de la batería"],
+      desde: "89 €", extra: "Aceite y filtros según tu coche", tiempo: "unas 2 horas",
+      foto: "1625047509248-ec889cbff17f", alt: "Mecánico revisando el motor de un coche con el capó abierto"
+    },
+    aceite: {
+      titulo: "Cambio de aceite",
+      desc: "El mantenimiento más importante del motor, con el aceite que pide tu fabricante.",
+      incluye: ["Aceite del tipo que indica el fabricante", "Filtro de aceite nuevo", "Revisión de niveles", "Puesta a cero del aviso de mantenimiento"],
+      desde: "59 €", extra: "Según litros y tipo de aceite", tiempo: "alrededor de 1 hora",
+      foto: "1487754180451-c456f719a1fc", alt: "Rellenando el aceite del motor de un coche"
+    },
+    neumaticos: {
+      titulo: "Neumáticos",
+      desc: "Te aconsejamos la medida y la marca que mejor van con tu forma de conducir.",
+      incluye: ["Desmontaje y montaje", "Equilibrado de cada rueda", "Válvula nueva", "Revisión de la presión"],
+      desde: "15 €", extra: "Por rueda, sin el neumático", tiempo: "alrededor de 1 hora",
+      foto: "1613214149922-f1809c99b414", alt: "Mecánico apretando los tornillos de una rueda"
+    },
+    frenos: {
+      titulo: "Frenos",
+      desc: "Si chirrían, vibran o notas que frenas peor, ven a que les echemos un ojo.",
+      incluye: ["Revisión de pastillas y discos", "Cambio de pastillas del eje", "Comprobación del líquido de frenos", "Prueba en carretera"],
+      desde: "79 €", extra: "Pastillas de un eje", tiempo: "entre 1 y 2 horas",
+      foto: "1599256872237-5dcc0fbe9668", alt: "Manos de mecánico trabajando en los bajos de un coche"
+    },
+    preitv: {
+      titulo: "Pre-ITV",
+      desc: "Revisamos lo que miran en la ITV para que vayas con tranquilidad.",
+      incluye: ["Luces, intermitentes y claxon", "Frenos y suspensión", "Neumáticos y holguras", "Emisiones y testigos del cuadro"],
+      desde: "25 €", extra: "Las reparaciones, aparte", tiempo: "unos 45 minutos",
+      foto: "1504222490345-c075b6008014", alt: "Mecánico sonriente junto a un coche con el capó abierto"
+    },
+    diagnosis: {
+      titulo: "Diagnosis electrónica",
+      desc: "¿Se ha encendido un testigo? Conectamos la máquina y te decimos qué pasa.",
+      incluye: ["Lectura de averías con máquina", "Explicación clara de lo que sale", "Borrado de errores si procede", "Presupuesto si hay que reparar"],
+      desde: "35 €", extra: "Se descuenta si reparas con nosotros", tiempo: "unos 45 minutos",
+      foto: "1486262715619-67b85e0b08d3", alt: "Detalle del motor de un coche con las correas y poleas"
+    }
+  };
+
+  var NOMBRES_DIAS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+  var MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+
+  /* =========================================================
+     HORA DE MADRID
+     Se calcula con la zona Europe/Madrid, esté donde esté quien mira.
+     Horario: L-V 8:00-13:30 y 15:00-19:00 · sábado 9:00-13:00 · domingo cerrado.
+     (en minutos desde medianoche)
+     ========================================================= */
+  var LV = [[8 * 60, 13 * 60 + 30], [15 * 60, 19 * 60]];
+  var HORARIO = { 0: [], 1: LV, 2: LV, 3: LV, 4: LV, 5: LV, 6: [[9 * 60, 13 * 60]] };
+
+  function ahoraMadrid() {
+    var ahora = new Date();
+    try {
+      var partes = new Intl.DateTimeFormat("en-US", {
+        timeZone: "Europe/Madrid", weekday: "short", year: "numeric", month: "numeric",
+        day: "numeric", hour: "numeric", minute: "numeric", hourCycle: "h23"
+      }).formatToParts(ahora);
+      var v = {};
+      partes.forEach(function (p) { v[p.type] = p.value; });
+      var semana = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+      return {
+        dia: semana[v.weekday], anio: Number(v.year), mes: Number(v.month), fecha: Number(v.day),
+        minutos: (Number(v.hour) % 24) * 60 + Number(v.minute)
+      };
+    } catch (e) {
+      return { dia: ahora.getDay(), anio: ahora.getFullYear(), mes: ahora.getMonth() + 1, fecha: ahora.getDate(), minutos: ahora.getHours() * 60 + ahora.getMinutes() };
+    }
+  }
+
+  var M = ahoraMadrid();
+
+  /* ---------- Estado abierto / cerrado ---------- */
+  function hhmm(min) { return Math.floor(min / 60) + ":" + String(min % 60).padStart(2, "0"); }
+
+  function calcularEstado() {
+    var hoy = M.dia, min = M.minutos, franjas = HORARIO[hoy], i;
+    for (i = 0; i < franjas.length; i++) {
+      if (min >= franjas[i][0] && min < franjas[i][1]) {
+        var hayTarde = i + 1 < franjas.length;
+        return {
+          abierto: true, corto: "Abierto ahora",
+          largo: "Abierto hasta las " + hhmm(franjas[i][1]) + (hayTarde ? " · por la tarde de " + hhmm(franjas[i + 1][0]) + " a " + hhmm(franjas[i + 1][1]) : "")
+        };
+      }
+    }
+    // Cerrado: busca la próxima apertura (hoy más tarde o en los días siguientes)
+    for (i = 0; i < franjas.length; i++) {
+      if (min < franjas[i][0]) {
+        return { abierto: false, corto: "Cerrado ahora", largo: "Cerrado · abrimos hoy a las " + hhmm(franjas[i][0]) };
+      }
+    }
+    for (var d = 1; d <= 7; d++) {
+      var dia = (hoy + d) % 7;
+      if (HORARIO[dia].length) {
+        var cuando = d === 1 ? "mañana" : "el " + NOMBRES_DIAS[dia].toLowerCase();
+        return { abierto: false, corto: "Cerrado ahora", largo: "Cerrado · abrimos " + cuando + " a las " + hhmm(HORARIO[dia][0][0]) };
+      }
+    }
+    return { abierto: false, corto: "Cerrado ahora", largo: "Cerrado" };
+  }
+
+  function pintarEstado() {
+    var e = calcularEstado();
+    var top = document.getElementById("estadoTop");
+    var chip = document.getElementById("estadoHoy");
+    [top, chip].forEach(function (el) {
+      el.classList.toggle("abierto", e.abierto);
+      el.classList.toggle("cerrado", !e.abierto);
+    });
+    top.querySelector(".txt").textContent = e.corto;
+    chip.querySelector(".txt").textContent = e.largo;
+  }
+
+  /* ---------- Tarjeta del servicio elegido ---------- */
+  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>';
+  var servicioActual = "revision";
+
+  function mostrarServicio(clave) {
+    var s = SERVICIOS[clave];
+    if (!s) return;
+    servicioActual = clave;
+    document.getElementById("servTitulo").textContent = s.titulo;
+    document.getElementById("servDesc").textContent = s.desc;
+    document.getElementById("servIncluye").innerHTML = s.incluye.map(function (t) { return "<li>" + CHECK + t + "</li>"; }).join("");
+    document.getElementById("servPrecio").innerHTML = s.desde + " <small>IVA incl.</small>";
+    document.getElementById("servPrecioExtra").textContent = s.extra;
+    document.getElementById("servTiempo").textContent = s.tiempo;
+
+    var img = document.getElementById("servFoto");
+    var nueva = FOTO + s.foto + AJUSTES_FOTO;
+    if (img.getAttribute("src") !== nueva) {
+      img.classList.add("cambiando");
+      img.onload = function () { img.classList.remove("cambiando"); };
+      img.src = nueva;
+    }
+    img.alt = s.alt;
+
+    document.querySelectorAll("#selectorServicio button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.servicio === clave));
+    });
+  }
+
+  document.querySelectorAll("#selectorServicio button").forEach(function (b) {
+    b.addEventListener("click", function () { mostrarServicio(b.dataset.servicio); });
+  });
+
+  // «Pedir cita» lleva al formulario con el servicio ya elegido
+  document.getElementById("btnPedirCita").addEventListener("click", function () {
+    document.getElementById("servicioCita").value = servicioActual;
+  });
+
+  /* ---------- Días para la cita: los próximos días de apertura ---------- */
+  function rellenarDias() {
+    var sel = document.getElementById("diaCita");
+    var html = "", n = 0;
+    for (var d = 1; d <= 14 && n < 8; d++) {
+      var f = new Date(Date.UTC(M.anio, M.mes - 1, M.fecha + d));
+      var ds = f.getUTCDay();
+      if (!HORARIO[ds].length) continue;
+      var texto = (d === 1 ? "Mañana, " : "") + NOMBRES_DIAS[ds] + " " + f.getUTCDate() + " " + MESES[f.getUTCMonth()] + (ds === 6 ? " (solo mañana)" : "");
+      html += "<option>" + texto + "</option>";
+      n++;
+    }
+    sel.innerHTML = html;
+  }
+
+  /* ---------- Aviso flotante (toast) ---------- */
+  var toast = document.getElementById("toast");
+  var temporizador = null;
+  function mostrarAviso(texto) {
+    toast.textContent = texto;
+    toast.classList.add("visible");
+    clearTimeout(temporizador);
+    temporizador = setTimeout(function () { toast.classList.remove("visible"); }, 4000);
+  }
+  var AVISO_DEMO = "Esto es un ejemplo. En tu web, este botón llamará a tu taller.";
+
+  /* ---------- Altura real de la banda de Nudo (para apilar los accesos encima) ---------- */
+  var banda = document.getElementById("bandaNudo");
+  function medirBanda() {
+    document.documentElement.style.setProperty("--alto-banda", banda.offsetHeight + "px");
+  }
+
+  /* ---------- Arranque ---------- */
+  mostrarServicio("revision");
+  rellenarDias();
+  pintarEstado();
+  medirBanda();
+  window.addEventListener("resize", medirBanda);
+  if (window.ResizeObserver) new ResizeObserver(medirBanda).observe(banda);
+  setInterval(function () { M = ahoraMadrid(); pintarEstado(); }, 60000);
+
+  // Marca el día de hoy en la tabla de horarios
+  var filaHoy = document.querySelector('#tablaHorario tr[data-dia="' + M.dia + '"]');
+  if (filaHoy) filaHoy.classList.add("es-hoy");
+
+  // Botones del negocio (Llamar, WhatsApp, Presupuesto, Cómo llegar...): solo muestran el aviso
+  document.querySelectorAll(".js-demo").forEach(function (b) {
+    b.addEventListener("click", function () { mostrarAviso(b.dataset.aviso || AVISO_DEMO); });
+  });
+
+  // Formulario: no envía nada, solo muestra el aviso
+  document.getElementById("formCita").addEventListener("submit", function (e) {
+    e.preventDefault();
+    mostrarAviso("Esto es un ejemplo. En tu web, esta cita le llegará a tu taller.");
+  });
+
+  // Iconos de redes: son de ejemplo, no llevan a ningún sitio
+  document.querySelectorAll(".redes a").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      mostrarAviso("Esto es un ejemplo. En tu web, aquí irán tus redes sociales.");
+    });
+  });
+
+  // Flechas del carrusel (en pantallas grandes)
+  var carrusel = document.getElementById("carrusel");
+  document.querySelectorAll(".flecha").forEach(function (f) {
+    f.addEventListener("click", function () {
+      var reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      carrusel.scrollBy({ left: Number(f.dataset.dir) * carrusel.clientWidth * 0.8, behavior: reducido ? "auto" : "smooth" });
+    });
+  });
+
+  // Accesos de abajo: marca la sección que se está viendo
+  var enlacesTabs = document.querySelectorAll("#tabs a");
+  function marcarTab(id) {
+    enlacesTabs.forEach(function (a) { a.classList.toggle("activa", a.getAttribute("href") === "#" + id); });
+  }
+  if ("IntersectionObserver" in window) {
+    var obs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (en) { if (en.isIntersecting) marcarTab(en.target.id); });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    ["servicios", "cita", "horario", "contacto"].forEach(function (id) { obs.observe(document.getElementById(id)); });
+  }
+  // Al llegar al final de la página, «Contacto»
+  window.addEventListener("scroll", function () {
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) marcarTab("contacto");
+  }, { passive: true });
+</script>
+</body>
+</html>

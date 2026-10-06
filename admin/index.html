@@ -879,7 +879,7 @@ async function guardarFicha(numero) {
 
 function lineasPorDefecto() {
   return [
-    { concepto: 'Web para tu local', precio: '249', mensual: false },
+    { concepto: 'Web para tu negocio', precio: '249', mensual: false },
     { concepto: 'Mantenimiento mensual (opcional)', precio: '39', mensual: true }
   ];
 }
@@ -1110,7 +1110,7 @@ function pintarVentas() {
 }
 
 // ── 5. Llamadas ──────────────────────────────────────────────────────
-// Registro de las llamadas a bares: quién llamó, qué dijeron y cuándo volver.
+// Registro de las llamadas a negocios: quién llamó, qué dijeron y cuándo volver.
 
 function hoyISO() {
   return new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' }); // aaaa-mm-dd
@@ -1182,11 +1182,11 @@ function abrirLlamada(id) {
     '<h1 id="ficha-titulo" style="margin:6px 48px 4px 0">' + (l ? esc(l.local) : 'Apuntar llamada') + '</h1>' +
     (l && l.telefono ? '<div class="contacto" style="margin-top:10px"><a class="btn btn--peque" href="' + esc(enlaceTel(l.telefono)) + '">Llamar</a>' +
       '<a class="btn btn--peque" href="' + esc(enlaceWhatsApp(l.telefono)) + '" target="_blank" rel="noopener">WhatsApp</a></div>' : '') +
-    '<label for="ll-local">Local</label><input type="text" id="ll-local" value="' + esc(v.local) + '" placeholder="Ej.: Bar Manolo">' +
+    '<label for="ll-local">Negocio</label><input type="text" id="ll-local" value="' + esc(v.local) + '" placeholder="Ej.: Peluquería Marta">' +
     '<div class="tres">' +
       '<div><label for="ll-tel">Teléfono</label><input type="text" inputmode="tel" id="ll-tel" value="' + esc(v.telefono) + '"></div>' +
       '<div><label for="ll-zona">Zona</label><input type="text" id="ll-zona" value="' + esc(v.zona) + '" placeholder="Ej.: Gràcia"></div>' +
-      '<div><label for="ll-tipo">Tipo de local</label><input type="text" id="ll-tipo" value="' + esc(v.tipo) + '" placeholder="Bar, restaurante, cafetería…"></div>' +
+      '<div><label for="ll-tipo">Sector</label><input type="text" id="ll-tipo" value="' + esc(v.tipo) + '" placeholder="Restaurante, peluquería, taller, fisio…"></div>' +
       '<div><label for="ll-res">Resultado</label><select id="ll-res">' + opciones + '</select></div>' +
       '<div><label for="ll-prox">Próxima acción</label><input type="text" id="ll-prox" value="' + esc(v.proxima) + '" placeholder="Ej.: llamar al dueño por la tarde"></div>' +
       '<div><label for="ll-fprox">Fecha para volver</label><input type="date" id="ll-fprox" value="' + esc(isoDe(v.fechaProxima)) + '" style="width:100%;min-height:48px;border:2px solid var(--linea);border-radius:10px;padding:8px 12px"></div>' +

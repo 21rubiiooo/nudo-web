@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Negocio ficticio: no debe aparecer en buscadores -->
+<meta name="robots" content="noindex, nofollow">
+<title>Estudio Nudo · Peluquería y estética (ejemplo)</title>
+<meta name="description" content="Ejemplo de concepto de web para una peluquería y centro de estética. Negocio ficticio creado por Nudo.">
+<meta name="theme-color" content="#F6E7E1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%231E1715'/%3E%3Cpath d='M10 22c0-7 12-5 12-12' fill='none' stroke='%23EBCFC4' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     COLORES Y MEDIDAS — salón luminoso: rosa empolvado, terracota y negro
+     ========================================================= */
+  :root {
+    --crema: #FBF6F2;
+    --blanco: #FFFFFF;
+    --rosa: #EBCFC4;
+    --rosa-claro: #F6E7E1;
+    --rosa-borde: #E6CFC6;
+    --terracota: #B8664A;
+    --terracota-osc: #8F4630;
+    --tinta: #1E1715;
+    --tinta-suave: #5E504B;
+    --linea: #EADDD7;
+    --radio-xl: 36px;
+    --radio: 24px;
+    --radio-s: 16px;
+    --sombra: 0 1px 2px rgba(60, 30, 20, .05), 0 14px 40px rgba(60, 30, 20, .08);
+    --alto-banda: 64px;   /* lo recalcula el JS según lo que ocupe de verdad */
+    --alto-top: 72px;
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--tinta);
+    background: var(--crema);
+    padding-bottom: var(--alto-banda); /* hueco para la banda de Nudo */
+  }
+  img { max-width: 100%; display: block; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.12; margin: 0; letter-spacing: -.01em; }
+  p { margin: 0 0 1em; }
+  a { color: var(--terracota-osc); }
+  button, input, select { font-family: inherit; }
+  :focus-visible { outline: 3px solid var(--terracota); outline-offset: 3px; border-radius: 10px; }
+  [id] { scroll-margin-top: calc(var(--alto-top) + 12px); }
+
+  .contenedor { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+  .seccion { padding: 64px 0 0; }
+  .cabeza { margin-bottom: 26px; max-width: 640px; }
+  .cabeza h2 { font-size: clamp(2rem, 7vw, 3rem); }
+  .cabeza h2 em { font-style: italic; color: var(--terracota-osc); }
+  .cabeza p { margin: 10px 0 0; color: var(--tinta-suave); }
+  .antetitulo {
+    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 12px;
+    font-size: .85rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--terracota-osc);
+  }
+  .antetitulo::before { content: ""; width: 28px; height: 2px; background: currentColor; border-radius: 2px; }
+
+  /* ---------- BOTONES ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 54px; padding: 12px 26px;
+    font: 700 1.02rem/1.2 var(--sans);
+    border-radius: 999px; border: 2px solid transparent;
+    cursor: pointer; text-decoration: none; text-align: center;
+    transition: transform .15s ease, background-color .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn svg { width: 22px; height: 22px; flex: none; }
+  .btn-negro { background: var(--tinta); color: #fff; }
+  .btn-negro:hover { background: #3a2c28; }
+  .btn-borde { background: transparent; color: var(--tinta); border-color: var(--tinta); }
+  .btn-borde:hover { background: var(--tinta); color: #fff; }
+  .btn-rosa { background: var(--rosa); color: var(--tinta); }
+  .btn-rosa:hover { background: #e2bfb2; }
+  .btn-bloque { width: 100%; }
+
+  /* =========================================================
+     BARRA SUPERIOR
+     ========================================================= */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251, 246, 242, .92);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--linea);
+  }
+  .topbar .contenedor { display: flex; align-items: center; gap: 12px; min-height: var(--alto-top); }
+  .marca { display: flex; align-items: center; gap: 10px; color: var(--tinta); text-decoration: none; margin-right: auto; min-width: 0; }
+  .marca-icono { width: 44px; height: 44px; flex: none; }
+  .marca-texto { display: flex; flex-direction: column; min-width: 0; }
+  .marca-nombre { font-family: var(--serif); font-size: 1.3rem; font-weight: 500; line-height: 1.1; white-space: nowrap; }
+  .marca-nombre em { font-style: italic; color: var(--terracota-osc); }
+  .estado { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; font-weight: 700; white-space: nowrap; color: var(--tinta-suave); }
+  .estado .punto { width: 8px; height: 8px; border-radius: 50%; background: #a99a95; flex: none; }
+  .estado.abierto { color: #2f6b45; }
+  .estado.abierto .punto { background: #3aa266; box-shadow: 0 0 0 4px rgba(58, 162, 102, .18); }
+  .estado.cerrado { color: #9b3324; }
+  .estado.cerrado .punto { background: #d0533f; }
+  .nav { display: none; gap: 2px; }
+  .nav a {
+    min-height: 48px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: 999px;
+    color: var(--tinta); text-decoration: none; font-weight: 600; font-size: 1rem;
+  }
+  .nav a:hover { background: var(--rosa-claro); }
+  .btn-cita-top { min-height: 48px; padding: 8px 20px; font-size: .98rem; flex: none; }
+
+  /* =========================================================
+     PORTADA PARTIDA
+     ========================================================= */
+  .portada { padding: 20px 0 0; overflow: clip; }
+  .portada-rejilla { display: grid; gap: 28px; align-items: center; }
+  .portada-foto { position: relative; }
+  .portada-foto img {
+    width: 100%; height: auto; aspect-ratio: 4 / 3.4; object-fit: cover;
+    border-radius: 200px 200px var(--radio-xl) var(--radio-xl);
+    background: var(--rosa-claro);
+  }
+  .portada-foto .mancha {
+    position: absolute; z-index: -1; width: 70%; aspect-ratio: 1; right: -12%; bottom: -10%;
+    background: var(--rosa); border-radius: 58% 42% 46% 54% / 52% 44% 56% 48%;
+  }
+  .sello {
+    position: absolute; left: 14px; bottom: 14px;
+    background: var(--blanco); border-radius: 999px; padding: 10px 18px 10px 12px;
+    display: flex; align-items: center; gap: 10px; box-shadow: var(--sombra);
+    font-size: .92rem; font-weight: 700; line-height: 1.25;
+  }
+  .sello .circ { width: 40px; height: 40px; border-radius: 50%; background: var(--rosa-claro); color: var(--terracota-osc); display: grid; place-items: center; flex: none; }
+  .sello .circ svg { width: 22px; height: 22px; }
+  .sello small { display: block; font-weight: 500; color: var(--tinta-suave); font-size: .85rem; }
+
+  .portada-texto h1 { font-size: clamp(2.6rem, 11vw, 4.6rem); line-height: 1.02; letter-spacing: -.02em; }
+  .portada-texto h1 em { font-style: italic; color: var(--terracota-osc); }
+  .portada-texto .entrada { font-size: 1.12rem; color: var(--tinta-suave); margin: 18px 0 26px; max-width: 520px; }
+  .portada-botones { display: flex; flex-wrap: wrap; gap: 12px; }
+  .portada-botones .btn { flex: 1 1 200px; }
+  .btn-cita-grande { min-height: 60px; font-size: 1.1rem; }
+  .datos { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .datos li {
+    display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px;
+    background: var(--blanco); border: 1px solid var(--linea); font-size: .95rem; font-weight: 600;
+  }
+  .datos svg { width: 18px; height: 18px; color: var(--terracota); flex: none; }
+
+  /* =========================================================
+     SERVICIOS
+     ========================================================= */
+  .filtros { display: flex; gap: 8px; overflow-x: auto; padding: 2px 16px 10px; margin: 0 -16px 10px; scrollbar-width: none; }
+  .filtros::-webkit-scrollbar { display: none; }
+  .filtros button {
+    flex: none; min-height: 48px; padding: 8px 20px; border-radius: 999px; cursor: pointer;
+    border: 1.5px solid var(--rosa-borde); background: var(--blanco); color: var(--tinta);
+    font-weight: 700; font-size: 1rem;
+  }
+  .filtros button:hover { border-color: var(--terracota); }
+  .filtros button[aria-pressed="true"] { background: var(--tinta); border-color: var(--tinta); color: #fff; }
+
+  .servicios { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .servicio {
+    background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra);
+    display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 4px 16px; padding: 14px; align-items: center;
+  }
+  .servicio[hidden] { display: none; }
+  .servicio img { width: 84px; height: 84px; object-fit: cover; border-radius: 50% 50% 50% 16px; background: var(--rosa-claro); grid-row: span 2; }
+  .servicio h3 { font-size: 1.3rem; }
+  .servicio p { margin: 2px 0 0; font-size: 1rem; color: var(--tinta-suave); line-height: 1.45; }
+  .servicio-pie { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; margin-top: 10px; padding-top: 12px; border-top: 1px dashed var(--linea); flex-wrap: wrap; }
+  .duracion { display: inline-flex; align-items: center; gap: 6px; font-size: .95rem; font-weight: 600; color: var(--tinta-suave); }
+  .duracion svg { width: 18px; height: 18px; color: var(--terracota); }
+  .precio { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; margin-left: auto; white-space: nowrap; }
+  .precio small { font-family: var(--sans); font-size: .82rem; font-weight: 600; color: var(--tinta-suave); margin-right: 4px; }
+  .btn-elegir { min-height: 48px; padding: 8px 18px; font-size: .95rem; }
+  .nota-precios { margin: 18px 0 0; font-size: .98rem; color: var(--tinta-suave); }
+
+  /* =========================================================
+     EQUIPO
+     ========================================================= */
+  .equipo { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 26px 14px; }
+  .persona { text-align: center; }
+  .persona img {
+    width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover;
+    border-radius: 999px 999px var(--radio) var(--radio); background: var(--rosa-claro);
+  }
+  .persona h3 { font-size: 1.5rem; margin-top: 14px; }
+  .persona .rol { color: var(--terracota-osc); font-weight: 700; font-size: .95rem; margin: 2px 0 10px; }
+  .chips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .chips li { background: var(--rosa-claro); border-radius: 999px; padding: 4px 12px; font-size: .88rem; font-weight: 600; }
+  .persona .btn { margin-top: 14px; min-height: 48px; padding: 8px 14px; font-size: .95rem; width: 100%; max-width: 260px; }
+
+  /* =========================================================
+     TRABAJOS: ANTES / DESPUÉS + GALERÍA
+     ========================================================= */
+  .trabajos-rejilla { display: grid; gap: 22px; }
+  .comparador { position: relative; border-radius: var(--radio-xl); overflow: hidden; background: var(--rosa-claro); aspect-ratio: 4 / 5; touch-action: pan-y; }
+  .comparador img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  /* «Antes»: misma foto apagada, solo para enseñar cómo funciona el comparador */
+  .comparador .antes { filter: grayscale(.9) brightness(.82) contrast(.85) sepia(.15); }
+  .comparador .despues { clip-path: inset(0 0 0 var(--corte, 50%)); }
+  .comparador .linea-corte { position: absolute; top: 0; bottom: 0; left: var(--corte, 50%); width: 3px; margin-left: -1.5px; background: #fff; pointer-events: none; }
+  .comparador .tirador {
+    position: absolute; top: 50%; left: var(--corte, 50%); width: 52px; height: 52px; margin: -26px 0 0 -26px;
+    border-radius: 50%; background: #fff; color: var(--tinta); display: grid; place-items: center; box-shadow: 0 6px 20px rgba(0,0,0,.25); pointer-events: none;
+  }
+  .comparador .tirador svg { width: 26px; height: 26px; }
+  .comparador input[type="range"] {
+    position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize;
+  }
+  .comparador input[type="range"]:focus-visible ~ .tirador { outline: 3px solid var(--terracota); outline-offset: 3px; }
+  .etiq-ad {
+    position: absolute; top: 14px; padding: 4px 12px; border-radius: 999px; font-size: .85rem; font-weight: 700;
+    background: rgba(30, 23, 21, .72); color: #fff; pointer-events: none;
+  }
+  .etiq-ad.izq { left: 14px; }
+  .etiq-ad.der { right: 14px; background: rgba(255, 255, 255, .9); color: var(--tinta); }
+  .nota-ad { font-size: .95rem; color: var(--tinta-suave); margin: 12px 4px 0; }
+
+  .galeria { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .galeria figure { margin: 0; }
+  .galeria img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--radio); background: var(--rosa-claro); }
+  .galeria li:nth-child(1) img { border-radius: 120px 120px var(--radio) var(--radio); }
+  .galeria li:nth-child(4) img { border-radius: var(--radio) var(--radio) 120px 120px; }
+  .galeria figcaption { font-size: .92rem; font-weight: 600; color: var(--tinta-suave); padding: 6px 4px 0; line-height: 1.35; }
+
+  /* =========================================================
+     PEDIR CITA
+     ========================================================= */
+  .cita { background: var(--tinta); color: #fff; border-radius: var(--radio-xl); padding: 28px 18px; position: relative; overflow: hidden; }
+  .cita::before {
+    content: ""; position: absolute; width: 340px; height: 340px; right: -140px; top: -140px;
+    background: var(--terracota); opacity: .35; border-radius: 58% 42% 46% 54% / 52% 44% 56% 48%;
+  }
+  .cita > * { position: relative; }
+  .cita .antetitulo { color: var(--rosa); }
+  .cita h2 { font-size: clamp(2rem, 7vw, 3rem); }
+  .cita h2 em { font-style: italic; color: var(--rosa); }
+  .cita .intro { color: #d9ccc7; margin: 10px 0 24px; }
+  .formulario { display: grid; gap: 22px; }
+  .campo { display: grid; gap: 8px; min-width: 0; border: 0; padding: 0; margin: 0; }
+  .campo > label, .campo legend { font-weight: 700; font-size: 1rem; padding: 0; color: #fff; }
+  .campo .paso { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--rosa); color: var(--tinta); font-size: .85rem; margin-right: 8px; }
+  .campo select, .campo input[type="text"] {
+    width: 100%; min-height: 56px; padding: 10px 16px; font-size: 1.05rem; font-weight: 500;
+    border: 1.5px solid #4a3c37; border-radius: var(--radio-s); background: #2a211e; color: #fff;
+  }
+  .campo select:focus, .campo input[type="text"]:focus { outline: none; border-color: var(--rosa); box-shadow: 0 0 0 4px rgba(235, 207, 196, .2); }
+  .campo input::placeholder { color: #a89a95; }
+  .opciones { display: flex; flex-wrap: wrap; gap: 8px; }
+  .opciones label { position: relative; cursor: pointer; }
+  .opciones input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .opciones span {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 52px; min-width: 64px;
+    padding: 6px 14px; border-radius: var(--radio-s); border: 1.5px solid #4a3c37; background: #2a211e;
+    font-weight: 700; font-size: 1rem; line-height: 1.2; transition: background-color .15s ease, border-color .15s ease;
+  }
+  .opciones span small { font-weight: 500; font-size: .8rem; color: #c9bbb6; }
+  .opciones label:hover span { border-color: var(--rosa); }
+  .opciones input:checked + span { background: var(--rosa); border-color: var(--rosa); color: var(--tinta); }
+  .opciones input:checked + span small { color: var(--tinta-suave); }
+  .opciones input:focus-visible + span { outline: 3px solid var(--rosa); outline-offset: 2px; }
+  .opciones input:disabled + span { opacity: .35; cursor: not-allowed; text-decoration: line-through; }
+  .dias-op span { min-width: 72px; }
+  .resumen { background: #2a211e; border-radius: var(--radio); padding: 16px 18px; font-size: 1rem; color: #e8dcd7; }
+  .resumen strong { color: #fff; }
+  .resumen p { margin: 0; }
+  .cita .btn-rosa { min-height: 60px; font-size: 1.1rem; }
+  .cita .nota { font-size: .92rem; color: #b9aba6; margin: 0; }
+
+  /* =========================================================
+     HORARIO Y DÓNDE ESTAMOS
+     ========================================================= */
+  .info-rejilla { display: grid; gap: 18px; }
+  .caja { background: var(--blanco); border-radius: var(--radio-xl); box-shadow: var(--sombra); }
+  .horario { padding: 10px 22px 22px; }
+  .tabla-horario { width: 100%; border-collapse: collapse; }
+  .tabla-horario caption { caption-side: top; text-align: left; padding: 16px 0 6px; font-family: var(--serif); font-size: 1.5rem; font-weight: 500; }
+  .tabla-horario th, .tabla-horario td { padding: 13px 2px; border-bottom: 1px solid var(--linea); text-align: left; font-size: 1.02rem; }
+  .tabla-horario th { font-weight: 600; }
+  .tabla-horario td { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .tabla-horario tr:last-child th, .tabla-horario tr:last-child td { border-bottom: 0; }
+  .tabla-horario tr.cerrado td { color: #9b3324; }
+  .tabla-horario tr.es-hoy th, .tabla-horario tr.es-hoy td { color: var(--terracota-osc); font-weight: 800; }
+  .tabla-horario tr.es-hoy th::after {
+    content: "Hoy"; margin-left: 8px; font-size: .75rem; font-weight: 700; color: #fff; background: var(--terracota-osc);
+    border-radius: 999px; padding: 2px 9px; vertical-align: 2px;
+  }
+  .estado-grande { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 8px 16px; border-radius: 999px; background: var(--rosa-claro); font-weight: 700; font-size: .98rem; }
+  .estado-grande .punto { width: 10px; height: 10px; border-radius: 50%; background: #a99a95; flex: none; }
+  .estado-grande.abierto .punto { background: #3aa266; }
+  .estado-grande.cerrado .punto { background: #d0533f; }
+
+  .donde { overflow: hidden; }
+  .mapa { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; background: #F3E9E4; }
+  .donde-cuerpo { padding: 20px 22px 24px; }
+  .donde-cuerpo h3 { font-size: 1.5rem; margin-bottom: 4px; }
+  .donde-cuerpo p { color: var(--tinta-suave); margin-bottom: 16px; }
+  .botones-dos { display: grid; gap: 10px; }
+
+  /* =========================================================
+     OPINIONES (de ejemplo, ficticias)
+     ========================================================= */
+  .aviso-ficticio {
+    display: flex; gap: 12px; align-items: flex-start; background: #FFF4D6; color: #5c4300; border: 1px solid #F0D98C;
+    border-radius: var(--radio); padding: 14px 18px; margin-bottom: 18px; font-weight: 600; font-size: 1rem;
+  }
+  .aviso-ficticio svg { width: 24px; height: 24px; flex: none; margin-top: 1px; }
+  .aviso-ficticio p { margin: 0; }
+  .opiniones { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .opinion { background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra); padding: 22px; position: relative; }
+  .opinion .marca-ej {
+    display: inline-block; margin-bottom: 10px; padding: 3px 10px; border-radius: 999px;
+    background: #FFF4D6; color: #5c4300; font-size: .78rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  }
+  .opinion blockquote { margin: 0; font-family: var(--serif); font-size: 1.2rem; line-height: 1.45; font-style: italic; }
+  .opinion .estrellas { color: var(--terracota); letter-spacing: 2px; font-size: 1.05rem; margin: 0 0 8px; }
+  .opinion .autor { margin: 14px 0 0; font-weight: 700; font-size: .98rem; color: var(--tinta-suave); }
+
+  /* =========================================================
+     PIE
+     ========================================================= */
+  .pie { margin-top: 72px; background: var(--rosa-claro); padding: 40px 0 32px; text-align: center; border-radius: var(--radio-xl) var(--radio-xl) 0 0; }
+  .pie .marca { display: inline-flex; margin: 0 auto 18px; }
+  .redes { display: flex; justify-content: center; gap: 10px; list-style: none; padding: 0; margin: 0 0 18px; }
+  .redes a { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--blanco); color: var(--tinta); }
+  .redes a:hover { background: var(--tinta); color: #fff; }
+  .redes svg { width: 22px; height: 22px; }
+  .pie p { font-size: 1rem; color: var(--tinta-suave); margin-bottom: .4em; }
+  .pie .firma a { font-weight: 800; }
+
+  /* =========================================================
+     BANDA DE NUDO (fija abajo) Y AVISO FLOTANTE
+     ========================================================= */
+  .banda-nudo {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 100;
+    background: #101814; color: #fff;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+  }
+  .banda-nudo p { margin: 0; font-size: .88rem; line-height: 1.3; }
+  .banda-nudo strong { color: #7ee2b0; }
+  .banda-nudo .btn { min-height: 48px; padding: 8px 14px; font-size: .95rem; border-radius: 12px; background: #25d366; color: #0b2e17; flex: none; }
+  .banda-nudo .btn:hover { background: #3ee07c; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: calc(var(--alto-banda) + 14px); z-index: 200;
+    transform: translate(-50%, 16px); opacity: 0; pointer-events: none;
+    width: calc(100% - 32px); max-width: 460px;
+    background: var(--tinta); color: #fff; border-radius: 20px;
+    padding: 16px 18px; font-size: 1rem; font-weight: 600; line-height: 1.4;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .3);
+    display: flex; gap: 12px; align-items: flex-start;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .toast::before { content: "i"; flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--terracota); display: grid; place-items: center; font-weight: 800; font-size: .9rem; }
+  .toast.visible { opacity: 1; transform: translate(-50%, 0); }
+
+  /* =========================================================
+     TAMAÑOS
+     ========================================================= */
+  @media (max-width: 379.98px) {
+    .marca-icono { display: none; }
+    .btn-cita-top { padding: 8px 14px; }
+    .banda-nudo p { font-size: .8rem; }
+    .banda-nudo .btn { padding: 8px 10px; font-size: .88rem; }
+    .servicio { grid-template-columns: 64px minmax(0, 1fr); gap: 4px 12px; }
+    .servicio img { width: 64px; height: 64px; }
+    .sello { left: 10px; bottom: 10px; padding: 8px 14px 8px 10px; }
+  }
+  @media (min-width: 560px) {
+    .contenedor { padding: 0 24px; }
+    .filtros { margin: 0 -24px 10px; padding: 2px 24px 10px; }
+    .galeria { grid-template-columns: repeat(3, 1fr); }
+    .botones-dos { grid-template-columns: 1fr 1fr; }
+    .opiniones { grid-template-columns: 1fr 1fr; }
+    .banda-nudo p { font-size: .95rem; }
+    .cita { padding: 36px 32px; }
+  }
+  @media (min-width: 768px) {
+    .servicios { grid-template-columns: 1fr 1fr; }
+    .info-rejilla { grid-template-columns: 1fr 1fr; align-items: start; }
+    .seccion { padding-top: 88px; }
+  }
+  @media (min-width: 960px) {
+    .nav { display: flex; }
+    .banda-nudo { justify-content: center; gap: 24px; padding: 8px 20px; }
+    .portada { padding-top: 40px; }
+    .portada-rejilla { grid-template-columns: 1fr 1.05fr; gap: 56px; }
+    .portada-foto { order: 2; }
+    .portada-foto img { aspect-ratio: 4 / 4.6; border-radius: 320px 320px var(--radio-xl) var(--radio-xl); }
+    .sello { left: -28px; bottom: 48px; }
+    .equipo { grid-template-columns: repeat(4, 1fr); }
+    .trabajos-rejilla { grid-template-columns: 1fr 1.25fr; align-items: start; }
+    .galeria { grid-template-columns: repeat(2, 1fr); }
+    .cita { padding: 52px 56px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; align-items: start; }
+    .opiniones { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1200px) {
+    .galeria { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ BARRA SUPERIOR ============ -->
+<header class="topbar">
+  <div class="contenedor">
+    <a class="marca" href="#inicio" aria-label="Estudio Nudo, ir al inicio">
+      <svg class="marca-icono" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="22" fill="#1E1715"/><path d="M13 30c0-10 18-7 18-16" fill="none" stroke="#EBCFC4" stroke-width="3.2" stroke-linecap="round"/><circle cx="22" cy="22" r="3" fill="#B8664A"/></svg>
+      <span class="marca-texto">
+        <span class="marca-nombre">Estudio <em>Nudo</em></span>
+        <span class="estado" id="estadoTop"><span class="punto" aria-hidden="true"></span><span class="txt">Horario</span></span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#servicios">Servicios</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#trabajos">Trabajos</a>
+      <a href="#horario">Horario</a>
+    </nav>
+    <a class="btn btn-negro btn-cita-top" href="#cita">Pide cita</a>
+  </div>
+</header>
+
+<main>
+  <!-- ============ PORTADA PARTIDA ============ -->
+  <section class="portada" id="inicio" aria-labelledby="tituloPortada">
+    <div class="contenedor portada-rejilla">
+      <div class="portada-foto">
+        <span class="mancha" aria-hidden="true"></span>
+        <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1100&h=1200&q=75" alt="Interior luminoso de la peluquería con sillón rosa y espejos" width="1100" height="1200" fetchpriority="high">
+        <p class="sello">
+          <span class="circ" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.1 8.1 20 20M8.1 15.9 20 4"/></svg></span>
+          <span>Peluquería y estética<small>Con cita, sin esperas</small></span>
+        </p>
+      </div>
+      <div class="portada-texto">
+        <span class="antetitulo">Peluquería · Color · Uñas · Estética</span>
+        <h1 id="tituloPortada">Tu pelo, <em>en buenas manos</em></h1>
+        <p class="entrada">Cortes, color y cuidados en un estudio tranquilo y luminoso. Elige servicio, profesional y hora, y nosotras nos ocupamos del resto.</p>
+        <div class="portada-botones">
+          <a class="btn btn-negro btn-cita-grande" href="#cita">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+            Pide cita
+          </a>
+          <a class="btn btn-borde btn-cita-grande" href="#servicios">Ver servicios y precios</a>
+        </div>
+        <ul class="datos">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span id="estadoPortada">Consultando horario…</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Calle Ejemplo, 8</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICIOS ============ -->
+  <section class="seccion" id="servicios" aria-labelledby="tituloServicios">
+    <div class="contenedor">
+      <div class="cabeza">
+        <span class="antetitulo">Carta de servicios</span>
+        <h2 id="tituloServicios">Servicios <em>y precios</em></h2>
+        <p>Precio y duración aproximada de cada servicio. Pulsa «Elegir» y te lo dejamos marcado en la cita.</p>
+      </div>
+      <div class="filtros" role="group" aria-label="Filtrar servicios por tipo" id="filtros">
+        <button type="button" data-cat="todos" aria-pressed="true">Todos</button>
+        <button type="button" data-cat="pelo" aria-pressed="false">Peluquería</button>
+        <button type="button" data-cat="color" aria-pressed="false">Color</button>
+        <button type="button" data-cat="unas" aria-pressed="false">Uñas</button>
+        <button type="button" data-cat="estetica" aria-pressed="false">Estética</button>
+      </div>
+      <ul class="servicios" id="listaServicios"></ul>
+      <p class="nota-precios">Precios con IVA incluido. En melenas largas o con mucho volumen el precio puede variar: te lo decimos antes de empezar.</p>
+    </div>
+  </section>
+
+  <!-- ============ EQUIPO ============ -->
+  <section class="seccion" id="equipo" aria-labelledby="tituloEquipo">
+    <div class="contenedor">
+      <div class="cabeza">
+        <span class="antetitulo">Quién te atiende</span>
+        <h2 id="tituloEquipo">Nuestro <em>equipo</em></h2>
+        <p>Cada una tiene su especialidad. Si ya tienes tu profesional de confianza, elígela al pedir cita.</p>
+      </div>
+      <ul class="equipo" id="listaEquipo"></ul>
+    </div>
+  </section>
+
+  <!-- ============ TRABAJOS ============ -->
+  <section class="seccion" id="trabajos" aria-labelledby="tituloTrabajos">
+    <div class="contenedor">
+      <div class="cabeza">
+        <span class="antetitulo">Galería</span>
+        <h2 id="tituloTrabajos">Nuestros <em>trabajos</em></h2>
+        <p>Desliza el círculo para comparar el antes y el después.</p>
+      </div>
+      <div class="trabajos-rejilla">
+        <div>
+          <div class="comparador" id="comparador">
+            <img class="antes" src="https://images.unsplash.com/photo-1554519934-e32b1629d9ee?auto=format&fit=crop&w=800&h=1000&q=70" alt="Antes: melena larga sin color" width="800" height="1000" loading="lazy">
+            <img class="despues" src="https://images.unsplash.com/photo-1554519934-e32b1629d9ee?auto=format&fit=crop&w=800&h=1000&q=70" alt="Después: melena larga con mechas balayage" width="800" height="1000" loading="lazy">
+            <span class="etiq-ad izq">Antes</span>
+            <span class="etiq-ad der">Después</span>
+            <span class="linea-corte" aria-hidden="true"></span>
+            <input type="range" min="0" max="100" value="50" id="rangoComparador" aria-label="Comparar antes y después: mueve a izquierda o derecha">
+            <span class="tirador" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+          </div>
+          <p class="nota-ad">Demostración del comparador. En tu web, aquí irán tus fotos reales de antes y después.</p>
+        </div>
+        <ul class="galeria">
+          <li><figure><img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=600&h=600&q=70" alt="Melena ondulada en tono lavanda" width="600" height="600" loading="lazy"><figcaption>Color fantasía lavanda</figcaption></figure></li>
+          <li><figure><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&h=600&q=70" alt="Melena larga castaña con ondas suaves, vista de espaldas" width="600" height="600" loading="lazy"><figcaption>Ondas al agua</figcaption></figure></li>
+          <li><figure><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=600&h=600&q=70" alt="Pelo rizado natural con mucho volumen" width="600" height="600" loading="lazy"><figcaption>Corte para rizos</figcaption></figure></li>
+          <li><figure><img src="https://images.unsplash.com/photo-1607779097040-26e80aa78e66?auto=format&fit=crop&w=600&h=600&q=70" alt="Manicura semipermanente en tonos malva y nácar" width="600" height="600" loading="lazy"><figcaption>Semipermanente malva</figcaption></figure></li>
+          <li><figure><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=600&h=600&q=70" alt="Peluquera secando con cepillo una melena" width="600" height="600" loading="lazy"><figcaption>Peinado con brushing</figcaption></figure></li>
+          <li><figure><img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?auto=format&fit=crop&w=600&h=600&q=70" alt="Manos con manicura francesa en tono natural" width="600" height="600" loading="lazy"><figcaption>Manicura natural</figcaption></figure></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PEDIR CITA ============ -->
+  <section class="seccion" id="cita" aria-labelledby="tituloCita">
+    <div class="contenedor">
+      <div class="cita">
+        <div>
+          <span class="antetitulo">Reserva online</span>
+          <h2 id="tituloCita">Pide tu <em>cita</em></h2>
+          <p class="intro">Cuatro pasos y listo. Te confirmamos la cita por mensaje.</p>
+        </div>
+        <form class="formulario" id="formCita" novalidate>
+          <div class="campo">
+            <label for="servicio"><span class="paso" aria-hidden="true">1</span>Servicio</label>
+            <select id="servicio" name="servicio"></select>
+          </div>
+          <div class="campo">
+            <label for="profesional"><span class="paso" aria-hidden="true">2</span>Profesional</label>
+            <select id="profesional" name="profesional"></select>
+          </div>
+          <fieldset class="campo">
+            <legend><span class="paso" aria-hidden="true">3</span>Día</legend>
+            <div class="opciones dias-op" id="opcionesDia"></div>
+          </fieldset>
+          <fieldset class="campo">
+            <legend><span class="paso" aria-hidden="true">4</span>Hora</legend>
+            <div class="opciones" id="opcionesHora"></div>
+          </fieldset>
+          <div class="campo">
+            <label for="nombre">Tu nombre</label>
+            <input id="nombre" name="nombre" type="text" autocomplete="off" placeholder="Por ejemplo: Lucía">
+          </div>
+          <div class="resumen" id="resumen" aria-live="polite"></div>
+          <button class="btn btn-rosa btn-bloque" type="submit" id="botonReservar">Reservar cita</button>
+          <p class="nota">Si no puedes venir, avísanos y la cambiamos sin problema.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HORARIO Y DÓNDE ESTAMOS ============ -->
+  <section class="seccion" id="horario" aria-labelledby="tituloHorario">
+    <div class="contenedor">
+      <div class="cabeza">
+        <span class="antetitulo">Cuándo y dónde</span>
+        <h2 id="tituloHorario">Horario y <em>dónde estamos</em></h2>
+      </div>
+      <div class="info-rejilla">
+        <div class="caja horario">
+          <table class="tabla-horario" id="tablaHorario">
+            <caption>Horario</caption>
+            <tbody>
+              <tr data-dia="1" class="cerrado"><th scope="row">Lunes</th><td>Cerrado</td></tr>
+              <tr data-dia="2"><th scope="row">Martes</th><td>10:00 – 20:00</td></tr>
+              <tr data-dia="3"><th scope="row">Miércoles</th><td>10:00 – 20:00</td></tr>
+              <tr data-dia="4"><th scope="row">Jueves</th><td>10:00 – 20:00</td></tr>
+              <tr data-dia="5"><th scope="row">Viernes</th><td>10:00 – 20:00</td></tr>
+              <tr data-dia="6"><th scope="row">Sábado</th><td>9:30 – 14:30</td></tr>
+              <tr data-dia="0" class="cerrado"><th scope="row">Domingo</th><td>Cerrado</td></tr>
+            </tbody>
+          </table>
+          <p class="estado-grande" id="estadoHorario"><span class="punto" aria-hidden="true"></span><span class="txt">Consultando horario…</span></p>
+        </div>
+
+        <div class="caja donde">
+          <!-- Plano dibujado (sin Google Maps) -->
+          <svg class="mapa" viewBox="0 0 640 400" role="img" aria-label="Plano de situación de Estudio Nudo en la Calle Ejemplo, 8">
+            <rect width="640" height="400" fill="#F3E9E4"/>
+            <path d="M420 250 C470 220 560 230 600 280 C640 330 600 390 520 390 C450 390 380 300 420 250Z" fill="#E3EBDD"/>
+            <circle cx="490" cy="300" r="16" fill="#CFDDC6"/><circle cx="540" cy="335" r="20" fill="#CFDDC6"/><circle cx="560" cy="285" r="12" fill="#CFDDC6"/>
+            <g stroke="#FFFFFF" stroke-linecap="round" fill="none">
+              <path d="M-20 170 C200 150 420 200 660 160" stroke-width="34"/>
+              <path d="M190 -20 C200 140 170 260 210 420" stroke-width="22"/>
+              <path d="M470 -20 L440 420" stroke-width="16"/>
+              <path d="M-20 330 L380 300" stroke-width="14"/>
+            </g>
+            <text x="290" y="176" font-family="Manrope, sans-serif" font-size="15" font-weight="700" fill="#9C8780" letter-spacing="3">CALLE EJEMPLO</text>
+            <text x="520" y="372" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" font-weight="700" fill="#7E8F74">PARQUE</text>
+            <g transform="translate(330 150)">
+              <ellipse cx="0" cy="4" rx="16" ry="5" fill="rgba(0,0,0,.15)"/>
+              <path d="M0 0 C-6 -14 -24 -26 -24 -44 A24 24 0 0 1 24 -44 C24 -26 6 -14 0 0Z" fill="#B8664A"/>
+              <circle cx="0" cy="-44" r="9" fill="#FFFFFF"/>
+              <rect x="-74" y="-106" width="148" height="36" rx="18" fill="#1E1715"/>
+              <text x="0" y="-82" text-anchor="middle" font-family="Fraunces, serif" font-size="17" fill="#FFFFFF">Estudio Nudo</text>
+            </g>
+          </svg>
+          <div class="donde-cuerpo">
+            <h3>Calle Ejemplo, 8</h3>
+            <p>00000 Tu Ciudad · Bajo, junto al parque. Zona de aparcamiento a la vuelta de la esquina.</p>
+            <div class="botones-dos">
+              <button class="btn btn-negro js-demo" type="button" data-aviso="Esto es un ejemplo. En tu web, este botón abrirá el mapa para llegar a tu negocio.">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8z"/></svg>
+                Cómo llegar
+              </button>
+              <button class="btn btn-borde js-demo" type="button" data-aviso="Esto es un ejemplo. En tu web, este botón llamará a tu negocio.">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+                Llamar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OPINIONES (FICTICIAS, DE EJEMPLO) ============ -->
+  <section class="seccion" id="opiniones" aria-labelledby="tituloOpiniones">
+    <div class="contenedor">
+      <div class="cabeza">
+        <span class="antetitulo">Opiniones</span>
+        <h2 id="tituloOpiniones">Lo que dicen <em>las clientas</em></h2>
+      </div>
+      <div class="aviso-ficticio" role="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg>
+        <p>Opiniones de ejemplo, inventadas para este concepto. No son de clientes reales. En tu web irán las reseñas reales de tu negocio.</p>
+      </div>
+      <ul class="opiniones">
+        <li class="opinion">
+          <span class="marca-ej">Ejemplo ficticio</span>
+          <p class="estrellas" aria-label="5 de 5 estrellas">★★★★★</p>
+          <blockquote>«Me explicaron qué tono me iba mejor antes de empezar y salí encantada con las mechas.»</blockquote>
+          <p class="autor">— Opinión de ejemplo</p>
+        </li>
+        <li class="opinion">
+          <span class="marca-ej">Ejemplo ficticio</span>
+          <p class="estrellas" aria-label="5 de 5 estrellas">★★★★★</p>
+          <blockquote>«Pedí cita desde el móvil en un minuto y me atendieron a la hora exacta.»</blockquote>
+          <p class="autor">— Opinión de ejemplo</p>
+        </li>
+        <li class="opinion">
+          <span class="marca-ej">Ejemplo ficticio</span>
+          <p class="estrellas" aria-label="4 de 5 estrellas">★★★★☆</p>
+          <blockquote>«La manicura semipermanente me duró muchísimo. El sitio es precioso y muy tranquilo.»</blockquote>
+          <p class="autor">— Opinión de ejemplo</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="pie">
+  <div class="contenedor">
+    <a class="marca" href="#inicio" aria-label="Estudio Nudo, volver arriba">
+      <svg class="marca-icono" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="22" fill="#1E1715"/><path d="M13 30c0-10 18-7 18-16" fill="none" stroke="#EBCFC4" stroke-width="3.2" stroke-linecap="round"/><circle cx="22" cy="22" r="3" fill="#B8664A"/></svg>
+      <span class="marca-nombre">Estudio <em>Nudo</em></span>
+    </a>
+    <ul class="redes">
+      <li><a href="#" aria-label="Instagram (ejemplo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></li>
+      <li><a href="#" aria-label="TikTok (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.3 2.2 1.7 3.7 4 3.9v3.2a7.4 7.4 0 0 1-4-1.3v6.4A6 6 0 1 1 10.5 9v3.3a2.8 2.8 0 1 0 2.8 2.8V3z"/></svg></a></li>
+      <li><a href="#" aria-label="Facebook (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/></svg></a></li>
+    </ul>
+    <p>Calle Ejemplo, 8 · Martes a viernes de 10:00 a 20:00 · Sábados de 9:30 a 14:30</p>
+    <p>Negocio ficticio creado como ejemplo. Equipo y opiniones inventados. Fotos: Unsplash.</p>
+    <p class="firma">Web hecha por <a href="https://nudodesign.es" target="_blank" rel="noopener">Nudo</a></p>
+  </div>
+</footer>
+
+<!-- ============ BANDA DE NUDO: deja claro que es un ejemplo ============ -->
+<div class="banda-nudo" id="bandaNudo" role="note" aria-label="Aviso: esta web es un ejemplo">
+  <p><strong>Ejemplo de concepto hecho por Nudo</strong> · Local ficticio</p>
+  <a class="btn" href="https://wa.me/34722740211?text=Hola%2C%20he%20visto%20el%20ejemplo%20de%20la%20peluquer%C3%ADa%20y%20quiero%20una%20web%20as%C3%AD%20para%20mi%20negocio" target="_blank" rel="noopener">Quiero una web así</a>
+</div>
+
+<!-- Aviso flotante para los botones de demostración -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  /* =========================================================
+     SERVICIOS: [id, categoría, nombre, descripción, minutos, precio, «desde», foto]
+     ========================================================= */
+  var FOTO = "https://images.unsplash.com/photo-";
+  var SERVICIOS = [
+    ["corte", "pelo", "Corte y peinado", "Lavado, corte a tu medida y secado.", 45, 28, false, "1562322140-8baeececf3df"],
+    ["corte-caballero", "pelo", "Corte de caballero", "Lavado, corte con tijera o máquina y acabado.", 30, 16, false, "1503951914875-452162b0f3f1"],
+    ["peinado", "pelo", "Peinado y recogido", "Ondas, brushing o recogido para un evento.", 60, 35, true, "1580618672591-eb180b1a973f"],
+    ["color", "color", "Color raíz", "Tinte de raíz con productos sin amoniaco.", 75, 38, false, "1492106087820-71f1a00d2b11"],
+    ["mechas", "color", "Mechas balayage", "Aclarado a mano alzada con matiz incluido.", 150, 85, true, "1554519934-e32b1629d9ee"],
+    ["manicura", "unas", "Manicura semipermanente", "Limado, cutículas y esmalte que dura semanas.", 50, 22, false, "1607779097040-26e80aa78e66"],
+    ["pedicura", "unas", "Pedicura completa", "Cuidado de pies, hidratación y esmalte.", 60, 30, false, "1519415510236-718bdfcd89c8"],
+    ["facial", "estetica", "Tratamiento facial", "Limpieza profunda, mascarilla e hidratación.", 60, 45, false, "1570172619644-dfd03ed5d881"],
+    ["maquillaje", "estetica", "Maquillaje de evento", "Bodas, comuniones o una noche especial.", 45, 40, false, "1487412947147-5cebf100ffc2"],
+    ["hidratacion", "estetica", "Tratamiento capilar", "Hidratación intensa para pelo seco o dañado.", 40, 25, false, "1634449571010-02389ed0f9b0"]
+  ];
+
+  /* EQUIPO (personas ficticias): [id, nombre, rol, [especialidades], foto, [servicios que hace]] */
+  var EQUIPO = [
+    ["marta", "Marta", "Directora y colorista", ["Balayage", "Color", "Rubios"], "1580489944761-15a19d654956", ["corte", "color", "mechas", "hidratacion", "peinado"]],
+    ["lucia", "Lucía", "Estilista", ["Cortes", "Rizos", "Recogidos"], "1438761681033-6461ffad8d80", ["corte", "peinado", "hidratacion", "corte-caballero"]],
+    ["javi", "Javi", "Barbero y estilista", ["Caballero", "Degradados", "Barba"], "1507003211169-0a1dd7228f2d", ["corte-caballero", "corte"]],
+    ["ana", "Ana", "Esteticista", ["Uñas", "Faciales", "Pedicura"], "1494790108377-be9c29b29330", ["manicura", "pedicura", "facial", "maquillaje"]]
+  ];
+
+  var NOMBRES_DIAS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+  var CORTOS = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+  var MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+
+  /* HORARIO en minutos desde las 00:00. null = cerrado. */
+  var HORARIO = { 0: null, 1: null, 2: [600, 1200], 3: [600, 1200], 4: [600, 1200], 5: [600, 1200], 6: [570, 870] };
+
+  /* =========================================================
+     HORA DE MADRID (Europe/Madrid), esté donde esté quien mira
+     ========================================================= */
+  function ahoraMadrid() {
+    var ahora = new Date();
+    try {
+      var partes = new Intl.DateTimeFormat("en-US", {
+        timeZone: "Europe/Madrid", weekday: "short", year: "numeric", month: "numeric",
+        day: "numeric", hour: "numeric", minute: "numeric", hourCycle: "h23"
+      }).formatToParts(ahora);
+      var v = {};
+      partes.forEach(function (p) { v[p.type] = p.value; });
+      var semana = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+      return {
+        dia: semana[v.weekday], anio: Number(v.year), mes: Number(v.month), fecha: Number(v.day),
+        minutos: (Number(v.hour) % 24) * 60 + Number(v.minute)
+      };
+    } catch (e) {
+      return { dia: ahora.getDay(), anio: ahora.getFullYear(), mes: ahora.getMonth() + 1, fecha: ahora.getDate(), minutos: ahora.getHours() * 60 + ahora.getMinutes() };
+    }
+  }
+
+  function hhmm(min) { return Math.floor(min / 60) + ":" + String(min % 60).padStart(2, "0"); }
+
+  var M = ahoraMadrid();
+
+  /* ---------- Abierto / cerrado ---------- */
+  function calcularEstado() {
+    var h = HORARIO[M.dia];
+    if (h && M.minutos >= h[0] && M.minutos < h[1]) {
+      return { abierto: true, corto: "Abierto ahora", largo: "Abierto ahora · hasta las " + hhmm(h[1]) };
+    }
+    var cuando = "";
+    for (var d = 0; d <= 7; d++) {
+      var dia = (M.dia + d) % 7, hd = HORARIO[dia];
+      if (!hd) continue;
+      if (d === 0 && M.minutos >= hd[0]) continue;
+      cuando = (d === 0 ? "hoy" : d === 1 ? "mañana" : "el " + NOMBRES_DIAS[dia].toLowerCase()) + " a las " + hhmm(hd[0]);
+      break;
+    }
+    return { abierto: false, corto: "Cerrado ahora", largo: "Cerrado · abrimos " + cuando };
+  }
+
+  function pintarEstado() {
+    var e = calcularEstado();
+    var top = document.getElementById("estadoTop");
+    var grande = document.getElementById("estadoHorario");
+    [top, grande].forEach(function (el) {
+      el.classList.toggle("abierto", e.abierto);
+      el.classList.toggle("cerrado", !e.abierto);
+    });
+    top.querySelector(".txt").textContent = e.corto;
+    grande.querySelector(".txt").textContent = e.largo;
+    document.getElementById("estadoPortada").textContent = e.largo;
+  }
+
+  /* ---------- Aviso flotante (toast) ---------- */
+  var toast = document.getElementById("toast");
+  var temporizador = null;
+  function mostrarAviso(texto) {
+    toast.textContent = texto;
+    toast.classList.add("visible");
+    clearTimeout(temporizador);
+    temporizador = setTimeout(function () { toast.classList.remove("visible"); }, 4500);
+  }
+
+  function buscar(lista, id) {
+    for (var i = 0; i < lista.length; i++) if (lista[i][0] === id) return lista[i];
+    return null;
+  }
+  function textoDuracion(min) {
+    var h = Math.floor(min / 60), m = min % 60;
+    return (h ? h + " h" : "") + (h && m ? " " : "") + (m ? m + " min" : "");
+  }
+  var reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* =========================================================
+     PINTAR SERVICIOS Y FILTROS
+     ========================================================= */
+  function pintarServicios() {
+    var html = "";
+    SERVICIOS.forEach(function (s) {
+      html += '<li class="servicio" data-cat="' + s[1] + '">' +
+        '<img src="' + FOTO + s[7] + '?auto=format&fit=crop&w=200&h=200&q=70" alt="" width="84" height="84" loading="lazy">' +
+        '<h3>' + s[2] + '</h3><p>' + s[3] + '</p>' +
+        '<div class="servicio-pie">' +
+          '<span class="duracion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' + textoDuracion(s[4]) + '</span>' +
+          '<span class="precio">' + (s[6] ? '<small>desde</small>' : '') + s[5] + ' €</span>' +
+          '<button class="btn btn-rosa btn-elegir" type="button" data-servicio="' + s[0] + '" aria-label="Elegir ' + s[2] + ' para la cita">Elegir</button>' +
+        '</div></li>';
+    });
+    document.getElementById("listaServicios").innerHTML = html;
+  }
+
+  function filtrar(cat) {
+    document.querySelectorAll("#filtros button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.cat === cat));
+    });
+    document.querySelectorAll("#listaServicios .servicio").forEach(function (li) {
+      li.hidden = !(cat === "todos" || li.dataset.cat === cat);
+    });
+  }
+
+  /* =========================================================
+     PINTAR EQUIPO
+     ========================================================= */
+  function pintarEquipo() {
+    var html = "";
+    EQUIPO.forEach(function (p) {
+      html += '<li class="persona">' +
+        '<img src="' + FOTO + p[4] + '?auto=format&fit=crop&crop=faces&w=480&h=600&q=70" alt="' + p[1] + ', ' + p[2].toLowerCase() + ' (persona ficticia)" width="480" height="600" loading="lazy">' +
+        '<h3>' + p[1] + '</h3><p class="rol">' + p[2] + '</p>' +
+        '<ul class="chips" aria-label="Especialidades">' + p[3].map(function (e) { return '<li>' + e + '</li>'; }).join("") + '</ul>' +
+        '<button class="btn btn-borde" type="button" data-profesional="' + p[0] + '">Pedir cita con ' + p[1] + '</button>' +
+        '</li>';
+    });
+    document.getElementById("listaEquipo").innerHTML = html;
+  }
+
+  /* =========================================================
+     FORMULARIO DE CITA
+     ========================================================= */
+  var selServicio = document.getElementById("servicio");
+  var selProfesional = document.getElementById("profesional");
+  var cajaDias = document.getElementById("opcionesDia");
+  var cajaHoras = document.getElementById("opcionesHora");
+  var DIAS_CITA = [];
+
+  function rellenarServicios() {
+    var html = "";
+    SERVICIOS.forEach(function (s) {
+      html += '<option value="' + s[0] + '">' + s[2] + ' · ' + textoDuracion(s[4]) + ' · ' + (s[6] ? 'desde ' : '') + s[5] + ' €</option>';
+    });
+    selServicio.innerHTML = html;
+  }
+
+  /* Solo salen las profesionales que hacen ese servicio */
+  function rellenarProfesionales() {
+    var servicio = selServicio.value, previa = selProfesional.value;
+    var html = '<option value="cualquiera">Me da igual, la primera libre</option>';
+    EQUIPO.forEach(function (p) {
+      if (p[5].indexOf(servicio) !== -1) html += '<option value="' + p[0] + '">' + p[1] + ' · ' + p[2] + '</option>';
+    });
+    selProfesional.innerHTML = html;
+    if (selProfesional.querySelector('option[value="' + previa + '"]')) selProfesional.value = previa;
+  }
+
+  /* Próximos 6 días en los que abrimos, contados desde hoy (hora de Madrid) */
+  function calcularDias() {
+    DIAS_CITA = [];
+    for (var d = 0; DIAS_CITA.length < 6 && d < 21; d++) {
+      var f = new Date(Date.UTC(M.anio, M.mes - 1, M.fecha + d));
+      var dia = f.getUTCDay(), h = HORARIO[dia];
+      if (!h) continue;
+      if (d === 0 && M.minutos > h[1] - 60) continue; // hoy ya no da tiempo
+      DIAS_CITA.push({ desfase: d, dia: dia, num: f.getUTCDate(), mes: MESES[f.getUTCMonth()] });
+    }
+  }
+
+  function pintarDias() {
+    var html = "";
+    DIAS_CITA.forEach(function (x, i) {
+      var nombre = x.desfase === 0 ? "Hoy" : x.desfase === 1 ? "Mañana" : CORTOS[x.dia];
+      html += '<label><input type="radio" name="dia" value="' + i + '"' + (i === 0 ? ' checked' : '') + '>' +
+        '<span>' + nombre + '<small>' + x.num + ' ' + x.mes + '</small></span></label>';
+    });
+    cajaDias.innerHTML = html;
+  }
+
+  function diaElegido() {
+    var r = cajaDias.querySelector("input:checked");
+    return r ? DIAS_CITA[Number(r.value)] : null;
+  }
+
+  /* Huecos cada 30 min; el servicio tiene que acabar antes del cierre */
+  function pintarHoras() {
+    var x = diaElegido();
+    if (!x) { cajaHoras.innerHTML = ""; return; }
+    var h = HORARIO[x.dia];
+    var s = buscar(SERVICIOS, selServicio.value);
+    var dur = s ? s[4] : 30;
+    var previa = (cajaHoras.querySelector("input:checked") || {}).value;
+    var html = "", primeraLibre = null;
+    for (var t = h[0]; t + Math.min(dur, 60) <= h[1]; t += 30) {
+      var pasada = x.desfase === 0 && t <= M.minutos + 30;
+      var valor = hhmm(t);
+      if (!pasada && primeraLibre === null) primeraLibre = valor;
+      html += '<label><input type="radio" name="hora" value="' + valor + '"' + (pasada ? ' disabled' : '') + '><span>' + valor + '</span></label>';
+    }
+    cajaHoras.innerHTML = html;
+    var elegir = cajaHoras.querySelector('input[value="' + previa + '"]:not(:disabled)') ||
+      cajaHoras.querySelector('input[value="' + primeraLibre + '"]');
+    if (elegir) elegir.checked = true;
+    pintarResumen();
+  }
+
+  function pintarResumen() {
+    var s = buscar(SERVICIOS, selServicio.value);
+    var p = buscar(EQUIPO, selProfesional.value);
+    var x = diaElegido();
+    var hora = (cajaHoras.querySelector("input:checked") || {}).value;
+    var cuando = x ? (x.desfase === 0 ? "hoy" : x.desfase === 1 ? "mañana" : NOMBRES_DIAS[x.dia].toLowerCase()) + " " + x.num + " " + x.mes : "";
+    document.getElementById("resumen").innerHTML = '<p>Tu cita: <strong>' + (s ? s[2] : "") + '</strong> con <strong>' +
+      (p ? p[1] : "la primera profesional libre") + '</strong>, <strong>' + cuando + (hora ? " a las " + hora : "") + '</strong>' +
+      (s ? ' · ' + textoDuracion(s[4]) + ' · ' + (s[6] ? 'desde ' : '') + s[5] + ' €' : '') + '</p>';
+  }
+
+  function irACita() {
+    document.getElementById("cita").scrollIntoView({ behavior: reducido ? "auto" : "smooth" });
+  }
+
+  /* ---------- Comparador antes / después ---------- */
+  var comparador = document.getElementById("comparador");
+  var rango = document.getElementById("rangoComparador");
+  function moverCorte() { comparador.style.setProperty("--corte", rango.value + "%"); }
+
+  /* ---------- Altura real de la banda de Nudo ---------- */
+  var banda = document.getElementById("bandaNudo");
+  function medirBanda() {
+    document.documentElement.style.setProperty("--alto-banda", banda.offsetHeight + "px");
+  }
+
+  /* =========================================================
+     ARRANQUE
+     ========================================================= */
+  pintarServicios();
+  pintarEquipo();
+  rellenarServicios();
+  rellenarProfesionales();
+  calcularDias();
+  pintarDias();
+  pintarHoras();
+  pintarEstado();
+  moverCorte();
+  medirBanda();
+  window.addEventListener("resize", medirBanda);
+  if (window.ResizeObserver) new ResizeObserver(medirBanda).observe(banda);
+  setInterval(function () { M = ahoraMadrid(); pintarEstado(); }, 60000);
+
+  var filaHoy = document.querySelector('#tablaHorario tr[data-dia="' + M.dia + '"]');
+  if (filaHoy) filaHoy.classList.add("es-hoy");
+
+  document.querySelectorAll("#filtros button").forEach(function (b) {
+    b.addEventListener("click", function () { filtrar(b.dataset.cat); });
+  });
+
+  // «Elegir» en un servicio: lo marca en el formulario y baja a la cita
+  document.getElementById("listaServicios").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-servicio]");
+    if (!b) return;
+    selServicio.value = b.dataset.servicio;
+    rellenarProfesionales();
+    pintarHoras();
+    irACita();
+  });
+
+  // «Pedir cita con…» en el equipo: elige un servicio que haga y a esa profesional
+  document.getElementById("listaEquipo").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-profesional]");
+    if (!b) return;
+    var p = buscar(EQUIPO, b.dataset.profesional);
+    if (p[5].indexOf(selServicio.value) === -1) selServicio.value = p[5][0];
+    rellenarProfesionales();
+    selProfesional.value = p[0];
+    pintarHoras();
+    irACita();
+  });
+
+  selServicio.addEventListener("change", function () { rellenarProfesionales(); pintarHoras(); });
+  selProfesional.addEventListener("change", pintarResumen);
+  cajaDias.addEventListener("change", pintarHoras);
+  cajaHoras.addEventListener("change", pintarResumen);
+  rango.addEventListener("input", moverCorte);
+
+  // Formulario: no envía nada, solo muestra el aviso
+  document.getElementById("formCita").addEventListener("submit", function (e) {
+    e.preventDefault();
+    mostrarAviso("Esto es un ejemplo. En tu web, esta cita le llegará a tu negocio y tu clienta recibirá la confirmación.");
+  });
+
+  // Botones del negocio (llamar, cómo llegar): solo muestran el aviso
+  document.querySelectorAll(".js-demo").forEach(function (b) {
+    b.addEventListener("click", function () { mostrarAviso(b.dataset.aviso); });
+  });
+
+  // Iconos de redes: de ejemplo
+  document.querySelectorAll(".redes a").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      mostrarAviso("Esto es un ejemplo. En tu web, aquí irán tus redes sociales.");
+    });
+  });
+</script>
+</body>
+</html>

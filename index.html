@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Webs para bares y restaurantes | Nudo</title>
-<meta name="description" content="Webs para bares y restaurantes: carta con alérgenos, reservas y pensada para el móvil. Te la enseñamos antes de que pagues nada. Pide tu presupuesto sin compromiso.">
+<title>Webs para tu negocio | Nudo</title>
+<meta name="description" content="Webs a medida para autónomos, comercios, profesionales y restaurantes, pensadas para el móvil. Te la enseñamos antes de que pagues nada. Pide tu presupuesto sin compromiso.">
 <meta name="theme-color" content="#0B0C10">
 <meta name="google-site-verification" content="Wtpsc8K9g6XZHmQRXuEmZZ80hzLTDTXOk9IkE-a_Iic">
 
@@ -10,16 +10,18 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Nudo">
-<meta property="og:title" content="Webs para bares y restaurantes | Nudo">
-<meta property="og:description" content="Webs claras para bares y restaurantes. Te la enseñamos antes de que pagues nada. Pide tu presupuesto sin compromiso.">
+<meta property="og:title" content="Webs para tu negocio | Nudo">
+<meta property="og:description" content="Webs claras y a medida para cualquier negocio: peluquerías, talleres, tiendas, despachos, restaurantes… Te la enseñamos antes de que pagues nada.">
 <meta property="og:url" content="https://nudodesign.es/">
 <meta property="og:locale" content="es_ES">
-<meta property="og:image" content="https://nudodesign.es/nudo-og-3.png">
+<meta property="og:image" content="https://nudodesign.es/nudo-og-4.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Nudo · Webs para bares y restaurantes">
+<meta property="og:image:alt" content="Nudo · Webs para tu negocio">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://nudodesign.es/nudo-og-3.png">
+<meta name="twitter:title" content="Webs para tu negocio | Nudo">
+<meta name="twitter:description" content="Webs claras y a medida para cualquier negocio. Te la enseñamos antes de que pagues nada.">
+<meta name="twitter:image" content="https://nudodesign.es/nudo-og-4.png">
 
 <!-- Inter (Google Fonts) solo se carga si la persona lo acepta en el aviso de cookies: Google recibe la IP -->
 
@@ -896,17 +898,44 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 .pie__cols{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; }
 .pie h4{ margin:0 0 14px; font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.4); }
 .pie ul{ list-style:none; margin:0; padding:0; display:grid; gap:9px; font-size:.92rem; }
-.pie a, .pie__enlace{
+.pie a:not(.btn), .pie__enlace{
   color:rgba(255,255,255,.72); background:none; border:0; padding:0; font:inherit; cursor:pointer; text-align:left;
   transition:color .3s ease;
 }
-.pie a:hover, .pie__enlace:hover{ color:#fff; }
+.pie a:not(.btn):hover, .pie__enlace:hover{ color:#fff; }
 .pie__fin{
   border-top:1px solid rgba(255,255,255,.08);
   max-width:1080px; margin-inline:auto; padding:22px 24px calc(34px + env(safe-area-inset-bottom,0px));
   display:flex; flex-wrap:wrap; gap:8px 24px; justify-content:space-between; font-size:.8rem; color:rgba(255,255,255,.38);
 }
 @media (max-width:760px){ .pie__int{ grid-template-columns:1fr; gap:38px; padding-top:48px; } }
+
+
+/* ==========================================================================
+   OTROS SERVICIOS — contenido con IA para redes
+   Va al final y pequeño a propósito: lo que vendemos son webs. Esto es un
+   extra para quien ya tiene negocio online, y no debe quitarle sitio a la web.
+   ========================================================================== */
+.otros{ background:var(--noche); color:#fff; border-top:1px solid rgba(255,255,255,.08); scroll-margin-top:var(--barra); }
+.otros__int{
+  max-width:1080px; margin-inline:auto; padding:clamp(48px,8vh,72px) 24px;
+  display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:24px 48px; align-items:center;
+}
+.otros .rotulo{ color:var(--oro); margin-bottom:12px; }
+.otros h2{ font-size:clamp(1.45rem,2.8vw,2rem); letter-spacing:-.035em; line-height:1.12; max-width:24ch; }
+.otros__txt{ margin-top:12px; max-width:52ch; font-size:1.05rem; line-height:1.6; color:rgba(255,255,255,.82); }
+.otros__lista{ list-style:none; margin:16px 0 0; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
+.otros__lista li{ font-size:.95rem; padding:7px 14px; border-radius:100px; border:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.88); }
+.otros__acciones{ display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+/* Botón secundario: solo el borde, para que no compita con «Pide tu presupuesto» */
+.btn--linea{ background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.45); }
+.btn--linea:hover{ border-color:#fff; opacity:1; }
+.otros__wa{ font-size:1rem; color:rgba(255,255,255,.8); border-bottom:1px solid rgba(255,255,255,.35); }
+.otros__wa:hover{ color:#fff; }
+@media (max-width:760px){
+  .otros__int{ grid-template-columns:1fr; }
+  .otros__acciones .btn{ width:100%; }
+}
 
 
 /* ==========================================================================
@@ -1099,7 +1128,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
 /* =====================================================================
    LECTURA CÓMODA
-   Quien nos lee lleva un bar, no tiene veinte años: letra más grande,
+   Quien nos lee lleva un negocio, no tiene veinte años: letra más grande,
    menos gris y botones fáciles de pulsar. Va al final para ganar a lo de arriba.
    ===================================================================== */
 .btn{ font-size:1.05rem; padding:15px 30px; }
@@ -1269,6 +1298,8 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 .barra__enlace:hover{ border-bottom-color:currentColor; }
 .barra__nav .btn{ white-space:nowrap; }
 .barra__corto{ display:none; }
+/* «Otros servicios» es secundario: en la barra solo cuando sobra sitio. En móvil queda en el pie */
+@media (max-width:900px){ .barra__otros{ display:none; } }
 /* En móvil el botón en dos líneas quedaba torpe: texto corto */
 @media (max-width:480px){ .barra__largo{ display:none; } .barra__corto{ display:inline; } .barra__enlace{ font-size:.95rem; } .barra__int .btn{ padding:10px 16px; font-size:.95rem; } }
 @media (max-width:360px){ .barra__int{ padding-inline:14px; } .barra .marca__logo{ height:18px; } .barra__nav{ gap:10px; } .barra__int .btn{ padding:10px 13px; } }
@@ -1352,7 +1383,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       </svg>
       <p class="splash__nombre" aria-label="Nudo"><span aria-hidden="true">N</span><span aria-hidden="true">u</span><span aria-hidden="true">d</span><span aria-hidden="true">o</span></p>
     </div>
-    <p class="splash__lema">Webs para hostelería</p>
+    <p class="splash__lema">Webs para tu negocio</p>
     <div class="splash__filo" aria-hidden="true"><i></i></div>
   </div>
 </div>
@@ -1362,6 +1393,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <a class="marca" href="#acto1" aria-label="Nudo, inicio"><svg class="marca__logo" viewBox="-1 0 450 75" aria-hidden="true"><path transform="translate(-26.4 -33.8) scale(2.1)" d="M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26" fill="none" style="stroke:var(--marca-simbolo)" stroke-width="7" stroke-linecap="round"/><path d="M162.8 71.6 132.9 18.6Q133.7 26.3 133.7 31V71.6H121V2.8H137.4L167.8 56.2Q167 48.8 167 42.8V2.8H179.7V71.6ZM235.8 72.6Q221.6 72.6 214 65.6Q206.5 58.7 206.5 45.8V2.8H220.9V44.7Q220.9 52.8 224.8 57.1Q228.7 61.3 236.2 61.3Q243.9 61.3 248 56.9Q252.2 52.5 252.2 44.2V2.8H266.6V45.1Q266.6 58.2 258.5 65.4Q250.4 72.6 235.8 72.6ZM354.7 36.7Q354.7 47.3 350.5 55.3Q346.4 63.2 338.7 67.4Q331.1 71.6 321.2 71.6H293.4V2.8H318.3Q335.7 2.8 345.2 11.6Q354.7 20.3 354.7 36.7ZM340.2 36.7Q340.2 25.6 334.5 19.8Q328.7 13.9 318 13.9H307.8V60.5H320Q329.3 60.5 334.7 54.1Q340.2 47.7 340.2 36.7ZM446.5 36.9Q446.5 47.6 442.3 55.8Q438 63.9 430.1 68.3Q422.2 72.6 411.6 72.6Q395.4 72.6 386.2 63Q377 53.5 377 36.9Q377 20.3 386.2 11.1Q395.4 1.8 411.7 1.8Q428.1 1.8 437.3 11.2Q446.5 20.5 446.5 36.9ZM431.8 36.9Q431.8 25.8 426.5 19.4Q421.3 13.1 411.7 13.1Q402.1 13.1 396.8 19.4Q391.5 25.7 391.5 36.9Q391.5 48.2 396.9 54.7Q402.3 61.2 411.6 61.2Q421.3 61.2 426.6 54.9Q431.8 48.6 431.8 36.9Z" fill="currentColor"/></svg></a>
     <!-- Los ejemplos a mano desde cualquier punto: es lo que más convence -->
     <nav class="barra__nav">
+      <a class="barra__enlace barra__otros" href="#otros">Otros servicios</a>
       <a class="barra__enlace" href="ejemplos/">Ejemplos</a>
       <a class="btn" href="#presupuesto" data-presupuesto><span class="barra__largo">Pedir presupuesto</span><span class="barra__corto">Presupuesto</span></a>
     </nav>
@@ -1375,7 +1407,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <div class="mundo3d" id="mundo3d" aria-hidden="true">
       <div class="escena capaz--fondo" id="escena">
         <div class="escena__kb">
-          <div class="toma toma--dia" role="img" aria-label="Terraza de restaurante sobre las nubes"></div>
+          <div class="toma toma--dia" role="img" aria-label="Un negocio de ejemplo sobre las nubes"></div>
           <div class="toma toma--noche" id="tomaNoche"></div>
           <div class="toma toma--dia toma--frente"></div>
           <div class="toma toma--noche toma--frente" id="frenteNoche"></div>
@@ -1394,12 +1426,12 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     </div>
 
     <div class="marca-gigante" id="marcaGigante">
-      <h1 class="hero__h1">Webs para bares y restaurantes</h1>
-      <p class="hero__sub">Hecha a medida para tu local. <b>Te la enseñamos antes de que pagues nada.</b></p>
+      <h1 class="hero__h1">Webs para tu negocio</h1>
+      <p class="hero__sub">Para autónomos, comercios, profesionales y restaurantes. <b>Te la enseñamos antes de que pagues nada.</b></p>
     </div>
 
     <div class="hero__txt hero__3d" id="heroTxt">
-      <!-- Sin precios: cada local es distinto. Un solo botón, y que nos cuenten -->
+      <!-- Sin precios: cada negocio es distinto. Un solo botón, y que nos cuenten -->
       <div class="hero__cta">
         <button class="btn btn--grande hero__boton" type="button" data-presupuesto>
           Pide tu presupuesto
@@ -1415,7 +1447,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
         <span>Si</span> <span>no</span> <span>te</span> <span>convence,</span> <span>no</span> <span>pagas.</span>
       </h2>
       <span class="raya" id="raya" aria-hidden="true"></span>
-      <p class="remate__sub" id="letraPeq">Te enseñamos una maqueta de tu local antes de cobrarte nada.</p>
+      <p class="remate__sub" id="letraPeq">Te enseñamos una maqueta de tu web antes de cobrarte nada.</p>
       <a class="btn btn--grande btn--blanco" href="#presupuesto" data-presupuesto>
         Pide tu presupuesto
         <svg class="flecha" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
@@ -1434,14 +1466,14 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 <section class="acto pasos" id="acto5" aria-labelledby="pasosTit">
   <div class="pasos__int">
     <p class="rotulo">Cómo funciona</p>
-    <h2 class="pasos__tit" id="pasosTit">De la llamada a tu web, en seis pasos.</h2>
+    <h2 class="pasos__tit" id="pasosTit">De la primera charla a tu web, en seis pasos.</h2>
     <ol class="pasos__lista">
-      <li><span>01</span><b>Llamada</b><p>Cinco minutos. Solo te pedimos permiso para mandarte algo.</p></li>
-      <li><span>02</span><b>WhatsApp</b><p>Seguimos por WhatsApp. Sin correos ni reuniones.</p></li>
-      <li><span>03</span><b>Maqueta</b><p>Te mandamos tu web hecha, no un presupuesto.</p></li>
-      <li><span>04</span><b>La pruebas</b><p>La abres en tu móvil y la tocas.</p></li>
-      <li><span>05</span><b>Pago</b><p>Si te gusta, la pagas y la hacemos tuya.</p></li>
-      <li><span>06</span><b>Online</b><p>Publicada con tu dominio y funcionando.</p></li>
+      <li><span>01</span><b>Hablamos</b><p>Nos escribes, nos llamas o te llamamos. Cinco minutos para saber qué necesitas.</p></li>
+      <li><span>02</span><b>WhatsApp</b><p>Seguimos por WhatsApp. Sin correos largos ni reuniones.</p></li>
+      <li><span>03</span><b>Maqueta</b><p>Te mandamos tu web hecha, no un presupuesto en papel.</p></li>
+      <li><span>04</span><b>La pruebas</b><p>La abres en tu móvil, la tocas y nos dices qué cambiar.</p></li>
+      <li><span>05</span><b>Pago</b><p>Si te gusta, la pagas y la terminamos. El plazo te lo decimos antes de empezar.</p></li>
+      <li><span>06</span><b>Online</b><p>Publicada con tu dominio y funcionando en el móvil y en el ordenador.</p></li>
     </ol>
     <p class="pasos__mas"><a class="btn btn--grande" href="ejemplos/">Ver ejemplos de webs →</a></p>
   </div>
@@ -1454,7 +1486,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <div class="nos__foto" id="nosFoto" aria-hidden="true"></div>
     <div class="nos__velo" aria-hidden="true"></div>
 
-    <p class="nos__tag" id="nosTag">Nudo · Diseño web para hostelería</p>
+    <p class="nos__tag" id="nosTag">Nudo · Diseño web para negocios</p>
 
     <div class="nos__titular" id="nosCentro">
       <h2>Nosotros</h2>
@@ -1470,11 +1502,11 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <div class="socio socio--leman" data-nota>
       <h3>Leman</h3>
       <p class="socio__rol">Cofundador · Estrategia y clientes</p>
-      <p class="socio__txt">Estudió gestión de restauración en el CETT y ahora marketing en ESIC. Conoce la sala por dentro y sabe qué mira un cliente antes de reservar.</p>
+      <p class="socio__txt">Empezó en Gastronomía, en el CETT, y ahora estudia marketing en ESIC. Ha estado al otro lado del mostrador y sabe qué mira un cliente antes de llamarte, reservar o comprar.</p>
     </div>
 
     <div class="nos__cierre" id="nosCierre">
-      <p class="nos__frase">Dos socios, un solo oficio: webs para bares y restaurantes.</p>
+      <p class="nos__frase">Dos socios, un solo oficio: webs claras para tu negocio.</p>
       <a class="btn btn--grande btn--blanco" href="#presupuesto" data-presupuesto>
         Pide tu presupuesto
         <svg class="flecha" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
@@ -1489,13 +1521,13 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   <div class="oficio__int">
     <p class="rotulo aparece">Cómo trabajamos</p>
     <h2 class="oficio__tit aparece" id="oficioTit">Pequeños <em>a propósito.</em></h2>
-    <p class="oficio__lead aparece">Nudo nace de juntar dos oficios: la sala y el código. Solo hacemos webs para hostelería, así que no empezamos de cero con cada local. Sabemos qué tiene que tener tu carta, dónde se pierden las reservas y qué mira un cliente en el móvil antes de decidir dónde cenar.</p>
+    <p class="oficio__lead aparece">Nudo nace de juntar dos oficios: el trato con el cliente y el código. Hacemos webs para quien las necesite: una peluquería, un fisio, un taller, una tienda, una academia, un restaurante o alguien con un proyecto propio. Te preguntamos cómo trabajas y montamos una web que explique bien lo que haces y que se use fácil desde el móvil, que es donde te buscan.</p>
 
     <div class="pilares">
       <div class="pilar aparece">
         <p class="pilar__num">01</p>
-        <h3>Solo hostelería</h3>
-        <p>No hacemos tiendas online ni webs de despachos. Todo lo que diseñamos está pensado para una cosa: llenar mesas.</p>
+        <h3>Para tu negocio, sea cual sea</h3>
+        <p>Autónomos, comercios, profesionales, hostelería o particulares. Cada web se piensa para lo que tú necesitas: que te llamen, que te pidan cita o que te encuentren.</p>
       </div>
       <div class="pilar aparece">
         <p class="pilar__num">02</p>
@@ -1505,7 +1537,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       <div class="pilar aparece">
         <p class="pilar__num">03</p>
         <h3>Primero la ves</h3>
-        <p>Te mandamos una maqueta de tu propio local antes de cobrarte nada. Si no te convence, no nos debes nada.</p>
+        <p>Te mandamos una maqueta de tu propia web antes de cobrarte nada. Si no te convence, no nos debes nada.</p>
       </div>
     </div>
 
@@ -1523,6 +1555,28 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 </section>
 
 
+<!-- ===================== OTROS SERVICIOS =====================
+     Decisión del 06/10/2026: además de webs, contenido con IA para negocios
+     online. Va aquí, al final y sin fotos, para que no le quite peso a la web.
+     El botón abre el mismo formulario; data-servicio="ia" le cambia el título. -->
+<section class="otros" id="otros" aria-labelledby="otrosTit">
+  <div class="otros__int">
+    <div>
+      <p class="rotulo">Otros servicios</p>
+      <h2 id="otrosTit">Contenido para tus redes, hecho con inteligencia artificial</h2>
+      <p class="otros__txt">Si tu negocio ya se mueve por internet, también te echamos una mano con lo que publicas. Cuéntanos qué necesitas y te decimos si te podemos ayudar.</p>
+      <ul class="otros__lista">
+        <li>Reels y vídeos cortos</li>
+        <li>Imágenes y creatividades</li>
+        <li>Contenido para negocios online</li>
+      </ul>
+    </div>
+    <div class="otros__acciones">
+      <a class="btn btn--linea" href="#presupuesto" data-presupuesto data-servicio="ia">Pregúntanos por esto</a>
+      <a class="otros__wa" href="https://wa.me/34722740211?text=Hola%2C%20me%20interesan%20los%20otros%20servicios%20con%20IA." target="_blank" rel="noopener">O escríbenos por WhatsApp</a>
+    </div>
+  </div>
+</section>
 
 
 <!-- ===================== PANEL DE SERVICIO ===================== -->
@@ -1555,7 +1609,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 </a>
 
 <!-- ===================== PRESUPUESTO (formulario propio) =====================
-     Sustituye a los precios: cada local es distinto, así que se pide presupuesto.
+     Sustituye a los precios: cada negocio es distinto, así que se pide presupuesto.
      Lo que se envía va a la hoja de Google y avisa a hola@ con «PRESUPUESTO #001». -->
 <div class="presu" id="presu" hidden>
   <div class="presu__fondo" data-cierra-presu></div>
@@ -1563,17 +1617,17 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <button class="presu__x" type="button" data-cierra-presu aria-label="Cerrar">&times;</button>
 
     <div class="presu__pedir">
-      <h3 id="presuTit">¿Quieres una web <span>para tu local?</span></h3>
+      <h3 id="presuTit">¿Quieres una web <span>para tu negocio?</span></h3>
       <p class="presu__lead">Cuéntanos qué necesitas. Te respondemos en menos de 24 h laborables, gratis y sin compromiso.</p>
 
       <form id="presuForm" novalidate>
         <div class="presu__rejilla">
           <label>Tu nombre*<input name="nombre" type="text" autocomplete="name" placeholder="Nombre" required maxlength="80"></label>
-          <label>Tu local*<input name="empresa" type="text" autocomplete="organization" placeholder="Nombre del bar o restaurante" required maxlength="120"></label>
+          <label>Tu negocio o proyecto*<input name="empresa" type="text" autocomplete="organization" placeholder="Nombre del negocio" required maxlength="120"></label>
           <label>E-mail*<input name="email" type="email" autocomplete="email" placeholder="tu@correo.com" required maxlength="120"></label>
-          <label>Teléfono*<input name="telefono" type="tel" autocomplete="tel" placeholder="600 000 000" required maxlength="30" pattern="[0-9 +().-]{9,}"></label>
+          <label>Teléfono*<input name="telefono" type="tel" autocomplete="tel" placeholder="600 000 000" required maxlength="30" pattern="[0-9 +\(\)\.\-]{9,}"></label>
         </div>
-        <label>Cuéntanos tu local<textarea name="proyecto" rows="3" maxlength="2000" placeholder="Qué tipo de local es, si ya tienes web, qué te gustaría que tuviera…"></textarea></label>
+        <label>Cuéntanos tu proyecto<textarea name="proyecto" rows="3" maxlength="2000" placeholder="A qué te dedicas, si ya tienes web, qué te gustaría que tuviera…"></textarea></label>
         <!-- Trampa para robots: una persona no ve este campo y lo deja vacío -->
         <label class="presu__trampa" aria-hidden="true">Web<input name="web" type="text" tabindex="-1" autocomplete="off"></label>
         <p class="presu__error" role="alert"></p>
@@ -1603,7 +1657,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <button class="legalov__x" type="button" data-cierra-legal aria-label="Cerrar">&times;</button>
 
     <h3 id="legalTit">Aviso legal, privacidad y cookies</h3>
-    <p class="legalov__fecha">Última actualización: 25 de septiembre de 2026</p>
+    <p class="legalov__fecha">Última actualización: 6 de octubre de 2026</p>
     <p class="legalov__indice"><a href="#legalAviso" data-salta>Aviso legal</a> · <a href="#legalPrivacidad" data-salta>Privacidad</a> · <a href="#legalCookies" data-salta>Cookies</a> · <a href="#legalCondiciones" data-salta>Condiciones</a></p>
 
     <!-- ============ 1. AVISO LEGAL (Ley 34/2002, LSSI, art. 10) ============ -->
@@ -1615,9 +1669,9 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       <li><strong>Domicilio:</strong> Avinguda Jaume I, 08100 Mollet del Vallès (Barcelona)</li>
       <li><strong>Nombre comercial:</strong> Nudo</li>
       <li><strong>Correo:</strong> <a href="mailto:hola@nudodesign.es">hola@nudodesign.es</a> · <strong>Teléfono y WhatsApp:</strong> <a href="tel:+34722740211">722 74 02 11</a></li>
-      <li><strong>Actividad:</strong> diseño, publicación y mantenimiento de páginas web para negocios de hostelería.</li>
+      <li><strong>Actividad:</strong> diseño, publicación y mantenimiento de páginas web para negocios, profesionales y particulares, y creación de contenido digital para redes y negocios online, también con herramientas de inteligencia artificial.</li>
     </ul>
-    <p>Los textos, el diseño, el logotipo y el código de esta web son de Nudo o se usan con permiso. No se pueden copiar ni reutilizar con fines comerciales sin autorización. Las fotos de los ejemplos son de bancos de imágenes libres (Unsplash) y los locales de los ejemplos son inventados.</p>
+    <p>Los textos, el diseño, el logotipo y el código de esta web son de Nudo o se usan con permiso. No se pueden copiar ni reutilizar con fines comerciales sin autorización. Las fotos de los ejemplos son de bancos de imágenes libres (Unsplash) y los negocios de los ejemplos son inventados.</p>
     <p>Intentamos que todo lo que publicamos sea correcto y esté al día, pero no respondemos de los errores puntuales ni de las interrupciones del servicio que no dependan de nosotros. Si enlazamos a otras webs (WhatsApp, Google…), no somos responsables de su contenido.</p>
 
     <!-- ============ 2. PRIVACIDAD (RGPD art. 13 y LOPDGDD) ============ -->
@@ -1626,10 +1680,10 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
     <p><strong>Qué datos, para qué y con qué base legal:</strong></p>
     <ul>
-      <li><strong>Si nos pides presupuesto desde el formulario:</strong> nombre, nombre del local, correo, teléfono y lo que nos cuentes. Los usamos para prepararte el presupuesto y responderte. Base legal: tu solicitud, es decir, medidas precontractuales que tú pides (art. 6.1.b RGPD).</li>
+      <li><strong>Si nos pides presupuesto desde el formulario:</strong> nombre, nombre del negocio o proyecto, correo, teléfono y lo que nos cuentes. Los usamos para prepararte el presupuesto y responderte. Base legal: tu solicitud, es decir, medidas precontractuales que tú pides (art. 6.1.b RGPD).</li>
       <li><strong>Si nos escribes por WhatsApp o correo, o nos llamas:</strong> los datos que nos des, para atenderte. Base legal: tu consentimiento al contactarnos (art. 6.1.a) y, si pides un presupuesto, las medidas precontractuales (art. 6.1.b).</li>
-      <li><strong>Si te llamamos nosotros:</strong> solo a negocios, usando los datos profesionales que el propio negocio ha hecho públicos (nombre del local, teléfono, dirección), para ofrecerte nuestros servicios. Base legal: interés legítimo en la prospección comercial entre empresas (art. 6.1.f). Si nos dices que no te volvamos a llamar, no lo hacemos y apuntamos tu número para no llamarte más.</li>
-      <li><strong>Si nos contratas:</strong> además los datos de facturación y pago y el material de tu web (carta, textos, logotipo, fotos), para hacer y mantener tu web y cumplir con Hacienda. Base legal: el contrato (art. 6.1.b) y las obligaciones legales (art. 6.1.c).</li>
+      <li><strong>Si te llamamos nosotros:</strong> solo a negocios, usando los datos profesionales que el propio negocio ha hecho públicos (nombre del negocio, teléfono, dirección), para ofrecerte nuestros servicios. Base legal: interés legítimo en la prospección comercial entre empresas (art. 6.1.f). Si nos dices que no te volvamos a llamar, no lo hacemos y apuntamos tu número para no llamarte más.</li>
+      <li><strong>Si nos contratas:</strong> además los datos de facturación y pago y el material de tu web (textos, logotipo, fotos, precios o servicios), para hacer y mantener tu web y cumplir con Hacienda. Base legal: el contrato (art. 6.1.b) y las obligaciones legales (art. 6.1.c).</li>
       <li><strong>Estadísticas de la web:</strong> solo si las aceptas en el aviso de cookies, contamos visitas y clics en los botones de forma anónima: sin tu IP, sin cookies y sin nada que te identifique. Base legal: tu consentimiento (art. 6.1.a).</li>
     </ul>
     <p>No tomamos decisiones automatizadas sobre ti ni hacemos perfiles. No vendemos ni cedemos tus datos a nadie para publicidad. Nuestros servicios son para negocios y no están dirigidos a menores de 14 años.</p>
@@ -1669,11 +1723,11 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
     <p>Nuestros servicios son para profesionales y empresas, no para consumidores. Lo que manda en cada encargo es el presupuesto aceptado y la confirmación de pedido que firmamos contigo; esto es un resumen.</p>
     <ul>
       <li><strong>Precio:</strong> el del presupuesto que te enviamos. Como referencia, la web parte de 249 € (pago único) y el mantenimiento de 39 €/mes, opcional y sin permanencia. A estos importes hay que sumarles el IVA (21 %). El precio de la web incluye dominio y alojamiento durante el primer año.</li>
-      <li><strong>La garantía:</strong> antes de cobrarte nada te enseñamos una maqueta de tu local. Si no te convence, no nos debes nada. Se paga al aceptar la maqueta y encargarnos la web definitiva, por transferencia bancaria o Bizum; desde ese momento el importe no se devuelve. La web final incluye dos rondas de cambios.</li>
+      <li><strong>La garantía:</strong> antes de cobrarte nada te enseñamos una maqueta de tu web. Si no te convence, no nos debes nada. Se paga al aceptar la maqueta y encargarnos la web definitiva, por transferencia bancaria o Bizum; desde ese momento el importe no se devuelve. La web final incluye dos rondas de cambios.</li>
       <li><strong>Mantenimiento:</strong> se paga mes a mes por adelantado y puedes darte de baja cuando quieras, avisando antes de la siguiente renovación; el mes ya pagado no se devuelve. Si te das de baja, te damos el control del dominio, que está a tu nombre, y tus archivos en quince días.</li>
-      <li><strong>Tus fotos y tu contenido:</strong> son tuyos. Al mandárnoslos nos autorizas a publicarlos en tu web y, salvo que nos digas que no, a enseñarla como ejemplo de nuestro trabajo. Si en las fotos sale personal o clientela reconocible, necesitas su permiso. La carta, los precios y los alérgenos que publiquemos son los que nos mandes; su exactitud es responsabilidad del local (Reglamento UE 1169/2011).</li>
+      <li><strong>Tus fotos y tu contenido:</strong> son tuyos. Al mandárnoslos nos autorizas a publicarlos en tu web y, salvo que nos digas que no, a enseñarla como ejemplo de nuestro trabajo. Si en las fotos sale personal o clientela reconocible, necesitas su permiso. Los precios, servicios y demás datos que publiquemos son los que nos mandes, y su exactitud es responsabilidad tuya. Si tu negocio publica información de alérgenos, su exactitud también es responsabilidad tuya (Reglamento UE 1169/2011).</li>
       <li><strong>De quién es la web:</strong> tuyos son el dominio, tus textos, tu marca, tus fotos y el diseño de tu página una vez pagada. Nuestro es el código base que reutilizamos entre proyectos y la marca Nudo.</li>
-      <li><strong>Responsabilidad:</strong> ponemos los medios razonables para que tu web funcione, pero dependemos de proveedores de alojamiento y dominio. No garantizamos resultados comerciales concretos (visitas o reservas).</li>
+      <li><strong>Responsabilidad:</strong> ponemos los medios razonables para que tu web funcione, pero dependemos de proveedores de alojamiento y dominio. No garantizamos resultados comerciales concretos (visitas, reservas o ventas).</li>
     </ul>
     <p><strong>Ley aplicable:</strong> legislación española, en particular el Reglamento (UE) 2016/679 (RGPD), la Ley Orgánica 3/2018 (LOPDGDD) y la Ley 34/2002 (LSSI). Para cualquier controversia, las partes se someten a los juzgados y tribunales del domicilio de la titular, salvo que la ley disponga otro fuero.</p>
   </div>
@@ -1701,7 +1755,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   <div class="pie__int">
     <div class="pie__marca">
       <a class="marca" href="#acto1" aria-label="Nudo, inicio"><svg class="marca__logo" viewBox="-1 0 450 75" aria-hidden="true"><path transform="translate(-26.4 -33.8) scale(2.1)" d="M16 42 C16 24 32 24 32 34 C32 44 48 44 48 26" fill="none" style="stroke:var(--marca-simbolo)" stroke-width="7" stroke-linecap="round"/><path d="M162.8 71.6 132.9 18.6Q133.7 26.3 133.7 31V71.6H121V2.8H137.4L167.8 56.2Q167 48.8 167 42.8V2.8H179.7V71.6ZM235.8 72.6Q221.6 72.6 214 65.6Q206.5 58.7 206.5 45.8V2.8H220.9V44.7Q220.9 52.8 224.8 57.1Q228.7 61.3 236.2 61.3Q243.9 61.3 248 56.9Q252.2 52.5 252.2 44.2V2.8H266.6V45.1Q266.6 58.2 258.5 65.4Q250.4 72.6 235.8 72.6ZM354.7 36.7Q354.7 47.3 350.5 55.3Q346.4 63.2 338.7 67.4Q331.1 71.6 321.2 71.6H293.4V2.8H318.3Q335.7 2.8 345.2 11.6Q354.7 20.3 354.7 36.7ZM340.2 36.7Q340.2 25.6 334.5 19.8Q328.7 13.9 318 13.9H307.8V60.5H320Q329.3 60.5 334.7 54.1Q340.2 47.7 340.2 36.7ZM446.5 36.9Q446.5 47.6 442.3 55.8Q438 63.9 430.1 68.3Q422.2 72.6 411.6 72.6Q395.4 72.6 386.2 63Q377 53.5 377 36.9Q377 20.3 386.2 11.1Q395.4 1.8 411.7 1.8Q428.1 1.8 437.3 11.2Q446.5 20.5 446.5 36.9ZM431.8 36.9Q431.8 25.8 426.5 19.4Q421.3 13.1 411.7 13.1Q402.1 13.1 396.8 19.4Q391.5 25.7 391.5 36.9Q391.5 48.2 396.9 54.7Q402.3 61.2 411.6 61.2Q421.3 61.2 426.6 54.9Q431.8 48.6 431.8 36.9Z" fill="currentColor"/></svg></a>
-      <p class="pie__lema">Tu web, hecha a medida. Si no te convence, no pagas.</p>
+      <p class="pie__lema">La web de tu negocio, hecha a medida. Si no te convence, no pagas.</p>
       <a class="btn btn--blanco" href="#presupuesto" data-presupuesto>
         Pide tu presupuesto
         <svg class="flecha" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
@@ -1715,6 +1769,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
           <li><button class="pie__enlace" type="button" data-abre="web">Tu web</button></li>
           <li><a href="ejemplos/">Ver ejemplos de webs</a></li>
           <li><button class="pie__enlace" type="button" data-abre="mant">Mantenimiento</button></li>
+          <li><a href="#otros">Otros servicios</a></li>
         </ul>
       </div>
       <div>
@@ -1736,7 +1791,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   </div>
 
   <div class="pie__fin">
-    <p>© <span id="anyo">2026</span> Nudo · Diseño web para hostelería</p>
+    <p>© <span id="anyo">2026</span> Nudo · Diseño web para negocios</p>
     <p>Esta web no usa cookies de seguimiento.</p>
   </div>
 </footer>
@@ -1839,12 +1894,12 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   var lineas   = [].slice.call(document.querySelectorAll('[data-linea]'));
   var nubes    = [].slice.call(document.querySelectorAll('[data-nube]'));
   var textosPaso = [
-    'Cinco minutos. Solo te pedimos permiso para mandarte algo.',
-    'Seguimos por WhatsApp. Sin correos ni reuniones.',
-    'Te mandamos tu web hecha, no un presupuesto.',
-    'La abres en tu móvil y la tocas.',
-    'Si te gusta, la pagas y la hacemos tuya.',
-    'Publicada con tu dominio y funcionando.'
+    'Nos escribes, nos llamas o te llamamos. Cinco minutos para saber qué necesitas.',
+    'Seguimos por WhatsApp. Sin correos largos ni reuniones.',
+    'Te mandamos tu web hecha, no un presupuesto en papel.',
+    'La abres en tu móvil, la tocas y nos dices qué cambiar.',
+    'Si te gusta, la pagas y la terminamos. El plazo te lo decimos antes de empezar.',
+    'Publicada con tu dominio y funcionando en el móvil y en el ordenador.'
   ];
 
   /* ---------- Las bombillas de la pérgola (una vez) ---------- */
@@ -2156,21 +2211,21 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
         tit: 'Tu web',
         puntos: [
           'Una sola p\u00e1gina, pensada para el m\u00f3vil',
-          'Tu carta, sin PDF y sin pellizcar la pantalla',
-          'Los catorce al\u00e9rgenos, como manda la ley',
-          'Reservas como t\u00fa quieras: tel\u00e9fono, WhatsApp o formulario',
+          'Qu\u00e9 haces, tus servicios o productos y tus precios, explicados claro',
+          'Que te contacten como t\u00fa quieras: tel\u00e9fono, WhatsApp, formulario o cita',
           'Horarios, tel\u00e9fono y c\u00f3mo llegar',
+          '\u00bfTienes restaurante? Tu carta sin PDF y con los al\u00e9rgenos',
           'Dominio, alojamiento y aviso legal el primer a\u00f1o',
           '\u00bfYa tienes web? La rehacemos entera y mantienes tu dominio',
-          'Publicada en siete d\u00edas'
+          'El plazo depende de cada web: te lo decimos antes de empezar'
         ],
-        nota: 'Un solo pago, al aceptar la maqueta de tu local. Antes de eso no pagas nada: si la maqueta no te convence, ah\u00ed se queda. Las fotos las haces t\u00fa con nuestra gu\u00eda; si no puedes, la montamos con las que tengas.'
+        nota: 'Un solo pago, al aceptar la maqueta de tu web. Antes de eso no pagas nada: si la maqueta no te convence, ah\u00ed se queda. Las fotos las haces t\u00fa con nuestra gu\u00eda; si no puedes, la montamos con las que tengas.'
       },
       mant: {
         precio: 'Qu\u00e9 incluye',
         tit: 'Mantenimiento',
         puntos: [
-          'Cambios de carta, precios y horarios en 24 h, los que hagan falta',
+          'Cambios de precios, horarios o textos en 24 h, los que hagan falta',
           'Tu ficha de Google al d\u00eda: fotos, horarios y festivos',
           'Dominio, alojamiento, certificado y copias de seguridad',
           'Si algo se cae, lo arreglamos nosotros',
@@ -2365,13 +2420,15 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
     var PREGUNTAS = [
       { q: '¿Cuánto cuesta?',
-        r: 'Tu web desde 249 €, un solo pago. Y desde 39 €/mes si quieres que te la mantengamos al día: cambios de carta y horarios en 24 h, dominio y alojamiento. Sin permanencia y es opcional.' },
+        r: 'Tu web desde 249 €, un solo pago. Y desde 39 €/mes si quieres que te la mantengamos al día: cambios de precios, horarios o textos en 24 h, dominio y alojamiento. Sin permanencia y es opcional.' },
       { q: '¿Cuánto tarda?',
-        r: 'En la llamada solo pedimos permiso para mandártela. Te llega la maqueta por WhatsApp y la miras cuando puedas. Desde que la aceptas y nos mandas tu carta y tus fotos, depende de cada local: te decimos el plazo antes de empezar.' },
+        r: 'Primero hablamos cinco minutos y te mandamos la maqueta por WhatsApp para que la mires cuando puedas. Desde que la aceptas y nos mandas tus textos y tus fotos, depende de cada proyecto: te decimos el plazo antes de empezar.' },
       { q: '¿Y si no me gusta?',
-        r: 'No pagas. Primero te enseñamos una maqueta de tu local: si no te convence, ahí se queda y no nos debes nada. Solo se paga cuando dices que la quieres.' },
+        r: 'No pagas. Primero te enseñamos una maqueta de tu web: si no te convence, ahí se queda y no nos debes nada. Solo se paga cuando dices que la quieres.' },
+      { q: '¿Es para mi tipo de negocio?',
+        r: 'Casi seguro que sí. Hacemos webs para autónomos, comercios, profesionales (fisios, asesores, peluquerías, talleres, academias…), restaurantes y también para particulares con un proyecto.' },
       { q: '¿Qué necesitáis de mí?',
-        r: 'La carta, los horarios y unas fotos de tu local hechas con el móvil. Te mandamos una guía para que salgan bien. Del resto nos ocupamos nosotros.' },
+        r: 'Lo que haces, tus servicios o productos, tus horarios y unas fotos hechas con el móvil. Te mandamos una guía para que salgan bien. Del resto nos ocupamos nosotros.' },
       { q: 'Quiero una llamada',
         r: 'Perfecto. Dale a "Seguir por WhatsApp" aquí abajo y cuadramos cinco minutos cuando te vaya bien.' }
     ];
@@ -2425,7 +2482,7 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
       if (!arrancada){
         arrancada = true;
         pintaFichas();
-        responde('Hola. Soy la ayuda de Nudo. Pregúntame lo que quieras sobre la web de tu local.', 650);
+        responde('Hola. Soy la ayuda de Nudo. Pregúntame lo que quieras sobre la web de tu negocio.', 650);
       }
     }
     function cierra(){
@@ -2546,9 +2603,21 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
   var caja = document.getElementById('presu'), form = document.getElementById('presuForm');
   if (!caja || !form) return;
   var ultimo = null;
+  var titulo = document.getElementById('presuTit'), tituloWeb = titulo ? titulo.innerHTML : '';
+  var cuenta = form.querySelector('textarea[name="proyecto"]');
+  var TEXTO_IA = 'Me interesan los otros servicios con IA: ';
+  var esIA = false;
 
   function abre(origen){
     ultimo = origen || null;
+    /* Desde «Otros servicios» es el mismo formulario, pero el título habla de
+       contenido y no de webs, y la nota ya dice de qué va la consulta */
+    esIA = !!(origen && origen.getAttribute && origen.getAttribute('data-servicio') === 'ia');
+    if (titulo) titulo.innerHTML = esIA ? 'Contenido con IA <span>para tu negocio</span>' : tituloWeb;
+    if (cuenta){
+      if (esIA && !cuenta.value) cuenta.value = TEXTO_IA;
+      else if (!esIA && cuenta.value === TEXTO_IA) cuenta.value = '';
+    }
     caja.classList.remove('hecho');
     caja.hidden = false;
     document.documentElement.style.overflow = 'hidden';
@@ -2576,11 +2645,11 @@ body.sin-splash .pal > span{ animation-delay:0s !important; }
 
   /* WhatsApp con lo que ya haya escrito, para que no tenga que repetirlo */
   function enlaceWa(){
-    var f = new FormData(form), t = 'Hola, quiero pedir presupuesto para la web de mi local.';
-    if (f.get('empresa'))  t += '\nLocal: ' + f.get('empresa');
+    var f = new FormData(form), t = esIA ? 'Hola, me interesan los otros servicios con IA.' : 'Hola, quiero pedir presupuesto para la web de mi negocio.';
+    if (f.get('empresa'))  t += '\nNegocio: ' + f.get('empresa');
     if (f.get('nombre'))   t += '\nMe llamo ' + f.get('nombre');
     if (f.get('telefono')) t += '\nTeléfono: ' + f.get('telefono');
-    if (f.get('proyecto')) t += '\n' + f.get('proyecto');
+    if (f.get('proyecto') && f.get('proyecto') !== TEXTO_IA) t += '\n' + f.get('proyecto');
     return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t);
   }
   var wa = document.getElementById('presuWa');
